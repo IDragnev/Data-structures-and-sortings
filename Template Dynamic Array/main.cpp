@@ -3,6 +3,17 @@
 #include "DynamicArray.h"
 
 
+int test(int number)
+{
+	int result = 2;
+
+	while (result <= number)
+		result *= 2;
+
+	return result;
+}
+
+
 int main()
 {
 	try 
@@ -13,7 +24,7 @@ int main()
 
 		std::cout << arr << std::endl;
 
-		std::cout << "Filling it with 1,2, .. , 19 \n";
+		std::cout << "Filling it with 0,1,2, .. , 19 \n";
 
 		for (int i = 0; i < 20; ++i)
 			arr += i;
@@ -50,6 +61,11 @@ int main()
 		std::cout << "\narr1 + arr2 :\n";
 
 		std::cout << arr + arr2 << std::endl;
+
+		std::cout << "\nAdding 999 at the position 2 of arr1 (should be third) : \n";
+		arr.addAt(999, 2);
+
+		std::cout << arr << std::endl;
 	}
 	catch (std::exception& ex)
 	{

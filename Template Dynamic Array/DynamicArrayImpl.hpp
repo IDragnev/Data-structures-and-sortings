@@ -4,6 +4,18 @@
 //GET AND SET
 //
 
+template <typename T>
+T* DynamicArray<T>::getData()
+{
+	return data;
+}
+
+template <typename T>
+const T* DynamicArray<T>::getData()const
+{
+	return data;
+}
+
 
 template <typename T>
 int DynamicArray<T>::getCount()const
@@ -134,6 +146,35 @@ void DynamicArray<T>::resize(int newSize)
 }
 
 
+//move each object from (beg + 1) to end
+//one position to the left 
+//beg is the first position in which we move an object (should be the 'empty' position)
+//end is the last object we move one position to the left
+template <typename T>
+void DynamicArray<T>::shiftLeft(int beg, int end)
+{
+	while (beg < end)
+	{
+		data[beg] = data[beg + 1];
+		beg++;
+	}
+}
+
+
+//move each object from (end - 1) to beg
+//one position to the right
+//end is the first position in which we move an object (should be the 'empty' position)
+//beg if the last object we move one position to the right
+template <typename T>
+void DynamicArray<T>::shiftRight(int beg, int end)
+{
+	while (end > beg)
+	{
+		data[end] = data[end - 1];
+		end--;
+	}
+}
+
 
 //----------------------------------------------------------------------------------
 //
@@ -205,15 +246,37 @@ const T& DynamicArray<T>::operator[](int position)const
 }
 
 
+template <typename T>
+void DynamicArray<T>::checkSpace()
+{
+	if (count == size)
+		resize(findNearestPowTwo(size));
+}
 
 
 template <typename T>
 void DynamicArray<T>::add(const T& object)
 {
-	if (count == size)
-		resize(findNearestPowTwo(size));
+	checkSpace();
 
 	data[count++] = object;
+}
+
+
+template <typename T>
+void DynamicArray<T>::addAt(const T& object, int position)
+{
+	if (position < 0 || position >= count)
+		throw std::out_of_range("Index out of range!");
+
+	checkSpace();
+
+	//make space
+	shiftRight(position, count);
+	//insert it
+	data[position] = object;
+	//increase count
+	++count;
 }
 
 

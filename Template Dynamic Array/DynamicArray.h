@@ -12,13 +12,16 @@ class DynamicArray
 public:
 	DynamicArray(int size = 10);                           //filled with default objects when constructed, count is 0
 	DynamicArray(const DynamicArray<T>&);    
-	~DynamicArray();
+	virtual ~DynamicArray();
 
 	DynamicArray<T>& operator=(const DynamicArray<T>&);
 
-	void add(const T&);                                    //add an element to the array
-	void remove(int position);                             //remove an element by its position in the array
+	virtual void add(const T&);                            //add an element to the array (added as last)
+	virtual void remove(int position);                     //remove an element by its position in the array (swapping used)
 
+	void addAt(const T&, int);                             //add the element at the exact position (shifting used)
+
+	const T* getData()const;                               //get the data for reading
 	int getSize()const;                                    //get the size of the array
 	int getCount()const;                                   //get the count of the elements in the array
 
@@ -37,15 +40,21 @@ private:
 	int count;                                             //the count of the elements in the array
 	T* data;                                               //the actual array of elements
 
-private:
+protected:
 	void clear();                                          //clear the array of elements
-	void copyFrom(const DynamicArray<T>&);                 //copy from another array (reconstruct)
-
-	void resize(int);                                     
 	void setSize(int);
 	void setCount(int);
+	void resize(int);                                     
 	
 	int findNearestPowTwo(int num);                        //find the nearest power of 2 which is bigger than num (8->16, 54->64..)
+	void checkSpace();                                     //resize if needed
+
+	void shiftLeft(int beg, int end);                      //shift objects left
+	void shiftRight(int beg, int end);                     //shift objects right
+	T* getData();                                          //get the array (for subclasses)
+
+private:
+	void copyFrom(const DynamicArray<T>&);                 //copy from another array (reconstruct)
 };
 
 
