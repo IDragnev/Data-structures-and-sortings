@@ -328,9 +328,9 @@ DynamicArray<T> operator+(const DynamicArray<T>& arr1, const DynamicArray<T>& ar
 
 
 template <typename T>
-DynamicArray<T> operator+(const DynamicArray<T>& array, const T& object)
+DynamicArray<T> operator+(const DynamicArray<T>& arr, const T& object)
 {
-	DynamicArray<T> temp(array);
+	DynamicArray<T> temp(arr);
 
 	temp += object;
 
@@ -348,4 +348,12 @@ std::ostream& operator<<(std::ostream& out, const DynamicArray<T>& arr)
 		std::cout << arr[i] << ' ';
 
 	return out;
+}
+
+
+
+template <typename T>
+inline DynamicArray<T> operator+(const T& object, const DynamicArray<T>& arr)
+{
+	return arr + object;
 }

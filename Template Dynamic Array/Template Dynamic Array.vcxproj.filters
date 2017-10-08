@@ -21,6 +21,12 @@
     <ClInclude Include="DynamicArrayImpl.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="OrderedDynamicArray.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="OrderedDynamicArrayImpl.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">

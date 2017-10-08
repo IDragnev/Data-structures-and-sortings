@@ -62,7 +62,10 @@ template <typename T>
 DynamicArray<T> operator+(const DynamicArray<T>&, const DynamicArray<T>&);  //sum two arrays
 
 template <typename T>
-DynamicArray<T> operator+(const DynamicArray<T>&, const T&);                
+DynamicArray<T> operator+(const DynamicArray<T>&, const T&);       
+
+template <typename T>
+DynamicArray<T> operator+(const T&, const DynamicArray<T>&);
 
 template <typename T>
 std::ostream& operator<<(std::ostream& out, const DynamicArray<T>&);        //print an array

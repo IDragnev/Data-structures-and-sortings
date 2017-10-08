@@ -148,6 +148,8 @@
   <ItemGroup>
     <ClInclude Include="DynamicArray.h" />
     <ClInclude Include="DynamicArrayImpl.hpp" />
+    <ClInclude Include="OrderedDynamicArray.h" />
+    <ClInclude Include="OrderedDynamicArrayImpl.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
