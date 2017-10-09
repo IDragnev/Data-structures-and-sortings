@@ -4,6 +4,13 @@
 //GET AND SET
 //
 
+
+template <typename T>
+bool DynamicArray<T>::isEmpty()const
+{
+	return count == 0;
+}
+
 template <typename T>
 T* DynamicArray<T>::getData()
 {
@@ -181,6 +188,15 @@ void DynamicArray<T>::shiftRight(int beg, int end)
 //CTORS
 //
 
+template <typename T>
+void DynamicArray<T>::makeEmpty()
+{
+	//resize it to hold only one object
+	resize(1);
+	assert(count == 1);
+	//decrement count to zero
+	--count;
+}
 
 //set count to 0, set size 
 //and allocate an array of default objects with this size

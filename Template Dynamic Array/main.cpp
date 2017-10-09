@@ -2,6 +2,7 @@
 
 #include "DynamicArray.h"
 #include "OrderedDynamicArray.h"
+#include "DynamicStack.h"
 
 int DynArrTest()
 {
@@ -147,5 +148,29 @@ int OrderedDynArrTest()
 
 int main()
 {
-	return OrderedDynArrTest();
+	try {
+		DynamicStack<int> stack;
+
+		for (int i = 0; i < 20; ++i)
+		{
+			std::cout << "Pushing " << i << std::endl;
+			stack.push(i);
+		}
+		std::cout << std::endl;
+
+		for (int i = 0; i < 5; ++i)
+			std::cout << "Popping: " << stack.pop() << std::endl;
+
+		std::cout << "\nPushing 1..\n\n";
+
+		stack.push(1);
+
+		for (int i = 0; i < 30; ++i)
+			std::cout << "Popping: " << stack.pop() << std::endl;
+	}
+	catch (std::exception& ex)
+	{
+		std::cout << ex.what() << std::endl;
+	}
+
 }

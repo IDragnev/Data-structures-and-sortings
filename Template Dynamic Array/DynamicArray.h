@@ -24,9 +24,12 @@ public:
 	const T* getData()const;                               //get the data for reading
 	int getSize()const;                                    //get the size of the array
 	int getCount()const;                                   //get the count of the elements in the array
+	bool isEmpty()const;                                   //is the array empty
 
 	T& getAt(int position);                                //get an element by its position in the array
 	const T& getAt(int position)const;                     //get an element by its position in the array (for reading only)
+
+	void makeEmpty();                                      //make the array empty
 
 public:
 	T& operator[](int position);                           //get an element by its position in the array
