@@ -33,19 +33,6 @@ void OrderedDynamicArray<T>::add(const T& object)
 }
 
 
-template <typename T>
-void OrderedDynamicArray<T>::remove(int index)
-{
-	if (index < 0 || index >= getCount())
-		throw std::out_of_range("Index out of range!");
-
-	//shift the objects after it one pos. to the left 
-	//and decrease count
-	shiftLeft(index, getCount());
-	setCount(getCount() - 1);
-}
-
-
 
 template <typename T>
 OrderedDynamicArray<T> operator+(const OrderedDynamicArray<T>& arr1, const OrderedDynamicArray<T>& arr2)

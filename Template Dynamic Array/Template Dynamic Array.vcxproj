@@ -150,6 +150,7 @@
     <ClInclude Include="DynamicArrayImpl.hpp" />
     <ClInclude Include="OrderedDynamicArray.h" />
     <ClInclude Include="OrderedDynamicArrayImpl.hpp" />
+    <ClInclude Include="Stack.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />

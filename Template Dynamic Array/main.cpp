@@ -22,7 +22,7 @@ int DynArrTest()
 
 		std::cout << arr << std::endl;
 
-		std::cout << "\nRemoving 1,4,7,10 and 13 : \n";
+		std::cout << "\nRemoving from positions 1,4,7,10 and 13 : \n";
 
 		for (int i = 1; i < arr.getCount(); i += 3)
 			arr.remove(i);

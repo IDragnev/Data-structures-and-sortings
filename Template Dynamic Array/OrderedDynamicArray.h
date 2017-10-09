@@ -15,7 +15,6 @@ public:
 	OrderedDynamicArray<T>& operator=(const OrderedDynamicArray<T>&) = default;
 
 	virtual void add(const T&)override;                                 //add an element to the array (insertion sort)
-	virtual void remove(int position)override;                          //remove an element by its position in the array (shifting used)
 
 private:
 	void addAt(const T&, int);                                          //add the element at the exact position DISALLOWED

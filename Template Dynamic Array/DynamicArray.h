@@ -17,7 +17,7 @@ public:
 	DynamicArray<T>& operator=(const DynamicArray<T>&);
 
 	virtual void add(const T&);                            //add an element to the array (added as last)
-	virtual void remove(int position);                     //remove an element by its position in the array (swapping used)
+	virtual void remove(int position);                     //remove an element by its position in the array (shifting used)
 
 	void addAt(const T&, int);                             //add the element at the exact position (shifting used)
 

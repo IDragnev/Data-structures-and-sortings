@@ -287,8 +287,10 @@ void DynamicArray<T>::remove(int position)
 	if (position < 0 || position >= count)
 		throw std::out_of_range("Index out of range!");
 
-	//put it last (of 'used')
-	std::swap(data[position], data[--count]);
+	//shift the objects after it one pos. to the left 
+	//and decrease count
+	shiftLeft(position, count);
+	--count;
 }
 
 
