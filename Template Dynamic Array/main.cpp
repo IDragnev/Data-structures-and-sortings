@@ -3,6 +3,7 @@
 #include "DynamicArray.h"
 #include "OrderedDynamicArray.h"
 #include "DynamicStack.h"
+#include "StaticQueue.h"
 
 int DynArrTest()
 {
@@ -145,9 +146,9 @@ int OrderedDynArrTest()
 	return 0;
 }
 
-
-int main()
+int DynamicStackTest()
 {
+
 	try {
 		DynamicStack<int> stack;
 
@@ -173,4 +174,10 @@ int main()
 		std::cout << ex.what() << std::endl;
 	}
 
+	return 0;
+}
+
+int main()
+{
+	
 }

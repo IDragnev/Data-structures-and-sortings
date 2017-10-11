@@ -52,7 +52,8 @@ void DynamicArray<T>::setSize(int newSize)
 template <typename T>
 void DynamicArray<T>::setCount(int newCount)
 {
-	assert(newCount >= 0);
+	if (newCount < 0 || newCount > size)
+		throw std::invalid_argument("Count must be between 0 and size!");
 
 	count = newCount;
 }
@@ -198,15 +199,15 @@ void DynamicArray<T>::makeEmpty()
 	--count;
 }
 
-//set count to 0, set size 
+//set count and size 
 //and allocate an array of default objects with this size
 template <typename T>
-DynamicArray<T>::DynamicArray(int size)
+DynamicArray<T>::DynamicArray(int size, int count)
 	:
-	data(NULL),
-	count(0)
+	data(NULL)
 {
 	setSize(size);
+	setCount(count);
 	data = new T[size];
 }
 

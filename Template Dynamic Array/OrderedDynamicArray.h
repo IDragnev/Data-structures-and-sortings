@@ -8,7 +8,7 @@ template <typename T>
 class OrderedDynamicArray : public DynamicArray<T>
 {
 public:
-	OrderedDynamicArray(int size = 10);
+	OrderedDynamicArray(int size = 16, int count = 0);
 	OrderedDynamicArray(const OrderedDynamicArray<T>&) = default;
 	virtual ~OrderedDynamicArray()override = default;
 

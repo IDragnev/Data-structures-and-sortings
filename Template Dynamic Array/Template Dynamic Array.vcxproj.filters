@@ -16,6 +16,12 @@
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
     </Filter>
+    <Filter Include="Static Queue">
+      <UniqueIdentifier>{fac8e744-a524-4cca-8b6a-8916defb389a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Static Stack">
+      <UniqueIdentifier>{86fc455b-c41c-46cd-a029-bf6d749d2b9e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DynamicArray.h">
@@ -35,6 +41,12 @@
     </ClInclude>
     <ClInclude Include="DynamicStack.h">
       <Filter>Dynamic Stack</Filter>
+    </ClInclude>
+    <ClInclude Include="StaticQueue.h">
+      <Filter>Static Queue</Filter>
+    </ClInclude>
+    <ClInclude Include="StaticQueueImpl.hpp">
+      <Filter>Static Queue</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

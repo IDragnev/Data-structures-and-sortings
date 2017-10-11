@@ -10,7 +10,7 @@ template <typename T>
 class DynamicArray
 {
 public:
-	DynamicArray(int size = 10);                           //filled with default objects when constructed, count is 0
+	DynamicArray(int size = 16, int count = 0);            //filled with default objects when constructed
 	DynamicArray(const DynamicArray<T>&);    
 	virtual ~DynamicArray();
 

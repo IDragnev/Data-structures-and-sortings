@@ -1,9 +1,9 @@
 
 
 template <typename T>
-OrderedDynamicArray<T>::OrderedDynamicArray(int size)
+OrderedDynamicArray<T>::OrderedDynamicArray(int size,int count)
 	:
-	DynamicArray<T>(size)
+	DynamicArray<T>(size,count)
 {
 	;
 }
