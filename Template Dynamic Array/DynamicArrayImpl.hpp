@@ -6,33 +6,33 @@
 
 
 template <typename T>
-bool DynamicArray<T>::isEmpty()const
+inline bool DynamicArray<T>::isEmpty()const
 {
 	return count == 0;
 }
 
 template <typename T>
-T* DynamicArray<T>::getData()
+inline T* DynamicArray<T>::getData()
 {
 	return data;
 }
 
 template <typename T>
-const T* DynamicArray<T>::getData()const
+inline const T* DynamicArray<T>::getData()const
 {
 	return data;
 }
 
 
 template <typename T>
-int DynamicArray<T>::getCount()const
+inline int DynamicArray<T>::getCount()const
 {
 	return count;
 }
 
 
 template <typename T>
-int DynamicArray<T>::getSize()const
+inline int DynamicArray<T>::getSize()const
 {
 	return size;
 }

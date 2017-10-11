@@ -4,6 +4,7 @@
 #include "OrderedDynamicArray.h"
 #include "DynamicStack.h"
 #include "StaticQueue.h"
+#include "StaticStack.h"
 
 int DynArrTest()
 {
@@ -177,7 +178,38 @@ int DynamicStackTest()
 	return 0;
 }
 
+int StaticStackTest()
+{
+	try
+	{
+		StaticStack<int> stack(10);
+
+		for (int i = 0; i < 10; ++i)
+		{
+			std::cout << "Pushing " << i << std::endl;
+			stack.push(i);
+			std::cout << "Pushed " << i << std::endl;
+		}
+		std::cout << std::endl << std::endl;
+
+		std::cout << "Popping " << stack.pop() << std::endl;
+		std::cout << "Pushing 999" << std::endl << std::endl;
+		stack.push(999);
+
+		for (int i = 0; i < 15; ++i)
+			std::cout << "Popping " << stack.pop() << std::endl;
+	}
+	catch (std::exception& ex)
+	{
+		std::cout << ex.what() << std::endl;
+	}
+
+	return 0;
+}
+
+
 int main()
 {
 	
+	return 0;
 }

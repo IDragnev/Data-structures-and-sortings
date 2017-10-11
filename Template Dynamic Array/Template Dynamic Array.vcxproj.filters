@@ -48,6 +48,12 @@
     <ClInclude Include="StaticQueueImpl.hpp">
       <Filter>Static Queue</Filter>
     </ClInclude>
+    <ClInclude Include="StaticStack.h">
+      <Filter>Static Stack</Filter>
+    </ClInclude>
+    <ClInclude Include="StaticStackImpl.hpp">
+      <Filter>Static Stack</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">

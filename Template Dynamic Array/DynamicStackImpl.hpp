@@ -10,7 +10,7 @@ DynamicStack<T>::DynamicStack()
 
 
 template <typename T>
-bool DynamicStack<T>::isEmpty()const
+inline bool DynamicStack<T>::isEmpty()const
 {
 	return top == -1;
 }

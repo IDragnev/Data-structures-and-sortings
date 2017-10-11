@@ -154,6 +154,8 @@
     <ClInclude Include="OrderedDynamicArrayImpl.hpp" />
     <ClInclude Include="DynamicStack.h" />
     <ClInclude Include="StaticQueueImpl.hpp" />
+    <ClInclude Include="StaticStack.h" />
+    <ClInclude Include="StaticStackImpl.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
