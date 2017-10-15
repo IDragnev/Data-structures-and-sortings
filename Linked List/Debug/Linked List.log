@@ -1,0 +1,4 @@
+﻿  main.cpp
+d:\vs\vs_projects\my structures\linked list\main.cpp(60): warning C4018: '<': signed/unsigned mismatch
+  Linked List.vcxproj -> D:\VS\VS_Projects\My structures\Template Dynamic Array\Debug\Linked List.exe
+  Linked List.vcxproj -> D:\VS\VS_Projects\My structures\Template Dynamic Array\Debug\Linked List.pdb (Full PDB)

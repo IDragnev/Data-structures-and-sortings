@@ -5,6 +5,16 @@
 //
 
 
+//
+//return a list iterator which starts from the head node
+//
+template <typename T>
+ListIterator<T> LinkedList<T>::getIterator()const
+{
+	return ListIterator<T>(head);
+}
+
+
 template <typename T>
 inline bool LinkedList<T>::isEmpty()const
 {
@@ -173,11 +183,11 @@ void LinkedList<T>::clearChain(const Node<T>* firstNode)
 {
 	if (!firstNode) return;
 
-	const Node<T>* currentNode = firstNode;
+	const Node<T>* current = firstNode;
 	const Node<T>* oldNode = firstNode;
 
 	//while there is an actual successor
-	while (currentNode)
+	while (current)
 	{
 		//save current's address
 		oldNode = current;

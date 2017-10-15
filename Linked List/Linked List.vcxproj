@@ -148,8 +148,8 @@
   <ItemGroup>
     <ClInclude Include="LinkedList.h" />
     <ClInclude Include="LinkedListImpl.hpp" />
-    <ClInclude Include="S_Iterator.h" />
-    <ClInclude Include="S_LinkedList.h" />
+    <ClInclude Include="ListIterator.h" />
+    <ClInclude Include="ListIteratorImpl.hpp" />
     <ClInclude Include="Node.h" />
     <ClInclude Include="NodeImpl.hpp" />
   </ItemGroup>

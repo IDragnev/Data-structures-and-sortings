@@ -10,21 +10,21 @@
 void FillList(LinkedList<int> &List, int Start, int End)
 {
 	for (int i = Start; i <= End; i++)
-		List.AddTail(i);
+		List.addAsTail(i);
 }
 
 
-int main()
+void Test()
 {
 	// Decide how many element to use for the tests
 	size_t ElementsCount = 0;
 
 	std::cout << "\nHow many elements to test with?\n: ";
-	
+
 	std::cin >> ElementsCount;
 
 
-	
+
 	// Create a linked list to test with
 	LinkedList<int> newList;
 
@@ -57,9 +57,9 @@ int main()
 
 	int foo;
 
-	for(int i = 0; i < ElementsCount; i++)
+	for (int i = 0; i < ElementsCount; i++)
 	{
-		foo = newList.GetAt(i);
+		foo = newList.getAt(i);
 	}
 
 	end = time(NULL);
@@ -75,16 +75,42 @@ int main()
 	start = time(NULL);
 
 	// try to walk the list via iterator
-	for (Iterator<int> iterator = newList.GetIterator();
-         !iterator.EndReached();
-	     iterator.MoveNext())
+	for (ListIterator<int> iterator = newList.getIterator();
+	        !iterator.isDone();
+	     iterator.next())
 	{
-		foo = iterator.GetCurrent();
+		foo = iterator.getCurrent();
 	}
 
 	end = time(NULL);
 
 	std::cout << "   Execution took " << (end - start) << " sec.\n";
+
+}
+
+
+int main()
+{
+	try
+	{
+		LinkedList<int> list;
+
+		for (int i = 0; i < 15; ++i)
+		{
+				list.addAsTail(i);
+		}
+
+		for (int i = 0; i < 16; ++i)
+		{
+			std::cout << list.getHead() << std::endl;
+			list.removeHead();
+		}
+
+	}
+	catch (std::exception& ex)
+	{
+		std::cout << "Error! " << ex.what() << std::endl;
+	}
 
 	return 0;
 }

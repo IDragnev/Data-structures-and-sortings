@@ -2,6 +2,7 @@
 #define __SINGLY_LINKED_LIST_H_INCLUDED__
 
 #include "Node.h"
+#include "ListIterator.h"
 #include <assert.h>
 
 template <typename T>
@@ -22,6 +23,8 @@ public:
 	const T& getTail()const;                           //get the value of the tail
 
 	void appendList(const LinkedList<T>&);             //append the passed list's nodes (reconstructed) to this
+
+	ListIterator<T> getIterator()const;                //get a new ListIterator
 
 public:
 	void setHead(const T&);                            //set the value of the head
