@@ -36,15 +36,11 @@ inline int LinkedList<T>::getCount()const
 //
 //returns the value which the specified node holds
 //
-//if the list is empty an exception is thrown
-//
 //searchByIndex throws an exception if the position is invalid 
 //
 template <typename T>
 const T& LinkedList<T>::getAt(int position)const
 {
-	checkIsEmtpy();
-
 	return searchByIndex(position)->data;
 }
 
@@ -115,15 +111,11 @@ void LinkedList<T>::setTail(const T& value)
 //
 //sets the value of the specified node
 //
-//if the list is empty, an exception is thrown
-//
 //searchByIndex throws an exception if the position is invalid 
 //
 template <typename T>
 void LinkedList<T>::setAt(int position, const T& value)
 {
-	checkIsEmtpy();
-
 	searchByIndex(position)->data = value;
 }
 
@@ -152,7 +144,7 @@ Node<T>* LinkedList<T>::searchByIndex(int index)const
 
 
 //
-//else move forward in the chain while possible
+//move forward in the chain while possible
 //and return the address of the last node
 //
 template <typename T>
@@ -162,7 +154,7 @@ Node<T>* LinkedList<T>::findEndOfChain(Node<T>* firstNode)
 
 	Node<T>* current = firstNode;
 
-	//while the is an actual successor
+	//while there is an actual successor
 	//move forward in the chain
 	while (current->next)
 		current = current->next;
@@ -264,8 +256,6 @@ Node<T>* LinkedList<T>::cloneChain(const Node<T>* firstNode)
 //
 //returns the node before the passed one 
 //
-//if the passed node is NULL, NULL is returned
-//
 template <typename T>
 Node<T>* LinkedList<T>::findNodeBefore(const Node<T>* node)const
 {
@@ -281,7 +271,7 @@ Node<T>* LinkedList<T>::findNodeBefore(const Node<T>* node)const
 
 	//if the list was empty, NULL is returned
 	//if the passed node is not in the list,
-	//the end of list is reached, where desiredNode points to NULL
+	//the end of list is reached, where current points to NULL
 	return current;
 }
 
@@ -417,33 +407,34 @@ void LinkedList<T>::addAsTail(const T& value)
 //
 //remove the head node
 //
+//if the list is empty, an exception is thrown
+//
 template <typename T>
 void LinkedList<T>::removeHead()
 {
-	//if not empty
-	if ( ! isEmpty() )
+	checkIsEmtpy();
+
+	assert(head != NULL);
+
+	//keep the address of the old head node
+	Node<T>* oldHead = head;
+
+	//move to the next node in the list
+	head = head->next;
+
+	//if this was the only node in the list
+	if(head == NULL)
 	{
-		assert(head != NULL);
-
-		//keep the address of the old head node
-		Node<T>* oldHead = head;
-
-		//move to the next node in the list
-		head = head->next;
-
-		//if this was the only node in the list
-		if(head == NULL)
-		{
-			//update tail to be NULL too
-			tail = NULL;
-		}
-
-		//free old head
-		delete oldHead;
-
-		//update count 
-		--count;
+		//update tail to be NULL too
+		tail = NULL;
 	}
+
+	//free old head
+	delete oldHead;
+
+	//update count 
+	--count;
+	
 }
 
 
@@ -490,16 +481,18 @@ void LinkedList<T>::removeAt(int index)
 
 }
 
+
 //
 //remove the tail node
+//
+//if the list is empty, an exception is thrown
 //
 template <typename T>
 void LinkedList<T>::removeTail()
 {
-	if ( ! isEmpty() )
-	{
-		return removeAt(count - 1);
-	}
+	checkIsEmtpy();
+
+	return removeAt(count - 1);
 }
 
 
@@ -534,7 +527,7 @@ void LinkedList<T>::insertAfter(int index, const T& value)
 
 
 //
-//inserts a node after the node in the
+//inserts a node before the nonde in the
 //specified position with the passed value
 //
 template <typename T>
