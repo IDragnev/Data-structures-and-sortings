@@ -336,7 +336,7 @@ LinkedList<T>& LinkedList<T>::operator=(const LinkedList<T>& other)
 	if (this != &other)
 	{
 		clear();
-		append(other);
+		appendList(other);
 	}
 
 	return *this;
@@ -566,7 +566,7 @@ template <typename T>
 void LinkedList<T>::appendList(const LinkedList<T>& other)
 {
 	//if other is empty, leave
-	if (other.IsEmpty())
+	if (other.isEmpty())
 		return;
 
 	//clone other list's chain of nodes

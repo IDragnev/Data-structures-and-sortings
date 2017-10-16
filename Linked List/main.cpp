@@ -95,22 +95,36 @@ int main()
 	{
 		LinkedList<int> list;
 
-		for (int i = 0; i < 15; ++i)
-		{
-				list.addAsTail(i);
-		}
+		for (int i = 0; i < 10; ++i)
+			list.addAsHead(i + 1);
 
-		for (int i = 0; i < 16; ++i)
-		{
-			std::cout << list.getHead() << std::endl;
-			list.removeHead();
-		}
+		ListIterator<int> &iter = list.getIterator();
 
+		std::cout << "\nFirst list: \n";
+		for (; !iter.isDone(); iter.next())
+		{
+			std::cout << iter.getCurrent() << ' ';
+		}
+		std::cout << std::endl;
+
+		std::cout << "\nList2 = list :\n";
+		LinkedList<int> list2;
+		list2 = list;
+
+		ListIterator<int>& iter2 = list2.getIterator();
+
+		for (; !iter2.isDone(); iter2.next())
+		{
+			std::cout << iter2.getCurrent() << ' ';
+		}
+		std::cout << std::endl;
+
+		
 	}
 	catch (std::exception& ex)
 	{
 		std::cout << "Error! " << ex.what() << std::endl;
 	}
 
-	return 0;
+return 0;
 }
