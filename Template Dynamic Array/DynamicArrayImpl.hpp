@@ -5,6 +5,22 @@
 //
 
 
+//
+//resize with the sent size
+//
+//if the sent size is not greater
+//than current size
+//an exception is thrown
+//
+template <typename T>
+void DynamicArray<T>::ensureSize(int newSize)
+{
+	if (newSize <= size)
+		throw std::invalid_argument("Size must be greater than current size!");
+
+	resize(newSize);
+}
+
 template <typename T>
 inline bool DynamicArray<T>::isEmpty()const
 {

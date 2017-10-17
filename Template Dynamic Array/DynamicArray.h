@@ -21,7 +21,6 @@ public:
 
 	void addAt(const T&, int);                             //add the element at the exact position (shifting used)
 
-	const T* getData()const;                               //get the data for reading
 	int getSize()const;                                    //get the size of the array
 	int getCount()const;                                   //get the count of the elements in the array
 	bool isEmpty()const;                                   //is the array empty
@@ -30,6 +29,7 @@ public:
 	const T& getAt(int position)const;                     //get an element by its position in the array (for reading only)
 
 	void makeEmpty();                                      //make the array empty
+	void ensureSize(int size);                             //resize with the sent size
 
 public:
 	T& operator[](int position);                           //get an element by its position in the array
@@ -54,7 +54,9 @@ protected:
 
 	void shiftLeft(int beg, int end);                      //shift objects left
 	void shiftRight(int beg, int end);                     //shift objects right
-	T* getData();                                          //get the array (for subclasses)
+
+	T* getData();                                          //get the array for subclasses
+	const T* getData()const;                               //get the array for reading
 
 private:
 	void copyFrom(const DynamicArray<T>&);                 //copy from another array (reconstruct)

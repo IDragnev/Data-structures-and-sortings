@@ -210,6 +210,6 @@ int StaticStackTest()
 
 int main()
 {
-	
+	OrderedDynArrTest();
 	return 0;
 }
