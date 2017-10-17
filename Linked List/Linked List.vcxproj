@@ -150,6 +150,8 @@
     <ClInclude Include="LinkedListImpl.hpp" />
     <ClInclude Include="ListIterator.h" />
     <ClInclude Include="ListIteratorImpl.hpp" />
+    <ClInclude Include="LStack.h" />
+    <ClInclude Include="LStackImpl.hpp" />
     <ClInclude Include="Node.h" />
     <ClInclude Include="NodeImpl.hpp" />
   </ItemGroup>
