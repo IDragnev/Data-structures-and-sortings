@@ -10,7 +10,7 @@ template <typename T>
 class DynamicArray
 {
 public:
-	DynamicArray(int size = 16, int count = 0);            //filled with default objects when constructed
+	explicit DynamicArray(int size = 16, int count = 0);   //filled with default objects when constructed
 	DynamicArray(const DynamicArray<T>&);    
 	virtual ~DynamicArray();
 
@@ -18,6 +18,7 @@ public:
 
 	virtual void add(const T&);                            //add an element to the array (added as last)
 	virtual void remove(int position);                     //remove an element by its position in the array (shifting used)
+	virtual int find(const T&)const;                       //search by value (-1 if not found)
 
 	void addAt(const T&, int);                             //add the element at the exact position (shifting used)
 
@@ -44,12 +45,9 @@ private:
 	T* data;                                               //the actual array of elements
 
 protected:
-	void clear();                                          //clear the array of elements
 	void setSize(int);
 	void setCount(int);
-	void resize(int);                                     
 	
-	int findNearestPowTwo(int num);                        //find the nearest power of 2 which is bigger than num (8->16, 54->64..)
 	void checkSpace();                                     //resize if needed
 
 	void shiftLeft(int beg, int end);                      //shift objects left
@@ -60,6 +58,9 @@ protected:
 
 private:
 	void copyFrom(const DynamicArray<T>&);                 //copy from another array (reconstruct)
+	void resize(int);                                     
+	void clear();                                          //clear the array of elements
+	int findNearestPowTwo(int num);                        //find the nearest power of 2 which is bigger than num (8->16, 54->64..)
 };
 
 

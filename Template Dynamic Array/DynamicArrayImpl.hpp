@@ -5,6 +5,26 @@
 //
 
 
+
+//
+//if one of the elements matches the sent value
+//return its index
+//
+//else return -1 to indicate error
+//
+template <typename T>
+int DynamicArray<T>::find(const T& value)const
+{
+	for (int i = 0; i < count; ++i)
+	{
+		if (data[i] == value)
+			return i;
+	}
+
+	return -1;
+}
+
+
 //
 //resize with the sent size
 //
