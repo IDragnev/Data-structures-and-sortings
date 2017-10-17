@@ -136,11 +136,19 @@ void LinkedList<T>::setAt(int position, const T& value)
 //UTILITY
 //
 
+
 template <typename T>
-Node<T>* LinkedList<T>::searchByIndex(int index)const
+void LinkedList<T>::validateIndex(int index)const
 {
 	if (index < 0 || index >= count)
 		throw std::invalid_argument("Index out of range!");
+}
+
+
+template <typename T>
+Node<T>* LinkedList<T>::searchByIndex(int index)const
+{
+	validateIndex(index);
 
 	//get the first node
 	Node<T>* current = this->head;
@@ -457,6 +465,9 @@ void LinkedList<T>::removeHead()
 template <typename T>
 void LinkedList<T>::removeAt(int index)
 {
+	//validate the index
+	validateIndex();
+
 	if (index == 0)
 	{
 		return removeHead();
@@ -466,7 +477,6 @@ void LinkedList<T>::removeAt(int index)
 	//there should be at least 2 nodes in the list
 	{
 		//find the node before the one we want to delete
-		//(exception is thrown if the index is invalid)
 		Node<T>* nodeBeforeIndex = searchByIndex(index - 1);
 
 		//the node we want to delete

@@ -54,6 +54,7 @@ private:
 	void clear();                                      //clear the list
 	void checkIsEmtpy()const;                          //will be called to check if the list is emtpy before doing an operation
 
+	void validateIndex(int)const;                      //throws an exception if the index is invalid
 private:
 	static Node<T>* findEndOfChain(Node<T>* firstNode);  //find the end of a chain of nodes by its first node
 	static Node<T>* cloneChain(const Node<T>* firstNode);//clone a whole chain of nodes by its first node
