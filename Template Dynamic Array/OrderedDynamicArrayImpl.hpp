@@ -62,3 +62,35 @@ inline OrderedDynamicArray<T> operator+(const T& object, const OrderedDynamicArr
 {
 	return arr + object;
 }
+
+
+
+template <typename T>
+int OrderedDynamicArray<T>::find(const T& value)const
+{
+	//initial ends
+	int left = 0;
+	int right = getCount() - 1;
+
+	const T* data = getData();
+
+	while (left <= right)
+	{
+		int middle = (left + right) / 2;
+
+		if (data[middle] == value)
+		{
+			return middle;
+		}
+		else if (data[middle] > value)
+		{
+			right = middle - 1;
+		}
+		else /*if (data[middle] < value)*/
+		{
+			left = middle + 1;
+		}
+	}
+
+	return -1;
+}

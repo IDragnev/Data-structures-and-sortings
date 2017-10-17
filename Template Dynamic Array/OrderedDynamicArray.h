@@ -14,10 +14,11 @@ public:
 
 	OrderedDynamicArray<T>& operator=(const OrderedDynamicArray<T>&) = default;
 
-	virtual void add(const T&)override;                                 //add an element to the array (insertion sort)
+	virtual int find(const T&)const override;                //search by value (binary search)
+	virtual void add(const T&)override;                      //add an element to the array (insertion sort)
 
 private:
-	void addAt(const T&, int);                                          //add the element at the exact position DISALLOWED
+	void addAt(const T&, int);                               //add the element at the exact position DISALLOWED
 };
 
 
