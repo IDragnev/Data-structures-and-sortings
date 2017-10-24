@@ -235,6 +235,7 @@ void DynamicArray<T>::makeEmpty()
 	--count;
 }
 
+
 //set count and size 
 //and allocate an array of default objects with this size
 template <typename T>

@@ -10,6 +10,12 @@ StaticQueue<T>::StaticQueue(int size)
 	;
 }
 
+template <typename T>
+inline bool StaticQueue<T>::isFull()const
+{
+	return (tail + 1) % elements.getSize() == head;
+}
+
 
 template <typename T>
 inline bool StaticQueue<T>::isEmpty()const
@@ -18,29 +24,18 @@ inline bool StaticQueue<T>::isEmpty()const
 }
 
 
-template <typename T>
-inline int StaticQueue<T>::incremented(int value)
-{
-	assert(value < elements.getSize());
-
-	//if head/tail == size - 1, make it 0
-	//else just increment it
-	return (value == (elements.getSize() - 1)) ? 0 : ++value;
-}
-
-
 
 template <typename T>
 void StaticQueue<T>::enqueue(const T& element)
 {
-	if (incremented(tail) == head)
+	if (isFull())
 		throw std::overflow_error("Queue overflow!");
 
 	//enqueue it
 	elements[tail] = element;
 
 	//increment tail
-	tail = incremented(tail);
+	tail = (tail + 1) % elements.getSize();
 }
 
 
@@ -54,7 +49,7 @@ T StaticQueue<T>::dequeue()
 	T &object = elements[head];
 
 	//increment head
-	head = incremented(head);
+	head = (head + 1) % elements.getSize();
 
 	return object;
 }

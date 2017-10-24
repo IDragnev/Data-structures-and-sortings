@@ -14,6 +14,7 @@ public:
 	StaticQueue<T>& operator=(const StaticQueue<T>&) = default;
 
 	bool isEmpty()const;                                       //is the queue empty
+	bool isFull()const;                                        //is the queue full
 
 	void enqueue(const T&);                                    //enqueue an element
 	T dequeue();                                               //dequeue an element
@@ -22,9 +23,6 @@ private:
 	int head;                                                  //the head of the queue
 	int tail;                                                  //the tail of the queue
 	DynamicArray<T> elements;                                  //the underlying container of the queue
-
-private:
-	int incremented(int value);                                //the result of incrementing the head/tail
 };
 
 #include "StaticQueueImpl.hpp"

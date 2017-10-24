@@ -1,19 +1,19 @@
 ﻿  main.cpp
 d:\vs\vs_projects\my structures\linked list\main.cpp(60): warning C4018: '<': signed/unsigned mismatch
-d:\vs\vs_projects\my structures\linked list\linkedlistimpl.hpp(257): warning C4101: 'ex': unreferenced local variable
-  d:\vs\vs_projects\my structures\linked list\linkedlistimpl.hpp(227): note: while compiling class template member function 'Node<T> *LinkedList<T>::cloneChain(const Node<T> *)'
+d:\vs\vs_projects\my structures\linked list\linkedlistimpl.hpp(265): warning C4101: 'ex': unreferenced local variable
+  d:\vs\vs_projects\my structures\linked list\linkedlistimpl.hpp(235): note: while compiling class template member function 'Node<T> *LinkedList<T>::cloneChain(const Node<T> *)'
           with
           [
               T=int
           ]
-  d:\vs\vs_projects\my structures\linked list\linkedlistimpl.hpp(573): note: see reference to function template instantiation 'Node<T> *LinkedList<T>::cloneChain(const Node<T> *)' being compiled
+  d:\vs\vs_projects\my structures\linked list\linkedlistimpl.hpp(583): note: see reference to function template instantiation 'Node<T> *LinkedList<T>::cloneChain(const Node<T> *)' being compiled
           with
           [
               T=int
           ]
   d:\vs\vs_projects\my structures\linked list\linkedlistimpl.hpp(20): note: while compiling class template member function 'bool LinkedList<int>::isEmpty(void) const'
-  d:\vs\vs_projects\my structures\linked list\linkedlistimpl.hpp(375): note: see reference to function template instantiation 'bool LinkedList<int>::isEmpty(void) const' being compiled
-  d:\vs\vs_projects\my structures\linked list\linkedlistimpl.hpp(303): note: while compiling class template member function 'LinkedList<int>::LinkedList(void)'
+  d:\vs\vs_projects\my structures\linked list\linkedlistimpl.hpp(383): note: see reference to function template instantiation 'bool LinkedList<int>::isEmpty(void) const' being compiled
+  d:\vs\vs_projects\my structures\linked list\linkedlistimpl.hpp(311): note: while compiling class template member function 'LinkedList<int>::LinkedList(void)'
   d:\vs\vs_projects\my structures\linked list\main.cpp(29): note: see reference to function template instantiation 'LinkedList<int>::LinkedList(void)' being compiled
   d:\vs\vs_projects\my structures\linked list\main.cpp(13): note: see reference to class template instantiation 'LinkedList<int>' being compiled
   Linked List.vcxproj -> D:\VS\VS_Projects\My structures\Template Dynamic Array\Debug\Linked List.exe
