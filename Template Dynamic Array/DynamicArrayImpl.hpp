@@ -318,7 +318,7 @@ void DynamicArray<T>::add(const T& object)
 
 
 template <typename T>
-void DynamicArray<T>::addAt(const T& object, int position)
+void DynamicArray<T>::addAt(int position, const T& object)
 {
 	if (position < 0 || position >= count)
 		throw std::out_of_range("Index out of range!");

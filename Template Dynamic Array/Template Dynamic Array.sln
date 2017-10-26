@@ -7,6 +7,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Template Dynamic Array", "T
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Linked List", "..\Linked List\Linked List.vcxproj", "{1AAEE947-862F-45BB-91E7-0EB87C17C0E3}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DynamicArrayTest", "..\DynamicArrayTest\DynamicArrayTest.vcxproj", "{506A462D-4120-4D33-80F9-AD354215AE94}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -31,6 +33,14 @@ Global
 		{1AAEE947-862F-45BB-91E7-0EB87C17C0E3}.Release|x64.Build.0 = Release|x64
 		{1AAEE947-862F-45BB-91E7-0EB87C17C0E3}.Release|x86.ActiveCfg = Release|Win32
 		{1AAEE947-862F-45BB-91E7-0EB87C17C0E3}.Release|x86.Build.0 = Release|Win32
+		{506A462D-4120-4D33-80F9-AD354215AE94}.Debug|x64.ActiveCfg = Debug|x64
+		{506A462D-4120-4D33-80F9-AD354215AE94}.Debug|x64.Build.0 = Debug|x64
+		{506A462D-4120-4D33-80F9-AD354215AE94}.Debug|x86.ActiveCfg = Debug|Win32
+		{506A462D-4120-4D33-80F9-AD354215AE94}.Debug|x86.Build.0 = Debug|Win32
+		{506A462D-4120-4D33-80F9-AD354215AE94}.Release|x64.ActiveCfg = Release|x64
+		{506A462D-4120-4D33-80F9-AD354215AE94}.Release|x64.Build.0 = Release|x64
+		{506A462D-4120-4D33-80F9-AD354215AE94}.Release|x86.ActiveCfg = Release|Win32
+		{506A462D-4120-4D33-80F9-AD354215AE94}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

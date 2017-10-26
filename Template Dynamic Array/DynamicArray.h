@@ -20,7 +20,7 @@ public:
 	virtual void remove(int position);                     //remove an element by its position in the array (shifting used)
 	virtual int find(const T&)const;                       //search by value (-1 if not found)
 
-	void addAt(const T&, int);                             //add the element at the exact position (shifting used)
+	void addAt(int, const T&);                             //add the element at the exact position (shifting used)
 
 	int getSize()const;                                    //get the size of the array
 	int getCount()const;                                   //get the count of the elements in the array
