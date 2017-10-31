@@ -11,7 +11,7 @@
 template <typename T>
 ListIterator<T> LinkedList<T>::getIterator()const
 {
-	return ListIterator<T>(head);
+	return ListIterator<T>(head,this);
 }
 
 

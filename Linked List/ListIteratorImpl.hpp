@@ -5,25 +5,62 @@
 //to point to the passed starting node
 //
 template <typename Key>
-ListIterator<Key>::ListIterator(Node<Key>* startNode)
+ListIterator<Key>::ListIterator(Node<Key>* startNode,const LinkedList<Key>* ownerList)
 	:
 	start(startNode),
-	current(startNode)
+	current(startNode),
+	owner(ownerList)
 {
 	;
 }
 
 
 
+
 //
-//the traversal is done if current points to NULL
+//returns true if the traversal has not ended
 //
 template <typename Key>
-bool ListIterator<Key>::isDone()const
+ListIterator<Key>::operator bool()const
+{
+	return current != NULL;
+}
+
+
+
+//
+//returns true if the traversal has ended
+//
+template <typename Key>
+bool ListIterator<Key>::operator!()const
 {
 	return current == NULL;
 }
 
+
+
+//
+//advance to the next node in the list
+//
+template <typename Key>
+ListIterator<Key>& ListIterator<Key>::operator++()
+{
+	if (current)
+		current = current->next;
+
+	return *this;
+}
+
+
+template <typename Key>
+ListIterator<Key> ListIterator<Key>::operator++(int)
+{
+	ListIterator<Key> temp(*this);
+
+	++(*this);
+
+	return temp;
+}
 
 
 //
@@ -37,54 +74,33 @@ void ListIterator<Key>::first()
 
 
 
+
 //
-//move iterator to the next node in the list
-//
-//if the traversal has already finished, the function does nothing
+//return the data of the current node
 //
 template <typename Key>
-void ListIterator<Key>::next()
+Key& ListIterator<Key>::operator*()
 {
-	//if not done
-	if (current)
-	{
-		//move forward
-		current = current->next;
-	}
+	return current->data;
 }
 
-
-
-
 //
-//get the value of the current node
-//
-//if the traversal has already finished, throw an exception
+//return the data of the current node
 //
 template <typename Key>
-const Key& ListIterator<Key>::getCurrent()const
+const Key& ListIterator<Key>::operator*()const
 {
-	if (isDone())
-		throw std::logic_error("Iterator out of bounds!");
-
 	return current->data;
 }
 
 
-
 //
-//set the value of the current node
-//
-//if the traversal has already finished, throw an exception
+//owner,start and current should be the same
 //
 template <typename Key>
-void ListIterator<Key>::setCurrent(const Key& value)
+bool ListIterator<Key>::operator==(const ListIterator<Key>& iter)const
 {
-	if (isDone())
-		throw std::logic_error("Iterator out of bounds!");
-
-	current->data = value;
+	return (this->current == iter.current && 
+		    this->owner == iter.owner && 
+		    this->start == iter.start);
 }
-
-
-

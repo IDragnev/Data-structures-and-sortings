@@ -16,5 +16,5 @@ d:\vs\vs_projects\my structures\linked list\linkedlistimpl.hpp(265): warning C41
   d:\vs\vs_projects\my structures\linked list\linkedlistimpl.hpp(311): note: while compiling class template member function 'LinkedList<int>::LinkedList(void)'
   d:\vs\vs_projects\my structures\linked list\main.cpp(29): note: see reference to function template instantiation 'LinkedList<int>::LinkedList(void)' being compiled
   d:\vs\vs_projects\my structures\linked list\main.cpp(13): note: see reference to class template instantiation 'LinkedList<int>' being compiled
-  Linked List.vcxproj -> D:\VS\VS_Projects\My structures\Template Dynamic Array\Debug\Linked List.exe
-  Linked List.vcxproj -> D:\VS\VS_Projects\My structures\Template Dynamic Array\Debug\Linked List.pdb (Full PDB)
+  Linked List.vcxproj -> D:\VS\VS_Projects\My structures\Linked List\Debug\Linked List.exe
+  Linked List.vcxproj -> D:\VS\VS_Projects\My structures\Linked List\Debug\Linked List.pdb (Full PDB)

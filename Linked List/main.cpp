@@ -76,10 +76,10 @@ void Test()
 
 	// try to walk the list via iterator
 	for (ListIterator<int> iterator = newList.getIterator();
-	        !iterator.isDone();
-	     iterator.next())
+	        !iterator;
+	    ++iterator)
 	{
-		foo = iterator.getCurrent();
+		foo = *iterator;
 	}
 
 	end = time(NULL);
@@ -101,9 +101,9 @@ int main()
 		ListIterator<int> &iter = list.getIterator();
 
 		std::cout << "\nFirst list: \n";
-		for (; !iter.isDone(); iter.next())
+		for (; !iter; ++iter)
 		{
-			std::cout << iter.getCurrent() << ' ';
+			std::cout << *iter << ' ';
 		}
 		std::cout << std::endl;
 
@@ -113,9 +113,9 @@ int main()
 
 		ListIterator<int>& iter2 = list2.getIterator();
 
-		for (; !iter2.isDone(); iter2.next())
+		for (; !iter2; ++iter2)
 		{
-			std::cout << iter2.getCurrent() << ' ';
+			std::cout << *iter2 << ' ';
 		}
 		std::cout << std::endl;
 
