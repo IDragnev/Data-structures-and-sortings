@@ -1,4 +1,7 @@
 #include <iostream>
+#include <stdlib.h>
+#include <random>
+#include <ctime>
 
 #include "DynamicArray.h"
 #include "OrderedDynamicArray.h"
@@ -207,8 +210,38 @@ int StaticStackTest()
 	return 0;
 }
 
+#include "MergeSort.h"
 
 int main()
 {
+	srand(time(NULL));
+
+	try
+	{
+		std::cout << "\nHow many elements to sort ? \n";
+
+		int x;
+		std::cin >> x;
+
+		DynamicArray<int> arr(x);
+
+		for (int i = 0; i < x; ++i)
+		{
+			arr.add(rand() % 1000);
+		}
+
+		time_t beg = time(NULL);
+
+		mergeSort(arr, 0, x - 1);
+
+		time_t end = time(NULL);
+
+		std::cout << "\nSorted for " << end - beg << " seconds!\n";
+	}
+	catch (std::exception& ex)
+	{
+		std::cout << ex.what() << std::endl;
+	}
+
 	return 0;
 }

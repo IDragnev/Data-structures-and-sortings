@@ -148,6 +148,7 @@
   <ItemGroup>
     <ClInclude Include="DynamicArray.h" />
     <ClInclude Include="DynamicArrayImpl.hpp" />
+    <ClInclude Include="MergeSort.h" />
     <ClInclude Include="StaticQueue.h" />
     <ClInclude Include="DynamicStackImpl.hpp" />
     <ClInclude Include="OrderedDynamicArray.h" />
