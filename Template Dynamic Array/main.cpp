@@ -213,6 +213,7 @@ int StaticStackTest()
 #include "MergeSort.h"
 #include "InsertionSort.h"
 #include "BubbleSort.h"
+#include "SelectionSort.h"
 
 int main()
 {
@@ -236,7 +237,9 @@ int main()
 
 		//insertionSort(arr, 0, arr.getCount() - 1);
 		//mergeSort(arr, 0, arr.getCount() - 1);
-		bubbleSort(arr, 0, arr.getCount() - 1);
+		//bubbleSort(arr, 0, arr.getCount() - 1);
+		selectionSort(arr, 0, arr.getCount() - 1);
+
 		time_t end = time(NULL);
 
 		std::cout << "\nSorted for " << end - beg << " seconds!\n";

@@ -151,6 +151,7 @@
     <ClInclude Include="DynamicArrayImpl.hpp" />
     <ClInclude Include="InsertionSort.h" />
     <ClInclude Include="MergeSort.h" />
+    <ClInclude Include="SelectionSort.h" />
     <ClInclude Include="StaticQueue.h" />
     <ClInclude Include="DynamicStackImpl.hpp" />
     <ClInclude Include="OrderedDynamicArray.h" />
