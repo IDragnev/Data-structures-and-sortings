@@ -10,11 +10,19 @@ int main()
 	list.addAsTail(2);
 
 	ListIterator<int> &it = list.getHead();
+	
+	list.insertBefore(it, 10000);
+
+	++it;
 
 	for (int i = 0; i < 3; ++i)
 	{
-		list.insertAfter(it, 99);
+		list.insertBefore(it, 99 - i);
 	}
+
+	assert(list.getCount() == 6);
+
+	it = list.getHead();
 
 	while (it)
 	{

@@ -516,7 +516,41 @@ void LinkedList<T>::insertAfter(ListIterator<T>& it, const T& data)
 }
 
 
+//
+//insert a new node with the sent data
+//exactly before it.current
+//
+// \ if the iterator has reached the end (points to NULL)
+//   or the iterator points to the head node
+//   addAsHead is called 
+//
+// \ if the iterator is not from this list
+//   std::invalid_arg is thrown
+//
+template <typename T>
+void LinkedList<T>::insertBefore(ListIterator<T>& it, const T& data)
+{
+	if (it.owner != this)
+		throw std::invalid_argument("Invalid iterator passed!");
 
+	//if NULL or points to the head node, insert before the head
+	if (!it || it.current == head)
+	{
+		addAsHead(data);
+	}
+	else 
+	{
+		//it has a predecessor, because it is not the head node
+		assert(it.current->hasPredecessor());
+
+		//get the previous node
+		ListIterator<T> previous = it;
+		--previous;
+
+		//insert after it
+		insertAfter(previous, data);
+	}
+}
 
 
 //
