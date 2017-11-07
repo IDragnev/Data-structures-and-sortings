@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Node">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="General">
+      <UniqueIdentifier>{b710f293-5979-4076-b770-319f9fc964bb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Doubly-linked list">
+      <UniqueIdentifier>{88cee530-0af2-4485-aa87-60100e305125}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Iterator">
+      <UniqueIdentifier>{76a46e2f-6394-4ff3-8964-fab2823897e4}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>General</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Node.h">
+      <Filter>Node</Filter>
+    </ClInclude>
+    <ClInclude Include="NodeImpl.hpp">
+      <Filter>Node</Filter>
+    </ClInclude>
+    <ClInclude Include="LinkedList.h">
+      <Filter>Doubly-linked list</Filter>
+    </ClInclude>
+    <ClInclude Include="ListIterator.h">
+      <Filter>Iterator</Filter>
+    </ClInclude>
+    <ClInclude Include="ListIteratorImpl.hpp">
+      <Filter>Iterator</Filter>
+    </ClInclude>
+    <ClInclude Include="LinkedListImpl.hpp">
+      <Filter>Doubly-linked list</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
