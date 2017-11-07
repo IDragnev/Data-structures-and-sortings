@@ -8,19 +8,11 @@ int main()
 
 	list.addAsHead(1);
 	list.addAsTail(2);
+	list.addAsTail(3);
 
-	ListIterator<int> &it = list.getHead();
+	ListIterator<int> &it = list.getTail();
 	
-	list.insertBefore(it, 10000);
-
-	++it;
-
-	for (int i = 0; i < 3; ++i)
-	{
-		list.insertBefore(it, 99 - i);
-	}
-
-	assert(list.getCount() == 6);
+	list.removeBefore(it);
 
 	it = list.getHead();
 
@@ -29,6 +21,5 @@ int main()
 		std::cout << *it << std::endl;
 		++it;
 	}
-
 	return 0;
 }

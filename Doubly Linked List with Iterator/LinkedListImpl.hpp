@@ -601,3 +601,33 @@ void LinkedList<T>::removeAt(ListIterator<T>& it)
 }
 
 
+
+//
+//remove the node brefore it.current
+//
+template <typename T>
+void LinkedList<T>::removeBefore(ListIterator<T>& it)
+{
+	//go to the previous node
+	ListIterator<T> previous = it;
+	--previous;
+
+	//remove it
+	removeAt(previous);
+}
+
+
+
+//
+//remove the node after it.current
+//
+template <typename T>
+void LinkedList<T>::removeAfter(ListIterator<T>& it)
+{
+	//go to the next node
+	ListIterator<T> next = it;
+	++next;
+
+	//remove it
+	removeAt(next);
+}
