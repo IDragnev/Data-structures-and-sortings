@@ -52,6 +52,11 @@ private:
 	void checkIsEmtpy()const;
 
 private:
+	void removeAt(Node<T>* node);
+	void insertAfter(Node<T>* node, const T&);
+	void insertBefore(Node<T>* node, const T&);
+
+private:
 	static Node<T>* findEndOfChain(Node<T>* firstNode);
 	static Node<T>* cloneChain(const Node<T>* firstNode);
 	static void clearChain(const Node<T>* firstNode);

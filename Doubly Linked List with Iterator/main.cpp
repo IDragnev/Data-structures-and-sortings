@@ -10,16 +10,25 @@ int main()
 	list.addAsTail(2);
 	list.addAsTail(3);
 
-	ListIterator<int> &it = list.getTail();
-	
-	list.removeBefore(it);
+	ListIterator<int> &it = list.getHead();
+	ListIterator<int> &rev = list.getTail();
 
-	it = list.getHead();
+	list.removeAt(rev);
+
+	rev = list.getTail();
 
 	while (it)
 	{
 		std::cout << *it << std::endl;
 		++it;
+	}
+
+	std::cout << std::endl;
+
+	while (rev)
+	{
+		std::cout << *rev << std::endl;
+		--rev;
 	}
 	return 0;
 }

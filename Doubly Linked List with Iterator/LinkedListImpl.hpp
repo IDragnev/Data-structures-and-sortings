@@ -472,85 +472,44 @@ void LinkedList<T>::removeTail()
 
 
 
-
 //
-//add a new node with the sent data
-//exactly after the iterator's current
+//remove the node from the list
 //
-// \ if the iterator has reached the end (points to NULL)
-//   or the iterator points to the tail node
-//   addAsTail is called 
-//
-// \ if the iterator is not from this list
-//   std::invalid_arg is thrown
+//if the pointer is NULL,just leave
 //
 template <typename T>
-void LinkedList<T>::insertAfter(ListIterator<T>& it, const T& data)
+void LinkedList<T>::removeAt(Node<T>* node)
 {
-	if (it.owner != this)
-		throw std::invalid_argument("Invalid iterator passed!");
-
-	//if the iterator has reached the end
-	//or the iterator points to the tail node
-	if (!it || it.current == tail)
+	//if not NULL
+	if (node)
 	{
-		addAsTail(data);
-	}
-	else //else insert after it.current 
-	{
-		//if it does not point to the tail (and is not NULL) it has a successor
-		assert(it.current->hasSuccessor());
+		//if it's the head node
+		if (node == head)
+		{
+			removeHead();
+		}
+		//else if it points to the tail node
+		else if (node == tail)
+		{
+			removeTail();
+		}
+		else // this means node has both successor AND predecessor
+		{
+			assert(node->hasSuccessor() && node->hasPredecessor());
 
-		//insert it exactly after the current node
-		Node<T>* newTab = new Node<T>(data, it.current, it.current->next);
+			//link node's neighbours toghether
+			node->next->previous = node->previous;
+			node->previous->next = node->next;
 
-		//update it.current successor's predecessor
-		it.current->next->previous = newTab;
+			//free node
+			delete node;
 
-		//update current's successor as the new node
-		it.current->next = newTab;
-
-		//increment count
-		++count;
+			//decrease count
+			--count;
+		}
 	}
 }
 
-
-//
-//insert a new node with the sent data
-//exactly before it.current
-//
-// \ if the iterator has reached the end (points to NULL)
-//   or the iterator points to the head node
-//   addAsHead is called 
-//
-// \ if the iterator is not from this list
-//   std::invalid_arg is thrown
-//
-template <typename T>
-void LinkedList<T>::insertBefore(ListIterator<T>& it, const T& data)
-{
-	if (it.owner != this)
-		throw std::invalid_argument("Invalid iterator passed!");
-
-	//if NULL or points to the head node, insert before the head
-	if (!it || it.current == head)
-	{
-		addAsHead(data);
-	}
-	else 
-	{
-		//it has a predecessor, because it is not the head node
-		assert(it.current->hasPredecessor());
-
-		//get the previous node
-		ListIterator<T> previous = it;
-		--previous;
-
-		//insert after it
-		insertAfter(previous, data);
-	}
-}
 
 
 //
@@ -565,36 +524,28 @@ void LinkedList<T>::removeAt(ListIterator<T>& it)
 	if (it.owner != this)
 		throw std::invalid_argument("Invalid iterator passed!");
 
-	//if the iterator has reached an end (points to NULL)
-	if (!it)
-	{
-		//just leave
-		return;
-	}
-	//else if the iterator points to the head node
-	else if (it.current == head)
-	{
-		removeHead();
-	}
-	//else if the iterator points to the tail node
-	else if (it.current == tail)
-	{
-		removeTail();
-	}
-	else // this means it.current has both successor AND predecessor
-	{
-		assert(it.current->hasSuccessor() && it.current->hasPredecessor());
+	//remove it
+	removeAt(it.current);
 
-		//link it.current's neighbours toghether
-		it.current->next->previous = it.current->previous;
-		it.current->previous->next = it.current->next;
+	//invalidate iterator
+	it.current = NULL;
+}
 
-		//free it.current
-		delete it.current;
 
-		//decrease count
-		--count;
-	}
+//
+//remove the node before the one the iterator points to
+//
+// \ if the iterator is not from this list
+//   std::invalid_arg is thrown
+//
+template <typename T>
+void LinkedList<T>::removeBefore(ListIterator<T>& it)
+{
+	if (it.owner != this)
+		throw std::invalid_argument("Invalid iterator passed!");
+
+	//remove the one before it
+	removeAt(it.current->previous);
 
 	//invalidate iterator
 	it.current = NULL;
@@ -603,31 +554,121 @@ void LinkedList<T>::removeAt(ListIterator<T>& it)
 
 
 //
-//remove the node brefore it.current
+//remove the node after the one the iterator points to
+//
+// \ if the iterator is not from this list
+//   std::invalid_arg is thrown
 //
 template <typename T>
-void LinkedList<T>::removeBefore(ListIterator<T>& it)
+void LinkedList<T>::removeAfter(ListIterator<T>& it)
 {
-	//go to the previous node
-	ListIterator<T> previous = it;
-	--previous;
+	if (it.owner != this)
+		throw std::invalid_argument("Invalid iterator passed!");
 
-	//remove it
-	removeAt(previous);
+	//remove the one after it
+	removeAt(it.current->next);
+
+	//invalidate iterator
+	it.current = NULL;
+}
+
+
+
+
+//
+//add a new node with the sent data
+//exactly after the sent node
+//
+// \ if the pointer is NULL
+//   or it points to the tail node
+//   addAsTail is called 
+//
+template <typename T>
+void LinkedList<T>::insertAfter(Node<T>* node, const T& data)
+{
+	//if NULL or tail
+	if (!node || node == tail)
+	{
+		addAsTail(data);
+	}
+	else //else insert after it
+	{
+		//if it does not point to the tail (and is not NULL) it has a successor
+		assert(node->hasSuccessor());
+
+		//insert it exactly after the node
+		Node<T>* newNode = new Node<T>(data, node, node->next);
+
+		//update node successor's predecessor
+		node->next->previous = newNode;
+
+		//update node's successor as the new node
+		node->next = newNode;
+
+		//increment count
+		++count;
+	}
 }
 
 
 
 //
-//remove the node after it.current
+//add a new node with the sent data
+//exactly after the iterator's current
+//
+// \ if the iterator is not from this list
+//   std::invalid_arg is thrown
 //
 template <typename T>
-void LinkedList<T>::removeAfter(ListIterator<T>& it)
+void LinkedList<T>::insertAfter(ListIterator<T>& it, const T& data)
 {
-	//go to the next node
-	ListIterator<T> next = it;
-	++next;
+	if (it.owner != this)
+		throw std::invalid_argument("Invalid iterator passed!");
 
-	//remove it
-	removeAt(next);
+	//insert it
+	insertAfter(it.current, data);
+}
+
+
+//
+//insert a node with the sent data 
+//exactly before the sent node
+//
+// \ if the pointer is NULL or points to the head
+//    addAsHead is called
+//
+template <typename T>
+void LinkedList<T>::insertBefore(Node<T>* node, const T& data)
+{
+	//if NULL or points to the head node, insert before the head
+	if (!node || node == head)
+	{
+		addAsHead(data);
+	}
+	else
+	{
+		//it has a predecessor, because it is not the head node
+		assert(node->hasPredecessor());
+
+		//insert after its predecessor
+		insertAfter(node->previous, data);
+	}
+}
+
+
+//
+//insert a new node with the sent data
+//exactly before it.current
+//
+// \ if the iterator is not from this list
+//   std::invalid_arg is thrown
+//
+template <typename T>
+void LinkedList<T>::insertBefore(ListIterator<T>& it, const T& data)
+{
+	if (it.owner != this)
+		throw std::invalid_argument("Invalid iterator passed!");
+
+	//insert before it
+	insertBefore(it.current, data);
 }
