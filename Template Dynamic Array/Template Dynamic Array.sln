@@ -11,6 +11,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DynamicArrayTest", "..\Dyna
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Doubly Linked List with Iterator", "..\Doubly Linked List with Iterator\Doubly Linked List with Iterator.vcxproj", "{A1AD2F87-529C-474D-ADB4-E441B44CBE79}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DL List Test", "..\DL List Test\DL List Test.vcxproj", "{24FFFC53-4ECF-4A53-AE1D-B2F58EBE134B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -51,6 +53,14 @@ Global
 		{A1AD2F87-529C-474D-ADB4-E441B44CBE79}.Release|x64.Build.0 = Release|x64
 		{A1AD2F87-529C-474D-ADB4-E441B44CBE79}.Release|x86.ActiveCfg = Release|Win32
 		{A1AD2F87-529C-474D-ADB4-E441B44CBE79}.Release|x86.Build.0 = Release|Win32
+		{24FFFC53-4ECF-4A53-AE1D-B2F58EBE134B}.Debug|x64.ActiveCfg = Debug|x64
+		{24FFFC53-4ECF-4A53-AE1D-B2F58EBE134B}.Debug|x64.Build.0 = Debug|x64
+		{24FFFC53-4ECF-4A53-AE1D-B2F58EBE134B}.Debug|x86.ActiveCfg = Debug|Win32
+		{24FFFC53-4ECF-4A53-AE1D-B2F58EBE134B}.Debug|x86.Build.0 = Debug|Win32
+		{24FFFC53-4ECF-4A53-AE1D-B2F58EBE134B}.Release|x64.ActiveCfg = Release|x64
+		{24FFFC53-4ECF-4A53-AE1D-B2F58EBE134B}.Release|x64.Build.0 = Release|x64
+		{24FFFC53-4ECF-4A53-AE1D-B2F58EBE134B}.Release|x86.ActiveCfg = Release|Win32
+		{24FFFC53-4ECF-4A53-AE1D-B2F58EBE134B}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
