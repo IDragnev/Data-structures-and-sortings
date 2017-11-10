@@ -178,5 +178,67 @@ namespace DLListTest
 			//count should be summed
 			Assert::IsTrue(list.getCount() == (count + list2.getCount()), L"Appending a non-empty list changes count incorrectly");
 		}
+
+
+		TEST_METHOD(AppendingToList)
+		{
+			LinkedList<int> list;
+
+			LinkedList<int> list2;
+			for (int i = 0; i < 10; ++i)
+				list2.addAsTail(i);
+
+			//append list2 to the empty list
+			list.appendList(list2);
+
+			ListIterator<int> &it = list.getHead();
+
+			//should have reconstructed them all
+			for (int i = 0; it; ++it, ++i)
+			{
+				Assert::AreEqual(i, *it, L"Appending to non-empty list is not working properly");
+			}
+
+			//set it to tail
+			it = list.getTail();
+
+			//now append again to the non-empty list
+			list.appendList(list2);
+
+
+			//move to the first appended node
+			++it;
+			Assert::IsFalse(!it, L"Appending to non-empty list is not working properly");
+
+			//should have reconstructed them all
+			for (int i = 0; it; ++it, ++i)
+			{
+				Assert::AreEqual(i, *it, L"Appending to list is not working properly");
+			}
+		}
+
+		TEST_METHOD(RemovingHeadAndTailTest)
+		{
+			LinkedList<int> list;
+
+			for (int i = 0; i < 10; ++i)
+				list.addAsHead(i);
+
+			for (int i = 10; i > 0; --i)
+			{
+				Assert::IsTrue(list.getCount() == i, L"Removing head does not manage count properly");
+				list.removeHead();
+			}
+
+			LinkedList<int> list2;
+			for (int i = 0; i < 10; ++i)
+				list.addAsTail(i);
+
+			for (int i = 10; i > 0; --i)
+			{
+				Assert::IsTrue(list.getCount() == i, L"Removing tail does not manage count properly");
+				list.removeTail();
+			}
+		}
 	};
 }
