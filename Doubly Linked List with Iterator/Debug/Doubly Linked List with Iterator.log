@@ -1,3 +1,4 @@
 ﻿  main.cpp
+cl : Command line warning D9028: minimal rebuild failure, reverting to normal build
   Doubly Linked List with Iterator.vcxproj -> D:\VS\VS_Projects\My structures\Template Dynamic Array\Debug\Doubly Linked List with Iterator.exe
   Doubly Linked List with Iterator.vcxproj -> D:\VS\VS_Projects\My structures\Template Dynamic Array\Debug\Doubly Linked List with Iterator.pdb (Full PDB)

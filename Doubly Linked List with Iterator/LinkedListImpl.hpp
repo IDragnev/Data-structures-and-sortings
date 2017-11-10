@@ -160,7 +160,7 @@ template <typename T>
 Node<T>* LinkedList<T>::cloneChain(const Node<T>* firstNode)
 {
 	assert(firstNode);
-	Node* newChain = NULL;
+	Node<T>* newChain = NULL;
 
 	try
 	{
