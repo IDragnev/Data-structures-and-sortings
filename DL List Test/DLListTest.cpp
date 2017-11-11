@@ -40,6 +40,12 @@ namespace DLListTest
 			//should be empty
 			Assert::IsTrue(list.getCount() == 0, L"List is not empty when removing head as only node");
 			Assert::IsTrue(list.isEmpty(), L"IsEmpty returns false after removing head as only node");
+
+			list.addAsHead(1);
+			list.addAsHead(2);
+			list.removeAll();
+			Assert::IsTrue(list.getCount() == 0, L"List is not empty after calling removeAll");
+			Assert::IsTrue(list.isEmpty(), L"List is not empty after calling removeAll");
 		}
 
 		TEST_METHOD(AddingTailTest)
@@ -249,12 +255,86 @@ namespace DLListTest
 			//null iterator
 			ListIterator<int> &head = list.getHead();
 
-			//shoukd insert it as tail
+			//should insert it as tail
 			list.insertAfter(head, 2);
 
 			head = list.getHead();
 			Assert::IsTrue(*head == 2, L"Insertion after NULL iterator is not adding as tail");
 
+			list.removeAll();
+
+			list.addAsHead(1);
+			
+			head = list.getHead();
+
+			list.insertAfter(head, 3);
+
+			//move to the new node
+			++head;
+			Assert::IsTrue(head, L"Insertion after iterator does not update its successor");
+			Assert::IsTrue(*head == 3, L"Insertion after iterator does not construct with the value passed");
+
+			list.removeAll();
+
+			list.addAsHead(1);
+			list.addAsTail(3);
+
+			//insert between 1 and 3
+			head = list.getHead();
+
+			list.insertAfter(head, 2);
+
+			for (int i = 0; i < 3; ++i)
+			{
+				Assert::IsTrue(*head == i + 1, L"Inserting between two nodes is not working properly");
+				++head;
+			}
+		}
+
+
+		TEST_METHOD(InsertionBeforeIteratorTest)
+		{
+
+			LinkedList<int> list;
+
+			//null iterator
+			ListIterator<int> &head = list.getHead();
+
+			//should insert it as head
+			list.insertBefore(head, 2);
+
+			head = list.getHead();
+			Assert::IsTrue(*head == 2, L"Insertion before NULL iterator is not adding as head");
+
+			list.removeAll();
+
+			list.addAsHead(1);
+			head = list.getHead();
+
+			list.insertBefore(head, 3);
+
+			//move to the new node
+			--head;
+			Assert::IsTrue(head, L"Insertion before iterator does not update its predecessor");
+			Assert::IsTrue(*head == 3, L"Insertion before iterator does not construct with the value passed");
+
+			list.removeAll();
+
+			list.addAsHead(1);
+			list.addAsTail(3);
+
+			//insert between 1 and 3
+			ListIterator<int> tail = list.getTail();
+
+			list.insertBefore(tail, 2);
+
+			head = list.getHead();
+
+			for (int i = 0; i < 3; ++i)
+			{
+				Assert::IsTrue(*head == i + 1, L"Inserting between two nodes is not working properly");
+				++head;
+			}
 		}
 	};
 }
