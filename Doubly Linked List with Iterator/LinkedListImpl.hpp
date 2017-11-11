@@ -96,6 +96,7 @@ ListIterator<T> LinkedList<T>::getHead()
 //
 
 
+
 //
 //move forward in the chain while possible
 //and return the address of the last node
@@ -205,7 +206,7 @@ Node<T>* LinkedList<T>::cloneChain(const Node<T>* firstNode)
 //and make tail, head and count 0
 //
 template <typename T>
-void LinkedList<T>::clear()
+void LinkedList<T>::removeAll()
 {
 	clearChain(head);
 

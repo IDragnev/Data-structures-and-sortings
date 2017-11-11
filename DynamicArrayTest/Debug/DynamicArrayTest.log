@@ -1,4 +1,5 @@
-﻿  DynamicArrayTest.cpp
+﻿  stdafx.cpp
+  DynamicArrayTest.cpp
 d:\vs\vs_projects\my structures\dynamicarraytest\dynamicarraytest.cpp(37): warning C4800: 'int': forcing value to bool 'true' or 'false' (performance warning)
      Creating library D:\VS\VS_Projects\My structures\Template Dynamic Array\Debug\DynamicArrayTest.lib and object D:\VS\VS_Projects\My structures\Template Dynamic Array\Debug\DynamicArrayTest.exp
   DynamicArrayTest.vcxproj -> D:\VS\VS_Projects\My structures\Template Dynamic Array\Debug\DynamicArrayTest.dll

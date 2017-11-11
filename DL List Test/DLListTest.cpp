@@ -240,5 +240,21 @@ namespace DLListTest
 				list.removeTail();
 			}
 		}
+
+		TEST_METHOD(InsertionAfterIteratorTest)
+		{
+			
+			LinkedList<int> list;
+
+			//null iterator
+			ListIterator<int> &head = list.getHead();
+
+			//shoukd insert it as tail
+			list.insertAfter(head, 2);
+
+			head = list.getHead();
+			Assert::IsTrue(*head == 2, L"Insertion after NULL iterator is not adding as tail");
+
+		}
 	};
 }

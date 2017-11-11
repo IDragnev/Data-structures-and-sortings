@@ -24,6 +24,8 @@ public:
 
 	void appendList(const LinkedList<T>&);
 
+	void removeAll();
+
 public:
 	void setHead(const T&);
 	void setTail(const T&);
@@ -48,7 +50,6 @@ private:
 	Node<T>* tail;
 
 private:
-	void clear();
 	void checkIsEmtpy()const;
 
 private:

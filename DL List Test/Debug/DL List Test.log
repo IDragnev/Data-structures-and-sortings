@@ -1,3 +1,21 @@
-﻿     Creating library D:\VS\VS_Projects\My structures\Template Dynamic Array\Debug\DL List Test.lib and object D:\VS\VS_Projects\My structures\Template Dynamic Array\Debug\DL List Test.exp
+﻿  stdafx.cpp
+  IteratorTest.cpp
+  DLListTest.cpp
+d:\vs\vs_projects\my structures\doubly linked list with iterator\linkedlistimpl.hpp(193): warning C4101: 'ex': unreferenced local variable
+  d:\vs\vs_projects\my structures\doubly linked list with iterator\linkedlistimpl.hpp(162): note: while compiling class template member function 'Node<T> *LinkedList<T>::cloneChain(const Node<T> *)'
+          with
+          [
+              T=int
+          ]
+  d:\vs\vs_projects\my structures\doubly linked list with iterator\linkedlistimpl.hpp(233): note: see reference to function template instantiation 'Node<T> *LinkedList<T>::cloneChain(const Node<T> *)' being compiled
+          with
+          [
+              T=int
+          ]
+  d:\vs\vs_projects\my structures\doubly linked list with iterator\linkedlistimpl.hpp(272): note: while compiling class template member function 'LinkedList<int>::LinkedList(void)'
+  d:\vs\vs_projects\my structures\dl list test\dllisttest.cpp(15): note: see reference to function template instantiation 'LinkedList<int>::LinkedList(void)' being compiled
+  d:\vs\vs_projects\my structures\dl list test\dllisttest.cpp(15): note: see reference to class template instantiation 'LinkedList<int>' being compiled
+  Generating Code...
+     Creating library D:\VS\VS_Projects\My structures\Template Dynamic Array\Debug\DL List Test.lib and object D:\VS\VS_Projects\My structures\Template Dynamic Array\Debug\DL List Test.exp
   DL List Test.vcxproj -> D:\VS\VS_Projects\My structures\Template Dynamic Array\Debug\DL List Test.dll
   DL List Test.vcxproj -> D:\VS\VS_Projects\My structures\Template Dynamic Array\Debug\DL List Test.pdb (Partial PDB)
