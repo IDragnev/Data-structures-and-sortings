@@ -6,29 +6,17 @@ int main()
 {
 	LinkedList<int> list;
 
-	list.addAsHead(1);
-	list.addAsTail(2);
-	list.addAsTail(3);
+	for (int i = 0; i < 10; ++i)
+		list.addAsHead(1);
 
-	ListIterator<int> &it = list.getHead();
-	ListIterator<int> &rev = list.getTail();
+	LinkedList<int> list2;
 
-	list.removeAt(rev);
+	list2.addAsHead(100);
+	list2.addAsHead(1212);
 
-	rev = list.getTail();
+	LinkedList<int> list3(list);
 
-	while (it)
-	{
-		std::cout << *it << std::endl;
-		++it;
-	}
+	list = list2;
 
-	std::cout << std::endl;
-
-	while (rev)
-	{
-		std::cout << *rev << std::endl;
-		--rev;
-	}
 	return 0;
 }

@@ -297,17 +297,25 @@ LinkedList<T>::LinkedList(const LinkedList<T>& other)
 
 
 //
-//delete the list's chain of nodes,
-//initialize members back to 0
-//and append other's chain of nodes to this
+//Make a copy of other's chain and store
+//the copy in the current object.
 //
 template <typename T>
 LinkedList<T>& LinkedList<T>::operator=(const LinkedList<T>& other)
 {
 	if (this != &other)
 	{
-		clear();
-		appendList(other);
+		//Make a copy of other.
+		LinkedList<T> temp(other);
+
+		//Swap the current object's chain
+		//with the temporary object's chain.
+		std::swap(head, temp.head);
+		std::swap(tail, temp.tail);
+
+		//Swap count and let temp go out of scope
+		//and destroy the old chain.
+		std::swap(count, temp.count);
 	}
 
 	return *this;

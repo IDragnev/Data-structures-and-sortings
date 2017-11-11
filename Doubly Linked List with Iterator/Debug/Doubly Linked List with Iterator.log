@@ -1,4 +1,19 @@
 ﻿  main.cpp
-cl : Command line warning D9028: minimal rebuild failure, reverting to normal build
-  Doubly Linked List with Iterator.vcxproj -> D:\VS\VS_Projects\My structures\Template Dynamic Array\Debug\Doubly Linked List with Iterator.exe
-  Doubly Linked List with Iterator.vcxproj -> D:\VS\VS_Projects\My structures\Template Dynamic Array\Debug\Doubly Linked List with Iterator.pdb (Full PDB)
+d:\vs\vs_projects\my structures\doubly linked list with iterator\linkedlistimpl.hpp(192): warning C4101: 'ex': unreferenced local variable
+  d:\vs\vs_projects\my structures\doubly linked list with iterator\linkedlistimpl.hpp(161): note: while compiling class template member function 'Node<T> *LinkedList<T>::cloneChain(const Node<T> *)'
+          with
+          [
+              T=int
+          ]
+  d:\vs\vs_projects\my structures\doubly linked list with iterator\linkedlistimpl.hpp(232): note: see reference to function template instantiation 'Node<T> *LinkedList<T>::cloneChain(const Node<T> *)' being compiled
+          with
+          [
+              T=int
+          ]
+  d:\vs\vs_projects\my structures\doubly linked list with iterator\linkedlistimpl.hpp(15): note: while compiling class template member function 'bool LinkedList<int>::isEmpty(void) const'
+  d:\vs\vs_projects\my structures\doubly linked list with iterator\linkedlistimpl.hpp(355): note: see reference to function template instantiation 'bool LinkedList<int>::isEmpty(void) const' being compiled
+  d:\vs\vs_projects\my structures\doubly linked list with iterator\linkedlistimpl.hpp(288): note: while compiling class template member function 'LinkedList<int>::LinkedList(const LinkedList<int> &)'
+  d:\vs\vs_projects\my structures\doubly linked list with iterator\main.cpp(17): note: see reference to function template instantiation 'LinkedList<int>::LinkedList(const LinkedList<int> &)' being compiled
+  d:\vs\vs_projects\my structures\doubly linked list with iterator\main.cpp(7): note: see reference to class template instantiation 'LinkedList<int>' being compiled
+  Doubly Linked List with Iterator.vcxproj -> D:\VS\VS_Projects\My structures\Doubly Linked List with Iterator\Debug\Doubly Linked List with Iterator.exe
+  Doubly Linked List with Iterator.vcxproj -> D:\VS\VS_Projects\My structures\Doubly Linked List with Iterator\Debug\Doubly Linked List with Iterator.pdb (Full PDB)
