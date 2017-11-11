@@ -10,6 +10,7 @@ StaticQueue<T>::StaticQueue(int size)
 	;
 }
 
+
 template <typename T>
 inline bool StaticQueue<T>::isFull()const
 {
@@ -29,7 +30,7 @@ template <typename T>
 void StaticQueue<T>::enqueue(const T& element)
 {
 	if (isFull())
-		throw std::overflow_error("Queue overflow!");
+		throw std::overflow_error("Queue is full!");
 
 	//enqueue it
 	elements[tail] = element;
@@ -43,7 +44,7 @@ template <typename T>
 T StaticQueue<T>::dequeue()
 {
 	if (isEmpty())
-		throw std::underflow_error("Queue underflow!");
+		throw std::underflow_error("Queue is empty!");
 
 	//get the first element
 	T &object = elements[head];

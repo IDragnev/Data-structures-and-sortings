@@ -3,7 +3,6 @@
 
 #include "DynamicArray.h"
 
-
 template <typename T>
 class StaticStack
 {

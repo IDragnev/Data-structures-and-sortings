@@ -1,8 +1,9 @@
 
 
-
+//
 //constructs the array to be filled with default objects (count = size)
 //so that all can be available to the stack
+//
 template <typename T>
 StaticStack<T>::StaticStack(int size)
 	:
