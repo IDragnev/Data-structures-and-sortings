@@ -2,9 +2,10 @@
 template <typename Key>
 Node<Key>::Node(const Key& data, Node<Key>* successor)
 	:
-	next(successor)
+	next(successor),
+	data(data)
 {
-	this->data = data;
+	;
 }
 
 

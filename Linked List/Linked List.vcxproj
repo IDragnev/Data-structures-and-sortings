@@ -23,6 +23,7 @@
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>LinkedList</RootNamespace>
     <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
+    <ProjectName>Forward Linked List</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -146,10 +147,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="LinkedList.h" />
-    <ClInclude Include="LinkedListImpl.hpp" />
-    <ClInclude Include="ListIterator.h" />
-    <ClInclude Include="ListIteratorImpl.hpp" />
+    <ClInclude Include="ForwardList.h" />
+    <ClInclude Include="ForwardListImpl.hpp" />
+    <ClInclude Include="ForwardListIterator.h" />
+    <ClInclude Include="ForwardListIteratorImpl.hpp" />
     <ClInclude Include="LStack.h" />
     <ClInclude Include="LStackImpl.hpp" />
     <ClInclude Include="Node.h" />

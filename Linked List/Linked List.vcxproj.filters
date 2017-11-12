@@ -1,48 +1,54 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Source Files">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
-    </Filter>
-    <Filter Include="Linked List">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
-    </Filter>
     <Filter Include="Linked-List-Stack">
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Forward linked list">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Forward linked list\Node">
+      <UniqueIdentifier>{2396bae2-f962-4d69-b9dd-d9b532e6decd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Forward linked list\Forward Iterator">
+      <UniqueIdentifier>{d9c5463b-89b4-4478-aac0-60b2be209d7a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="General">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Node.h">
-      <Filter>Linked List</Filter>
-    </ClInclude>
-    <ClInclude Include="NodeImpl.hpp">
-      <Filter>Linked List</Filter>
-    </ClInclude>
-    <ClInclude Include="LinkedList.h">
-      <Filter>Linked List</Filter>
-    </ClInclude>
-    <ClInclude Include="LinkedListImpl.hpp">
-      <Filter>Linked List</Filter>
-    </ClInclude>
-    <ClInclude Include="ListIterator.h">
-      <Filter>Linked List</Filter>
-    </ClInclude>
-    <ClInclude Include="ListIteratorImpl.hpp">
-      <Filter>Linked List</Filter>
-    </ClInclude>
     <ClInclude Include="LStack.h">
       <Filter>Linked-List-Stack</Filter>
     </ClInclude>
     <ClInclude Include="LStackImpl.hpp">
       <Filter>Linked-List-Stack</Filter>
     </ClInclude>
+    <ClInclude Include="ForwardList.h">
+      <Filter>Forward linked list</Filter>
+    </ClInclude>
+    <ClInclude Include="ForwardListImpl.hpp">
+      <Filter>Forward linked list</Filter>
+    </ClInclude>
+    <ClInclude Include="Node.h">
+      <Filter>Forward linked list\Node</Filter>
+    </ClInclude>
+    <ClInclude Include="NodeImpl.hpp">
+      <Filter>Forward linked list\Node</Filter>
+    </ClInclude>
+    <ClInclude Include="ForwardListIterator.h">
+      <Filter>Forward linked list\Forward Iterator</Filter>
+    </ClInclude>
+    <ClInclude Include="ForwardListIteratorImpl.hpp">
+      <Filter>Forward linked list\Forward Iterator</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>General</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

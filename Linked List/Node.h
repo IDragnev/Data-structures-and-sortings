@@ -16,8 +16,8 @@ public:
 	bool hasSuccessor()const;                     
 
 public:  
-	Node<Key>* next;                                   //the successor
-	Key data;                                          //the data of the node
+	Node<Key>* next;                                
+	Key data;                                          
 };
 
 #include "NodeImpl.hpp"
