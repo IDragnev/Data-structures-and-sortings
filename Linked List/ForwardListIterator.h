@@ -7,7 +7,7 @@
 template <typename Key>
 class ForwardListIterator
 {
-	template<typename Key>
+	template <typename Key>
 	friend class ForwardList;
 private:
 	ForwardListIterator(Node<Key>* startNode, const ForwardList<Key>* owner);

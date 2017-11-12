@@ -247,6 +247,9 @@ void ForwardList<T>::appendList(const ForwardList<T>& other)
 //
 //returns the node before the passed one 
 //
+//if node is the actual head
+//no matching node is found and NULL is returned
+//
 template <typename T>
 Node<T>* ForwardList<T>::findNodeBefore(const Node<T>* node)const
 {
@@ -345,7 +348,7 @@ ForwardList<T>::~ForwardList()
 
 
 //
-//add a node with passed value 
+//add a node with the passed value 
 //as head node
 //
 template <typename T>
@@ -409,7 +412,7 @@ void ForwardList<T>::removeHead()
 {
 	checkIsEmtpy();
 
-	assert(head != NULL);
+	assert(head);
 
 	//keep the address of the old head node
 	Node<T>* oldHead = head;
@@ -434,4 +437,211 @@ void ForwardList<T>::removeHead()
 
 
 
+//
+//remove the specified node from the list
+//
+//if the pointer is NULL, the function does nothing
+//
+template <typename T>
+void ForwardList<T>::removeAt(Node<T>* node)
+{
+	if (node)
+	{
+		if (node == head)
+		{
+			removeHead();
+		}
+		//if it is not the head node, there are at least
+		//two nodes in the list
+		else
+		{
+			//find the node before the one we want to delete
+			Node<T>* nodeBefore = findNodeBefore(node);
 
+			//if the node we are about to delete is the tail 
+			if (node == tail)
+			{
+				tail = nodeBefore;
+			}
+
+			//update the successor of the previous node
+			nodeBefore->next = node->next;
+
+			//free node
+			delete node;
+
+			//update count
+			--count;
+		}
+	}
+}
+
+
+//
+//if the iterator is not from this list
+//an exception is thrown
+//
+template <typename T>
+void ForwardList<T>::removeAt(ForwardListIterator<T>& it)
+{
+	if (it.owner != this)
+		throw std::invalid_argument("Invalid iterator passed!");
+
+	//remove it
+	removeAt(it.current);
+
+	//invalidate iterator
+	it.current = NULL;
+}
+
+
+
+template <typename T>
+void ForwardList<T>::removeTail()
+{
+	return removeAt(tail);
+}
+
+
+
+//
+//insert a node with the sent value
+//exactly after the sent node
+//
+// \ if the pointer is NULL
+//   or it points to the tail node
+//   addAsTail is called 
+//
+template <typename T>
+void ForwardList<T>::insertAfter(Node<T>* node, const T& data)
+{
+	//if NULL or tail
+	if (!node || node == tail)
+	{
+		addAsTail(data);
+	}
+	else //else insert after it
+	{
+		//if it does not point to the tail (and is not NULL) it has a successor
+		assert(node->hasSuccessor());
+
+		//insert it exactly after the node
+		Node<T>* newNode = new Node<T>(data, node->next);
+
+		//update node's successor as the new node
+		node->next = newNode;
+
+		//increment count
+		++count;
+	}
+}
+
+
+
+//
+//add a new node with the sent data
+//exactly after the iterator's current
+//
+// \ if the iterator is not from this list
+//   std::invalid_arg is thrown
+//
+template <typename T>
+void ForwardList<T>::insertAfter(ForwardListIterator<T>& it, const T& data)
+{
+	if (it.owner != this)
+		throw std::invalid_argument("Invalid iterator passed!");
+
+	//insert it
+	insertAfter(it.current, data);
+}
+
+
+
+
+//
+//insert a node with the sent data 
+//exactly before the sent node
+//
+// \ if the pointer is NULL or points to the head
+//    addAsHead is called
+//
+template <typename T>
+void ForwardList<T>::insertBefore(Node<T>* node, const T& data)
+{
+	//if NULL or points to the head node, insert before the head
+	if (!node || node == head)
+	{
+		addAsHead(data);
+	}
+	else
+	{
+		//it has a predecessor, because it is not the head node
+		Node<T>* previous = findNodeBefore(node);
+		
+		assert(previous);
+
+		//insert after its predecessor
+		insertAfter(previous, data);
+	}
+}
+
+
+
+//
+//insert a new node with the sent data
+//exactly before it.current
+//
+// \ if the iterator is not from this list
+//   std::invalid_arg is thrown
+//
+template <typename T>
+void ForwardList<T>::insertBefore(ForwardListIterator<T>& it, const T& data)
+{
+	if (it.owner != this)
+		throw std::invalid_argument("Invalid iterator passed!");
+
+	//insert before it
+	insertBefore(it.current, data);
+}
+
+
+
+
+
+//
+//remove the node after the one the iterator points to
+//
+// \ if the iterator is not from this list
+//   std::invalid_arg is thrown
+//
+template <typename T>
+void ForwardList<T>::removeAfter(ForwardListIterator<T>& it)
+{
+	if (it.owner != this)
+		throw std::invalid_argument("Invalid iterator passed!");
+
+	//remove the one after it
+	removeAt(it.current->next);
+}
+
+
+
+
+//
+//remove the node before the one the iterator points to
+//
+// \ if the iterator is not from this list
+//   std::invalid_arg is thrown
+//
+template <typename T>
+void ForwardList<T>::removeBefore(ForwardListIterator<T>& it)
+{
+	if (it.owner != this)
+		throw std::invalid_argument("Invalid iterator passed!");
+
+	//find the one before it 
+	Node<T>* previous = findNodeBefore(it.current);
+
+	//remove the one before it
+	removeAt(previous);
+}

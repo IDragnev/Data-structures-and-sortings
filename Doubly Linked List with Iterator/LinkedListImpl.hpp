@@ -555,9 +555,6 @@ void LinkedList<T>::removeBefore(ListIterator<T>& it)
 
 	//remove the one before it
 	removeAt(it.current->previous);
-
-	//invalidate iterator
-	it.current = NULL;
 }
 
 
@@ -576,9 +573,6 @@ void LinkedList<T>::removeAfter(ListIterator<T>& it)
 
 	//remove the one after it
 	removeAt(it.current->next);
-
-	//invalidate iterator
-	it.current = NULL;
 }
 
 
