@@ -15,8 +15,11 @@ bool LStack<T>::isEmpty()const
 template <typename T>
 T LStack<T>::pop()
 {
+	if (isEmpty())
+		throw std::underflow_error("Stack underflow!");
+
 	//get the value of the current top
-	T& temp = peek();
+	T temp = peek();
 
 	//save old top
 	Node<T>* oldTop = top;
@@ -164,22 +167,23 @@ Node<T>* LStack<T>::cloneChain(const Node<T>* firstNode)
 template <typename T>
 void LStack<T>::clearChain(const Node<T>* firstNode)
 {
-	if (!firstNode) return;
-
-	const Node<T>* current = firstNode;
-	const Node<T>* oldNode = firstNode;
-
-	//while there is an actual node to delete
-	while (current)
+	if (firstNode)
 	{
-		//save the address of the current node
-		oldNode = current;
+		const Node<T>* current = firstNode;
+		const Node<T>* oldNode = firstNode;
 
-		//move current forward
-		current = current->next;
+		//while there is an actual node to delete
+		while (current)
+		{
+			//save the address of the current node
+			oldNode = current;
 
-		//free old
-		delete oldNode;
+			//move current forward
+			current = current->next;
+
+			//free old
+			delete oldNode;
+		}
 	}
 }
 

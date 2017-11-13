@@ -9,28 +9,28 @@ template <typename T>
 class LStack
 {
 public: 
-	LStack();                                    //stack is empty when constructed
+	LStack();                                   
 	LStack(const LStack<T>&);
 	~LStack();
 
 	LStack<T>& operator=(const LStack<T>&);
 
-	void push(const T&);                         //push on the top of the stack
-	T pop();                                     //get the top of the stack (removed)
-	const T& peek()const;                        //get the top of the stack (not removed)
+	void push(const T&);                       
+	T pop();                                     
+	const T& peek()const;                        
 
-	bool isEmpty()const;                         //is the stack empty 
-
-private:
-	Node<T>* top;                                //pointer to the node at the top of the stack
+	bool isEmpty()const;                        
 
 private:
-	void copyFrom(const LStack<T>&);             //copy the chain of nodes of another stack
-	void clear();                                //clear current chain of nodes
+	Node<T>* top;                               
 
 private:
-	static Node<T>* cloneChain(const Node<T>*);  //clone a chain of nodes by its first node
-	static void clearChain(const Node<T>*);      //clear a chain of nodes by its first node
+	void copyFrom(const LStack<T>&);             
+	void clear();                               
+
+private:
+	static Node<T>* cloneChain(const Node<T>*); 
+	static void clearChain(const Node<T>*);     
 };
 
 #include "LStackImpl.hpp"
