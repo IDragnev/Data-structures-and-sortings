@@ -5,13 +5,15 @@ VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Template Dynamic Array", "Template Dynamic Array.vcxproj", "{A751A4B4-193E-4F73-91AC-05B1FF909C4D}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Linked List", "..\Linked List\Linked List.vcxproj", "{1AAEE947-862F-45BB-91E7-0EB87C17C0E3}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Forward Linked List", "..\Linked List\Linked List.vcxproj", "{1AAEE947-862F-45BB-91E7-0EB87C17C0E3}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DynamicArrayTest", "..\DynamicArrayTest\DynamicArrayTest.vcxproj", "{506A462D-4120-4D33-80F9-AD354215AE94}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Doubly Linked List with Iterator", "..\Doubly Linked List with Iterator\Doubly Linked List with Iterator.vcxproj", "{A1AD2F87-529C-474D-ADB4-E441B44CBE79}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DL List Test", "..\DL List Test\DL List Test.vcxproj", "{24FFFC53-4ECF-4A53-AE1D-B2F58EBE134B}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Forward List Queue", "..\Forward List Queue\Forward List Queue.vcxproj", "{F1422D9E-F51C-413A-B72A-CAA0637B8B36}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -61,6 +63,14 @@ Global
 		{24FFFC53-4ECF-4A53-AE1D-B2F58EBE134B}.Release|x64.Build.0 = Release|x64
 		{24FFFC53-4ECF-4A53-AE1D-B2F58EBE134B}.Release|x86.ActiveCfg = Release|Win32
 		{24FFFC53-4ECF-4A53-AE1D-B2F58EBE134B}.Release|x86.Build.0 = Release|Win32
+		{F1422D9E-F51C-413A-B72A-CAA0637B8B36}.Debug|x64.ActiveCfg = Debug|x64
+		{F1422D9E-F51C-413A-B72A-CAA0637B8B36}.Debug|x64.Build.0 = Debug|x64
+		{F1422D9E-F51C-413A-B72A-CAA0637B8B36}.Debug|x86.ActiveCfg = Debug|Win32
+		{F1422D9E-F51C-413A-B72A-CAA0637B8B36}.Debug|x86.Build.0 = Debug|Win32
+		{F1422D9E-F51C-413A-B72A-CAA0637B8B36}.Release|x64.ActiveCfg = Release|x64
+		{F1422D9E-F51C-413A-B72A-CAA0637B8B36}.Release|x64.Build.0 = Release|x64
+		{F1422D9E-F51C-413A-B72A-CAA0637B8B36}.Release|x86.ActiveCfg = Release|Win32
+		{F1422D9E-F51C-413A-B72A-CAA0637B8B36}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

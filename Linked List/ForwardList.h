@@ -59,7 +59,7 @@ private:
 
 private:
 	static Node<T>* findEndOfChain(Node<T>* firstNode); 
-	static Node<T>* cloneChain(const Node<T>* firstNode, Node<T>** lastNode);
+	static Node<T>* cloneChain(const Node<T>* firstNode, Node<T>** lastNode = NULL);
 	static void clearChain(const Node<T>* firstNode);  
 };
 

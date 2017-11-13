@@ -458,6 +458,8 @@ void ForwardList<T>::removeAt(Node<T>* node)
 			//find the node before the one we want to delete
 			Node<T>* nodeBefore = findNodeBefore(node);
 
+			assert(nodeBefore);
+
 			//if the node we are about to delete is the tail 
 			if (node == tail)
 			{
