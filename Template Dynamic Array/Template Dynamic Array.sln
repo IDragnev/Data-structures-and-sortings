@@ -15,6 +15,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DL List Test", "..\DL List 
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Forward List Queue", "..\Forward List Queue\Forward List Queue.vcxproj", "{F1422D9E-F51C-413A-B72A-CAA0637B8B36}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Sortings", "Sortings\Sortings.vcxproj", "{5AB8FB13-F6AF-4DCA-885C-66B7CA598B71}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -71,6 +73,14 @@ Global
 		{F1422D9E-F51C-413A-B72A-CAA0637B8B36}.Release|x64.Build.0 = Release|x64
 		{F1422D9E-F51C-413A-B72A-CAA0637B8B36}.Release|x86.ActiveCfg = Release|Win32
 		{F1422D9E-F51C-413A-B72A-CAA0637B8B36}.Release|x86.Build.0 = Release|Win32
+		{5AB8FB13-F6AF-4DCA-885C-66B7CA598B71}.Debug|x64.ActiveCfg = Debug|x64
+		{5AB8FB13-F6AF-4DCA-885C-66B7CA598B71}.Debug|x64.Build.0 = Debug|x64
+		{5AB8FB13-F6AF-4DCA-885C-66B7CA598B71}.Debug|x86.ActiveCfg = Debug|Win32
+		{5AB8FB13-F6AF-4DCA-885C-66B7CA598B71}.Debug|x86.Build.0 = Debug|Win32
+		{5AB8FB13-F6AF-4DCA-885C-66B7CA598B71}.Release|x64.ActiveCfg = Release|x64
+		{5AB8FB13-F6AF-4DCA-885C-66B7CA598B71}.Release|x64.Build.0 = Release|x64
+		{5AB8FB13-F6AF-4DCA-885C-66B7CA598B71}.Release|x86.ActiveCfg = Release|Win32
+		{5AB8FB13-F6AF-4DCA-885C-66B7CA598B71}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

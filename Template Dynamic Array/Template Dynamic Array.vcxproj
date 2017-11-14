@@ -146,12 +146,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="BubbleSort.h" />
     <ClInclude Include="DynamicArray.h" />
     <ClInclude Include="DynamicArrayImpl.hpp" />
-    <ClInclude Include="InsertionSort.h" />
-    <ClInclude Include="MergeSort.h" />
-    <ClInclude Include="SelectionSort.h" />
     <ClInclude Include="StaticQueue.h" />
     <ClInclude Include="DynamicStackImpl.hpp" />
     <ClInclude Include="OrderedDynamicArray.h" />

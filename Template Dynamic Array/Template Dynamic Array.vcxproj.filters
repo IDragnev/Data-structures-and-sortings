@@ -54,18 +54,6 @@
     <ClInclude Include="StaticStackImpl.hpp">
       <Filter>Static Stack</Filter>
     </ClInclude>
-    <ClInclude Include="MergeSort.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="InsertionSort.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="BubbleSort.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="SelectionSort.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">

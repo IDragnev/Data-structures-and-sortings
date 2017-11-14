@@ -13,5 +13,9 @@ d:\vs\vs_projects\my structures\doubly linked list with iterator\linkedlistimpl.
   d:\vs\vs_projects\my structures\doubly linked list with iterator\linkedlistimpl.hpp(272): note: while compiling class template member function 'LinkedList<int>::LinkedList(void)'
   d:\vs\vs_projects\my structures\dl list test\dllisttest.cpp(15): note: see reference to function template instantiation 'LinkedList<int>::LinkedList(void)' being compiled
   d:\vs\vs_projects\my structures\dl list test\dllisttest.cpp(15): note: see reference to class template instantiation 'LinkedList<int>' being compiled
+  Generating Code...
+  Compiling...
+  IteratorTest.cpp
+  Generating Code...
   DL List Test.vcxproj -> D:\VS\VS_Projects\My structures\Template Dynamic Array\Debug\DL List Test.dll
   DL List Test.vcxproj -> D:\VS\VS_Projects\My structures\Template Dynamic Array\Debug\DL List Test.pdb (Partial PDB)
