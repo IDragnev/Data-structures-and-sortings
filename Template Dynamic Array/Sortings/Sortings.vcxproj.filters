@@ -27,6 +27,9 @@
     <ClInclude Include="..\..\Sortings\SelectionSort.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Sortings\ShakerSort.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Sortings\main.cpp">

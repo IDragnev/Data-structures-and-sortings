@@ -10,6 +10,7 @@
 #include "InsertionSort.h"
 #include "BubbleSort.h"
 #include "SelectionSort.h"
+#include "ShakerSort.h"
 
 int main()
 {
@@ -34,7 +35,8 @@ int main()
 		//insertionSort(arr, 0, arr.getCount() - 1);
 		//mergeSort(arr, 0, arr.getCount() - 1);
 		//selectionSort(arr, 0, arr.getCount() - 1);
-		bubbleSort(arr, 0, arr.getCount() - 1);
+		//bubbleSort(arr, 0, arr.getCount() - 1);
+		shakerSort(arr, 0, arr.getCount() - 1);
 
 		time_t end = time(NULL);
 
