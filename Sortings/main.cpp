@@ -11,6 +11,7 @@
 #include "BubbleSort.h"
 #include "SelectionSort.h"
 #include "ShakerSort.h"
+#include "QuickSort.h"
 
 int main()
 {
@@ -36,14 +37,15 @@ int main()
 		//mergeSort(arr, 0, arr.getCount() - 1);
 		//selectionSort(arr, 0, arr.getCount() - 1);
 		//bubbleSort(arr, 0, arr.getCount() - 1);
-		shakerSort(arr, 0, arr.getCount() - 1);
+		//shakerSort(arr, 0, arr.getCount() - 1);
+		quickSort(arr, 0, arr.getCount() - 1);
 
 		time_t end = time(NULL);
 
 		std::cout << "\nSorted for " << end - beg << " seconds!\n";
 
-		std::cout << "\nResult: \n";
-		std::cout << arr << std::endl;
+		//std::cout << "\nResult: \n";
+		//std::cout << arr << std::endl;
 	}
 	catch (std::exception& ex)
 	{
