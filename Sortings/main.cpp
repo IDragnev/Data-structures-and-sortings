@@ -12,6 +12,7 @@
 #include "SelectionSort.h"
 #include "ShakerSort.h"
 #include "QuickSort.h"
+#include "ShellSort.h"
 
 int main()
 {
@@ -33,12 +34,13 @@ int main()
 
 		time_t beg = time(NULL);
 
-		insertionSort(arr, 0, arr.getCount() - 1);
+		//insertionSort(arr, 0, arr.getCount() - 1);
 		//mergeSort(arr, 0, arr.getCount() - 1);
 		//selectionSort(arr, 0, arr.getCount() - 1);
 		//bubbleSort(arr, 0, arr.getCount() - 1);
 		//shakerSort(arr, 0, arr.getCount() - 1);
 		//quickSort(arr, 0, arr.getCount() - 1);
+		shellSort(arr, 0, arr.getCount() - 1);
 
 		time_t end = time(NULL);
 

@@ -157,6 +157,7 @@
     <ClInclude Include="..\..\Sortings\QuickSort.h" />
     <ClInclude Include="..\..\Sortings\SelectionSort.h" />
     <ClInclude Include="..\..\Sortings\ShakerSort.h" />
+    <ClInclude Include="..\..\Sortings\ShellSort.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Sortings\main.cpp" />

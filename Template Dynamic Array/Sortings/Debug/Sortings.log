@@ -1,4 +1,4 @@
 ﻿  main.cpp
-d:\vs\vs_projects\my structures\sortings\main.cpp(18): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+d:\vs\vs_projects\my structures\sortings\main.cpp(19): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
   Sortings.vcxproj -> D:\VS\VS_Projects\My structures\Template Dynamic Array\Debug\Sortings.exe
   Sortings.vcxproj -> D:\VS\VS_Projects\My structures\Template Dynamic Array\Debug\Sortings.pdb (Full PDB)
