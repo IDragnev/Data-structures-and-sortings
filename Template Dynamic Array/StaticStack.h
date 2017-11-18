@@ -7,19 +7,19 @@ template <typename T>
 class StaticStack
 {
 public:
-	StaticStack(int size = 16);                                     //constructs its array with default objects, top is -1
+	StaticStack(int size = 16);                                  
 	StaticStack(const StaticStack<T>&) = default;
 	~StaticStack() = default;
 
 	StaticStack<T>& operator=(const StaticStack<T>&) = default;
 
-	bool isEmpty()const;                                            //is the stack empty
-	void push(const T&);                                            //push the element on the top of the stack
-	T pop();                                                        //get the top element of the stack
+	bool isEmpty()const;                                           
+	void push(const T&);                                          
+	T pop();                                                        
 
 private:
-	int top;                                                        //the top of the stack
-	DynamicArray<T> elements;                                       //the underlying container
+	int top;                                                       
+	DynamicArray<T> elements;                                      
 };
 
 #include "StaticStackImpl.hpp"

@@ -10,62 +10,62 @@ template <typename T>
 class DynamicArray
 {
 public:
-	explicit DynamicArray(int size = 16, int count = 0);   //filled with default objects when constructed
+	explicit DynamicArray(int size = 16, int count = 0);   
 	DynamicArray(const DynamicArray<T>&);    
 	virtual ~DynamicArray();
 
 	DynamicArray<T>& operator=(const DynamicArray<T>&);
 
-	virtual void add(const T&);                            //add an element to the array (added as last)
-	virtual void remove(int position);                     //remove an element by its position in the array (shifting used)
-	virtual int find(const T&)const;                       //search by value (-1 if not found)
+	virtual void add(const T&);                          
+	virtual void remove(int position);                     
+	virtual int find(const T&)const;                     
 
-	void addAt(int, const T&);                             //add the element at the exact position (shifting used)
+	void addAt(int, const T&);                             
 
-	int getSize()const;                                    //get the size of the array
-	int getCount()const;                                   //get the count of the elements in the array
-	bool isEmpty()const;                                   //is the array empty
+	int getSize()const;                                  
+	int getCount()const;                                 
+	bool isEmpty()const;                                   
 
-	T& getAt(int position);                                //get an element by its position in the array
-	const T& getAt(int position)const;                     //get an element by its position in the array (for reading only)
+	T& getAt(int position);                                
+	const T& getAt(int position)const;                    
 
-	void makeEmpty();                                      //make the array empty
-	void ensureSize(int size);                             //resize with the sent size
+	void makeEmpty();                                    
+	void ensureSize(int size);                            
 
 public:
-	T& operator[](int position);                           //get an element by its position in the array
-	const T& operator[](int position)const;                //get an element by its position in the array (for reading only)
+	T& operator[](int position);                         
+	const T& operator[](int position)const;                
 	 
-	DynamicArray<T>& operator+=(const T&);                 //add an element to the array
-	DynamicArray<T>& operator+=(const DynamicArray<T>&);   //add a whole other array (add all its elements to the array)
+	DynamicArray<T>& operator+=(const T&);                 
+	DynamicArray<T>& operator+=(const DynamicArray<T>&);   
 
 private:
-	int size;                                              //the size of the array
-	int count;                                             //the count of the elements in the array
-	T* data;                                               //the actual array of elements
+	int size;                                            
+	int count;                                            
+	T* data;                                               
 
 protected:
 	void setSize(int);
 	void setCount(int);
 	
-	void checkSpace();                                     //resize if needed
+	void checkSpace();                                    
 
-	void shiftLeft(int beg, int end);                      //shift objects left
-	void shiftRight(int beg, int end);                     //shift objects right
+	void shiftLeft(int beg, int end);                    
+	void shiftRight(int beg, int end);                    
 
-	T* getData();                                          //get the array for subclasses
-	const T* getData()const;                               //get the array for reading
+	T* getData();                                        
+	const T* getData()const;                              
 
 private:
-	void copyFrom(const DynamicArray<T>&);                 //copy from another array (reconstruct)
+	void copyFrom(const DynamicArray<T>&);                 
 	void resize(int);                                     
-	void clear();                                          //clear the array of elements
-	int findNearestPowTwo(int num);                        //find the nearest power of 2 which is bigger than num (8->16, 54->64..)
+	void clear();                                        
+	int findNearestPowTwo(int num);                    
 };
 
 
 template <typename T>
-DynamicArray<T> operator+(const DynamicArray<T>&, const DynamicArray<T>&);  //sum two arrays
+DynamicArray<T> operator+(const DynamicArray<T>&, const DynamicArray<T>&);  
 
 template <typename T>
 DynamicArray<T> operator+(const DynamicArray<T>&, const T&);       
@@ -74,7 +74,7 @@ template <typename T>
 DynamicArray<T> operator+(const T&, const DynamicArray<T>&);
 
 template <typename T>
-std::ostream& operator<<(std::ostream& out, const DynamicArray<T>&);        //print an array
+std::ostream& operator<<(std::ostream& out, const DynamicArray<T>&);       
 
 #include "DynamicArrayImpl.hpp"
 

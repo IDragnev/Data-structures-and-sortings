@@ -31,6 +31,7 @@ void StaticStack<T>::push(const T& object)
 
 	//increment top
 	++top;
+
 	//push object on the stack
 	elements[top] = object;
 }
