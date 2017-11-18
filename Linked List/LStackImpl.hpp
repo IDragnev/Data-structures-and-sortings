@@ -1,7 +1,4 @@
 
-
-
-
 //
 //the stack is empty if the top is NULL
 //
@@ -15,9 +12,6 @@ bool LStack<T>::isEmpty()const
 template <typename T>
 T LStack<T>::pop()
 {
-	if (isEmpty())
-		throw std::underflow_error("Stack underflow!");
-
 	//get the value of the current top
 	T temp = peek();
 

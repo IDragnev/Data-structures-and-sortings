@@ -1,9 +1,5 @@
 
 
-//
-//initializes both start and current
-//to point to the passed starting node
-//
 template <typename Key>
 ForwardListIterator<Key>::ForwardListIterator(Node<Key>* startNode, const ForwardList<Key>* owner)
 	:
