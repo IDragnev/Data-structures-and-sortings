@@ -155,6 +155,7 @@
     <ClInclude Include="..\..\Sortings\InsertionSort.h" />
     <ClInclude Include="..\..\Sortings\MergeSort.h" />
     <ClInclude Include="..\..\Sortings\QuickSort.h" />
+    <ClInclude Include="..\..\Sortings\SelectionMethod.h" />
     <ClInclude Include="..\..\Sortings\SelectionSort.h" />
     <ClInclude Include="..\..\Sortings\ShakerSort.h" />
     <ClInclude Include="..\..\Sortings\ShellSort.h" />
