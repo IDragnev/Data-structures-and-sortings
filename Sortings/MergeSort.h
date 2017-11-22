@@ -1,13 +1,16 @@
 #include "../Template Dynamic Array/DynamicArray.h"
 
+template <typename T>
+void insertionSort(DynamicArray<T> &arr, int beg, int end);
+
 //
-// merge two parts of an array:
+// merge two (sorted!) parts of an array:
 //
 // left part -> arr[beg, ... , middle]
 // right part -> arr[middle+1, ... , end]
 //
 template <typename T>
-void merge(DynamicArray<T> &arr, int beg, int middle, int end)
+void simpleMerge(DynamicArray<T> &arr, int beg, int middle, int end)
 {
 	// the beginning of the left part
 	int leftArr = beg;
@@ -48,6 +51,61 @@ void merge(DynamicArray<T> &arr, int beg, int middle, int end)
 }
 
 
+
+//
+// merge two (sorted!) parts of an array:
+//
+// left part -> arr[beg, ... , middle]
+// right part -> arr[middle+1, ... , end]
+//
+//by first putting them in an auxiliary array
+//but putting the right part in reverse order
+//in order to make some kind of sentinels
+//this way
+//
+template <typename T>
+void bitonicMerge(DynamicArray<T> &arr, int beg, int middle, int end)
+{
+	int size = end - beg + 1;
+
+	//the auxiliary array
+	DynamicArray<T> aux(size);
+	
+	//copy left part in its original order                                            //because the right part is coppied in reverse order in the aux
+	for (int i = beg; i <= middle; ++i)                                               //the biggest element in the array will lie 'between' the two parts
+		aux += arr[i];                                                                //thus acting as a sentinel once reached by one of the parts
+																					  //and the checking for emptiness of either parts is not needed!
+	//copy right part in reverse order                                                //[1][2][3][10][12][15]  [17][9][8][4][3][0]
+	for (int j = end; j > middle; --j)                                                //once the sentinel is reached, the part in which it was
+		aux += arr[j];                                                                //is empty and all the copies will be made from the other part
+	
+	//the smallest element of the left part             
+	int leftPart = 0;
+	//the smallest element of the right part
+	int rightPart = aux.getCount() - 1;
+	
+	//from the first element to the last
+	for (int current = beg; current <= end; ++current)
+	{
+		//if the left part's smallest element is smaller or equal
+		//to the right part's smallest element
+		if (aux[leftPart] <= aux[rightPart])
+		{
+			//write it and move forward in the left part
+			arr[current] = aux[leftPart++];
+		}
+		else
+		{
+			//write the right part's min. element
+			//and move left in the right part
+			arr[current] = aux[rightPart--];
+		}
+	}
+
+
+}
+
+
 //
 //sorts the subarray arr[beg, ... , end]
 //by splitting it in two halves :
@@ -61,19 +119,28 @@ void merge(DynamicArray<T> &arr, int beg, int middle, int end)
 template <typename T>
 void mergeSort(DynamicArray<T> &arr, int beg, int end)
 {
+	int size = end - beg + 1;
+	
 	//if more than one element
-	if (beg < end)
+	if (size > 1)
 	{
-		//find the middle
-		int middle = (beg + end) / 2;
+		if (size < 25)
+		{
+			return insertionSort(arr, beg, end);
+		}
+		else
+		{
+			//find the middle
+			int middle = (beg + end) / 2;
 
-		//sort the left part
-		mergeSort(arr, beg, middle);
+			//sort the left part
+			mergeSort(arr, beg, middle);
 
-		//sort the right part
-		mergeSort(arr, middle + 1, end);
+			//sort the right part
+			mergeSort(arr, middle + 1, end);
 
-		//merge them in the subarray
-		merge(arr, beg, middle, end);
+			//merge them in the subarray
+			bitonicMerge(arr, beg, middle, end);
+		}
 	}
 }

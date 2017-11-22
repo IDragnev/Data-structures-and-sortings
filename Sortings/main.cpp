@@ -36,21 +36,21 @@ int main()
 		time_t beg = time(NULL);
 
 		//insertionSort(arr, 0, arr.getCount() - 1);
-		//mergeSort(arr, 0, arr.getCount() - 1);
 		//selectionSort(arr, 0, arr.getCount() - 1);
 		//bubbleSort(arr, 0, arr.getCount() - 1);
 		//shakerSort(arr, 0, arr.getCount() - 1);
 		//shellSort(arr, 0, arr.getCount() - 1);
 		//quickSort(arr, 0, arr.getCount() - 1);
 		//recursiveSelect(arr, 0, arr.getCount() - 1, 5);
-		iterativeSelect(arr, 0, arr.getCount() - 1, 5);
+		//iterativeSelect(arr, 0, arr.getCount() - 1, 5);
+		mergeSort(arr, 0, arr.getCount() - 1);
 
 		time_t end = time(NULL);
 
 		std::cout << "\nSorted for " << end - beg << " seconds!\n";
 
-		std::cout << "\nResult: \n";
-		std::cout << arr << std::endl;
+		//std::cout << "\nResult: \n";
+		//std::cout << arr << std::endl;
 	}
 	catch (std::exception& ex)
 	{
