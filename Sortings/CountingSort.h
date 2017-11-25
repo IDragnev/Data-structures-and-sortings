@@ -34,4 +34,6 @@ void countingSort(DynamicArray<int>& arr, int smallest, int biggest)
 			arr[pos++] = i + smallest;                        // i + smallest regenerates the integer from the interval:  0 + smallest = smallest, n + smallest = biggest, ...   
 		}
 	}
+
+	delete[] timesFound;
 }
