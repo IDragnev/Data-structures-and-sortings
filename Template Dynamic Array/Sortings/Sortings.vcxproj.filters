@@ -39,6 +39,9 @@
     <ClInclude Include="..\..\Sortings\SelectionMethod.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Sortings\CountingSort.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Sortings\main.cpp">

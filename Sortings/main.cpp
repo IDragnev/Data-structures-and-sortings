@@ -14,6 +14,18 @@
 #include "QuickSort.h"
 #include "ShellSort.h"
 #include "SelectionMethod.h"
+#include "CountingSort.h"
+
+
+void fillRandomly(DynamicArray<int>& arr, int gap)
+{
+	int size = arr.getSize();
+
+	for (int i = 0; i < size; ++i)
+	{
+		arr.add(rand() % gap);
+	}
+}
 
 int main()
 {
@@ -21,18 +33,19 @@ int main()
 
 	try
 	{
-		std::cout << "\nHow many elements to sort ? \n";
-
 		int x;
+		int gap;
+
+		std::cout << "\nHow many elements to sort ? \n";
 		std::cin >> x;
+
+		std::cout << "\nUp to which number? \n";
+		std::cin >> gap;
 
 		DynamicArray<int> arr(x);
 
-		for (int i = 0; i < x; ++i)
-		{
-			arr.add(rand() % 1000);
-		}
-
+		fillRandomly(arr, gap);
+		
 		time_t beg = time(NULL);
 
 		//insertionSort(arr, 0, arr.getCount() - 1);
@@ -43,7 +56,8 @@ int main()
 		//quickSort(arr, 0, arr.getCount() - 1);
 		//recursiveSelect(arr, 0, arr.getCount() - 1, 5);
 		//iterativeSelect(arr, 0, arr.getCount() - 1, 5);
-		mergeSort(arr, 0, arr.getCount() - 1);
+		//mergeSort(arr, 0, arr.getCount() - 1);
+		countingSort(arr, 0, gap);
 
 		time_t end = time(NULL);
 

@@ -152,6 +152,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Sortings\BubbleSort.h" />
+    <ClInclude Include="..\..\Sortings\CountingSort.h" />
     <ClInclude Include="..\..\Sortings\InsertionSort.h" />
     <ClInclude Include="..\..\Sortings\MergeSort.h" />
     <ClInclude Include="..\..\Sortings\QuickSort.h" />
