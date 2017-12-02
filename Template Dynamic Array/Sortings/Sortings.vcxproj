@@ -146,6 +146,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Linked List\Linked List.vcxproj">
+      <Project>{1aaee947-862f-45bb-91e7-0eb87c17c0e3}</Project>
+    </ProjectReference>
     <ProjectReference Include="..\Template Dynamic Array.vcxproj">
       <Project>{a751a4b4-193e-4f73-91ac-05b1ff909c4d}</Project>
     </ProjectReference>
@@ -160,6 +163,7 @@
     <ClInclude Include="..\..\Sortings\SelectionSort.h" />
     <ClInclude Include="..\..\Sortings\ShakerSort.h" />
     <ClInclude Include="..\..\Sortings\ShellSort.h" />
+    <ClInclude Include="LLMergeSort.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Sortings\main.cpp" />

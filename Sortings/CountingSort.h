@@ -23,7 +23,7 @@ void countingSort(DynamicArray<int>& arr, int smallest, int biggest)
 		++timesFound[arr[i] - smallest];                    // timesFound[smallest - smallest] = timesFound[0] ,  timesFound[biggest - smallest] = timesFound[n], ...
 
 	int pos = 0;
-	//for each integer in the interval
+	//for each integer in the interval (in timesFound)
 	for (int i = 0; i < size; ++i)
 	{
 		//write the integer from the interval in the array
