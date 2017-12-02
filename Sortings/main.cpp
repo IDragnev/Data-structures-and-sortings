@@ -15,7 +15,7 @@
 #include "ShellSort.h"
 #include "SelectionMethod.h"
 #include "CountingSort.h"
-
+#include "HeapSort.h"
 
 void fillRandomly(DynamicArray<int>& arr, int gap)
 {
@@ -57,14 +57,16 @@ int main()
 		//recursiveSelect(arr, 0, arr.getCount() - 1, 5);
 		//iterativeSelect(arr, 0, arr.getCount() - 1, 5);
 		//mergeSort(arr, 0, arr.getCount() - 1);
-		countingSort(arr, 0, gap);
+		//countingSort(arr, 0, gap);
 
 		time_t end = time(NULL);
 
 		std::cout << "\nSorted for " << end - beg << " seconds!\n";
+		
+		heapSort(arr);
 
-		//std::cout << "\nResult: \n";
-		//std::cout << arr << std::endl;
+		std::cout << "\nResult: \n";
+		std::cout << arr << std::endl;
 	}
 	catch (std::exception& ex)
 	{

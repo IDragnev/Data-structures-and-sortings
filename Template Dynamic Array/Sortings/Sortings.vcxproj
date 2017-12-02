@@ -154,6 +154,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\Sortings\HeapSort.h" />
     <ClInclude Include="..\..\Sortings\BubbleSort.h" />
     <ClInclude Include="..\..\Sortings\CountingSort.h" />
     <ClInclude Include="..\..\Sortings\InsertionSort.h" />
