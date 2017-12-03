@@ -10,7 +10,7 @@ template <typename T>
 class FLQueue
 {
 public:
-	FLQueue();
+	FLQueue(); 
 	FLQueue(const FLQueue<T>&);
 	~FLQueue();
 

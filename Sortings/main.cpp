@@ -59,11 +59,13 @@ int main()
 		//mergeSort(arr, 0, arr.getCount() - 1);
 		//countingSort(arr, 0, gap);
 
+		HeapSort<int> sorter;
+		sorter.sort(arr, 1, 15);
+
 		time_t end = time(NULL);
 
 		std::cout << "\nSorted for " << end - beg << " seconds!\n";
 		
-		heapSort(arr);
 
 		std::cout << "\nResult: \n";
 		std::cout << arr << std::endl;
