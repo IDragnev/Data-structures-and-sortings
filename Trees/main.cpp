@@ -129,3 +129,41 @@ void postOrderIterative(TreeNode<T> *root, void(*process)(TreeNode<T>*))
 		prev = curr;
 	}
 }
+
+
+//
+//count the number of nodes in a tree
+//
+template <typename T>
+int countNodes(TreeNode<T>* root)
+{
+	if (!root) return 0;
+
+	//return the nodes in left subtree + nodes in right subtree + 1 for the root
+	return countNodes(root->left) + countNodes(root->right) + 1;
+}
+
+
+//
+//get the height of a tree
+//
+template <typename T>
+int height(TreeNode<T>* root)
+{
+	if (!root) return -1;
+
+	int u = height(root->left);
+	int v = height(root->right);
+
+	//return the height of the higher subtree + 1
+	if (u > v) ? u + 1 : v + 1;
+}
+
+
+
+int main()
+{
+
+
+	return 0;
+}
