@@ -1,6 +1,7 @@
 ﻿  stdafx.cpp
   DynamicArrayTest.cpp
-d:\vs\vs_projects\my structures\dynamicarraytest\dynamicarraytest.cpp(37): warning C4800: 'int': forcing value to bool 'true' or 'false' (performance warning)
-     Creating library D:\VS\VS_Projects\My structures\Template Dynamic Array\Debug\DynamicArrayTest.lib and object D:\VS\VS_Projects\My structures\Template Dynamic Array\Debug\DynamicArrayTest.exp
-  DynamicArrayTest.vcxproj -> D:\VS\VS_Projects\My structures\Template Dynamic Array\Debug\DynamicArrayTest.dll
-  DynamicArrayTest.vcxproj -> D:\VS\VS_Projects\My structures\Template Dynamic Array\Debug\DynamicArrayTest.pdb (Partial PDB)
+d:\sortings and data structures\data-structures-and-sortings\dynamicarraytest\dynamicarraytest.cpp(37): warning C4800: 'int': forcing value to bool 'true' or 'false' (performance warning)
+  LINK : D:\Sortings and data structures\Data-structures-and-sortings\Template Dynamic Array\Debug\DynamicArrayTest.dll not found or not built by the last incremental link; performing full link
+     Creating library D:\Sortings and data structures\Data-structures-and-sortings\Template Dynamic Array\Debug\DynamicArrayTest.lib and object D:\Sortings and data structures\Data-structures-and-sortings\Template Dynamic Array\Debug\DynamicArrayTest.exp
+  DynamicArrayTest.vcxproj -> D:\Sortings and data structures\Data-structures-and-sortings\Template Dynamic Array\Debug\DynamicArrayTest.dll
+  DynamicArrayTest.vcxproj -> D:\Sortings and data structures\Data-structures-and-sortings\Template Dynamic Array\Debug\DynamicArrayTest.pdb (Partial PDB)

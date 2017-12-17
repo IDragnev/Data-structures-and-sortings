@@ -1,0 +1,17 @@
+﻿  ForwardListTest.cpp
+d:\sortings and data structures\data-structures-and-sortings\linked list\forwardlistimpl.hpp(202): warning C4101: 'ex': unreferenced local variable
+  d:\sortings and data structures\data-structures-and-sortings\linked list\forwardlistimpl.hpp(169): note: while compiling class template member function 'Node<T> *ForwardList<T>::cloneChain(const Node<T> *,Node<T> **)'
+          with
+          [
+              T=int
+          ]
+  d:\sortings and data structures\data-structures-and-sortings\linked list\forwardlistimpl.hpp(226): note: see reference to function template instantiation 'Node<T> *ForwardList<T>::cloneChain(const Node<T> *,Node<T> **)' being compiled
+          with
+          [
+              T=int
+          ]
+  d:\sortings and data structures\data-structures-and-sortings\linked list\forwardlistimpl.hpp(287): note: while compiling class template member function 'ForwardList<int>::ForwardList(void)'
+  d:\sortings and data structures\data-structures-and-sortings\forward list test\forwardlisttest.cpp(16): note: see reference to function template instantiation 'ForwardList<int>::ForwardList(void)' being compiled
+  d:\sortings and data structures\data-structures-and-sortings\forward list test\forwardlisttest.cpp(16): note: see reference to class template instantiation 'ForwardList<int>' being compiled
+  Forward List test.vcxproj -> D:\Sortings and data structures\Data-structures-and-sortings\Template Dynamic Array\Debug\Forward List test.dll
+  Forward List test.vcxproj -> D:\Sortings and data structures\Data-structures-and-sortings\Template Dynamic Array\Debug\Forward List test.pdb (Partial PDB)
