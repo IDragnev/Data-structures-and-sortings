@@ -198,12 +198,14 @@ namespace DLListTest
 			list.appendList(list2);
 
 			ListIterator<int> &it = list.getHead();
+			ListIterator<int> &srcIt = list2.getHead();
 
 			//should have reconstructed them all
-			for (int i = 0; it; ++it, ++i)
-			{
-				Assert::AreEqual(i, *it, L"Appending to non-empty list is not working properly");
-			}
+			for (; it && srcIt; ++it, ++srcIt)
+				Assert::AreEqual(*srcIt, *it, L"Appending to empty list is not working properly");
+
+			//should have ended simultaneously
+			Assert::IsTrue(!it == !srcIt, L"Appending to empty list is not working properly");
 
 			//set it to tail
 			it = list.getTail();
@@ -211,15 +213,17 @@ namespace DLListTest
 			//now append again to the non-empty list
 			list.appendList(list2);
 
-
 			//move to the first appended node
 			++it;
 			Assert::IsFalse(!it, L"Appending to non-empty list is not working properly");
 
+			//return to source beginning
+			srcIt = list2.getHead();
+
 			//should have reconstructed them all
-			for (int i = 0; it; ++it, ++i)
+			for (; it; ++it, ++srcIt)
 			{
-				Assert::AreEqual(i, *it, L"Appending to list is not working properly");
+				Assert::AreEqual(*srcIt, *it, L"Appending to list is not working properly");
 			}
 		}
 
@@ -289,6 +293,15 @@ namespace DLListTest
 				Assert::IsTrue(*head == i + 1, L"Inserting between two nodes is not working properly");
 				++head;
 			}
+
+			//now the traversal has finished
+			Assert::IsFalse(head);
+
+			//should add as tail when adding after NULL iterator
+			list.insertAfter(head, 100);
+
+			ListIterator<int> &tail = list.getTail();
+			Assert::AreEqual(*tail, 100, L"Inserting after NULL iterator is not adding as tail");
 		}
 
 
@@ -335,6 +348,15 @@ namespace DLListTest
 				Assert::IsTrue(*head == i + 1, L"Inserting between two nodes is not working properly");
 				++head;
 			}
+
+			//should be finished
+			Assert::IsFalse(head);
+
+			//should add as head when adding before NULL iterator
+			list.insertBefore(head, 100);
+
+			head = list.getHead();
+			Assert::AreEqual(*head, 100, L"Inserting before NULL iterator is not adding as head");
 		}
 	};
 }
