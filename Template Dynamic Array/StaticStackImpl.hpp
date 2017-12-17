@@ -29,11 +29,8 @@ void StaticStack<T>::push(const T& object)
 	if (top == elements.getSize() - 1)
 		throw std::overflow_error("Stack overflow!");
 
-	//increment top
-	++top;
-
-	//push object on the stack
-	elements[top] = object;
+	//increment top and push object on the stack
+	elements[++top] = object;
 }
 
 
@@ -45,4 +42,14 @@ T StaticStack<T>::pop()
 
 	//return object by value and post-decrement top
 	return elements[top--];
+}
+
+
+template <typename T>
+const T& StaticStack<T>::peek()const
+{
+	if (isEmpty())
+		throw std::logic_error("Stack is empty!");
+
+	return elements[top];
 }

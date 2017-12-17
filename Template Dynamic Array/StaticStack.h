@@ -13,8 +13,10 @@ public:
 
 	StaticStack<T>& operator=(const StaticStack<T>&) = default;
 
-	bool isEmpty()const;                                           
-	void push(const T&);                                          
+	bool isEmpty()const;    
+	const T& peek()const;
+
+	void push(const T&); 
 	T pop();                                                        
 
 private:
