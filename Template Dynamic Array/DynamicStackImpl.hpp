@@ -1,9 +1,9 @@
 
-
 template <typename T>
-DynamicStack<T>::DynamicStack()
+DynamicStack<T>::DynamicStack(int size)
 	:
-	top(-1)
+	top(-1),
+	elements(size)
 {
 	;
 }
@@ -16,6 +16,9 @@ inline bool DynamicStack<T>::isEmpty()const
 }
 
 
+//
+//cannot overflow
+//
 template <typename T>
 void DynamicStack<T>::push(const T& object)
 {
@@ -25,7 +28,7 @@ void DynamicStack<T>::push(const T& object)
 	//if the top is now exactly after the last object in the array, use add
 	if (top == elements.getCount())
 		elements.add(object);
-	else  //else (top is between 0 and count-1) write on the object elements[top]
+	else  //else (top is between 0 and count-1) write on elements[top]
 		elements[top] = object;
 }
 
@@ -38,5 +41,15 @@ T DynamicStack<T>::pop()
 
 	//return object by value and post-decrement top
 	return elements[top--];
+}
+
+
+template <typename T>
+const T& DynamicStack<T>::peek()const
+{
+	if (isEmpty())
+		throw std::logic_error("Stack is empty!");
+
+	return elements[top];
 }
 

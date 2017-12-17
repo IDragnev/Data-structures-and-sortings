@@ -3,20 +3,21 @@
 
 #include "DynamicArray.h"
 
-
 template <typename T>
 class DynamicStack
 {
 public:
-	DynamicStack();                                                 
+	DynamicStack(int size = 16);                                                 
 	DynamicStack(const DynamicStack<T>&) = default;
 	~DynamicStack() = default;
 
 	DynamicStack<T>& operator=(const DynamicStack<T>&) = default;
 
-	T pop();                                                       
+	bool isEmpty()const;      
+	const T& peek()const;
+
 	void push(const T&);                                          
-	bool isEmpty()const;                                            
+	T pop();                                                       
 
 private:
 	int top;                                                       
