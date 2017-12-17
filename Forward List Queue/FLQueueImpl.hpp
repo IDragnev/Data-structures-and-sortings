@@ -197,7 +197,7 @@ void FLQueue<T>::enqueue(const T& data)
 	{
 		tail->next = newNode;
 	}
-	else // add is as a head node
+	else // add it as a head node
 	{
 		head = newNode;
 	}
@@ -243,3 +243,19 @@ T FLQueue<T>::dequeue()
 	return data;
 }
 
+
+
+//
+//access the first object in the queue
+//
+// \ if the queue is empty
+//   std::logic_error is thrown
+//
+template <typename T>
+T FLQueue<T>::peek()const
+{
+	if (isEmpty())
+		throw std::logic_error("Queue is empty!");
+
+	return head->data;
+}

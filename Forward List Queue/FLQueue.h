@@ -17,6 +17,7 @@ public:
 	FLQueue<T>& operator=(const FLQueue<T>&);
 
 	bool isEmpty()const;                                    
+	T peek()const;
 
 	void enqueue(const T&);                                   
 	T dequeue();                                             

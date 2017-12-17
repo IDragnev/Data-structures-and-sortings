@@ -15,11 +15,11 @@ public:
 
 	LStack<T>& operator=(const LStack<T>&);
 
+	bool isEmpty()const;                        
+	const T& peek()const;
+
 	void push(const T&);                       
 	T pop();                                     
-	const T& peek()const;                        
-
-	bool isEmpty()const;                        
 
 private:
 	Node<T>* top;                               
