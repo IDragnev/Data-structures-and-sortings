@@ -15,6 +15,7 @@ public:
 
 	bool isEmpty()const;                                    
 	bool isFull()const;                                        
+	T peek()const;
 
 	void enqueue(const T&);                                    
 	T dequeue();                                               

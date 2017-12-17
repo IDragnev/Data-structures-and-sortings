@@ -11,6 +11,10 @@ StaticQueue<T>::StaticQueue(int size)
 }
 
 
+//
+//queue is full when there is exactly one 
+//vacant place
+//
 template <typename T>
 inline bool StaticQueue<T>::isFull()const
 {
@@ -25,12 +29,11 @@ inline bool StaticQueue<T>::isEmpty()const
 }
 
 
-
 template <typename T>
 void StaticQueue<T>::enqueue(const T& element)
 {
 	if (isFull())
-		throw std::overflow_error("Queue is full!");
+		throw std::logic_error("Queue is full!");
 
 	//enqueue it
 	elements[tail] = element;
@@ -43,14 +46,24 @@ void StaticQueue<T>::enqueue(const T& element)
 template <typename T>
 T StaticQueue<T>::dequeue()
 {
-	if (isEmpty())
-		throw std::underflow_error("Queue is empty!");
-
-	//get the first element
-	T &object = elements[head];
+	//get the first object,
+	//peek throws an exception if
+	//the queue is empty
+	T object = peek();
 
 	//increment head
 	head = (head + 1) % elements.getSize();
 
 	return object;
+}
+
+
+
+template <typename T>
+T StaticQueue<T>::peek()const
+{
+	if (isEmpty())
+		throw std::logic_error("Queue is empty!");
+
+	return elements[head];
 }
