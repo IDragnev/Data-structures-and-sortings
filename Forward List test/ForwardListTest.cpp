@@ -227,5 +227,152 @@ namespace ForwardListTest
 			Assert::IsTrue(!it == !itSrc, L"Appending to list is not working properly");
 		}
 
+
+		TEST_METHOD(FLRemovingHeadAndTailTest)
+		{
+			ForwardList<int> list;
+
+			//fill list with addHead
+			for (int i = 0; i < 10; ++i)
+				list.addAsHead(i);
+
+			//removing head should decrement count
+			for (int i = 10; i > 0; --i)
+			{
+				Assert::IsTrue(list.getCount() == i, L"Removing head does not manage count properly");
+				list.removeHead();
+			}
+
+			ForwardList<int> list2;
+			//fill list with addTail
+			for (int i = 0; i < 10; ++i)
+				list.addAsTail(i);
+
+			//removing tail should decrement count
+			for (int i = 10; i > 0; --i)
+			{
+				Assert::IsTrue(list.getCount() == i, L"Removing tail does not manage count properly");
+				list.removeTail();
+			}
+		}
+
+
+		TEST_METHOD(FLInsertionAfterIteratorTest)
+		{
+
+			ForwardList<int> list;
+
+			//null iterator
+			ForwardListIterator<int> &head = list.getHead();
+
+			//should insert it as tail
+			list.insertAfter(head, 2);
+
+			head = list.getHead();
+			Assert::IsTrue(*head == 2, L"Insertion after NULL iterator is not adding as tail");
+
+			//empty list
+			list.removeAll();
+
+			//add as head
+			list.addAsHead(1);
+
+			head = list.getHead();
+
+			//insert after the head
+			list.insertAfter(head, 3);
+
+			//move to the new node
+			++head;
+			Assert::IsTrue(head, L"Insertion after iterator does not update its successor");
+			Assert::IsTrue(*head == 3, L"Insertion after iterator does not construct with the value passed");
+
+			//empty again
+			list.removeAll();
+
+			list.addAsHead(1);
+			list.addAsTail(3);
+
+			//insert between 1 and 3
+			head = list.getHead();
+
+			list.insertAfter(head, 2);
+
+			//should have added between them 
+			for (int i = 0; i < 3; ++i)
+			{
+				Assert::IsTrue(*head == i + 1, L"Inserting between two nodes is not working properly");
+				++head;
+			}
+
+			//now the traversal has finished
+			Assert::IsFalse(head);
+			
+			//should add as tail when adding after NULL iterator
+			list.insertAfter(head, 100);
+
+			ForwardListIterator<int> &tail = list.getTail();
+			Assert::AreEqual(*tail, 100, L"Inserting after NULL iterator is not adding as tail");
+		}
+
+
+		TEST_METHOD(FLInsertionBeforeIteratorTest)
+		{
+
+			ForwardList<int> list;
+
+			//null iterator
+			ForwardListIterator<int> &head = list.getHead();
+
+			//should insert it as head
+			list.insertBefore(head, 2);
+
+			head = list.getHead();
+			Assert::IsTrue(*head == 2, L"Insertion before NULL iterator is not adding as head");
+
+			//empty list
+			list.removeAll();
+
+			list.addAsHead(1);
+			head = list.getHead();
+
+			//insert before the head node
+			list.insertBefore(head, 3);
+
+			//there should be a new head
+			head = list.getHead();
+			Assert::IsTrue(head, L"Insertion before iterator does not update its predecessor");
+			Assert::IsTrue(*head == 3, L"Insertion before iterator does not construct with the value passed");
+
+			list.removeAll();
+
+			list.addAsHead(1);
+			list.addAsTail(3);
+
+			//insert between 1 and 3
+			ForwardListIterator<int> &tail = list.getTail();
+
+			list.insertBefore(tail, 2);
+
+			head = list.getHead();
+
+			//should be 1,2,3
+			for (int i = 0; i < 3; ++i)
+			{
+				Assert::IsTrue(*head == i + 1, L"Inserting between two nodes is not working properly");
+				++head;
+			}
+
+			//should be finished
+			Assert::IsFalse(head);
+
+
+			//should add as head when adding before NULL iterator
+			list.insertBefore(head, 100);
+
+			head = list.getHead();
+			Assert::AreEqual(*head, 100, L"Inserting before NULL iterator is not adding as head");
+		}
+
 	};
 }
