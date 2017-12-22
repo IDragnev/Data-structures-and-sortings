@@ -1,4 +1,6 @@
 #include "BSTree.h"
+#include "../Template Dynamic Array/DynamicStack.h"
+
 
 /*
 The BSTree is implemented with the larger or equal keys of a node
@@ -223,4 +225,138 @@ namespace BinarySearchTree
 			successor->left->parent = successor;
 		}
 	}
+
+
+	//
+	//preorder iterative tree traversal
+	//
+	template <typename T, typename Function>
+	void processPreorder(BSTreeNode<T>* root, const Function& process)
+	{
+		//if empty, return
+		if (!root) return;
+
+		DynamicStack<BSTreeNode<T>*> stack;
+
+		//push the tree on the stack
+		stack.push(root);
+
+		while (!stack.isEmpty())
+		{
+			//process the root
+			process(root = stack.pop());
+
+			//push its right subtree on the stack
+			if (root->right)
+				stack.push(root->right);
+
+			//push its left subtree on the stack
+			if (root->left)
+				stack.push(root->left);
+		}
+	}
+
+
+	//
+	//inorder iterative tree traversal
+	//
+	template <typename T, typename Function>
+	void processInorder(BSTreeNode<T>* root, const Function& process)
+	{
+		DynamicStack<BSTreeNode<T>*> stack;
+
+		BSTreeNode<T>* current = root;
+
+		//while there is a parent to come back to
+		//or currently at a non-NULL TreeNode
+		while (!stack.isEmpty() || current)
+		{
+			//if on a TreeNode
+			if (current)
+			{
+				//push it on the stack and go to its left child
+				stack.push(current);
+
+				current = current->left;
+			}
+			else  //if NULL was reached, return to its parent, process it and go to the parent's right child
+			{
+				current = stack.pop();
+
+				process(current);
+
+				current = current->right;
+			}
+		}
+	}
+
+
+
+	//
+	//postorder iterative tree traversal
+	//
+	template <typename T, typename Function>
+	void processPostorder(BSTreeNode<T>* root, const Function& process)
+	{
+		if (!root) return;
+
+		DynamicStack<BSTreeNode<T>*> stack;
+		stack.push(root);
+
+		//the last traversed node
+		BSTreeNode<T>* prev = NULL;
+
+		while (!stack.isEmpty())
+		{
+			BSTreeNode<T>* curr = stack.peek();
+
+			//if moving down the tree
+			if (!prev || prev->left == curr || prev->right == curr)
+			{
+				//try to push left or right child
+				if (curr->left)
+					stack.push(curr->left);
+				else if (curr->right)
+					stack.push(curr->right);
+
+				//if there were no children, the leaf stays on top of the stack
+			}
+			//else if moving up from left
+			else if (curr->left == prev)
+			{
+				//try to push right child
+				if (curr->right)
+					stack.push(curr->right);
+			}
+			else  //if moving up from right (both subtrees were traversed)
+			{
+				//process the 'root' and remove it from the stack
+				process(stack.pop());
+			}
+
+			//mark current as traversed
+			prev = curr;
+		}
+	}
+
+
+	template <typename T>
+	void clearTree(BSTreeNode<T>* &root)
+	{
+		processPostorder(root, [](BSTreeNode<T>* node) { delete node; });
+		root = NULL;
+	}
+	
+
+	//
+	//reconstruct a tree
+	//
+	template <typename T>
+	BSTreeNode<T>* copyTree(const BSTreeNode<T>* root)
+	{
+		//if empty, return NULL, else reconstruct
+		return (!root) ? NULL : new BSTreeNode<T>(root->data, copyTree(root->left), copyTree(root->right));
+	}
+
+
 }

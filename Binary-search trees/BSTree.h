@@ -27,6 +27,8 @@ namespace BinarySearchTree
 
 	template <typename T>
 	void clearTree(BSTreeNode<T>* &root);
+	template <typename T>
+	BSTreeNode<T>* copyTree(const BSTreeNode<T>* root);
 	template <typename T, typename Function>
 	BSTreeNode<T>* copyTree(const BSTreeNode<T>* root, const Function& copyFun);
 
