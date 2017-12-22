@@ -28,5 +28,8 @@
     <ClCompile Include="main.cpp">
       <Filter>General</Filter>
     </ClCompile>
+    <ClCompile Include="BSTree.cpp">
+      <Filter>BSTree</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

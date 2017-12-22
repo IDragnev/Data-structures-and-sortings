@@ -1,71 +1,40 @@
-#ifndef __BIN_SEARCH_TREE_H_INCLUDED__
-#define __BIN_SEARCH_TREE_H_INCLUDED__
+#ifndef __BIN_SEARCH_TREE_FUNS_H_INCLUDED__
+#define __BIN_SEARCH_TREE_FUNS_H_INCLUDED__
 
 #include "BSTreeNode.h"
 
-template <typename T>
-class BSTree
+namespace BinarySearchTree
 {
-public:
 	template <typename T>
-	class BSTIterator
-	{
-	private:
-		BSTIterator(BSTreeNode<T>* start, const BSTree<T>* owner);
+	BSTreeNode<T>* searchTree(BSTreeNode<T>* root, const T& key);
+	template <typename T>
+	BSTreeNode<T>* treeMin(BSTreeNode<T>* root);
+	template <typename T>
+	BSTreeNode<T>* treeMax(BSTreeNode<T>* root);
 
-	private:
-		BSTreeNode<T>* current;
-		const BSTree<T>* owner;
-	};
+	template <typename T>
+	BSTreeNode<T>* getSuccessor(BSTreeNode<T>* node);
+	template <typename T>
+	BSTreeNode<T>* getPredecessor(BSTreeNode<T>* node);
 
-public:
-	BSTree();
-	BSTree(const BSTree<T>&);
-	~BSTree();
+	template <typename T>
+	void insert(BSTreeNode<T>* root, BSTreeNode<T>* leaf);
+	template <typename T>
+	void remove(BSTreeNode<T>* root, BSTreeNode<T>* node);
+	template <typename T>
+	void transplant(BSTreeNode<T>* root, BSTreeNode<T>* oldChild, BSTreeNode<T>* newChild);
 
-	BSTree<T>& operator=(const BSTree&);
+	template <typename T>
+	void clearTree(BSTreeNode<T>* root);
+	template <typename T, typename Function>
+	BSTreeNode<T>* copyTree(const BSTreeNode<T>* root, const Function& copyFun);
 
-public:
-	bool isEmpty()const;
-	void removeAll();
+	template <typename T, typename Function>
+	void processPreorder(BSTreeNode<T>* root, const Function& fun);
+	template <typename T, typename Function>
+	void processInorder(BSTreeNode<T>* root, const Function& fun);
+	template <typename T, typename Function>
+	void processPostorder(BSTreeNode<T>* root, const Function& fun);
+}
 
-	BSTIterator<T> search(const T& key);
-	BSTIterator<T> getMinimum();
-	BSTIterator<T> getMaximum();
-
-	void add(const T& key);
-
-	void removeAt(BSTIterator<T>& it);
-	void removeAfter(BSTIterator<T>& it);
-	void removeBefore(BSTIterator<T>& it);
-	
-private:
-	static BSTreeNode<T>* search(BSTreeNode<T>* root, const T& key);
-	static BSTreeNode<T>* min(BSTreeNode<T>* root);
-	static BSTreeNode<T>* max(BSTreeNode<T>* root);
-
-	static BSTreeNode<T>* successor(BSTreeNode<T>* node);
-	static BSTreeNode<T>* predecessor(BSTreeNode<T>* node);
-
-	static void insert(BSTreeNode<T>* root, BSTreeNode<T>* leaf);
-
-	void remove(BSTreeNode<T>* node);
-	void transplant(BSTreeNode<T>* oldChild, BSTreeNode<T>* newChild);
-
-	static void clear(BSTreeNode<T>* root);
-
-	template <typename Function>
-	static BSTreeNode<T>* copy(const BSTreeNode<T>* root, const Function& copyFun);
-	
-	template <typename Function>
-	static void processPre(BSTreeNode<T>* root, const Function& fun);
-	template <typename Function>
-	static void processIn(BSTreeNode<T>* root, const Function& fun);
-	template <typename Function>
-	static void processPost(BSTreeNode<T>* root, const Function& fun);
-
-private:
-	BSTreeNode<T>* root;
-};
-
-#endif //__BIN_SEARCH_TREE_H_INCLUDED__
+#endif //__BIN_SEARCH_TREE_FUNS_H_INCLUDED__
