@@ -2,6 +2,7 @@
 #define __BIN_SEARCH_TREE_FUNS_H_INCLUDED__
 
 #include "BSTreeNode.h"
+#include <assert.h>
 
 namespace BinarySearchTree
 {
@@ -18,14 +19,14 @@ namespace BinarySearchTree
 	BSTreeNode<T>* getPredecessor(BSTreeNode<T>* node);
 
 	template <typename T>
-	void insert(BSTreeNode<T>* root, BSTreeNode<T>* leaf);
+	void insert(BSTreeNode<T>* &root, BSTreeNode<T>* leaf);
 	template <typename T>
-	void remove(BSTreeNode<T>* root, BSTreeNode<T>* node);
+	void remove(BSTreeNode<T>* &root, BSTreeNode<T>* node);
 	template <typename T>
-	void transplant(BSTreeNode<T>* root, BSTreeNode<T>* oldChild, BSTreeNode<T>* newChild);
+	void transplantSubtree(BSTreeNode<T>* &root, BSTreeNode<T>* oldChild, BSTreeNode<T>* newChild);
 
 	template <typename T>
-	void clearTree(BSTreeNode<T>* root);
+	void clearTree(BSTreeNode<T>* &root);
 	template <typename T, typename Function>
 	BSTreeNode<T>* copyTree(const BSTreeNode<T>* root, const Function& copyFun);
 

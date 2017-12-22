@@ -122,4 +122,105 @@ namespace BinarySearchTree
 		}
 	}
 
+
+	//
+	//insert a leaf node to a tree
+	//
+	template <typename T>
+	void insert(BSTreeNode<T>* &root, BSTreeNode<T>* leaf)
+	{
+		BSTreeNode<T>* parent = NULL;
+		BSTreeNode<T>* current = root;
+
+		//until the empty (NULL) position is reached
+		while (current)
+		{
+			//save the last non-NULL as its parent
+			parent = current;
+			
+			//choose the appropriate branch to proceed down the tree
+			if (leaf->data < current->data)
+				current = current->left;
+			else
+				current = current->right;
+		}
+
+		//set its parent
+		leaf->parent = parent;
+
+		//if the tree was empty, it is the new root
+		if (parent == NULL)
+			root = leaf;
+		else if (leaf->data < parent->data)
+			parent->left = leaf;
+		else
+			parent->right = leaf;
+	}
+
+
+	//
+	//change a tree's subtree with another tree
+	//
+	//the function does nothing on old and newSubtree's children
+	//
+	template <typename T>
+	void transplantSubtree(BSTreeNode<T>* &tree, BSTreeNode<T>* oldSubtree, BSTreeNode<T>* newSubtree)
+	{
+		//if the old subtree was the actual tree
+		//the new subtree 'becomes' the tree
+		if (oldSubtree->parent == NULL)
+			tree = newSubtree;
+		//else if oldSubtree was a left child of its parent
+		else if (oldSubtree->parent->left == oldSubtree)
+			oldSubtree->parent->left = newSubtree;
+		else
+			oldSubtree->parent->right = newSubtree;
+
+		//if the new subtree is not empty, update its parent
+		if (newSubtree)
+			newSubtree->parent = oldSubtree->parent;
+	}
+
+
+	//
+	//remove a node from a tree
+	//
+	template <typename T>
+	void remove(BSTreeNode<T>* &tree, BSTreeNode<T>* node)
+	{
+		//if node has no left child
+		if (node->left == NULL)
+		{
+			//elevate node's right child in its place (could be NULL)
+			transplantSubtree(tree, node, node->right);
+		}
+		//else if it has a left child but no right one
+		else if (node->right == NULL)
+		{
+			//elevate node's left child in its place
+			transplantSubtree(tree, node, node->left);
+		}
+		else //node has both left and right child
+		{
+			//its successor is the min. of its right subtree (as min. successor has no left child)
+			BSTreeNode<T>* successor = treeMin(node->right);
+			assert(successor && successor->left == NULL);
+
+			//if its successor is not its right child, their right subtrees must be updated
+			if (successor->parent != node)
+			{
+				//put successor's right child in successor's place (elevate successor's right subtree)
+				transplantSubtree(tree, successor, successor->right);
+				//change successors right subtree with node's subtree
+				successor->right = node->right;
+				successor->right->parent = successor;
+			}
+
+			//elevate successor to node's place
+			transplantSubtree(tree, node, successor);
+			//and attach node's left subtree to successor
+			successor->left = node->left;
+			successor->left->parent = successor;
+		}
+	}
 }
