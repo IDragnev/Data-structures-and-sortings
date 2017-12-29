@@ -30,15 +30,13 @@ int DynamicArray<T>::find(const T& value)const
 //
 //if the sent size is not greater
 //than current size
-//an exception is thrown
+//the function does nothing
 //
 template <typename T>
 void DynamicArray<T>::ensureSize(int newSize)
 {
-	if (newSize <= size)
-		throw std::invalid_argument("Size must be greater than current size!");
-
-	resize(newSize);
+	if (newSize > size)
+		resize(newSize);
 }
 
 template <typename T>
@@ -230,9 +228,8 @@ void DynamicArray<T>::makeEmpty()
 {
 	//resize it to hold only one object
 	resize(1);
-	assert(count == 1);
-	//decrement count to zero
-	--count;
+	//and update count
+	count = 0;
 }
 
 
