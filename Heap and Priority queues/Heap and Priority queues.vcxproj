@@ -150,6 +150,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BinaryHeap.h" />
+    <ClInclude Include="BinaryHeapImpl.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Template Dynamic Array\Template Dynamic Array.vcxproj">

@@ -19,5 +19,8 @@
     <ClInclude Include="BinaryHeap.h">
       <Filter>Binary Heap</Filter>
     </ClInclude>
+    <ClInclude Include="BinaryHeapImpl.hpp">
+      <Filter>Binary Heap</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

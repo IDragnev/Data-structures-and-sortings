@@ -1,5 +1,5 @@
 #include "../Template Dynamic Array/DynamicArray.h"
-
+#include <assert.h>
 
 namespace BinaryHeap
 {
@@ -62,3 +62,5 @@ namespace BinaryHeap
 	template <typename T, typename Function>
 	void greatenKey(BinaryHeap<T, Function>& heap, int index, const T& key);
 }
+
+#include "BinaryHeapImpl.hpp"
