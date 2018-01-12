@@ -1,6 +1,6 @@
 
 
-namespace BinaryHeap
+namespace BHeap
 {
 
 	template <typename T, typename Function>

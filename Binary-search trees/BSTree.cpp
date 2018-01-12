@@ -224,6 +224,8 @@ namespace BinarySearchTree
 			successor->left = node->left;
 			successor->left->parent = successor;
 		}
+
+		delete node;
 	}
 
 

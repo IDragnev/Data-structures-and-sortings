@@ -1,7 +1,7 @@
 #include "../Template Dynamic Array/DynamicArray.h"
 #include <assert.h>
 
-namespace BinaryHeap
+namespace BHeap
 {
 	template <typename T, typename Function>
 	struct BinaryHeap
