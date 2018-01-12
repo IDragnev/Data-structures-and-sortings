@@ -156,7 +156,7 @@ int height(TreeNode<T>* root)
 	int v = height(root->right);
 
 	//return the height of the higher subtree + 1
-	if (u > v) ? u + 1 : v + 1;
+	return (u > v) ? u + 1 : v + 1;
 }
 
 
