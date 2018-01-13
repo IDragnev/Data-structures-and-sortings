@@ -111,14 +111,15 @@ namespace BHeap
 		//save the optimal element
 		T optimal = arr[0];
 
-		//swap the root with the last element
-		std::swap(arr[0], arr[arr.getCount() - 1]);
+		//put the last element as a root
+		arr[0] = arr[arr.getCount() - 1];
 		
-		//and remove the ex-root
+		//remove the last element
 		arr.remove(arr.getCount() - 1);
 
-		//sift the new root to its correct position
-		siftDown(heap, 0);
+		if(!arr.isEmpty())
+			//sift the new root to its correct position
+			siftDown(heap, 0);
 
 		return optimal;
 	}
