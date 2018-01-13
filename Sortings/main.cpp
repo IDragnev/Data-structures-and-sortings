@@ -50,7 +50,7 @@ int main()
 
 		//insertionSort(arr, 0, arr.getCount() - 1);
 		//selectionSort(arr, 0, arr.getCount() - 1);
-		//bubbleSort(arr, 0, arr.getCount() - 1);
+		bubbleSort(arr, 0, arr.getCount() - 1);
 		//shakerSort(arr, 0, arr.getCount() - 1);
 		//shellSort(arr, 0, arr.getCount() - 1);
 		//quickSort(arr, 0, arr.getCount() - 1);
@@ -59,8 +59,8 @@ int main()
 		//mergeSort(arr, 0, arr.getCount() - 1);
 		//countingSort(arr, 0, gap);
 
-		HeapSort<int> sorter;
-		sorter.sort(arr, 1, 15);
+		//HeapSort<int> sorter;
+		//sorter.sort(arr, 1, 15);
 
 		time_t end = time(NULL);
 
