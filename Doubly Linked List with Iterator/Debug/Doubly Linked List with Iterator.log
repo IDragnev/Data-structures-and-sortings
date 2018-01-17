@@ -15,6 +15,5 @@ d:\sortings and data structures\data-structures-and-sortings\doubly linked list 
   d:\sortings and data structures\data-structures-and-sortings\doubly linked list with iterator\linkedlistimpl.hpp(289): note: while compiling class template member function 'LinkedList<int>::LinkedList(const LinkedList<int> &)'
   d:\sortings and data structures\data-structures-and-sortings\doubly linked list with iterator\main.cpp(17): note: see reference to function template instantiation 'LinkedList<int>::LinkedList(const LinkedList<int> &)' being compiled
   d:\sortings and data structures\data-structures-and-sortings\doubly linked list with iterator\main.cpp(7): note: see reference to class template instantiation 'LinkedList<int>' being compiled
-  LINK : D:\Sortings and data structures\Data-structures-and-sortings\Template Dynamic Array\Debug\Doubly Linked List with Iterator.exe not found or not built by the last incremental link; performing full link
   Doubly Linked List with Iterator.vcxproj -> D:\Sortings and data structures\Data-structures-and-sortings\Template Dynamic Array\Debug\Doubly Linked List with Iterator.exe
   Doubly Linked List with Iterator.vcxproj -> D:\Sortings and data structures\Data-structures-and-sortings\Template Dynamic Array\Debug\Doubly Linked List with Iterator.pdb (Full PDB)

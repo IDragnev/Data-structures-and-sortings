@@ -1,25 +1,31 @@
-#ifndef __HASH_SIMPLE_ADT_BASE_H_INCLUDED__
-#define __HASH_SIMPLE_ADT_BASE_H_INCLUDED__
+#ifndef __HASH_ADT_BASE_H_INCLUDED__
+#define __HASH_ADT_BASE_H_INCLUDED__
 
 #include "HashFunction.h"
 
-template <typename T>
+template <typename Item, typename Key, typename HashFun>
 class Hash
 {
 public:
-	Hash(HashFunction<T>* function);
-	Hash(const Hash<T>&) = default;
+	Hash(int size);
+	Hash(const Hash<Item, Key, HashFun>&) = default;
 	virtual ~Hash() = default;
 
-	Hash<T>& operator=(const Hash<T>&) = default;
+	Hash<Item, Key, HashFun>& operator=(const Hash<Item, Key, HashFun>&) = default;
+	
+	int getCount()const;
+	bool isEmpty()const;
 
-	virtual void insert(const T&) = 0;
-	virtual void remove(const T&) = 0;
-	virtual bool search(const T&) = 0;
+	virtual void insert(const Item&, const Key&) = 0;
+	virtual void remove(const Key&) = 0;
+	virtual Item& search(const Key&) = 0;
+	virtual const Item& search(const Key&)const = 0;
 
-private:
-	HashFunction<T>* function;
+protected:
+	int count;
+	int size;
+	HashFun function;
 };
 
 #include "HashImpl.hpp"
-#endif //__HASH_SIMPLE_ADT_BASE_H_INCLUDED__
+#endif //__HASH_ADT_BASE_H_INCLUDED__

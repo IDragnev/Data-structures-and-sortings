@@ -13,6 +13,8 @@ d:\sortings and data structures\data-structures-and-sortings\doubly linked list 
   d:\sortings and data structures\data-structures-and-sortings\doubly linked list with iterator\linkedlistimpl.hpp(272): note: while compiling class template member function 'LinkedList<int>::LinkedList(void)'
   d:\sortings and data structures\data-structures-and-sortings\dl list test\dllisttest.cpp(15): note: see reference to function template instantiation 'LinkedList<int>::LinkedList(void)' being compiled
   d:\sortings and data structures\data-structures-and-sortings\dl list test\dllisttest.cpp(15): note: see reference to class template instantiation 'LinkedList<int>' being compiled
-     Creating library D:\Sortings and data structures\Data-structures-and-sortings\Template Dynamic Array\Debug\DL List Test.lib and object D:\Sortings and data structures\Data-structures-and-sortings\Template Dynamic Array\Debug\DL List Test.exp
+  Generating Code...
+  Skipping... (no relevant changes detected)
+  IteratorTest.cpp
   DL List Test.vcxproj -> D:\Sortings and data structures\Data-structures-and-sortings\Template Dynamic Array\Debug\DL List Test.dll
   DL List Test.vcxproj -> D:\Sortings and data structures\Data-structures-and-sortings\Template Dynamic Array\Debug\DL List Test.pdb (Partial PDB)
