@@ -13,11 +13,11 @@
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
     </Filter>
-    <Filter Include="Hash structures\Base">
-      <UniqueIdentifier>{1977269e-7c30-4cc5-881e-0bb66486ffea}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Hash structures\Separate chaining">
+    <Filter Include="Hash structures\Separate chaining Map">
       <UniqueIdentifier>{ba8e13ed-74c0-47aa-8863-f09c6e97aaed}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Hash structures\Linear probing map">
+      <UniqueIdentifier>{91b0bfc5-8a69-4d71-8add-443c6e5b4d18}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -41,11 +41,8 @@
     <ClInclude Include="ModAndMultiHashFunctionImpl.hpp">
       <Filter>Hashing functions</Filter>
     </ClInclude>
-    <ClInclude Include="Hash.h">
-      <Filter>Hash structures\Base</Filter>
-    </ClInclude>
-    <ClInclude Include="HashImpl.hpp">
-      <Filter>Hash structures\Base</Filter>
+    <ClInclude Include="SCMap.h">
+      <Filter>Hash structures\Separate chaining Map</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

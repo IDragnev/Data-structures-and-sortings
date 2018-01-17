@@ -149,13 +149,12 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Hash.h" />
     <ClInclude Include="HashFunction.h" />
-    <ClInclude Include="HashImpl.hpp" />
     <ClInclude Include="ModAndMultiHashFunction.h" />
     <ClInclude Include="ModAndMultiHashFunctionImpl.hpp" />
     <ClInclude Include="ModuloHashFunction.h" />
     <ClInclude Include="ModuloHashFunctionImpl.hpp" />
+    <ClInclude Include="SCMap.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Doubly Linked List with Iterator\Doubly Linked List with Iterator.vcxproj">
