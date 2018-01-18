@@ -1,6 +1,9 @@
 #ifndef __SEPARATE_CHAIN_HASH_MAP_H_INCLUDED__
 #define __SEPARATE_CHAIN_HASH_MAP_H_INCLUDED__
 
+#include <assert.h>
+#include <stdexcept>
+
 template <typename Item, typename Key, typename HashFun>
 class SCMap
 {
@@ -33,11 +36,12 @@ private:
 	int count;
 	int size;
 	Node<Item, Key>** chains;
-	HashFun function;
+	HashFun hashFunction;
 
 private:
-	static Node<Item, Key>* cloneChain(const Node<Item, Key>* first, Node<Item, Key>** last = nullptr);
+	static Node<Item, Key>* cloneChain(const Node<Item, Key>* first);
 	static void clearChain(Node<Item, Key>* first);
 };
 
+#include "SCMapImpl.hpp"
 #endif //__SEPARATE_CHAIN_HASH_MAP_H_INCLUDED__

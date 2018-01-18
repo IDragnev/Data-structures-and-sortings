@@ -44,5 +44,8 @@
     <ClInclude Include="SCMap.h">
       <Filter>Hash structures\Separate chaining Map</Filter>
     </ClInclude>
+    <ClInclude Include="SCMapImpl.hpp">
+      <Filter>Hash structures\Separate chaining Map</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

@@ -155,6 +155,7 @@
     <ClInclude Include="ModuloHashFunction.h" />
     <ClInclude Include="ModuloHashFunctionImpl.hpp" />
     <ClInclude Include="SCMap.h" />
+    <ClInclude Include="SCMapImpl.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Doubly Linked List with Iterator\Doubly Linked List with Iterator.vcxproj">
