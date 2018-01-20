@@ -11,8 +11,9 @@ private:
 	template <typename Item, typename Key>
 	struct Node
 	{
-		Node(const Item& item, const Key& key, Node<Item,Key>* next = nullptr);
-
+		Node(const Item& item, const Key& key, Node<Item, Key>* next = nullptr) 
+			: item(item), key(key), next(next) {}
+			 
 		Item item;
 		Key key;
 		Node<Item, Key>* next;
@@ -41,6 +42,9 @@ private:
 private:
 	static Node<Item, Key>* cloneChain(const Node<Item, Key>* first);
 	static void clearChain(Node<Item, Key>* first);
+
+	void clear();
+	void setSize(int);
 };
 
 #include "SCMapImpl.hpp"

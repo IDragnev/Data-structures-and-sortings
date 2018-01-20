@@ -1,18 +1,5 @@
 
 template <typename Item, typename Key, typename HashFun>
-template <typename T, typename K>
-SCMap<Item,Key,HashFun>::Node<T, K>::Node(const T& it, const K& key, Node<T, K>* next)
-	:
-	item(it),
-	key(key),
-	next(next)
-{
-	;
-}
-
-
-
-template <typename Item, typename Key, typename HashFun>
 int SCMap<Item, Key, HashFun>::getCount()const
 {
 	return count;
@@ -26,6 +13,16 @@ bool SCMap<Item, Key, HashFun>::isEmpty()const
 }
 
 
+template <typename Item, typename Key, typename HashFun>
+void SCMap<Item, Key, HashFun>::setSize(int Size)
+{
+	if (Size > 0)
+	{
+		size = Size
+	}
+	else
+		throw std::invalid_argument("Size must be positive!");	
+}
 
 
 //
@@ -133,7 +130,6 @@ void SCMap<Item, Key, HashFun>::remove(const Key& key)
 
 	//find the corresponding list
 	Node<Item, Key>* list = chains[hash];
-
 	Node<Item, Key>* prev = list;
 
 	//while in the list and on a node with a diff. key
@@ -150,12 +146,13 @@ void SCMap<Item, Key, HashFun>::remove(const Key& key)
 	if (list)
 	{
 		//if it is the head node of the list
-		if (list = chains[hash])                                   ///TO DO
+		if (list == chains[hash])                                  
 		{
-			chains[hash] = chains[hash]->next;
+			chains[hash] = list->next;
 		}
-		else
+		else 
 		{
+			assert(prev->next == list);
 			//unchain it
 			prev->next = list->next;
 		}
@@ -166,4 +163,113 @@ void SCMap<Item, Key, HashFun>::remove(const Key& key)
 		//update count
 		--count;
 	}
+}
+
+
+
+
+//
+//get an item by a sent key
+//
+// \ if no match is found, nullptr is returned
+//
+template <typename Item, typename Key, typename HashFun>
+Item* SCMap<Item, Key, HashFun>::search(const Key& key)
+{
+	Node<Item, Key>* current = chains[hashFunction(key) % size];
+
+	//while in the list and on a node with a diff. key
+	while (current && current->key != key)
+	{
+		//move to the next node
+		current = current->next;
+	}
+
+	return current;
+}
+
+
+
+template <typename Item, typename Key, typename HashFun>
+void SCMap<Item, Key, HashFun>::clear()
+{
+	//if not empty
+	if (chains)
+	{
+		//clear the lists
+		for (int i = 0; i < size; ++i)
+			clearChain(chains[i]);
+
+		//and free the array of pointers
+		delete[] chains;
+	}
+}
+
+
+
+
+//
+//set count to 0 and
+//alloc. size empty lists
+//
+template <typename Item, typename Key, typename HashFun>
+SCMap<Item, Key, HashFun>::SCMap(int size)
+	:
+	count(0),
+	chains(nullptr)
+{
+	setSize(size);
+
+	chains = new Node<Item, Key>*[size] {nullptr};
+}
+
+
+
+template <typename Item, typename Key, typename HashFun>
+SCMap<Item, Key, HashFun>::~SCMap()
+{
+	clear();
+}
+
+
+
+template <typename Item, typename Key, typename HashFun>
+SCMap<Item, Key, HashFun>::SCMap(const SCMap& other)
+	:
+	chains(nullptr),
+	count(other.count)
+{
+	setSize(other.size);
+
+	try
+	{
+		chains = new Node<Item, Key>*[size] {nullptr};
+
+		for (int i = 0; i < size; ++i)
+			chains[i] = cloneChain(other.chains[i]);
+	}
+	catch (std::bad_alloc&)
+	{
+		clear();
+		throw;
+	}
+}
+
+
+
+template <typename Item, typename Key, typename HashFun>
+SCMap<Item,Key,HashFun>& SCMap<Item, Key, HashFun>::operator=(const SCMap& other)
+{
+	if (this != &other)
+	{
+		//copy-construct other in temp
+		SCMap temp(other);
+
+		//swap data with temp and leave temp destroy old data
+		std::swap(this->chains, temp.chains);
+		std::swap(this->count, temp.count);
+		std::swap(this->size, temp.size);
+	}
+
+	return *this;
 }
