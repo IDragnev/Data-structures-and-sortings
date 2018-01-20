@@ -146,10 +146,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Item.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="HashFunction.h" />
+    <ClInclude Include="HashFunctionImpl.hpp" />
+    <ClInclude Include="Item.h" />
+    <ClInclude Include="LPMap.h" />
+    <ClInclude Include="LPMapImpl.hpp" />
     <ClInclude Include="ModAndMultiHashFunction.h" />
     <ClInclude Include="ModAndMultiHashFunctionImpl.hpp" />
     <ClInclude Include="ModuloHashFunction.h" />

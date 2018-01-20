@@ -24,6 +24,9 @@
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Item.cpp">
+      <Filter>Hash structures\Linear probing map</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="HashFunction.h">
@@ -46,6 +49,18 @@
     </ClInclude>
     <ClInclude Include="SCMapImpl.hpp">
       <Filter>Hash structures\Separate chaining Map</Filter>
+    </ClInclude>
+    <ClInclude Include="Item.h">
+      <Filter>Hash structures\Linear probing map</Filter>
+    </ClInclude>
+    <ClInclude Include="LPMap.h">
+      <Filter>Hash structures\Linear probing map</Filter>
+    </ClInclude>
+    <ClInclude Include="LPMapImpl.hpp">
+      <Filter>Hash structures\Linear probing map</Filter>
+    </ClInclude>
+    <ClInclude Include="HashFunctionImpl.hpp">
+      <Filter>Hashing functions</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

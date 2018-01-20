@@ -12,7 +12,7 @@ ModAndMultiHashFunction<T>::ModAndMultiHashFunction(int mod, int multi)
 
 
 template <>
-int ModAndMultiHashFunction<int>::calculateHash(const int& key)
+int ModAndMultiHashFunction<int>::calculateHash(const int& key)const
 {
 	return (key % modulo) * multiplier;
 }

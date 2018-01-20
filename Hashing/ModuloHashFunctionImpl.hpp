@@ -10,7 +10,7 @@ ModuloHashFunction<T>::ModuloHashFunction(int modulo)
 
 
 template <>
-int ModuloHashFunction<int>::calculateHash(const int& key)
+int ModuloHashFunction<int>::calculateHash(const int& key)const
 {
 	return key & modulo;
 }

@@ -7,13 +7,14 @@ template <typename T>
 class ModAndMultiHashFunction : public HashFunction<T>
 {
 public:
-	ModAndMultiHashFunction(int mod, int multi);
+	ModAndMultiHashFunction(int mod = 9, int multi = 3);
 	ModAndMultiHashFunction(const ModAndMultiHashFunction<T>&) = default;
 	virtual ~ModAndMultiHashFunction()override = default;
 
 	ModAndMultiHashFunction<T>& operator=(const ModAndMultiHashFunction<T>&) = default;
 
-	virtual int calculateHash(const T& key)override;
+protected:
+	virtual int calculateHash(const T& key)const override;
 
 private:
 	int modulo;

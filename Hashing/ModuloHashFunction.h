@@ -7,13 +7,14 @@ template <typename T>
 class ModuloHashFunction : public HashFunction<T>
 {
 public:
-	ModuloHashFunction(int modulo);
+	ModuloHashFunction(int modulo = 9);
 	ModuloHashFunction(const ModuloHashFunction<T>&) = default;
 	virtual ~ModuloHashFunction()override = default;
 
 	ModuloHashFunction<T>& operator=(const ModuloHashFunction<T>&) = default;
 
-	virtual int calculateHash(const T& key)override;
+protected:
+	virtual int calculateHash(const T& key)const override;
 
 private:
 	int modulo;
