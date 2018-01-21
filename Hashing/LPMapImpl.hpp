@@ -87,7 +87,7 @@ LPMap<HashFun>& LPMap<HashFun>::operator=(const LPMap<HashFun>& other)
 
 		std::swap(this->items, temp.items);
 		std::swap(this->size, temp.size);
-		std::swap(this->count, temp.count;)
+		std::swap(this->count, temp.count);
 	}
 
 	return *this;
@@ -119,6 +119,7 @@ void LPMap<HashFun>::insert(const Item& item)
 			hash = (hash + 1) % size;
 
 		items[hash] = item;
+		++count;
 	}
 }
 
