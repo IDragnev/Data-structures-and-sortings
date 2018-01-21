@@ -13,12 +13,17 @@ bool SCMap<Item, Key, HashFun>::isEmpty()const
 }
 
 
+//
+//divide by 5 to make the average chain length be 5
+//
+// \ if the expected size is at most 5, just one chain will be allocated
+//
 template <typename Item, typename Key, typename HashFun>
-void SCMap<Item, Key, HashFun>::setSize(int Size)
-{
-	if (Size > 0)
+void SCMap<Item, Key, HashFun>::setSize(int expectedSize)
+{	
+	if (expectedSize > 0)
 	{
-		size = Size
+		size = (expectedSize) > 5 ? expectedSize / 5 : 1;
 	}
 	else
 		throw std::invalid_argument("Size must be positive!");	
@@ -62,7 +67,7 @@ void SCMap<Item, Key, HashFun>::clearChain(Node<Item, Key>* first)
 // \ the function might throw std::bad_alloc
 //
 template <typename Item, typename Key, typename HashFun>
-SCMap<Item, Key, HashFun>::Node<Item, Key>* SCMap<Item, Key, HashFun>::cloneChain(const Node<Item, Key>* first)
+typename SCMap<Item, Key, HashFun>::Node<Item, Key>* SCMap<Item, Key, HashFun>::cloneChain(const Node<Item, Key>* first)
 {
 	Node<Item, Key>* newChain = nullptr;
 	assert(first);
@@ -185,7 +190,8 @@ Item* SCMap<Item, Key, HashFun>::search(const Key& key)
 		current = current->next;
 	}
 
-	return current;
+	//if not null return the item
+	return current ? &current->item : nullptr;
 }
 
 
@@ -209,16 +215,16 @@ void SCMap<Item, Key, HashFun>::clear()
 
 
 //
-//set count to 0 and
+//set count to 0, set size and
 //alloc. size empty lists
 //
 template <typename Item, typename Key, typename HashFun>
-SCMap<Item, Key, HashFun>::SCMap(int size)
+SCMap<Item, Key, HashFun>::SCMap(int expectedSize)
 	:
 	count(0),
 	chains(nullptr)
 {
-	setSize(size);
+	setSize(expectedSize);
 
 	chains = new Node<Item, Key>*[size] {nullptr};
 }

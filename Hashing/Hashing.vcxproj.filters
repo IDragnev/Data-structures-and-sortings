@@ -19,6 +19,9 @@
     <Filter Include="Hash structures\Linear probing map">
       <UniqueIdentifier>{91b0bfc5-8a69-4d71-8add-443c6e5b4d18}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Hash structures\Separate chaining Map\Book">
+      <UniqueIdentifier>{be7d4316-1530-43a2-9215-467d80ce12a5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -26,6 +29,9 @@
     </ClCompile>
     <ClCompile Include="Item.cpp">
       <Filter>Hash structures\Linear probing map</Filter>
+    </ClCompile>
+    <ClCompile Include="Book.cpp">
+      <Filter>Hash structures\Separate chaining Map\Book</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -61,6 +67,9 @@
     </ClInclude>
     <ClInclude Include="HashFunctionImpl.hpp">
       <Filter>Hashing functions</Filter>
+    </ClInclude>
+    <ClInclude Include="Book.h">
+      <Filter>Hash structures\Separate chaining Map\Book</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
