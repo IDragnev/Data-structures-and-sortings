@@ -1,0 +1,5 @@
+﻿  main.cpp
+d:\sortings and data structures\data-structures-and-sortings\recursive bst\main.cpp(104): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+d:\sortings and data structures\data-structures-and-sortings\recursive bst\recbstimpl.hpp(26): warning C4715: 'RecBST::search<int>': not all control paths return a value
+  Recursive BST.vcxproj -> D:\Sortings and data structures\Data-structures-and-sortings\Template Dynamic Array\Debug\Recursive BST.exe
+  Recursive BST.vcxproj -> D:\Sortings and data structures\Data-structures-and-sortings\Template Dynamic Array\Debug\Recursive BST.pdb (Full PDB)

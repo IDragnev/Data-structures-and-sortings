@@ -14,7 +14,7 @@ d:\sortings and data structures\data-structures-and-sortings\linked list\forward
   d:\sortings and data structures\data-structures-and-sortings\linked list\forwardlistimpl.hpp(10): note: while compiling class template member function 'bool ForwardList<int>::isEmpty(void) const'
   d:\sortings and data structures\data-structures-and-sortings\linked list\forwardlistimpl.hpp(362): note: see reference to function template instantiation 'bool ForwardList<int>::isEmpty(void) const' being compiled
   d:\sortings and data structures\data-structures-and-sortings\linked list\forwardlistimpl.hpp(302): note: while compiling class template member function 'ForwardList<int>::ForwardList(const ForwardList<int> &)'
-  d:\sortings and data structures\data-structures-and-sortings\linked list\main.cpp(16): note: see reference to function template instantiation 'ForwardList<int>::ForwardList(const ForwardList<int> &)' being compiled
-  d:\sortings and data structures\data-structures-and-sortings\linked list\main.cpp(11): note: see reference to class template instantiation 'ForwardList<int>' being compiled
+  d:\sortings and data structures\data-structures-and-sortings\linked list\main.cpp(73): note: see reference to function template instantiation 'ForwardList<int>::ForwardList(const ForwardList<int> &)' being compiled
+  d:\sortings and data structures\data-structures-and-sortings\linked list\main.cpp(68): note: see reference to class template instantiation 'ForwardList<int>' being compiled
   Linked List.vcxproj -> D:\Sortings and data structures\Data-structures-and-sortings\Template Dynamic Array\Debug\Forward Linked List.exe
   Linked List.vcxproj -> D:\Sortings and data structures\Data-structures-and-sortings\Template Dynamic Array\Debug\Forward Linked List.pdb (Full PDB)
