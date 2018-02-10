@@ -14,12 +14,18 @@
     <ClCompile Include="main.cpp">
       <Filter>General</Filter>
     </ClCompile>
+    <ClCompile Include="Event.cpp">
+      <Filter>Binary Heap</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="BinaryHeap.h">
+    <ClInclude Include="Event.h">
       <Filter>Binary Heap</Filter>
     </ClInclude>
-    <ClInclude Include="BinaryHeapImpl.hpp">
+    <ClInclude Include="Heap.h">
+      <Filter>Binary Heap</Filter>
+    </ClInclude>
+    <ClInclude Include="HeapImpl.hpp">
       <Filter>Binary Heap</Filter>
     </ClInclude>
   </ItemGroup>

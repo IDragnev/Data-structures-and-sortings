@@ -146,16 +146,18 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Event.cpp" />
     <ClCompile Include="main.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="BinaryHeap.h" />
-    <ClInclude Include="BinaryHeapImpl.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Template Dynamic Array\Template Dynamic Array.vcxproj">
       <Project>{a751a4b4-193e-4f73-91ac-05b1ff909c4d}</Project>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Event.h" />
+    <ClInclude Include="Heap.h" />
+    <ClInclude Include="HeapImpl.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
