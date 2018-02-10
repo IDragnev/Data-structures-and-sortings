@@ -17,6 +17,9 @@
     <ClInclude Include="uniquePtrImpl.hpp">
       <Filter>Unique ptr</Filter>
     </ClInclude>
+    <ClInclude Include="Shapes.h">
+      <Filter>General</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">

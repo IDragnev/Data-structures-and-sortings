@@ -1,0 +1,7 @@
+﻿  uniquePtrTest.cpp
+d:\sortings and data structures\data-structures-and-sortings\reusable classes\unique pointer\unique pointer\uniqueptrimpl.hpp(74): warning C4800: 'Shape *const ': forcing value to bool 'true' or 'false' (performance warning)
+  d:\sortings and data structures\data-structures-and-sortings\reusable classes\unique pointer\unique pointer\uniqueptrimpl.hpp(73): note: while compiling class template member function 'uniquePtr<Shape>::operator bool(void) const'
+  d:\sortings and data structures\data-structures-and-sortings\reusable classes\unique pointer\unique pointer unit test\uniqueptrtest.cpp(29): note: see reference to function template instantiation 'uniquePtr<Shape>::operator bool(void) const' being compiled
+  d:\sortings and data structures\data-structures-and-sortings\reusable classes\unique pointer\unique pointer unit test\uniqueptrtest.cpp(12): note: see reference to class template instantiation 'uniquePtr<Shape>' being compiled
+  Unique pointer unit test.vcxproj -> D:\Sortings and data structures\Data-structures-and-sortings\Reusable classes\Unique pointer\Debug\Unique pointer unit test.dll
+  Unique pointer unit test.vcxproj -> D:\Sortings and data structures\Data-structures-and-sortings\Reusable classes\Unique pointer\Debug\Unique pointer unit test.pdb (Partial PDB)

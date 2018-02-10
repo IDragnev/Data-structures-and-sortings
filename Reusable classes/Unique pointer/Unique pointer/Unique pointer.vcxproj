@@ -146,6 +146,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Shapes.h" />
     <ClInclude Include="uniquePtr.h" />
     <ClInclude Include="uniquePtrImpl.hpp" />
   </ItemGroup>
