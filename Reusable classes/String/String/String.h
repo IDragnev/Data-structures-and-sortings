@@ -10,9 +10,11 @@ public:
 	String(char);                            
 	String(const char* value);
 	String(const String&);
+	String(String&&);
 	~String();
 
-	String& operator=(const String& other);
+	String& operator=(String&&);
+	String& operator=(const String&);
 	String& operator=(const char*);
 
 	operator char*();
@@ -22,8 +24,6 @@ public:
 
 	String& operator+=(const char*);          
 	String& operator+=(char);
-
-	long long toDigit()const;
 
 	char& operator[](int);
 	const char& operator[](int)const;

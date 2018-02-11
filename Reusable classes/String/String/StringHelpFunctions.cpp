@@ -107,48 +107,64 @@ int strLen(const char* str)
 //
 //copy source to dest
 //
-//if either of them is NULL, and exception is thrown
+// \ if dest is null, and exception is thrown
+// \ if source is null, the function does nothing
 //
-//if maxSymbols (to copy) is exceeded by source, and exception is thrown
+// \ if maxSymbols (to copy) is exceeded by source, and exception is thrown
 //
 void strCopy(char* dest, size_t maxSymbols, const char* source)
 {
-	if (!dest || !source) throw std::invalid_argument("NULL pointer passed to strcpy");
-
-	if (maxSymbols < strlen(source) + 1) throw std::invalid_argument("Buffer not large enough");
-
-	while (*source)
+	if (!dest) throw std::invalid_argument("Destination buffer cannot be null");
+	
+	if (source)
 	{
-		*dest = *source;
-		dest++; source++;
+		if (maxSymbols < strLen(source) + 1) throw std::invalid_argument("Destination buffer not large enough");
+
+		while (*source)
+		{
+			*dest = *source;
+			dest++; source++;
+		}
+
+		*dest = '\0';
 	}
-	*dest = '\0';
 }
 
 
 //
 //concatenate two strings
 //
+// \ if dest is null an exception is thrown
+//
+// \ if the second string is null, the function does nothing
+//
 void strCat(char* str1, const char* str2)
 {
-	//move to '0' of str1
-	while (*str1)
-		str1++;
+	if(!str1) throw std::invalid_argument("Destination buffer cannot be null");
 
-	//start copying str2 from there
-	while (*str2)
+	if (str2)
 	{
-		*str1 = *str2;
-		str1++; str2++;
+		//move to '0' of str1
+		while (*str1)
+			str1++;
+
+		//start copying str2 from there
+		while (*str2)
+		{
+			*str1 = *str2;
+			str1++; str2++;
+		}
+
+		//mark the end
+		*str1 = '\0';
 	}
-	
-	//mark the end
-	*str1 = '\0';
 }
 
 
 //
 //compare two strings
+//
+// \ the function assumes both arguments are valid strings
 //
 int strCmp(const char* str1, const char* str2)
 {
@@ -211,6 +227,8 @@ int toInt(char c)
 
 long long strToInt(const char* str)
 {
+	if (!str) return 0;
+
 	int sum = 0;
 
 	//skip non-digits
@@ -236,7 +254,7 @@ long long strToInt(const char* str)
 const char* numberToString(long long number)
 {
 	//if the number is negative, add a char for its sign
-	int size = (number > 0) ? digitsCount(number) + 1 : digitsCount(number) + 2;
+	size_t size = (number > 0) ? digitsCount(number) + 1 : digitsCount(number) + 2;
 
 	char* buffer = new char[size] { 0, };
 
@@ -281,6 +299,8 @@ int digitsCount(long long digit)
 
 int digitsCount(const char* string)
 {
+	if (!string) return 0;
+
 	int count = 0;
 	
 	while (*string)
@@ -296,15 +316,19 @@ int digitsCount(const char* string)
 
 
 
+//
+// the function assumes all parameters are valid pointers
+//
+// \ if start > end, the buffer is left empty with a valid end
+//
 void copyFromEnds(char* buffer, const char* start, const char* end)
 {
-	if (start > end) throw std::invalid_argument("Invalid start and end pointers!");
-
 	while (start <= end)
 	{
 		*buffer = *start;
 		++start;
 		++buffer;
 	}
+
 	*buffer = '\0';	
 }

@@ -1,7 +1,7 @@
 #include "String.h"
-#define NULL 0
-
 #include <stdexcept>
+#include <utility>
+
 
 //---------------------------------------------------------------
 //
@@ -9,7 +9,7 @@
 //
 
 //
-//if str is NULL return an empty string
+//if str is nullptr return an empty string
 //else return str
 //
 String::operator char *()
@@ -18,7 +18,7 @@ String::operator char *()
 }
 
 //
-//if str is NULL return an empty string
+//if str is nullptr return an empty string
 //else return str
 //
 const char* String::getValue()const
@@ -36,8 +36,8 @@ String::operator const char *()const
 
 
 //
-//if the sent value is NULL 
-//free the pointer and set str as NULL
+//if the sent value is nullptr 
+//free the pointer and set str as nullptr
 //
 //else reconstruct str with the sent value
 //
@@ -46,11 +46,11 @@ void String::setValue(const char* value)
 	if (!value)
 	{
 		delete[] str;
-		str = NULL;
+		str = nullptr;
 		return;
 	}
 
-	int size = strLen(value) + 1;
+	size_t size = strLen(value) + 1;
 	char* buffer = new char[size];
 	strCopy(buffer, size, value);
 
@@ -62,20 +62,10 @@ void String::setValue(const char* value)
 //
 //get the length of the string
 //
-// 0 if str is NULL, and strLen if not NULL
-//
 int String::len()const
 {
-	return (str) ? strLen(str) : 0;
-}
-
-
-//
-//get the string as an integer
-//
-long long String::toDigit()const
-{
-	return strToInt(str);
+	//strLen handles a null value
+	return strLen(str);
 }
 
 
@@ -85,11 +75,11 @@ long long String::toDigit()const
 //
 
 //
-//holds a NULL value by default
+//holds a null value by default
 //
 String::String()
 	:
-	str(NULL)
+	str(nullptr)
 {
 	;
 }
@@ -101,7 +91,7 @@ String::String()
 //
 String::String(const char* value)
 	:
-	str(NULL)
+	str(nullptr)
 {
 	setValue(value);
 }
@@ -112,7 +102,7 @@ String::String(const char* value)
 //
 String::String(const String& other)
 	:
-	str(NULL)
+	str(nullptr)
 {
 	setValue(other.str);
 }
@@ -146,7 +136,7 @@ String& String::operator=(const char* string)
 //
 String::String(char c)
 	:
-	str(NULL)
+	str(nullptr)
 {
 	str = new char[2];
 	str[0] = c;
@@ -162,6 +152,39 @@ String::~String()
 	delete[] str;
 }
 
+
+//
+//move constructor
+//
+//transfers source's string to this object
+//
+String::String(String&& source)
+	:
+	str(source.str)
+{
+	source.str = nullptr;
+}
+
+
+
+//
+//move assignment
+//
+//frees old memory and transfers other's string
+//to this object
+//
+String& String::operator=(String&& other)
+{
+	if (this != &other)
+	{
+		delete[] str;
+
+		str = other.str;
+		other.str = nullptr;
+	}
+
+	return *this;
+}
 
 
 //----------------------------------------------------------------------
@@ -205,8 +228,7 @@ bool operator<=(const String& s1, const String& s2)
 
 
 //
-//if the sent value is NULL, return
-//
+//if the sent value is null, return
 //else reconstruct str with concatenated string
 //
 String& String::operator+=(const char* value)
@@ -214,15 +236,11 @@ String& String::operator+=(const char* value)
 	if (!value)
 		return *this;
 
-	int len1 = len();
-	int len2 = strLen(value);
-
-	int size = len1 + len2 + 1;
+	size_t size = this->len() + strLen(value) + 1;
 	char* buffer = new char[size];
 
-	//copy current str
+	//copy this->str (could be null) and 'append' value
 	strCopy(buffer, size, getValue());
-	//'append' value
 	strCat(buffer, value);
 
 	delete[] str;
@@ -277,19 +295,17 @@ const char& String::operator[](int index)const
 //
 String& String::operator+=(char c)
 {
-	//make a temporary string
 	String temp(c);
 
-	//if str is NULL
-	//just set it with c
+	//if str is null just set it with c
 	if (!str)
 	{
 		setValue(temp);
-		return *this;
 	}
-	
-	//else append to str
-	*this += temp;
+	else //else append to it
+	{
+		*this += temp;
+	}
 
 	return *this;
 }
@@ -308,16 +324,11 @@ String operator+(const String& string, char c)
 
 String operator+(char c, const String& string)
 {
-	//make a temp. empty string
-	String s;
+	String str(c);
 
-	//append c to it
-	s += c;
+	str += string;
 
-	//append string
-	s += string;
-
-	return s;
+	return str;
 }
 
 
