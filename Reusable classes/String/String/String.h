@@ -1,8 +1,6 @@
 #ifndef __STRING_H_INCLUDED__
 #define __STRING_H_INCLUDED__
 
-#include "StringHelpFunctions.h"
-
 class String
 {
 public:
@@ -13,11 +11,8 @@ public:
 	String(String&&);
 	~String();
 
-	String& operator=(String&&);
-	String& operator=(const String&);
-	String& operator=(const char*);
+	String& operator=(String);
 
-	operator char*();
 	operator const char*()const;
 
 	int len()const;                          
@@ -25,15 +20,13 @@ public:
 	String& operator+=(const char*);          
 	String& operator+=(char);
 
-	char& operator[](int);
-	const char& operator[](int)const;
-
 private:
 	char* str;
 
 private:
 	const char* getValue()const;           
-	void setValue(const char*);               
+	void setValue(const char*);  
+	void append(const char*);
 };
 
 

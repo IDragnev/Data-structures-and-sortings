@@ -1,21 +1,11 @@
 #include "String.h"
 #include <stdexcept>
-#include <utility>
-
 
 //---------------------------------------------------------------
 //
 //GET AND SET
 //
 
-//
-//if str is nullptr return an empty string
-//else return str
-//
-String::operator char *()
-{
-	return (str) ? str : "";
-}
 
 //
 //if str is nullptr return an empty string
@@ -34,7 +24,6 @@ String::operator const char *()const
 
 
 
-
 //
 //if the sent value is nullptr 
 //free the pointer and set str as nullptr
@@ -47,27 +36,56 @@ void String::setValue(const char* value)
 	{
 		delete[] str;
 		str = nullptr;
-		return;
 	}
+	else
+	{
+		size_t size = strlen(value) + 1;
+		char* buffer = new char[size];
+		strcpy_s(buffer, size, value);
 
-	size_t size = strLen(value) + 1;
-	char* buffer = new char[size];
-	strCopy(buffer, size, value);
-
-	delete[] str;
-	str = buffer;
+		delete[] str;
+		str = buffer;
+	}
 }
+
 
 
 //
 //get the length of the string
 //
+// 0 if nullptr, strlen else
+//
 int String::len()const
 {
-	//strLen handles a null value
-	return strLen(str);
+	return (str) ? strlen(str) : 0;
 }
 
+
+//
+//if the sent value is null, do nothing
+//else reconstruct str with a concatenated string
+//
+void String::append(const char* value)
+{
+	if (value)
+	{
+		size_t size = strlen(value);
+
+		//if not empty
+		if (size > 0)
+		{
+			size += (this->len() + 1);
+			char* buffer = new char[size];
+
+			//copy this->str (could be null) and 'append' value
+			strcpy_s(buffer, size, getValue());
+			strcat_s(buffer, size, value);
+
+			delete[] str;
+			str = buffer;
+		}
+	}
+}
 
 //----------------------------------------------------------------------------------------------
 //
@@ -87,7 +105,7 @@ String::String()
 
 
 //
-//reconstructs str with the sent value
+//constructs str with the sent value
 //
 String::String(const char* value)
 	:
@@ -107,26 +125,6 @@ String::String(const String& other)
 	setValue(other.str);
 }
 
-
-
-//
-//reconstructs str with other's str
-//
-String& String::operator=(const String& other)
-{
-	if (this != &other)
-		setValue(other.str);
-	
-	return *this;
-}
-
-
-String& String::operator=(const char* string)
-{
-	setValue(string);
-
-	return *this;
-}
 
 
 //
@@ -167,24 +165,28 @@ String::String(String&& source)
 
 
 
-//
-//move assignment
-//
-//frees old memory and transfers other's string
-//to this object
-//
-String& String::operator=(String&& other)
-{
-	if (this != &other)
-	{
-		delete[] str;
 
-		str = other.str;
-		other.str = nullptr;
-	}
+//
+// combined operator= taking by value and using the copy-and-swap idiom
+//
+// \ if rhs is an rvalue, 'other' will be initialized with move c-tor
+//
+// \ if rhs is an lvalue, 'other' will be copy-constructed which is fine
+//   because we would have to reconstruct other's str anyway
+//
+// \ if rhs is const char*, 'other' will be constructed with String(const char*)
+//   which is fine again, because we would have to reconstruct this->str anyway
+//
+// After constructing 'other' with rhs, data is swapped and 'other' destroys old data.
+//
+String& String::operator=(String other)
+{
+	std::swap(this->str, other.str);
 
 	return *this;
 }
+
+
 
 
 //----------------------------------------------------------------------
@@ -192,9 +194,10 @@ String& String::operator=(String&& other)
 //OPERATORS
 //
 
+
 bool operator==(const String& s1, const String& s2)
 {
-	return strCmp(s1, s2) == 0;
+	return strcmp(s1, s2) == 0;
 }
 
 bool operator!=(const String& s1, const String& s2)
@@ -204,7 +207,7 @@ bool operator!=(const String& s1, const String& s2)
 
 bool operator>(const String& s1, const String& s2)
 {
-	return strCmp(s1, s2) > 0;
+	return strcmp(s1, s2) > 0;
 }
 
 
@@ -227,28 +230,14 @@ bool operator<=(const String& s1, const String& s2)
 
 
 
-//
-//if the sent value is null, return
-//else reconstruct str with concatenated string
-//
+
+
 String& String::operator+=(const char* value)
 {
-	if (!value)
-		return *this;
-
-	size_t size = this->len() + strLen(value) + 1;
-	char* buffer = new char[size];
-
-	//copy this->str (could be null) and 'append' value
-	strCopy(buffer, size, getValue());
-	strCat(buffer, value);
-
-	delete[] str;
-	str = buffer;
+	append(value);
 
 	return *this;
 }
-
 
 
 String operator+(const String& string1, const String& string2)
@@ -272,40 +261,14 @@ String operator+(const String& string, const char* str)
 
 
 
-char& String::operator[](int index)
-{
-	if (index<0 || index >= len())
-		throw std::out_of_range("Index out of range");
-
-	return str[index];
-}
-
-
-const char& String::operator[](int index)const
-{
-	if (index<0 || index >= len())
-		throw std::out_of_range("Index out of range");
-
-	return str[index];
-}
-
-
-//
-//appends the char to str
-//
 String& String::operator+=(char c)
 {
-	String temp(c);
+	static char temp[2];
 
-	//if str is null just set it with c
-	if (!str)
-	{
-		setValue(temp);
-	}
-	else //else append to it
-	{
-		*this += temp;
-	}
+	temp[0] = c;
+	temp[1] = '\0';
+	
+	append(temp);
 
 	return *this;
 }
