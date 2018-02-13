@@ -21,11 +21,11 @@
   <ItemGroup>
     <ClCompile Include="main.cpp" />
     <ClCompile Include="String.cpp" />
-    <ClCompile Include="StringHelpFunctions.cpp" />
+    <ClCompile Include="cStringGlobals.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="String.h" />
-    <ClInclude Include="StringHelpFunctions.h" />
+    <ClInclude Include="cStringGlobals.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{6CB4FC71-36B0-4857-90DE-A61E7A90004C}</ProjectGuid>

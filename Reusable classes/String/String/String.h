@@ -15,7 +15,7 @@ public:
 
 	operator const char*()const;
 
-	int len()const;                          
+	size_t len()const;                          
 
 	String& operator+=(const char*);          
 	String& operator+=(char);

@@ -1,5 +1,5 @@
 #include "String.h"
-#include <stdexcept>
+#include <utility>
 
 //---------------------------------------------------------------
 //
@@ -55,7 +55,7 @@ void String::setValue(const char* value)
 //
 // 0 if nullptr, strlen else
 //
-int String::len()const
+size_t String::len()const
 {
 	return (str) ? strlen(str) : 0;
 }
