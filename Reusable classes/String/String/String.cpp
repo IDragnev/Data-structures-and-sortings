@@ -179,13 +179,52 @@ String::String(String&& source)
 //
 // After constructing 'other' with rhs, data is swapped and 'other' destroys old data.
 //
-String& String::operator=(String other)
+//String& String::operator=(String other)
+//{
+//	std::swap(this->str, other.str);
+//
+//	return *this;
+//}
+//
+
+
+
+//
+//copy assignment, can be called for lvalues only
+//
+// setValue frees old memory (if any)
+//
+String& String::operator=(const String& other)
 {
-	std::swap(this->str, other.str);
+	if (this != &other)
+	{
+		setValue(other.str);
+	}
 
 	return *this;
 }
 
+
+
+//
+//move assignment, can be called for rvalues only 
+//(including const char* which will move-construct a rvalue object)
+//
+//moves the argument's resource to the current object, freeing the old resource
+//
+String& String::operator=(String&& other)
+{
+	if (this != &other)
+	{
+		delete[] str;
+
+		str = other.str;
+
+		other.str = nullptr;
+	}
+
+	return *this;
+}
 
 
 

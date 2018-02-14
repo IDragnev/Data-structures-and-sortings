@@ -11,7 +11,8 @@ public:
 	String(String&&);
 	~String();
 
-	String& operator=(String);
+	String& operator=(String&&);
+	String& operator=(const String&);
 
 	operator const char*()const;
 
