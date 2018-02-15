@@ -148,8 +148,6 @@
   <ItemGroup>
     <ClInclude Include="DynamicArray.h" />
     <ClInclude Include="DynamicArrayImpl.hpp" />
-    <ClInclude Include="StaticQueue.h" />
-    <ClInclude Include="StaticQueueImpl.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />

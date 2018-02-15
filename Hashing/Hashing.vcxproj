@@ -168,9 +168,6 @@
     <ProjectReference Include="..\Doubly Linked List with Iterator\Doubly Linked List with Iterator.vcxproj">
       <Project>{a1ad2f87-529c-474d-adb4-e441b44cbe79}</Project>
     </ProjectReference>
-    <ProjectReference Include="..\Linked List\Linked List.vcxproj">
-      <Project>{1aaee947-862f-45bb-91e7-0eb87c17c0e3}</Project>
-    </ProjectReference>
     <ProjectReference Include="..\Template Dynamic Array\Template Dynamic Array.vcxproj">
       <Project>{a751a4b4-193e-4f73-91ac-05b1ff909c4d}</Project>
     </ProjectReference>
