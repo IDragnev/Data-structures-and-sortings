@@ -1,6 +1,5 @@
-#include "../Linked List/LStack.h"
-#include "../Template Dynamic Array/DynamicStack.h"
-
+#include "../Stack/Linked-List Stack/LStack.h"
+#include "../Stack/Dynamic stack/DynamicStack.h"
 
 template <typename Key>
 struct TreeNode

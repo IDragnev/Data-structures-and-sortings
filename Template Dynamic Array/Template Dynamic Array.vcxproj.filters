@@ -9,18 +9,8 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Ordered Dynamic Array">
-      <UniqueIdentifier>{a6c86f91-390b-4b46-b72f-e3161c71165c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Dynamic Stack">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
-    </Filter>
     <Filter Include="Static Queue">
       <UniqueIdentifier>{fac8e744-a524-4cca-8b6a-8916defb389a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Static Stack">
-      <UniqueIdentifier>{86fc455b-c41c-46cd-a029-bf6d749d2b9e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -30,29 +20,11 @@
     <ClInclude Include="DynamicArrayImpl.hpp">
       <Filter>DynamicArray</Filter>
     </ClInclude>
-    <ClInclude Include="OrderedDynamicArray.h">
-      <Filter>Ordered Dynamic Array</Filter>
-    </ClInclude>
-    <ClInclude Include="OrderedDynamicArrayImpl.hpp">
-      <Filter>Ordered Dynamic Array</Filter>
-    </ClInclude>
-    <ClInclude Include="DynamicStackImpl.hpp">
-      <Filter>Dynamic Stack</Filter>
-    </ClInclude>
-    <ClInclude Include="DynamicStack.h">
-      <Filter>Dynamic Stack</Filter>
-    </ClInclude>
     <ClInclude Include="StaticQueue.h">
       <Filter>Static Queue</Filter>
     </ClInclude>
     <ClInclude Include="StaticQueueImpl.hpp">
       <Filter>Static Queue</Filter>
-    </ClInclude>
-    <ClInclude Include="StaticStack.h">
-      <Filter>Static Stack</Filter>
-    </ClInclude>
-    <ClInclude Include="StaticStackImpl.hpp">
-      <Filter>Static Stack</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

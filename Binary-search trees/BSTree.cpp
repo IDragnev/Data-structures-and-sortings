@@ -1,6 +1,5 @@
 #include "BSTree.h"
-#include "../Template Dynamic Array/DynamicStack.h"
-
+#include "../Stack/Dynamic stack/DynamicStack.h"
 
 /*
 The BSTree is implemented with the larger or equal keys of a node

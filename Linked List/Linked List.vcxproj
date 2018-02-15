@@ -151,8 +151,6 @@
     <ClInclude Include="ForwardListImpl.hpp" />
     <ClInclude Include="ForwardListIterator.h" />
     <ClInclude Include="ForwardListIteratorImpl.hpp" />
-    <ClInclude Include="LStack.h" />
-    <ClInclude Include="LStackImpl.hpp" />
     <ClInclude Include="Node.h" />
     <ClInclude Include="NodeImpl.hpp" />
   </ItemGroup>

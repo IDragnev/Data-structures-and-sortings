@@ -2,7 +2,7 @@
 #define __REC_BST_H_INCLUDED__
 
 #include <assert.h>
-#include "../Template Dynamic Array/DynamicStack.h"
+#include "../Stack/Dynamic stack/DynamicStack.h"
 #include "../Forward List Queue/FLQueue.h"
 
 namespace RecBST
