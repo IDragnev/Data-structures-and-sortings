@@ -168,5 +168,51 @@ namespace Stringtest
 			Assert::IsTrue(strcmp(str, "") == 0, L"Move assignment from an empty xvalue is not working properly");
 			Assert::IsTrue(str.len() == 0, L"Move assignment from an empty xvalue is not working properly");
 		}
+
+		TEST_METHOD(AppendingStringTest)
+		{
+			//to an emtpy string...
+			String str;
+
+			//appending an empty (null) string
+			str += String(nullptr);
+			Assert::IsTrue(strcmp(str, "") == 0, L"appending to an empty string fails");
+			
+			//appending an empty string
+			str += "";
+			Assert::IsTrue(strcmp(str, "") == 0, L"appending to an empty string fails");
+
+			//appending a non-empty string
+			str += "1234";
+			Assert::IsTrue(strcmp(str, "1234") == 0, L"appending to an empty string fails");
+
+
+			//to a non-empty string...
+
+			//appending an empty (null) string
+			str += String(nullptr);
+			Assert::IsTrue(strcmp(str, "1234") == 0, L"appending to a non-emtpy string fails");
+
+			//appending an empty string
+			str += "";
+			Assert::IsTrue(strcmp(str, "1234") == 0, L"appending to a non-emtpy string fails");
+
+			//appending a non-empty string
+			str += "5678";
+			Assert::IsTrue(strcmp(str, "12345678") == 0, L"appending to a non-emtpy string fails");
+		}
+
+		TEST_METHOD(AppendingCharTest)
+		{
+			//to an emtpy string
+			String str;
+
+			str += 'c';
+			Assert::IsTrue(strcmp(str, "c") == 0, L"appending a char to an empty string fails");
+
+			//to a non-empty string
+			str += 'd';
+			Assert::IsTrue(strcmp(str, "cd") == 0, L"appending a char to an non-empty string fails");
+		}
 	};
 }
