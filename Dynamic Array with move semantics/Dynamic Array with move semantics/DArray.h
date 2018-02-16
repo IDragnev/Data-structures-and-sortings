@@ -26,8 +26,9 @@ public:
 	int getCount()const;
 	bool isEmpty()const;
 
-	void makeEmpty();
+	void empty();
 	void ensureSize(int size);
+	void shrink(int size);
 
 public:
 	virtual void add(T&&);
@@ -64,6 +65,7 @@ private:
 	void copy(const DArray<T>&);
 	void resize(int);
 	void clear();
+	void destroy();
 	void null();
 	void directInit(T*, int count, int size);
 };
