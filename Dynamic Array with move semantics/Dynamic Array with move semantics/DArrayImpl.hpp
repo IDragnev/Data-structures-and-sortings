@@ -28,14 +28,14 @@ inline bool DArray<T>::isEmpty()const
 
 
 template <typename T>
-inline T* DArray<T>::data()
+inline T* DArray<T>::getData()
 {
 	return data;
 }
 
 
 template <typename T>
-inline const T* DArray<T>::data()const
+inline const T* DArray<T>::getData()const
 {
 	return data;
 }
@@ -162,7 +162,7 @@ template <typename T>
 inline void DArray<T>::checkSpace()
 {
 	if (count == size)
-		resize((2 * size) > 0 ? (2 * size) : 8;);
+		resize((2 * size) > 0 ? (2 * size) : 8);
 }
 
 
@@ -176,7 +176,7 @@ inline void DArray<T>::shiftLeft(int start, int end)
 {
 	assert(start > 0);
 
-	while (start < end)
+	while (start <= end)
 	{
 		data[start - 1] = data[start];
 		++start;
@@ -196,7 +196,7 @@ inline void DArray<T>::shiftRight(int start, int end)
 	//end can be at most the last 'valid' object
 	assert(end < count);
 
-	while (end > start)
+	while (end >= start)
 	{
 		data[end + 1] = data[end];
 		--end;
@@ -344,7 +344,7 @@ DArray<T>& DArray<T>::operator=(const DArray<T>& other)
 template <typename T>
 DArray<T>& DArray<T>::operator=(DArray<T>&& source)
 {
-	if (this != &other)
+	if (this != &source)
 	{
 		destroy();
 		directInit(source.data, source.count, source.size);
@@ -361,4 +361,139 @@ template <typename T>
 DArray<T>::~DArray()
 {
 	destroy();
+}
+
+
+
+//---------------------------------------------------------------------------------------------------------------------------------
+//
+// ADDING AND REMOVAL
+//
+
+
+//
+//adding an lvalue
+//
+template <typename T>
+void DArray<T>::add(const T& obj)
+{
+	checkSpace();
+
+	data[count++] = obj;
+}
+
+
+//
+//adding an rvalue
+//
+template <typename T>
+void DArray<T>::add(T&& obj)
+{
+	checkSpace();
+
+	data[count++] = std::move(obj);
+} 
+
+
+
+template <typename T>
+void DArray<T>::addAt(int pos, const T& obj)
+{
+	if (pos < 0 || pos >= count)
+		throw std::out_of_range("Index out of range");
+
+	checkSpace();
+
+	//empty the position
+	shiftRight(pos, count - 1);
+
+	data[pos] = obj;
+	++count;
+}
+
+
+template <typename T>
+void DArray<T>::addAt(int pos, T&& obj)
+{
+	if (pos < 0 || pos >= count)
+		throw std::out_of_range("Index out of range");
+
+	checkSpace();
+
+	//empty the position
+	shiftRight(pos, count - 1);
+
+	data[pos] = std::move(obj);
+	++count;
+}
+
+
+
+template <typename T>
+void DArray<T>::remove(int pos)
+{
+	if (pos < 0 || pos >= count)
+		throw std::out_of_range("Index out of range");
+
+	//shift objects after it one pos. to the left
+	shiftLeft(pos + 1, count - 1);
+	--count;
+}
+
+
+
+template <typename T>
+int DArray<T>::find(const T& val)const
+{
+	for (int i = 0; i < count; ++i)
+	{
+		if (data[i] == val)
+			return i;
+	}
+
+	return -1;
+}
+
+
+
+template <typename T>
+T& DArray<T>::operator[](int index)
+{
+	if (index < 0 || index >= count)
+		throw std::out_of_range("Index out of range");
+
+	return data[index];
+}
+
+
+
+template <typename T>
+const T& DArray<T>::operator[](int index)const
+{
+	if (index < 0 || index >= count)
+		throw std::out_of_range("Index out of range");
+
+	return data[index];
+}
+
+
+template <typename T>
+void DArray<T>::append(const DArray<T>& other)
+{
+	for (int i = 0; i < other.count; ++i)
+		add(other[i]);
+}
+
+
+
+//
+//move other's objects and null it
+//
+template <typename T>
+void DArray<T>::append(DArray<T>&& other)
+{
+	for (int i = 0; i < other.count; ++i)
+		add(std::move(other[i]));
+
+	other.null();
 }

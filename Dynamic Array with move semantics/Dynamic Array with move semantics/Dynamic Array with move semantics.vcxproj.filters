@@ -5,6 +5,9 @@
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
+    <Filter Include="General">
+      <UniqueIdentifier>{5ba56a18-84a5-43e8-9a6d-47ad1769fbb6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DArray.h">
@@ -13,5 +16,10 @@
     <ClInclude Include="DArrayImpl.hpp">
       <Filter>DArray</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>General</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

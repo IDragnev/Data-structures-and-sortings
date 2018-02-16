@@ -58,8 +58,8 @@ protected:
 	void shiftLeft(int beg, int end);
 	void shiftRight(int beg, int end);
 
-	T* data();
-	const T* data()const;
+	T* getData();
+	const T* getData()const;
 
 private:
 	void copy(const DArray<T>&);
