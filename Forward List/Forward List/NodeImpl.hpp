@@ -1,9 +1,20 @@
 
+
 template <typename Key>
-Node<Key>::Node(const Key& data, Node<Key>* successor)
+Node<Key>::Node(const Key& data, Node<Key>* next)
 	:
-	next(successor),
+	next(next),
 	data(data)
+{
+	;
+}
+
+
+template <typename Key>
+Node<Key>::Node(Key&& data, Node<Key>* next)
+	:
+	next(next),
+	data(std::move(data))
 {
 	;
 }
@@ -12,5 +23,5 @@ Node<Key>::Node(const Key& data, Node<Key>* successor)
 template <typename Key>
 bool Node<Key>::hasSuccessor()const
 {
-	return next != NULL;
+	return next != nullptr;
 }

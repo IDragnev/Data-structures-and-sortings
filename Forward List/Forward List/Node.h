@@ -1,17 +1,14 @@
 #ifndef __NODE_H_INCLUDED__
 #define __NODE_H_INCLUDED__
 
-#include <iostream>
+#include <utility>
 
 template <typename Key>
-class Node
+struct Node
 {
 public:
-	Node(const Key& data, Node<Key>* successor = NULL);
-	Node(const Node<Key>& other) = default;
-	~Node() = default;
-
-	Node<Key>& operator=(const Node<Key>&) = default;
+	Node(const Key& data, Node<Key>* next = nullptr);
+	Node(Key&& data, Node<Key>* next = nullptr);
 
 	bool hasSuccessor()const;                     
 
@@ -21,5 +18,4 @@ public:
 };
 
 #include "NodeImpl.hpp"
-
 #endif // __NODE_H_INCLUDED__

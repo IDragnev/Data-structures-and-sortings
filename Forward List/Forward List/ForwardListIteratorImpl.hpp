@@ -16,7 +16,7 @@ ForwardListIterator<Key>::ForwardListIterator(Node<Key>* startNode, const Forwar
 template <typename Key>
 ForwardListIterator<Key>::operator bool()const
 {
-	return current != NULL;
+	return current != nullptr;
 }
 
 
@@ -27,7 +27,7 @@ ForwardListIterator<Key>::operator bool()const
 template <typename Key>
 bool ForwardListIterator<Key>::operator!()const
 {
-	return current == NULL;
+	return current == nullptr;
 }
 
 

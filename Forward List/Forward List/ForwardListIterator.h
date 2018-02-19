@@ -2,7 +2,6 @@
 #define __FOR_LIST_ITERATOR_H_INCLUDED__
 
 #include "Node.h"
-#include <stdexcept>
 
 template <typename Key>
 class ForwardListIterator
@@ -13,11 +12,6 @@ private:
 	ForwardListIterator(Node<Key>* startNode, const ForwardList<Key>* owner);
 
 public:
-	ForwardListIterator(const ForwardListIterator<Key>&) = default;
-	~ForwardListIterator() = default;
-
-	ForwardListIterator<Key>& operator=(const ForwardListIterator<Key>&) = default;
-
 	Key& operator*();
 
 	ForwardListIterator<Key>& operator++();   
@@ -34,5 +28,4 @@ private:
 };
 
 #include "ForwardListIteratorImpl.hpp"
-
 #endif //__LIST_ITERATOR_H_INCLUDED__

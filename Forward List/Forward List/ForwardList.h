@@ -4,6 +4,7 @@
 #include "Node.h"
 #include "ForwardListIterator.h"
 #include <assert.h>
+#include <stdexcept>
 
 template <typename T>
 class ForwardList
@@ -59,10 +60,9 @@ private:
 
 private:
 	static Node<T>* findEndOfChain(Node<T>* firstNode); 
-	static Node<T>* cloneChain(const Node<T>* firstNode, Node<T>** lastNode = NULL);
+	static Node<T>* cloneChain(const Node<T>* firstNode, Node<T>** lastNode = nullptr);
 	static void clearChain(const Node<T>* firstNode);  
 };
 
 #include "ForwardListImpl.hpp"
-
 #endif //__SINGLY_LINKED_LIST_H_INCLUDED__

@@ -1,5 +1,4 @@
-﻿  IteratorTest.cpp
-  ForwardListTest.cpp
+﻿  ForwardListTest.cpp
 d:\sortings and data structures\data-structures-and-sortings\forward list\forward list\forwardlistimpl.hpp(202): warning C4101: 'ex': unreferenced local variable
   d:\sortings and data structures\data-structures-and-sortings\forward list\forward list\forwardlistimpl.hpp(169): note: while compiling class template member function 'Node<T> *ForwardList<T>::cloneChain(const Node<T> *,Node<T> **)'
           with
@@ -15,6 +14,8 @@ d:\sortings and data structures\data-structures-and-sortings\forward list\forwar
   d:\sortings and data structures\data-structures-and-sortings\forward list\forward list test\forwardlisttest.cpp(15): note: see reference to function template instantiation 'ForwardList<int>::ForwardList(void)' being compiled
   d:\sortings and data structures\data-structures-and-sortings\forward list\forward list test\forwardlisttest.cpp(15): note: see reference to class template instantiation 'ForwardList<int>' being compiled
   Generating Code...
-     Creating library D:\Sortings and data structures\Data-structures-and-sortings\Forward List\Debug\Forward List test.lib and object D:\Sortings and data structures\Data-structures-and-sortings\Forward List\Debug\Forward List test.exp
+  Compiling...
+  IteratorTest.cpp
+  Generating Code...
   Forward List test.vcxproj -> D:\Sortings and data structures\Data-structures-and-sortings\Forward List\Debug\Forward List test.dll
   Forward List test.vcxproj -> D:\Sortings and data structures\Data-structures-and-sortings\Forward List\Debug\Forward List test.pdb (Partial PDB)
