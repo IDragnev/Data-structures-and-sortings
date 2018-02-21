@@ -2,6 +2,7 @@
 #include <time.h>
 
 #include "ForwardList.h"
+#include "../../Reusable classes/String/String/String.h"
 
 
 
@@ -65,12 +66,20 @@ int main()
 {
 	try
 	{
-		ForwardList<int> list;
+		ForwardList<String> list;
+		String str("some val");
 
 		for (int i = 0; i < 10; ++i)
-			list.addAsHead(i + 1);
+		{
+			list.addAsHead(std::move(str));
+			str = "some val";
+		}
 
-		ForwardList<int> list2(list);
+		ForwardList<String> list2;
+
+		auto &it = list2.getHead();
+
+		list2.insertBefore(it, std::move(str));
 		
 	}
 	catch (std::exception& ex)

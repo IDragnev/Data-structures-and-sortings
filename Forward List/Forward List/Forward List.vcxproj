@@ -154,6 +154,7 @@
     <ClInclude Include="NodeImpl.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\Reusable classes\String\String\String.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -16,6 +16,9 @@
     <Filter Include="Forward List">
       <UniqueIdentifier>{f94fd7f8-f4dd-42d2-8b01-d8e2357785cd}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resource">
+      <UniqueIdentifier>{c4b8903b-922d-4420-b6b4-be5bd0b8101c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ForwardListIterator.h">
@@ -40,6 +43,9 @@
   <ItemGroup>
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Reusable classes\String\String\String.cpp">
+      <Filter>Resource</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

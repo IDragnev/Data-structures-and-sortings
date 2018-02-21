@@ -60,6 +60,7 @@ private:
 
 private:
 	void checkIsEmtpy()const;    
+	void null();
 
 	Node<T>* findNodeBefore(const Node<T>* node)const; 
 
