@@ -47,5 +47,22 @@ namespace ForwardListtest
 				Assert::AreEqual(*it, i, L"Operator* of iterator is not working properly");
 		}
 
+		TEST_METHOD(EqualtyOperatorsTest)
+		{
+				ForwardList<int> list;
+				list.addAsHead(1);
+				list.addAsTail(2);
+
+				ForwardListIterator<int> head = list.getHead();
+				ForwardListIterator<int> tail = list.getTail();
+
+				Assert::IsFalse(head == tail, L"Operator== is not working properly");
+				Assert::IsTrue(head != tail, L"Operator!= is not working properly");
+
+				tail = list.getHead();
+
+				Assert::IsTrue(head == tail, L"Operator== is not working properly");
+				Assert::IsFalse(head != tail, L"Operator!= is not working properly");
+		}
 	};
 }
