@@ -9,15 +9,6 @@ namespace ForwardListtest
 	TEST_CLASS(FLIteratorTest)
 	{
 	public:
-		
-		TEST_METHOD(FLNodeTest)
-		{
-			Node<int> node(1);
-			Assert::IsFalse(node.hasSuccessor(), L"Node has successor even when default constructed");
-
-			Node<int> node2(33, &node);
-			Assert::IsTrue(node2.hasSuccessor(), L"Node has no successor after constructing it with such");
-		}
 
 		TEST_METHOD(FLIteratorBoundariesTest)
 		{

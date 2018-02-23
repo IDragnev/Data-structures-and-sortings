@@ -30,9 +30,6 @@
     <ClInclude Include="Node.h">
       <Filter>Node</Filter>
     </ClInclude>
-    <ClInclude Include="NodeImpl.hpp">
-      <Filter>Node</Filter>
-    </ClInclude>
     <ClInclude Include="ForwardListImpl.hpp">
       <Filter>Forward List</Filter>
     </ClInclude>

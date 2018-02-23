@@ -3,6 +3,7 @@
 
 #include "Node.h"
 #include "ForwardListIterator.h"
+#include <utility>
 #include <assert.h>
 #include <stdexcept>
 
@@ -40,7 +41,6 @@ public:
 	void removeTail();                          
 
 	void removeAt(ForwardListIterator<T>& it); 
-
 	void removeBefore(ForwardListIterator<T>& it);
 	void removeAfter(ForwardListIterator<T>& it);
 
@@ -54,7 +54,7 @@ private:
 
 private:
 	void checkIsEmtpy()const;    
-	void null();
+	void nullMembers();
 
 	Node<T>* findNodeBefore(const Node<T>* node)const; 
 

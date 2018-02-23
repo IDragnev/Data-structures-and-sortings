@@ -151,7 +151,6 @@
     <ClInclude Include="ForwardListIterator.h" />
     <ClInclude Include="ForwardListIteratorImpl.hpp" />
     <ClInclude Include="Node.h" />
-    <ClInclude Include="NodeImpl.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Reusable classes\String\String\String.cpp" />
