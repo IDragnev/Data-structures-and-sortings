@@ -213,21 +213,8 @@ void ForwardList<T>::appendList(const ForwardList<T>& other)
 	//clone other list's chain of nodes
 	Node<T>* newChain = cloneChain(other.head, &endOfChain);
 
-	//if the list is empty, attach the chain to the head pointer
-	if (isEmpty())
-	{
-		this->head = newChain;
-	}
-	else //else attach it to the tail node
-	{
-		this->tail->next = newChain;
-	}
-
-	assert(endOfChain);
-
-	//update tail and count
-	this->tail = endOfChain;    
-	this->count += other.count;
+	//append the cloned chain to the current one
+	appendChain(newChain, endOfChain, other.count);
 }
 
 
@@ -243,23 +230,38 @@ void ForwardList<T>::appendList(ForwardList<T>&& source)
 	if (source.isEmpty())
 		return;
 
-	//if the list is empty, attach source's chain to the head pointer
-	if (isEmpty())
-	{
-		this->head = source.head;
-	}
-	else //else attach it to the tail node
-	{
-		this->tail->next = source.head;
-	}
+	//append source's chain
+	appendChain(source.head, source.tail, source.count);
 
-	//update tail and count
-	this->tail = source.tail;
-	this->count += source.count;
-
+	//and null it
 	source.nullMembers();
 }
 
+
+
+
+//
+//append the sent chain to the current chain and update count
+//
+template <typename T>
+void ForwardList<T>::appendChain(Node<T>* first, Node<T>* last, int count)
+{
+	assert(first && last);
+
+	//if the list is empty, attach the chain to the head pointer
+	if (isEmpty())
+	{
+		this->head = first;
+	}
+	else //attach it to the tail node
+	{
+		this->tail->next = first;
+	}
+
+	//update tail and count
+	this->tail = last;
+	this->count += count;
+}
 
 
 

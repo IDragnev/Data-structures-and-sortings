@@ -62,6 +62,8 @@ private:
 	void insertAfter(Node<T>* node, const T&);
 	void insertBefore(Node<T>* node, const T&);
 
+	void appendChain(Node<T>* first, Node<T>* last, int count);
+
 private:
 	static Node<T>* cloneChain(const Node<T>* firstNode, Node<T>** lastNode = nullptr);
 	static void clearChain(const Node<T>* firstNode);  
