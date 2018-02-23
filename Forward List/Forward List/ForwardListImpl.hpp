@@ -66,21 +66,6 @@ void ForwardList<T>::null()
 }
 
 
-
-//
-//sets the value of the head node with the passed value
-//
-//if the list is empty, an exception is thrown
-//
-template <typename T>
-void ForwardList<T>::setHead(T&& value)
-{
-	checkIsEmtpy();
-
-	head->data = std::move(value);
-}
-
-
 //
 //sets the value of the head node with the passed value
 //
@@ -94,19 +79,6 @@ void ForwardList<T>::setHead(const T& value)
 	head->data = value;
 }
 
-
-//
-//sets the value of the tail node with the passed value
-//
-//if the list is empty, an exception is thrown
-//
-template <typename T>
-void ForwardList<T>::setTail(T&& value)
-{
-	checkIsEmtpy();
-
-	tail->data = std::move(value);
-}
 
 
 //
@@ -468,28 +440,6 @@ void ForwardList<T>::addAsHead(const T& value)
 
 
 //
-//add a node with the passed value (moved into node)
-//as head node 
-//
-template <typename T>
-void ForwardList<T>::addAsHead(T&& value)
-{
-	//move value in the node
-	Node<T>* newHead = new Node<T>(std::move(value), this->head);
-
-	if (isEmpty())
-	{
-		this->tail = newHead;
-	}
-
-	this->head = newHead;
-
-	++count;
-}
-
-
-
-//
 //add a node with the passed value
 //as the new tail
 //
@@ -510,33 +460,6 @@ void ForwardList<T>::addAsTail(const T& value)
 	}
 
 	//update tail and count
-	this->tail = newTail;
-
-	++count;
-}
-
-
-
-//
-//add a node with the passed value (moved into node)
-//as the new tail
-//
-template <typename T>
-void ForwardList<T>::addAsTail(T&& value)
-{
-	//move value in the node
-	Node<T>* newTail = new Node<T>(std::move(value));
-
-	//if the list is empty, update head
-	if (isEmpty())
-	{
-		this->head = newTail;
-	}
-	else //update the successor of current tail
-	{
-		this->tail->next = newTail;
-	}
-
 	this->tail = newTail;
 
 	++count;
@@ -570,10 +493,9 @@ void ForwardList<T>::removeHead()
 		tail = nullptr;
 	}
 
-	//free old head
+	//free old head and update count
 	delete oldHead;
 
-	//update count 
 	--count;
 }
 
@@ -684,39 +606,6 @@ void ForwardList<T>::insertAfter(Node<T>* node, const T& data)
 
 
 //
-//insert a node with the sent value (moved into node)
-//exactly after the sent node
-//
-// \ if the pointer is nullptr
-//   or it points to the tail node
-//   addAsTail is called 
-//
-template <typename T>
-void ForwardList<T>::insertAfter(Node<T>* node, T&& data)
-{
-	//if nullptr or tail
-	if (!node || node == tail)
-	{
-		addAsTail(std::move(data));
-	}
-	else //else insert after it
-	{
-		//if it does not point to the tail (and is not nullptr) it has a successor
-		assert(node->hasSuccessor());
-
-		//insert it exactly after the node (moving data into node)
-		Node<T>* newNode = new Node<T>(std::move(data), node->next);
-
-		//update node's successor as the new node
-		node->next = newNode;
-
-		++count;
-	}
-}
-
-
-
-//
 //add a new node with the sent data
 //exactly after the iterator's current
 //
@@ -729,26 +618,7 @@ void ForwardList<T>::insertAfter(ForwardListIterator<T>& it, const T& data)
 	if (it.owner != this)
 		throw std::invalid_argument("Invalid iterator passed!");
 
-	//insert it
 	insertAfter(it.current, data);
-}
-
-
-
-//
-//add a new node with the sent data (moved)
-//exactly after the iterator's current
-//
-// \ if the iterator is not from this list
-//   std::invalid_arg is thrown
-//
-template <typename T>
-void ForwardList<T>::insertAfter(ForwardListIterator<T>& it, T&& data)
-{
-	if (it.owner != this)
-		throw std::invalid_argument("Invalid iterator passed!");
-
-	insertAfter(it.current, std::move(data));
 }
 
 
@@ -783,34 +653,6 @@ void ForwardList<T>::insertBefore(Node<T>* node, const T& data)
 
 
 //
-//insert a node with the sent data (moved into the new head node)
-//exactly before the sent node
-//
-// \ if the pointer is nullptr or points to the head
-//    addAsHead is called
-//
-template <typename T>
-void ForwardList<T>::insertBefore(Node<T>* node, T&& data)
-{
-	if (!node || node == head)
-	{
-		addAsHead(std::move(data));
-	}
-	else
-	{
-		//it has a predecessor, because it is not the head node
-		Node<T>* previous = findNodeBefore(node);
-
-		assert(previous);
-
-		//insert after its predecessor
-		insertAfter(previous, std::move(data));
-	}
-}
-
-
-
-//
 //insert a new node with the sent data
 //exactly before it.current
 //
@@ -829,24 +671,6 @@ void ForwardList<T>::insertBefore(ForwardListIterator<T>& it, const T& data)
 
 
 //
-//insert a new node with the sent data (moved)
-//exactly before it.current
-//
-// \ if the iterator is not from this list
-//   std::invalid_arg is thrown
-//
-template <typename T>
-void ForwardList<T>::insertBefore(ForwardListIterator<T>& it, T&& data)
-{
-	if (it.owner != this)
-		throw std::invalid_argument("Invalid iterator passed!");
-
-	insertBefore(it.current, std::move(data));
-}
-
-
-
-//
 //remove the node after the one the iterator points to
 //
 // \ if the iterator is not from this list
@@ -858,7 +682,6 @@ void ForwardList<T>::removeAfter(ForwardListIterator<T>& it)
 	if (it.owner != this)
 		throw std::invalid_argument("Invalid iterator passed!");
 
-	//remove the one after it
 	removeAt(it.current->next);
 }
 

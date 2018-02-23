@@ -30,13 +30,9 @@ public:
 	void removeAll();
 
 public:
-	void setHead(T&&);
-	void setTail(T&&);
 	void setHead(const T&);                           
 	void setTail(const T&);                          
 
-	void addAsHead(T&&);
-	void addAsTail(T&&);
 	void addAsHead(const T&);                         
 	void addAsTail(const T&);                         
 
@@ -48,8 +44,6 @@ public:
 	void removeBefore(ForwardListIterator<T>& it);
 	void removeAfter(ForwardListIterator<T>& it);
 
-	void insertAfter(ForwardListIterator<T>& it, T&&);
-	void insertBefore(ForwardListIterator<T>& it, T&&);
 	void insertAfter(ForwardListIterator<T>& it, const T&);          
 	void insertBefore(ForwardListIterator<T>& it, const T&);      
 
@@ -67,8 +61,6 @@ private:
 	void removeAt(Node<T>* node);
 	void insertAfter(Node<T>* node, const T&);
 	void insertBefore(Node<T>* node, const T&);
-	void insertAfter(Node<T>* node, T&&);
-	void insertBefore(Node<T>* node, T&&);
 
 private:
 	static Node<T>* cloneChain(const Node<T>* firstNode, Node<T>** lastNode = nullptr);
