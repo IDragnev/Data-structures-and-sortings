@@ -4,20 +4,22 @@
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
-namespace ForwardListtest
+namespace ForwardListTest
 {		
-	TEST_CLASS(FLIteratorTest)
+	void fillListAddingTail(ForwardList<int>& list, int count);
+	void fillListAddingHead(ForwardList<int>& list, int count);
+
+	TEST_CLASS(IteratorTest)
 	{
 	public:
 
-		TEST_METHOD(FLIteratorBoundariesTest)
+		TEST_METHOD(IteratorBoundariesTest)
 		{
 			ForwardList<int> list;
 
-			for (int i = 0; i < 5; ++i)
-				list.addAsHead(i);
+			fillListAddingTail(list, 5);
 			
-			ForwardListIterator<int> &it = list.getHead();
+			ForwardListIterator<int> it = list.getHead();
 
 			int count = 0;
 			for (; it; ++it, ++count);
@@ -25,24 +27,23 @@ namespace ForwardListtest
 			Assert::IsTrue(count == 5, L"Iterator is not moving forward in the list properly");
 		}
 
-		TEST_METHOD(FLIteratorDerrefTest)
+		TEST_METHOD(IteratorDerrefTest)
 		{
 			ForwardList<int> list;
 
-			for (int i = 0; i < 5; ++i)
-				list.addAsTail(i);
+			fillListAddingTail(list, 10);
 
-			ForwardListIterator<int> &it = list.getHead();
+			ForwardListIterator<int> it = list.getHead();
 
 			for (int i = 0; it; ++it, ++i)
 				Assert::AreEqual(*it, i, L"Operator* of iterator is not working properly");
 		}
 
-		TEST_METHOD(EqualtyOperatorsTest)
+		TEST_METHOD(IteratorEqualtyOperatorsTest)
 		{
 				ForwardList<int> list;
-				list.addAsHead(1);
-				list.addAsTail(2);
+				
+				fillListAddingTail(list, 10);
 
 				ForwardListIterator<int> head = list.getHead();
 				ForwardListIterator<int> tail = list.getTail();
@@ -54,6 +55,15 @@ namespace ForwardListtest
 
 				Assert::IsTrue(head == tail, L"Operator== is not working properly");
 				Assert::IsFalse(head != tail, L"Operator!= is not working properly");
+
+				list.removeAll();
+
+				head = list.getHead();
+				tail = list.getTail();
+
+				Assert::IsTrue(head == tail, L"Operator== is not working properly");
+				Assert::IsFalse(head != tail, L"Operator!= is not working properly");
+
 		}
 	};
 }
