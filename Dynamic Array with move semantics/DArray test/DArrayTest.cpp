@@ -6,6 +6,28 @@ using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
 namespace DArraytest
 {		
+	void fillArray(DArray<int>& arr, int count, int first = 0, int step = 1)
+	{
+		for (int i = first; i < count; i += step)
+			arr.add(i);
+	}
+
+	bool areEqual(DArray<int>& darr1, DArray<int>& darr2)
+	{
+		int count = darr1.getCount();
+
+		if (count != darr2.getCount())
+			return false;
+
+		for (int i = 0; i < count; ++i)
+		{
+			if (darr1[i] != darr2[i])
+				return false;
+		}
+
+		return true;
+	}
+
 	TEST_CLASS(DArrayTest)
 	{
 	public:
@@ -68,8 +90,7 @@ namespace DArraytest
 		{
 			DArray<int> darr(16);
 
-			for (int i = 0; i < 17; ++i)
-				darr.add(i);
+			fillArray(darr, 17);
 
 			Assert::IsTrue(darr.getSize() == 32, L"Resize is not working correctly");
 
@@ -108,8 +129,7 @@ namespace DArraytest
 
 				int i;
 
-				for (i = 0; i < 10; ++i)
-					darr.add(i);
+				fillArray(darr, 10);
 
 				DArray<int> darr2(darr);
 
@@ -117,9 +137,7 @@ namespace DArraytest
 				Assert::IsTrue(darr.getCount() == darr2.getCount(), L"Copy constructor is not copying count correctly");
 				Assert::IsFalse(darr2.isEmpty(), L"isEmpty() returns true after copying from non-empty array");
 
-				int count = darr.getCount();
-				for (i = 0; i < count; ++i)
-					Assert::AreEqual(darr[i], darr2[i], L"Copy-constructed array holds different values");
+				Assert::IsTrue(areEqual(darr, darr2), L"Copy-constructed array holds different values");
 			}
 
 			//from an empty 
@@ -130,9 +148,7 @@ namespace DArraytest
 			Assert::IsTrue(darr.getCount() == darr2.getCount(), L"Copy constructor is not copying count correctly");
 			Assert::IsTrue(darr2.isEmpty(), L"isEmpty() returns false after copying from an empty array");
 
-			int count = darr.getCount();
-			for (int i = 0; i < count; ++i)
-				Assert::AreEqual(darr[i], darr2[i], L"Copy-constructed array holds different values");
+			Assert::IsTrue(areEqual(darr, darr2), L"Copy-constructed array holds different values");
 		}
 
 
@@ -158,9 +174,7 @@ namespace DArraytest
 			//from a non-empty
 			DArray<int> temp(10);
 
-			int i;
-			for (i = 0; i < 4; ++i)
-				temp.add(i);
+			fillArray(temp, 4);
 
 			DArray<int> darr(std::move(temp));
 
@@ -168,7 +182,7 @@ namespace DArraytest
 			Assert::IsTrue(darr.getSize() == 10);
 			Assert::IsFalse(darr.isEmpty());
 
-			for (i = 0; i < 4; ++i)
+			for (int i = 0; i < 4; ++i)
 				Assert::IsTrue(darr[i] == i);
 
 			//should be nulled
@@ -186,10 +200,6 @@ namespace DArraytest
 
 				darr2 = darr;
 
-				Assert::IsTrue(darr.getCount() == 0);
-				Assert::IsTrue(darr.getSize() == 0);
-				Assert::IsTrue(darr.isEmpty());
-
 				Assert::IsTrue(darr2.getCount() == 0);
 				Assert::IsTrue(darr2.getSize() == 0);
 				Assert::IsTrue(darr2.isEmpty());
@@ -198,8 +208,7 @@ namespace DArraytest
 			{
 				//empty to non-empty
 				DArray<int> darr;
-				for (int i = 0; i < 4; ++i)
-					darr.add(i);
+				fillArray(darr, 4);
 
 				DArray<int> darr2;
 
@@ -208,10 +217,6 @@ namespace DArraytest
 				Assert::IsTrue(darr.getCount() == 0);
 				Assert::IsTrue(darr.getSize() == 0);
 				Assert::IsTrue(darr.isEmpty());
-
-				Assert::IsTrue(darr2.getCount() == 0);
-				Assert::IsTrue(darr2.getSize() == 0);
-				Assert::IsTrue(darr2.isEmpty());
 			}
 
 
@@ -219,28 +224,16 @@ namespace DArraytest
 				//non-empty to empty
 				DArray<int> darr(8);
 
-				int i;
-				for (i = 0; i < 4; ++i)
-					darr.add(i);
+				fillArray(darr, 4);
 
 				DArray<int> darr2;
 				darr2 = darr;
-
-				//argument is untouched
-				Assert::IsTrue(darr.getCount() == 4);
-				Assert::IsTrue(darr.getSize() == 8);
-				Assert::IsFalse(darr.isEmpty());
-
-				for (i = 0; i < 4; ++i)
-					Assert::IsTrue(darr[i] == i);
-
 
 				Assert::IsTrue(darr2.getCount() == darr.getCount());
 				Assert::IsTrue(darr2.getSize() == darr.getSize());
 				Assert::IsFalse(darr2.isEmpty());
 
-				for (i = 0; i < 4; ++i)
-					Assert::IsTrue(darr[i] == darr2[i]);
+				Assert::IsTrue(areEqual(darr, darr2), L"Copy-assigned array holds different values");
 			}
 
 
@@ -248,30 +241,18 @@ namespace DArraytest
 				//non-empty to non-empty
 				DArray<int> darr(8);
 
-				int i;
-				for (i = 0; i < 4; ++i)
-					darr.add(i);
+				fillArray(darr, 4);
 
 				DArray<int> darr2;
-				for (i = 0; i < 7; ++i)
-					darr2.add(i + 5);
+				fillArray(darr2, 7, 0, 5);
 
 				darr2 = darr;
-
-				//argument is untouched
-				Assert::IsTrue(darr.getCount() == 4);
-				Assert::IsTrue(darr.getSize() == 8);
-				Assert::IsFalse(darr.isEmpty());
-
-				for (i = 0; i < 4; ++i)
-					Assert::IsTrue(darr[i] == i);
 
 				Assert::IsTrue(darr2.getCount() == darr.getCount());
 				Assert::IsTrue(darr2.getSize() == darr.getSize());
 				Assert::IsFalse(darr2.isEmpty());
 
-				for (i = 0; i < 4; ++i)
-					Assert::IsTrue(darr[i] == darr2[i]);
+				Assert::IsTrue(areEqual(darr, darr2), L"Copy-assigned array holds different values");
 			}
 		}
 
@@ -296,8 +277,7 @@ namespace DArraytest
 			{
 				//empty to non-empty
 				DArray<int> darr;
-				for (int i = 0; i < 4; ++i)
-					darr.add(i);
+				fillArray(darr, 4);
 
 				DArray<int> darr2;
 
@@ -317,9 +297,7 @@ namespace DArraytest
 				//non-empty to empty
 				DArray<int> darr(8);
 
-				int i;
-				for (i = 0; i < 4; ++i)
-					darr.add(i);
+				fillArray(darr, 4);
 
 				DArray<int> darr2;
 				darr2 = std::move(darr);
@@ -333,7 +311,7 @@ namespace DArraytest
 				Assert::IsTrue(darr2.getSize() == 8);
 				Assert::IsFalse(darr2.isEmpty());
 
-				for (i = 0; i < 4; ++i)
+				for (int i = 0; i < 4; ++i)
 					Assert::IsTrue(darr2[i] == i);
 			}
 
@@ -342,13 +320,10 @@ namespace DArraytest
 				//non-empty to non-empty
 				DArray<int> darr(8);
 
-				int i;
-				for (i = 0; i < 4; ++i)
-					darr.add(i);
+				fillArray(darr, 4);
 
 				DArray<int> darr2;
-				for (i = 0; i < 7; ++i)
-					darr2.add(i + 5);
+				fillArray(darr2, 7, 0, 5);
 
 				darr2 = std::move(darr);
 
@@ -361,7 +336,7 @@ namespace DArraytest
 				Assert::IsTrue(darr2.getSize() == 8);
 				Assert::IsFalse(darr2.isEmpty());
 
-				for (i = 0; i < 4; ++i)
+				for (int i = 0; i < 4; ++i)
 					Assert::IsTrue(darr2[i] == i);
 			}
 		}
@@ -370,14 +345,12 @@ namespace DArraytest
 		{
 			DArray<int> darr(8);
 
-			int i;
-			for (i = 0; i < 5; ++i)
-				darr.add(i);
+			fillArray(darr, 5);
 
 			DArray<int> darr2(10);
-			for (i = 5; i < 10; ++i)
-				darr2.add(i);
 
+			fillArray(darr2, 10, 5, 1);
+	
 			darr.append(darr2);
 
 			//arg is left untouched
@@ -386,7 +359,7 @@ namespace DArraytest
 			Assert::IsFalse(darr2.isEmpty());
 
 			Assert::IsTrue(darr.getCount() == 5 + darr2.getCount());
-			for (i = 0; i < 10; ++i)
+			for (int i = 0; i < 10; ++i)
 				Assert::IsTrue(darr[i] == i);
 		}
 
@@ -394,13 +367,10 @@ namespace DArraytest
 		{
 			DArray<int> darr(8);
 
-			int i;
-			for (i = 0; i < 5; ++i)
-				darr.add(i);
+			fillArray(darr, 5);
 
 			DArray<int> darr2(10);
-			for (i = 5; i < 10; ++i)
-				darr2.add(i);
+			fillArray(darr2, 10, 5, 1);
 
 			darr.append(std::move(darr2));
 
@@ -410,7 +380,7 @@ namespace DArraytest
 			Assert::IsTrue(darr2.isEmpty());
 
 			Assert::IsTrue(darr.getCount() == 10);
-			for (i = 0; i < 10; ++i)
+			for (int i = 0; i < 10; ++i)
 				Assert::IsTrue(darr[i] == i);
 		}
 	};

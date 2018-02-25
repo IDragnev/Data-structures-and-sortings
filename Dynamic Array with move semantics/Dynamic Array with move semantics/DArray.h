@@ -62,11 +62,11 @@ protected:
 	const T* getData()const;
 
 private:
-	void copy(const DArray<T>&);
+	void copyFrom(const DArray<T>&);
 	void resize(int);
 	void clear();
 	void destroy();
-	void null();
+	void nullMembers();
 	void directInit(T*, int count, int size);
 };
 

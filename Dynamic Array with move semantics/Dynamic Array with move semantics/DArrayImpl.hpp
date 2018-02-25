@@ -42,6 +42,9 @@ inline const T* DArray<T>::getData()const
 
 
 
+//
+//count must be at least 0 and at most size
+//
 template <typename T>
 void DArray<T>::setCount(int newCount)
 {
@@ -79,7 +82,7 @@ inline void DArray<T>::directInit(T* nData, int nCount, int nSize)
 
 
 template <typename T>
-inline void DArray<T>::null()
+inline void DArray<T>::nullMembers()
 {
 	directInit(nullptr, 0, 0);
 }
@@ -99,7 +102,7 @@ template <typename T>
 inline void DArray<T>::clear()
 {
 	destroy();
-	null();
+	nullMembers();
 }
 
 
@@ -108,7 +111,7 @@ inline void DArray<T>::clear()
 // else clear current content
 //
 template <typename T>
-void DArray<T>::copy(const DArray<T>& other)
+void DArray<T>::copyFrom(const DArray<T>& other)
 {
 	if (!other.isEmpty())
 	{
@@ -157,6 +160,8 @@ void DArray<T>::resize(int newSize)
 
 //
 //resize if full
+//
+// \ if this is null-empty, it will be resized with 8 
 //
 template <typename T>
 inline void DArray<T>::checkSpace()
@@ -278,12 +283,12 @@ DArray<T>::DArray()
 
 
 template <typename T>
-DArray<T>::DArray(int size, int count)
+DArray<T>::DArray(int Size, int Count)
 	:
 	data(nullptr)
 {
-	setSize(size);
-	setCount(count);
+	setSize(Size);
+	setCount(Count);
 
 	if (size > 0)
 		data = new T[size];
@@ -303,7 +308,7 @@ DArray<T>::DArray(DArray<T>&& source)
 	count(source.count),
 	size(source.size)
 {
-	source.null();
+	source.nullMembers();
 }
 
 
@@ -313,7 +318,7 @@ DArray<T>::DArray(const DArray<T>& other)
 	:
 	data(nullptr)
 {
-	copy(other);
+	copyFrom(other);
 }
 
 
@@ -321,14 +326,14 @@ DArray<T>::DArray(const DArray<T>& other)
 //
 // copy assignment
 //
-// copy() frees old memory (if any)
+// copyFrom() frees old memory (if any)
 //
 template <typename T>
 DArray<T>& DArray<T>::operator=(const DArray<T>& other)
 {
 	if (this != &other)
 	{
-		copy(other);
+		copyFrom(other);
 	}
 
 	return *this;
@@ -348,7 +353,7 @@ DArray<T>& DArray<T>::operator=(DArray<T>&& source)
 	{
 		destroy();
 		directInit(source.data, source.count, source.size);
-		source.null();
+		source.nullMembers();
 	}
 
 	return *this;
@@ -495,5 +500,5 @@ void DArray<T>::append(DArray<T>&& other)
 	for (int i = 0; i < other.count; ++i)
 		add(std::move(other[i]));
 
-	other.null();
+	other.nullMembers();
 }
