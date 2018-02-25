@@ -298,7 +298,7 @@ Node<T>* ForwardList<T>::findNodeBefore(const Node<T>* node)const
 
 
 //
-//the list is empty when constructed
+//the list is empty when default-constructed
 //
 template <typename T>
 ForwardList<T>::ForwardList()
@@ -329,20 +329,18 @@ ForwardList<T>::ForwardList(const ForwardList<T>& other)
 
 
 //
-//copy-construct argument in a temp.
-//then swap contents with this and let temp
-//destroy old data
+//copy assignment
+//
+//copy-construct 'swapContentsWith' parameter from 'other'
+//and let it do the work
 //
 template <typename T>
 ForwardList<T>& ForwardList<T>::operator=(const ForwardList<T>& other)
 {
 	if (this != &other)
 	{
-		ForwardList<T> temp(other);
-
-		std::swap(this->head, temp.head);
-		std::swap(this->tail, temp.tail);
-		std::swap(this->count, temp.count);
+		//parameter is copy-constructed from other
+		swapContentsWith(other);
 	}
 
 	return *this;
@@ -381,23 +379,42 @@ ForwardList<T>::ForwardList(ForwardList<T>&& source)
 //
 //move assignment
 //
-//move source in a temp. object, then swap temp's data with this
-//and leave temp. destroy old data
+//move source in the 'swapContentsWith' parameter (which is a temporary object)
+//and let it do the work
 //
 template <typename T>
 ForwardList<T>& ForwardList<T>::operator=(ForwardList<T>&& source)
 {
 	if (this != &source)
 	{
-		ForwardList<T> temp(std::move(source));
-
-		std::swap(this->head, temp.head);
-		std::swap(this->tail, temp.tail);
-		std::swap(this->count, temp.count);
+		//source is moved into parameter
+		swapContentsWith(std::move(source));
 	}
 
 	return *this;
 }
+
+
+
+
+//
+// construct temp (parameter) with the passed argument,
+// swap contents with this and let temp destroy old data
+//
+// \ if the argument is an rvalue, temp will be move-constructed from it
+// 
+// \ if the argument is an lvalue, temp will be copy-constructed from it
+//
+template <typename T>
+void ForwardList<T>::swapContentsWith(ForwardList<T> temp)
+{
+	std::swap(this->head, temp.head);
+	std::swap(this->tail, temp.tail);
+	std::swap(this->count, temp.count);
+
+	//temp dies here...
+}
+
 
 
 //-------------------------------------------------------------------------------------

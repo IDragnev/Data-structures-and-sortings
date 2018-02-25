@@ -67,6 +67,7 @@ int main()
 	try
 	{
 		ForwardList<String> list;
+
 		String str("some val");
 
 		for (int i = 0; i < 10; ++i)
@@ -76,10 +77,9 @@ int main()
 		}
 
 		ForwardList<String> list2;
+		list2.addAsHead("some value");
 
-		auto &it = list2.getHead();
-
-		list2.insertBefore(it, std::move(str));
+		list2 = list;		
 		
 	}
 	catch (std::exception& ex)

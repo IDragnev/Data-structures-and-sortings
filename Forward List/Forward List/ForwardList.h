@@ -64,6 +64,8 @@ private:
 
 	void appendChain(Node<T>* first, Node<T>* last, int count);
 
+	void swapContentsWith(ForwardList<T>);
+
 private:
 	static Node<T>* cloneChain(const Node<T>* firstNode, Node<T>** lastNode = nullptr);
 	static void clearChain(const Node<T>* firstNode);  
