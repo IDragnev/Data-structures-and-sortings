@@ -143,20 +143,12 @@ void DArray<T>::resize(int newSize)
 }
 
 
-
-
-//
-//resize if full
-//
-// \ if this is null-empty, it will be resized with 8 
-//
 template <typename T>
-inline void DArray<T>::checkSpace()
+inline void DArray<T>::resizeIfNeeded()
 {
 	if (count == size)
 		resize((2 * size) > 0 ? (2 * size) : 8);
 }
-
 
 
 
@@ -180,12 +172,11 @@ inline void DArray<T>::shiftLeft(int start, int end)
 //
 //shift objects in [start, .. , end] one position to the right
 //
-//the function assumes that count < size (checkSpace() will already be called)
+// (!) the function assumes that count < size (resizeIfNeeded() will have already been called)
 //
 template <typename T>
 inline void DArray<T>::shiftRight(int start, int end)
 {
-	//end can be at most the last 'valid' object
 	assert(end < count);
 
 	while (end >= start)
@@ -213,12 +204,6 @@ inline void DArray<T>::empty()
 
 
 
-//
-//resize with the sent size
-//
-//if the sent size is not greater
-//than current size, the function does nothing
-//
 template <typename T>
 inline void DArray<T>::ensureSize(int newSize)
 {
@@ -227,11 +212,7 @@ inline void DArray<T>::ensureSize(int newSize)
 }
 
 
-//
-//shrink the array to the sent size
-//
-// \ newSize must be at least 0 and fewer than current size
-//
+
 template <typename T>
 inline void DArray<T>::shrink(int newSize)
 {
@@ -254,9 +235,6 @@ inline void DArray<T>::shrink(int newSize)
 //
 
 
-//
-//null-empty by default
-//
 template <typename T>
 DArray<T>::DArray()
 	:
@@ -309,9 +287,9 @@ DArray<T>::DArray(const DArray<T>& other)
 
 
 //
-// copy assignment
+//copy assignment
 //
-// copyFrom() frees old memory (if any)
+// (!) copyFrom() frees old memory (if any)
 //
 template <typename T>
 DArray<T>& DArray<T>::operator=(const DArray<T>& other)
@@ -327,7 +305,7 @@ DArray<T>& DArray<T>::operator=(const DArray<T>& other)
 
 
 //
-// move assignment
+//move assignment
 //
 template <typename T>
 DArray<T>& DArray<T>::operator=(DArray<T>&& source)
@@ -363,11 +341,11 @@ DArray<T>::~DArray()
 //adding an lvalue
 //
 template <typename T>
-void DArray<T>::add(const T& obj)
+void DArray<T>::add(const T& item)
 {
-	checkSpace();
+	resizeIfNeeded();
 
-	data[count++] = obj;
+	data[count++] = item;
 }
 
 
@@ -375,56 +353,58 @@ void DArray<T>::add(const T& obj)
 //adding an rvalue
 //
 template <typename T>
-void DArray<T>::add(T&& obj)
+void DArray<T>::add(T&& item)
 {
-	checkSpace();
+	resizeIfNeeded();
 
-	data[count++] = std::move(obj);
+	data[count++] = std::move(item);
 } 
 
 
 
 template <typename T>
-void DArray<T>::addAt(int pos, const T& obj)
+void DArray<T>::addAt(int position, const T& item)
 {
-	if (pos < 0 || pos >= count)
+	if (position < 0 || position >= count)
 		throw std::out_of_range("Index out of range");
 
-	checkSpace();
+	resizeIfNeeded();
 
 	//empty the position
-	shiftRight(pos, count - 1);
+	shiftRight(position, count - 1);
 
-	data[pos] = obj;
-	++count;
-}
-
-
-template <typename T>
-void DArray<T>::addAt(int pos, T&& obj)
-{
-	if (pos < 0 || pos >= count)
-		throw std::out_of_range("Index out of range");
-
-	checkSpace();
-
-	//empty the position
-	shiftRight(pos, count - 1);
-
-	data[pos] = std::move(obj);
+	data[position] = item;
 	++count;
 }
 
 
 
 template <typename T>
-void DArray<T>::remove(int pos)
+void DArray<T>::addAt(int position, T&& item)
 {
-	if (pos < 0 || pos >= count)
+	if (position < 0 || position >= count)
+		throw std::out_of_range("Index out of range");
+
+	resizeIfNeeded();
+
+	//empty the position
+	shiftRight(position, count - 1);
+
+	data[position] = std::move(item);
+	++count;
+}
+
+
+
+template <typename T>
+void DArray<T>::remove(int position)
+{
+	if (position < 0 || position >= count)
 		throw std::out_of_range("Index out of range");
 
 	//shift objects after it one pos. to the left
-	shiftLeft(pos + 1, count - 1);
+	shiftLeft(position + 1, count - 1);
+
 	--count;
 }
 
@@ -473,10 +453,6 @@ void DArray<T>::append(const DArray<T>& other)
 }
 
 
-
-//
-//move other's objects and null it
-//
 template <typename T>
 void DArray<T>::append(DArray<T>&& other)
 {

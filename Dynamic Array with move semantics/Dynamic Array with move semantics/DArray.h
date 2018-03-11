@@ -53,7 +53,7 @@ protected:
 	void setSize(int);
 	void setCount(int);
 
-	void checkSpace();
+	void resizeIfNeeded();
 
 	void shiftLeft(int beg, int end);
 	void shiftRight(int beg, int end);
