@@ -41,10 +41,6 @@ inline const T* DArray<T>::getData()const
 }
 
 
-
-//
-//count must be at least 0 and at most size
-//
 template <typename T>
 void DArray<T>::setCount(int newCount)
 {
@@ -73,11 +69,11 @@ void DArray<T>::setSize(int newSize)
 
 
 template <typename T>
-inline void DArray<T>::directInit(T* nData, int nCount, int nSize)
+inline void DArray<T>::directInit(T* newData, int newCount, int newSize)
 {
-	data = nData;
-	count = nCount;
-	size = nSize;
+	data = newData;
+	count = newCount;
+	size = newSize;
 }
 
 
@@ -89,27 +85,22 @@ inline void DArray<T>::nullMembers()
 
 
 template <typename T>
-inline void DArray<T>::destroy()
+inline void DArray<T>::destroyData()
 {
 	delete[] data;
 }
 
 
-//
-//free memory and null members
-//
+
 template <typename T>
-inline void DArray<T>::clear()
+inline void DArray<T>::destroyAndNullAll()
 {
-	destroy();
+	destroyData();
 	nullMembers();
 }
 
 
-//
-// if other is not empty, copy its data
-// else clear current content
-//
+
 template <typename T>
 void DArray<T>::copyFrom(const DArray<T>& other)
 {
@@ -120,22 +111,20 @@ void DArray<T>::copyFrom(const DArray<T>& other)
 		for (int i = 0; i < other.count; ++i)
 			buffer[i] = other.data[i];
 
-		destroy();
+		destroyData();
 
 		directInit(buffer, other.count, other.size);
 	}
-	else //empty
+	else 
 	{
-		clear();
+		destroyAndNullAll();
 	}
 }
 
 
 
 //
-//resize with the sent size
-//
-// \ if the array is null-empty, then count will be 0 
+// (!) if data == nullptr, then count will be 0 
 //   and the null pointer will not be touched
 //
 template <typename T>
@@ -143,14 +132,12 @@ void DArray<T>::resize(int newSize)
 {
 	T* newData = new T[newSize];
 
-	//if newSize is smaller than count, it is the new count
 	int newCount = (count <= newSize) ? count : newSize;
 
-	//copy needed objects
 	for (int i = 0; i < newCount; ++i)
 		newData[i] = data[i];
 
-	destroy();
+	destroyData();
 
 	directInit(newData, newCount, newSize);
 }
@@ -252,7 +239,7 @@ inline void DArray<T>::shrink(int newSize)
 		throw std::invalid_argument("Invalid size sent");
 
 	if (newSize == 0)
-		clear();
+		destroyAndNullAll();
 	else
 		resize(newSize);
 }
@@ -299,8 +286,6 @@ DArray<T>::DArray(int Size, int Count)
 //
 //move constructor
 //
-//steal source's data and then null it
-//
 template <typename T>
 DArray<T>::DArray(DArray<T>&& source)
 	:
@@ -344,14 +329,12 @@ DArray<T>& DArray<T>::operator=(const DArray<T>& other)
 //
 // move assignment
 //
-// free old data, 'steal' source's data and then null it
-//
 template <typename T>
 DArray<T>& DArray<T>::operator=(DArray<T>&& source)
 {
 	if (this != &source)
 	{
-		destroy();
+		destroyData();
 		directInit(source.data, source.count, source.size);
 		source.nullMembers();
 	}
@@ -365,7 +348,7 @@ DArray<T>& DArray<T>::operator=(DArray<T>&& source)
 template <typename T>
 DArray<T>::~DArray()
 {
-	destroy();
+	destroyData();
 }
 
 

@@ -64,8 +64,8 @@ protected:
 private:
 	void copyFrom(const DArray<T>&);
 	void resize(int);
-	void clear();
-	void destroy();
+	void destroyAndNullAll();
+	void destroyData();
 	void nullMembers();
 	void directInit(T*, int count, int size);
 };
