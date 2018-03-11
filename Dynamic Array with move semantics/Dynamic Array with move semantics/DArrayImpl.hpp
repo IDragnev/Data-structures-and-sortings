@@ -152,11 +152,8 @@ inline void DArray<T>::resizeIfNeeded()
 
 
 
-//
-//shift items in [start, .. , end] one position to the left
-//
 template <typename T>
-inline void DArray<T>::shiftLeft(int start, int end)
+inline void DArray<T>::shiftOnePositionLeft(int start, int end)
 {
 	assert(start > 0);
 
@@ -170,14 +167,13 @@ inline void DArray<T>::shiftLeft(int start, int end)
 
 
 //
-//shift items in [start, .. , end] one position to the right
-//
-// (!) the function assumes that count < size (resizeIfNeeded() will have already been called)
+// (!) the function assumes that count < size, so that shifting the last 
+//     item to the right will not write outside the array
 //
 template <typename T>
-inline void DArray<T>::shiftRight(int start, int end)
+inline void DArray<T>::shiftOnePositionRight(int start, int end)
 {
-	assert(end < count);
+	assert(end < count && count < size);
 
 	while (end >= start)
 	{
@@ -337,9 +333,7 @@ DArray<T>::~DArray()
 //
 
 
-//
-//adding an lvalue
-//
+
 template <typename T>
 void DArray<T>::add(const T& newItem)
 {
@@ -349,9 +343,6 @@ void DArray<T>::add(const T& newItem)
 }
 
 
-//
-//adding an rvalue
-//
 template <typename T>
 void DArray<T>::add(T&& newItem)
 {
@@ -371,7 +362,7 @@ void DArray<T>::addAt(int position, const T& newItem)
 	resizeIfNeeded();
 
 	//empty the position
-	shiftRight(position, count - 1);
+	shiftOnePositionRight(position, count - 1);
 
 	items[position] = newItem;
 	++count;
@@ -388,7 +379,7 @@ void DArray<T>::addAt(int position, T&& newItem)
 	resizeIfNeeded();
 
 	//empty the position
-	shiftRight(position, count - 1);
+	shiftOnePositionRight(position, count - 1);
 
 	items[position] = std::move(newItem);
 	++count;
@@ -403,7 +394,7 @@ void DArray<T>::remove(int position)
 		throw std::out_of_range("Index out of range");
 
 	//shift items after it one pos. to the left
-	shiftLeft(position + 1, count - 1);
+	shiftOnePositionLeft(position + 1, count - 1);
 
 	--count;
 }

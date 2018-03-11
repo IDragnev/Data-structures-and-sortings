@@ -55,8 +55,8 @@ protected:
 
 	void resizeIfNeeded();
 
-	void shiftLeft(int beg, int end);
-	void shiftRight(int beg, int end);
+	void shiftOnePositionLeft(int start, int end);
+	void shiftOnePositionRight(int start, int end);
 
 	T* getItems();
 	const T* getItems()const;
@@ -67,7 +67,7 @@ private:
 	void destroyAndNullAll();
 	void destroyItems();
 	void nullMembers();
-	void directInit(T*, int count, int size);
+	void directInit(T* items, int count, int size);
 };
 
 #include "DArrayImpl.hpp"
