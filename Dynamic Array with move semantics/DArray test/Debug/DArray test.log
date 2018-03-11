@@ -1,5 +1,7 @@
 ﻿  DArrayTest.cpp
 d:\sortings and data structures\data-structures-and-sortings\dynamic array with move semantics\darray test\darraytest.cpp(60): warning C4800: 'int': forcing value to bool 'true' or 'false' (performance warning)
 d:\sortings and data structures\data-structures-and-sortings\dynamic array with move semantics\darray test\darraytest.cpp(130): warning C4101: 'i': unreferenced local variable
+  LINK : D:\Sortings and data structures\Data-structures-and-sortings\Dynamic Array with move semantics\Debug\DArray test.dll not found or not built by the last incremental link; performing full link
+     Creating library D:\Sortings and data structures\Data-structures-and-sortings\Dynamic Array with move semantics\Debug\DArray test.lib and object D:\Sortings and data structures\Data-structures-and-sortings\Dynamic Array with move semantics\Debug\DArray test.exp
   DArray test.vcxproj -> D:\Sortings and data structures\Data-structures-and-sortings\Dynamic Array with move semantics\Debug\DArray test.dll
   DArray test.vcxproj -> D:\Sortings and data structures\Data-structures-and-sortings\Dynamic Array with move semantics\Debug\DArray test.pdb (Partial PDB)
