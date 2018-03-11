@@ -47,7 +47,7 @@ public:
 private:
 	int count;
 	int size;
-	T* data;
+	T* items;
 
 protected:
 	void setSize(int);
@@ -58,14 +58,14 @@ protected:
 	void shiftLeft(int beg, int end);
 	void shiftRight(int beg, int end);
 
-	T* getData();
-	const T* getData()const;
+	T* getItems();
+	const T* getItems()const;
 
 private:
 	void copyFrom(const DArray<T>&);
 	void resize(int);
 	void destroyAndNullAll();
-	void destroyData();
+	void destroyItems();
 	void nullMembers();
 	void directInit(T*, int count, int size);
 };
