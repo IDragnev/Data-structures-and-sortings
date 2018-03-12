@@ -16,5 +16,8 @@ int main()
 
 	str = another;
 
+	std::cout << 'c' + String("asd") << std::endl;
+	std::cout << "asd" + String('c') << std::endl;
+
 	return 0;
 }

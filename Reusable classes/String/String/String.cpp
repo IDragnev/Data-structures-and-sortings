@@ -197,46 +197,45 @@ String& String::operator=(String&& other)
 //
 
 
-bool operator==(const String& s1, const String& s2)
+bool operator==(const String& lhs, const String& rhs)
 {
-	return strcmp(s1, s2) == 0;
+	return strcmp(lhs, rhs) == 0;
 }
 
-bool operator!=(const String& s1, const String& s2)
+bool operator!=(const String& lhs, const String& rhs)
 {
-	return !(s1 == s2);
+	return !(lhs == rhs);
 }
 
-bool operator>(const String& s1, const String& s2)
+bool operator>(const String& lhs, const String& rhs)
 {
-	return strcmp(s1, s2) > 0;
-}
-
-
-bool operator>=(const String& s1, const String& s2)
-{
-	return (s1 > s2) || (s1 == s2);
+	return strcmp(lhs, rhs) > 0;
 }
 
 
-bool operator<(const String& s1, const String& s2)
+bool operator>=(const String& lhs, const String& rhs)
 {
-	return !(s1 >= s2);
+	return (lhs > rhs) || (lhs == rhs);
 }
 
 
-bool operator<=(const String& s1, const String& s2)
+bool operator<(const String& lhs, const String& rhs)
 {
-	return !(s1 > s2);
+	return !(lhs >= rhs);
+}
+
+
+bool operator<=(const String& lhs, const String& rhs)
+{
+	return !(lhs > rhs);
 }
 
 
 
 
-
-String& String::operator+=(const char* value)
+String& String::operator+=(const String& other)
 {
-	appendToValue(value);
+	appendToValue(other);
 
 	return *this;
 }
@@ -251,40 +250,6 @@ String operator+(const String& lhs, const String& rhs)
 	return result;
 }
 
-
-String operator+(const String& lhs, const char* rhs)
-{
-	String result(lhs);
-
-	result += rhs;
-
-	return result;
-}
-
-
-
-String& String::operator+=(char c)
-{
-	static char temp[2];
-
-	temp[0] = c;
-	temp[1] = '\0';
-	
-	appendToValue(temp);
-
-	return *this;
-}
-
-
-
-String operator+(const String& lhs, char rhs)
-{
-	String result(lhs);
-
-	result += rhs;
-
-	return result;
-}
 
 
 String operator+(char lhs, const String& rhs)
