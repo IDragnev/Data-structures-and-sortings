@@ -27,7 +27,7 @@ private:
 private:
 	const char* getValue()const;           
 	void setValue(const char*);  
-	void append(const char*);
+	void appendToValue(const char*);
 };
 
 

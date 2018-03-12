@@ -7,13 +7,9 @@
 //
 
 
-//
-//if str is nullptr return an empty string
-//else return str
-//
 const char* String::getValue()const
 {
-	return (str) ? str : "";
+	return (str != nullptr) ? str : "";
 }
 
 
@@ -24,12 +20,6 @@ String::operator const char *()const
 
 
 
-//
-//if the sent value is nullptr 
-//free the pointer and set str as nullptr
-//
-//else reconstruct str with the sent value
-//
 void String::setValue(const char* value)
 {
 	if (!value)
@@ -50,22 +40,14 @@ void String::setValue(const char* value)
 
 
 
-//
-//get the length of the string
-//
-// 0 if nullptr, strlen else
-//
 size_t String::len()const
 {
-	return (str) ? strlen(str) : 0;
+	return (str != nullptr) ? strlen(str) : 0;
 }
 
 
-//
-//if the sent value is null, do nothing
-//else reconstruct str with a concatenated string
-//
-void String::append(const char* value)
+
+void String::appendToValue(const char* value)
 {
 	if (value)
 	{
@@ -77,7 +59,7 @@ void String::append(const char* value)
 			size += (this->len() + 1);
 			char* buffer = new char[size];
 
-			//copy this->str (could be null) and 'append' value
+			//getValue() because str could be null
 			strcpy_s(buffer, size, getValue());
 			strcat_s(buffer, size, value);
 
@@ -87,14 +69,14 @@ void String::append(const char* value)
 	}
 }
 
+
 //----------------------------------------------------------------------------------------------
 //
 //CTORS
 //
 
-//
-//holds a null value by default
-//
+
+
 String::String()
 	:
 	str(nullptr)
@@ -103,10 +85,6 @@ String::String()
 }
 
 
-
-//
-//constructs str with the sent value
-//
 String::String(const char* value)
 	:
 	str(nullptr)
@@ -115,9 +93,6 @@ String::String(const char* value)
 }
 
 
-//
-//reconstructs str with other's str
-//
 String::String(const String& other)
 	:
 	str(nullptr)
@@ -127,11 +102,6 @@ String::String(const String& other)
 
 
 
-//
-//makes a new string with two 'boxes'
-//one of which is the symbol
-//and the other is '\0'
-//
 String::String(char c)
 	:
 	str(nullptr)
@@ -142,19 +112,16 @@ String::String(char c)
 }
 
 
-//
-//free str
-//
+
 String::~String()
 {
 	delete[] str;
 }
 
 
+
 //
 //move constructor
-//
-//transfers source's string to this object
 //
 String::String(String&& source)
 	:
@@ -190,9 +157,7 @@ String::String(String&& source)
 
 
 //
-//copy assignment, can be called for lvalues only
-//
-// setValue frees old memory (if any)
+// (!) setValue frees old memory (if any)
 //
 String& String::operator=(const String& other)
 {
@@ -208,9 +173,7 @@ String& String::operator=(const String& other)
 
 //
 //move assignment, can be called for rvalues only 
-//(including const char* which will move-construct a rvalue object)
-//
-//moves the argument's resource to the current object, freeing the old resource
+//(including const char* which will move-construct an rvalue object)
 //
 String& String::operator=(String&& other)
 {
@@ -273,29 +236,29 @@ bool operator<=(const String& s1, const String& s2)
 
 String& String::operator+=(const char* value)
 {
-	append(value);
+	appendToValue(value);
 
 	return *this;
 }
 
 
-String operator+(const String& string1, const String& string2)
+String operator+(const String& lhs, const String& rhs)
 {
-	String temp(string1);
+	String result(lhs);
 
-	temp += string2;
+	result += rhs;
 
-	return temp;
+	return result;
 }
 
 
-String operator+(const String& string, const char* str)
+String operator+(const String& lhs, const char* rhs)
 {
-	String temp(string);
+	String result(lhs);
 
-	temp += str;
+	result += rhs;
 
-	return temp;
+	return result;
 }
 
 
@@ -307,41 +270,41 @@ String& String::operator+=(char c)
 	temp[0] = c;
 	temp[1] = '\0';
 	
-	append(temp);
+	appendToValue(temp);
 
 	return *this;
 }
 
 
 
-String operator+(const String& string, char c)
+String operator+(const String& lhs, char rhs)
 {
-	String temp(string);
+	String result(lhs);
 
-	temp += c;
+	result += rhs;
 
-	return temp;
+	return result;
 }
 
 
-String operator+(char c, const String& string)
+String operator+(char lhs, const String& rhs)
 {
-	String str(c);
+	String result(lhs);
 
-	str += string;
+	result += rhs;
 
-	return str;
+	return result;
 }
 
 
 
-String operator+(const char* str, const String& string)
+String operator+(const char* lhs, const String& rhs)
 {
-	String temp(str);
+	String result(lhs);
 
-	temp += string;                                         
+	result += rhs;
 
-	return temp;
+	return result;
 }
 
 
