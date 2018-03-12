@@ -22,7 +22,7 @@ public:
 	String& operator+=(char);
 
 private:
-	char* str;
+	char* theRealString;
 
 private:
 	const char* getValue()const;           

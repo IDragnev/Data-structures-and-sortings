@@ -9,7 +9,7 @@
 
 const char* String::getValue()const
 {
-	return (str != nullptr) ? str : "";
+	return (theRealString != nullptr) ? theRealString : "";
 }
 
 
@@ -24,8 +24,8 @@ void String::setValue(const char* value)
 {
 	if (!value)
 	{
-		delete[] str;
-		str = nullptr;
+		delete[] theRealString;
+		theRealString = nullptr;
 	}
 	else
 	{
@@ -33,8 +33,8 @@ void String::setValue(const char* value)
 		char* buffer = new char[size];
 		strcpy_s(buffer, size, value);
 
-		delete[] str;
-		str = buffer;
+		delete[] theRealString;
+		theRealString = buffer;
 	}
 }
 
@@ -42,7 +42,7 @@ void String::setValue(const char* value)
 
 size_t String::len()const
 {
-	return (str != nullptr) ? strlen(str) : 0;
+	return (theRealString != nullptr) ? strlen(theRealString) : 0;
 }
 
 
@@ -59,12 +59,12 @@ void String::appendToValue(const char* value)
 			size += (this->len() + 1);
 			char* buffer = new char[size];
 
-			//getValue() because str could be null
+			//getValue() because theRealString could be null
 			strcpy_s(buffer, size, getValue());
 			strcat_s(buffer, size, value);
 
-			delete[] str;
-			str = buffer;
+			delete[] theRealString;
+			theRealString = buffer;
 		}
 	}
 }
@@ -79,7 +79,7 @@ void String::appendToValue(const char* value)
 
 String::String()
 	:
-	str(nullptr)
+	theRealString(nullptr)
 {
 	;
 }
@@ -87,7 +87,7 @@ String::String()
 
 String::String(const char* value)
 	:
-	str(nullptr)
+	theRealString(nullptr)
 {
 	setValue(value);
 }
@@ -95,27 +95,27 @@ String::String(const char* value)
 
 String::String(const String& other)
 	:
-	str(nullptr)
+	theRealString(nullptr)
 {
-	setValue(other.str);
+	setValue(other.theRealString);
 }
 
 
 
 String::String(char c)
 	:
-	str(nullptr)
+	theRealString(nullptr)
 {
-	str = new char[2];
-	str[0] = c;
-	str[1] = '\0';
+	theRealString = new char[2];
+	theRealString[0] = c;
+	theRealString[1] = '\0';
 }
 
 
 
 String::~String()
 {
-	delete[] str;
+	delete[] theRealString;
 }
 
 
@@ -125,9 +125,9 @@ String::~String()
 //
 String::String(String&& source)
 	:
-	str(source.str)
+	theRealString(source.theRealString)
 {
-	source.str = nullptr;
+	source.theRealString = nullptr;
 }
 
 
@@ -139,16 +139,16 @@ String::String(String&& source)
 // \ if rhs is an rvalue, 'other' will be initialized with move c-tor
 //
 // \ if rhs is an lvalue, 'other' will be copy-constructed which is fine
-//   because we would have to reconstruct other's str anyway
+//   because we would have to reconstruct other's theRealString anyway
 //
 // \ if rhs is const char*, 'other' will be constructed with String(const char*)
-//   which is fine again, because we would have to reconstruct this->str anyway
+//   which is fine again, because we would have to reconstruct this->theRealString anyway
 //
 // After constructing 'other' with rhs, data is swapped and 'other' destroys old data.
 //
 //String& String::operator=(String other)
 //{
-//	std::swap(this->str, other.str);
+//	std::swap(this->theRealString, other.theRealString);
 //
 //	return *this;
 //}
@@ -163,7 +163,7 @@ String& String::operator=(const String& other)
 {
 	if (this != &other)
 	{
-		setValue(other.str);
+		setValue(other.theRealString);
 	}
 
 	return *this;
@@ -179,11 +179,11 @@ String& String::operator=(String&& other)
 {
 	if (this != &other)
 	{
-		delete[] str;
+		delete[] theRealString;
 
-		str = other.str;
+		theRealString = other.theRealString;
 
-		other.str = nullptr;
+		other.theRealString = nullptr;
 	}
 
 	return *this;
