@@ -22,7 +22,7 @@ int main()
 	for (int i = 10; i < 15; ++i)
 		arr2.add(i);
 
-	arr.append(std::move(arr2));
+	arr.add(std::move(arr2));
 
 	DArray<int> arr3;
 

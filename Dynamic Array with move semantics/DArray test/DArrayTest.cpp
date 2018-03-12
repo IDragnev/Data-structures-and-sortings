@@ -127,8 +127,6 @@ namespace DArraytest
 				//from a non-empty
 				DArray<int> darr(16);
 
-				int i;
-
 				fillArray(darr, 10);
 
 				DArray<int> darr2(darr);
@@ -341,7 +339,7 @@ namespace DArraytest
 			}
 		}
 
-		TEST_METHOD(LValueAppend)
+		TEST_METHOD(LValueArrayAdd)
 		{
 			DArray<int> darr(8);
 
@@ -351,7 +349,7 @@ namespace DArraytest
 
 			fillArray(darr2, 10, 5, 1);
 	
-			darr.append(darr2);
+			darr.add(darr2);
 
 			//arg is left untouched
 			Assert::IsTrue(darr2.getCount() == 5);
@@ -363,7 +361,7 @@ namespace DArraytest
 				Assert::IsTrue(darr[i] == i);
 		}
 
-		TEST_METHOD(RValueAppend)
+		TEST_METHOD(RValueArrayAdd)
 		{
 			DArray<int> darr(8);
 
@@ -372,7 +370,7 @@ namespace DArraytest
 			DArray<int> darr2(10);
 			fillArray(darr2, 10, 5, 1);
 
-			darr.append(std::move(darr2));
+			darr.add(std::move(darr2));
 
 			//arg is nulled
 			Assert::IsTrue(darr2.getCount() == 0);
