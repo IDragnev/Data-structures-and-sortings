@@ -41,7 +41,7 @@ namespace DArraytest
 			Assert::IsTrue(darr.isEmpty(), L"isEmpty() returns false even though count is 0");
 
 			for (int i = 0; i < 10; ++i)
-				Assert::IsFalse(darr.find(i) != -1, L"Find returns a valid index in an empty array");
+				Assert::IsFalse(darr.search(i) != -1, L"Find returns a valid index in an empty array");
 		}
 
 		TEST_METHOD(AddingAndRemoval)
@@ -57,7 +57,7 @@ namespace DArraytest
 				Assert::IsTrue(darr.getSize() == 16, L"Size is changed even though no resizing is needed(done)");
 				Assert::IsTrue(darr.getCount() == i, L"Count is not set correctly after adding");
 				Assert::IsFalse(darr.isEmpty(), L"IsEmpty() returns true after adding elements");
-				Assert::IsTrue(darr[i - 1] = i, L"Adding is not working correctly");
+				Assert::IsTrue(darr[i - 1] == i, L"Adding is not working correctly");
 			}
 
 
@@ -96,7 +96,7 @@ namespace DArraytest
 
 
 			for (int i = 0; i < 17; ++i)
-				Assert::IsTrue(darr.find(i) == i, L"Find is not working correctly");
+				Assert::IsTrue(darr.search(i) == i, L"Find is not working correctly");
 
 			darr.empty();
 			Assert::IsTrue(darr.isEmpty(), L"empty() is not working correctly");

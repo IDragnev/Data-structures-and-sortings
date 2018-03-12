@@ -34,7 +34,7 @@ public:
 	virtual void add(T&&);
 	virtual void add(const T&);
 	virtual void remove(int position);
-	virtual int find(const T&)const;
+	virtual int search(const T&)const;
 
 public:
 	void addAt(int, const T&);

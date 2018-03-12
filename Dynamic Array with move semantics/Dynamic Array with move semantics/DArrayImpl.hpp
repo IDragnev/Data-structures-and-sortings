@@ -406,7 +406,7 @@ void DArray<T>::remove(int position)
 
 
 template <typename T>
-int DArray<T>::find(const T& searchedItem)const
+int DArray<T>::search(const T& searchedItem)const
 {
 	for (int i = 0; i < count; ++i)
 	{
