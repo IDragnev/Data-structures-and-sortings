@@ -10,7 +10,7 @@
     <ClCompile Include="IteratorTest.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ForwardListTest.cpp">
+    <ClCompile Include="SinglyLinkedListTest.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

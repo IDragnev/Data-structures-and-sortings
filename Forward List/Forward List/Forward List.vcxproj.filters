@@ -13,28 +13,28 @@
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
     </Filter>
-    <Filter Include="Forward List">
-      <UniqueIdentifier>{f94fd7f8-f4dd-42d2-8b01-d8e2357785cd}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Resource">
       <UniqueIdentifier>{c4b8903b-922d-4420-b6b4-be5bd0b8101c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Singly-Linked List">
+      <UniqueIdentifier>{f94fd7f8-f4dd-42d2-8b01-d8e2357785cd}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="ForwardListIterator.h">
-      <Filter>Iterator</Filter>
-    </ClInclude>
-    <ClInclude Include="ForwardListIteratorImpl.hpp">
-      <Filter>Iterator</Filter>
-    </ClInclude>
     <ClInclude Include="Node.h">
       <Filter>Node</Filter>
     </ClInclude>
-    <ClInclude Include="ForwardListImpl.hpp">
-      <Filter>Forward List</Filter>
+    <ClInclude Include="SinglyLinkedList.h">
+      <Filter>Singly-Linked List</Filter>
     </ClInclude>
-    <ClInclude Include="ForwardList.h">
-      <Filter>Forward List</Filter>
+    <ClInclude Include="SinglyLinkedListImpl.hpp">
+      <Filter>Singly-Linked List</Filter>
+    </ClInclude>
+    <ClInclude Include="SinglyLinkedListIterator.h">
+      <Filter>Iterator</Filter>
+    </ClInclude>
+    <ClInclude Include="SinglyLinkedListIteratorImpl.hpp">
+      <Filter>Iterator</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

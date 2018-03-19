@@ -1,13 +1,13 @@
 #include "CppUnitTest.h"
 
-#include "../Forward List/ForwardList.h"
+#include "../Forward List/SinglyLinkedList.h"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
 namespace ForwardListTest
 {		
-	void fillListAddingTail(ForwardList<int>& list, int count);
-	void fillListAddingHead(ForwardList<int>& list, int count);
+	void fillListAddingTail(SinglyLinkedList<int>& list, int count);
+	void fillListAddingHead(SinglyLinkedList<int>& list, int count);
 
 	TEST_CLASS(IteratorTest)
 	{
@@ -15,11 +15,11 @@ namespace ForwardListTest
 
 		TEST_METHOD(IteratorBoundariesTest)
 		{
-			ForwardList<int> list;
+			SinglyLinkedList<int> list;
 
 			fillListAddingTail(list, 5);
 			
-			ForwardListIterator<int> it = list.getHead();
+			SinglyLinkedListIterator<int> it = list.getHead();
 
 			int count = 0;
 			for (; it; ++it, ++count);
@@ -29,11 +29,11 @@ namespace ForwardListTest
 
 		TEST_METHOD(IteratorDerrefTest)
 		{
-			ForwardList<int> list;
+			SinglyLinkedList<int> list;
 
 			fillListAddingTail(list, 10);
 
-			ForwardListIterator<int> it = list.getHead();
+			SinglyLinkedListIterator<int> it = list.getHead();
 
 			for (int i = 0; it; ++it, ++i)
 				Assert::AreEqual(*it, i, L"Operator* of iterator is not working properly");
@@ -41,12 +41,12 @@ namespace ForwardListTest
 
 		TEST_METHOD(IteratorEqualtyOperatorsTest)
 		{
-				ForwardList<int> list;
+				SinglyLinkedList<int> list;
 				
 				fillListAddingTail(list, 10);
 
-				ForwardListIterator<int> head = list.getHead();
-				ForwardListIterator<int> tail = list.getTail();
+				SinglyLinkedListIterator<int> head = list.getHead();
+				SinglyLinkedListIterator<int> tail = list.getTail();
 
 				Assert::IsFalse(head == tail, L"Operator== is not working properly");
 				Assert::IsTrue(head != tail, L"Operator!= is not working properly");

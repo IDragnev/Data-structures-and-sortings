@@ -1,7 +1,7 @@
 ﻿#include <iostream>
 #include <time.h>
 
-#include "ForwardList.h"
+#include "SinglyLinkedList.h"
 #include "../../Reusable classes/String/String/String.h"
 
 
@@ -60,13 +60,11 @@ void swapWithNext(Node<T>* &node)
 }
 
 
-
-
 int main()
 {
 	try
 	{
-		ForwardList<String> list;
+		SinglyLinkedList<String> list;
 
 		String str("some val");
 
@@ -76,7 +74,7 @@ int main()
 			str = "some val";
 		}
 
-		ForwardList<String> list2;
+		SinglyLinkedList<String> list2;
 		list2.addAsHead("some value");
 
 		list2 = list;		
