@@ -9,13 +9,13 @@ namespace ForwardListTest
 	void fillListAddingTail(SinglyLinkedList<int>& list, int count)
 	{
 		for (int i = 0; i < count; ++i)
-			list.addAsTail(i);
+			list.insertAsTail(i);
 	}
 
 	void fillListAddingHead(SinglyLinkedList<int>& list, int count)
 	{
 		for (int i = 0; i < count; ++i)
-			list.addAsHead(i);
+			list.insertAsHead(i);
 	}
 
 	bool areEqual(SinglyLinkedList<int>& list1, SinglyLinkedList<int>& list2)
@@ -54,16 +54,16 @@ namespace ForwardListTest
 			iterator = list.getTail();
 			Assert::IsFalse(iterator);
 
-			list.removeAll();
-			Assert::IsTrue(list.getCount() == 0, L"List is not empty after calling removeAll");
-			Assert::IsTrue(list.isEmpty(), L"List is not empty after calling removeAll");
+			list.empty();
+			Assert::IsTrue(list.getCount() == 0, L"List is not empty after calling empty");
+			Assert::IsTrue(list.isEmpty(), L"List is not empty after calling empty");
 		}
 		
 		TEST_METHOD(AddingTailTest)
 		{
 			SinglyLinkedList<int> list;
 
-			list.addAsTail(1);
+			list.insertAsTail(1);
 
 			//check count and isEmpty
 			Assert::IsFalse(list.isEmpty(), L"IsEmpty retuns true after inserting as tail");
@@ -81,7 +81,7 @@ namespace ForwardListTest
 			//push tail -> 0,1,2,3,4,5,6,7,8,9
 			for (int i = 0; i < 10; ++i)
 			{
-				list.addAsTail(i);
+				list.insertAsTail(i);
 				Assert::IsTrue(list.getCount() == i + 1, L"Count is not set properly when adding as tail");
 			}
 
@@ -96,7 +96,7 @@ namespace ForwardListTest
 		{
 			SinglyLinkedList<int> list;
 
-			list.addAsHead(1);
+			list.insertAsHead(1);
 
 			//check count and isEmpty
 			Assert::IsFalse(list.isEmpty(), L"IsEmpty retuns true after inserting as head");
@@ -114,7 +114,7 @@ namespace ForwardListTest
 			//push head -> 9,8,7,6,5,4,3,2,1,0
 			for (int i = 0; i < 10; ++i)
 			{
-				list.addAsHead(i);
+				list.insertAsHead(i);
 				Assert::IsTrue(list.getCount() == i + 1, L"Count is not set properly when adding as head");
 			}
 
@@ -129,7 +129,7 @@ namespace ForwardListTest
 		{
 			SinglyLinkedList<int> list;
 
-			list.addAsTail(1);
+			list.insertAsTail(1);
 
 			//should update tail (which is head also)
 			list.setTail(2);
@@ -148,7 +148,7 @@ namespace ForwardListTest
 		{
 			SinglyLinkedList<int> list;
 
-			list.addAsHead(1);
+			list.insertAsHead(1);
 
 			//should update tail which is head also
 			list.setHead(2);
@@ -250,7 +250,7 @@ namespace ForwardListTest
 				list.removeHead();
 			}
 
-			list.removeAll();
+			list.empty();
 			
 			// list = { 0,1,2,3,4,5,6,7,8,9 }
 			fillListAddingTail(list, 10);
@@ -283,10 +283,10 @@ namespace ForwardListTest
 			Assert::IsTrue(*head == 2, L"Insertion after null iterator is not adding as tail");
 
 			//empty list
-			list.removeAll();
+			list.empty();
 
 			//add as head
-			list.addAsHead(1);
+			list.insertAsHead(1);
 
 			head = list.getHead();
 
@@ -299,10 +299,10 @@ namespace ForwardListTest
 			Assert::IsTrue(*head == 3, L"Insertion after iterator does not construct with the value passed");
 
 			//empty again
-			list.removeAll();
+			list.empty();
 
-			list.addAsHead(1);
-			list.addAsTail(3);
+			list.insertAsHead(1);
+			list.insertAsTail(3);
 
 			//insert between 1 and 3
 			head = list.getHead();
@@ -342,9 +342,9 @@ namespace ForwardListTest
 			Assert::IsTrue(*head == 2, L"Insertion before null iterator is not adding as head");
 
 			//empty list
-			list.removeAll();
+			list.empty();
 
-			list.addAsHead(1);
+			list.insertAsHead(1);
 			head = list.getHead();
 
 			//insert before the head node
@@ -355,10 +355,10 @@ namespace ForwardListTest
 			Assert::IsTrue(head, L"Insertion before iterator does not update its predecessor");
 			Assert::IsTrue(*head == 3, L"Insertion before iterator does not construct with the value passed");
 
-			list.removeAll();
+			list.empty();
 
-			list.addAsHead(1);
-			list.addAsTail(3);
+			list.insertAsHead(1);
+			list.insertAsTail(3);
 
 			//insert between 1 and 3
 			SinglyLinkedListIterator<int> tail = list.getTail();
@@ -586,7 +586,7 @@ namespace ForwardListTest
 			Assert::IsTrue(areEqual(list, list2), L"Copy assignment from non-empty to empty is not working properly");
 
 			//append one more to list2
-			list2.addAsTail(11);
+			list2.insertAsTail(11);
 
 			//non-empty to non-empty
 			list = list2;
@@ -594,7 +594,7 @@ namespace ForwardListTest
 			Assert::IsTrue(areEqual(list, list2), L"Copy assignment from non-empty to non-empty is not working properly");
 
 			//empty list2
-			list2.removeAll();
+			list2.empty();
 
 			//empty to non-empty
 			list = list2;

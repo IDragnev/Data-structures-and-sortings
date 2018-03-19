@@ -70,12 +70,12 @@ int main()
 
 		for (int i = 0; i < 10; ++i)
 		{
-			list.addAsHead(std::move(str));
+			list.insertAsHead(std::move(str));
 			str = "some val";
 		}
 
 		SinglyLinkedList<String> list2;
-		list2.addAsHead("some value");
+		list2.insertAsHead("some value");
 
 		list2 = list;		
 		

@@ -28,14 +28,14 @@ public:
 	void appendList(SinglyLinkedList<T>&&);
 	void appendList(const SinglyLinkedList<T>&);          
 
-	void removeAll();
+	void empty();
 
 public:
 	void setHead(const T&);                           
 	void setTail(const T&);                          
 
-	void addAsHead(const T&);                         
-	void addAsTail(const T&);                         
+	void insertAsHead(const T&);                         
+	void insertAsTail(const T&);                         
 
 	void removeHead();                                
 	void removeTail();                          
@@ -53,7 +53,7 @@ private:
 	Node<T>* tail;                                    
 
 private:
-	void checkIsEmtpy()const;    
+	void throwExceptionIfEmpty()const;    
 	void nullMembers();
 
 	Node<T>* findNodeBefore(const Node<T>* node)const; 
@@ -62,9 +62,9 @@ private:
 	void insertAfter(Node<T>* node, const T&);
 	void insertBefore(Node<T>* node, const T&);
 
-	void appendChain(Node<T>* first, Node<T>* last, int count);
+	void appendChainAndUpdateCount(Node<T>* first, Node<T>* last, int count);
 
-	void swapContentsWith(SinglyLinkedList<T>);
+	void swapContentsWithReconstructedParameter(SinglyLinkedList<T>);
 
 private:
 	static Node<T>* cloneChain(const Node<T>* firstNode, Node<T>** lastNode = nullptr);

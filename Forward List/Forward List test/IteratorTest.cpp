@@ -56,7 +56,7 @@ namespace ForwardListTest
 				Assert::IsTrue(head == tail, L"Operator== is not working properly");
 				Assert::IsFalse(head != tail, L"Operator!= is not working properly");
 
-				list.removeAll();
+				list.empty();
 
 				head = list.getHead();
 				tail = list.getTail();

@@ -14,7 +14,7 @@ inline bool SinglyLinkedList<T>::isEmpty()const
 
 
 template <typename T>
-inline void SinglyLinkedList<T>::checkIsEmtpy()const
+inline void SinglyLinkedList<T>::throwExceptionIfEmpty()const
 {
 	if (isEmpty())
 		throw std::logic_error("List is empty!");
@@ -58,30 +58,21 @@ void SinglyLinkedList<T>::nullMembers()
 }
 
 
-//
-//sets the data of the head node with the passed value
-//
-// \ if the list is empty, an exception is thrown
-//
+
 template <typename T>
 void SinglyLinkedList<T>::setHead(const T& value)
 {
-	checkIsEmtpy();
+	throwExceptionIfEmpty();
 
 	head->data = value;
 }
 
 
 
-//
-//sets the data of the tail node with the passed value
-//
-// \ if the list is empty, an exception is thrown
-//
 template <typename T>
 void SinglyLinkedList<T>::setTail(const T& value)
 {
-	checkIsEmtpy();
+	throwExceptionIfEmpty();
 
 	tail->data = value;
 }
@@ -94,29 +85,20 @@ void SinglyLinkedList<T>::setTail(const T& value)
 //
 
 
-//
-//free each node in the chain
-//
-// \ if the sent address is nullptr the function does nothing
-//
 template <typename T>
 void SinglyLinkedList<T>::clearChain(const Node<T>* firstNode)
 {
-	if (firstNode)
+	if (firstNode != nullptr)
 	{
-		const Node<T>* current = firstNode;
+		const Node<T>* currentNode = firstNode;
 		const Node<T>* oldNode = firstNode;
 
-		//while there is an actual node to delete
-		while (current)
+		while (currentNode != nullptr)
 		{
-			//save current's address
-			oldNode = current;
+			oldNode = currentNode;
 
-			//move forward in the chain
-			current = current->next;
+			currentNode = currentNode->next;
 
-			//free old
 			delete oldNode;
 		}
 	}
@@ -124,12 +106,8 @@ void SinglyLinkedList<T>::clearChain(const Node<T>* firstNode)
 
 
 
-//
-//free the chain of nodes
-//and null the members
-//
 template <typename T>
-void SinglyLinkedList<T>::removeAll()
+void SinglyLinkedList<T>::empty()
 {
 	clearChain(head);
 
@@ -138,143 +116,97 @@ void SinglyLinkedList<T>::removeAll()
 
 
 
-
-//
-//clone a chain by the address of its first node
-//
-//the function assumes firstNode is a valid pointer
-//
-// \ if endOfChain points to a valid pointer
-//   it is set to point to the address of the
-//   last node in the cloned chain
-//
 template <typename T>
 Node<T>* SinglyLinkedList<T>::cloneChain(const Node<T>* firstNode, Node<T>** endOfChain)
 {
-	Node<T>* newChain = nullptr;
 	assert(firstNode);
+	Node<T>* newChainHead = nullptr;
 
 	try
 	{
-		//the start of the new chain
-		newChain = new Node<T>(firstNode->data);
+		newChainHead = new Node<T>(firstNode->data);
 
-		//pointer to the node we will copy next (initially points to the second node of the passed chain)
-		const Node<T>* readFrom = firstNode->next;
+		const Node<T>* nodeToCopy = firstNode->next;
 
-		//pointer to the node to which we will connect the next node
-		Node<T>* connectTo = newChain;
+		Node<T>* newChainTail = newChainHead;
 
-		//while there is an actual node to copy
-		while (readFrom)
+		while (nodeToCopy != nullptr)
 		{
-			//append to chain
-			connectTo->next = new Node<T>(readFrom->data);
+			newChainTail->next = new Node<T>(nodeToCopy->data);
 
-			//move to current end of chain
-			connectTo = connectTo->next;
+			newChainTail = newChainTail->next;
 
-			//move to the next node to be copied
-			readFrom = readFrom->next;
+			nodeToCopy = nodeToCopy->next;
 		}
 
-		if (endOfChain)
-			*endOfChain = connectTo;
+		if (endOfChain != nullptr)
+			*endOfChain = newChainTail;
 
-		return newChain;
+		return newChainHead;
 	} 
-	catch (std::bad_alloc& ex)
+	catch (std::bad_alloc&)
 	{		
-		clearChain(newChain);
+		clearChain(newChainHead);
 
 		throw;
 	}
 }
 
 
-//
-//append other list's chain of nodes to this
-//
+
 template <typename T>
 void SinglyLinkedList<T>::appendList(const SinglyLinkedList<T>& other)
 {
-	//if other is empty, leave
-	if (other.isEmpty())
-		return;
+	if ( ! other.isEmpty() )
+	{
+		Node<T>* newChainTail = nullptr;
+		Node<T>* newChainHead = cloneChain(other.head, &newChainTail);
 
-	//a pointer to save the end of the new chain
-	Node<T>* endOfChain = nullptr;
-
-	//clone other list's chain of nodes
-	Node<T>* newChain = cloneChain(other.head, &endOfChain);
-
-	//append the cloned chain to the current one
-	appendChain(newChain, endOfChain, other.count);
+		appendChainAndUpdateCount(newChainHead, newChainTail, other.count);
+	}
 }
 
 
 
-//
-//append source's chain of nodes to this directly, 
-//leaving source in a valid empty state
-//
 template <typename T>
 void SinglyLinkedList<T>::appendList(SinglyLinkedList<T>&& source)
 {
-	//if source is empty, leave
-	if (source.isEmpty())
-		return;
+	if ( ! source.isEmpty() )
+	{
+		appendChainAndUpdateCount(source.head, source.tail, source.count);
 
-	//append source's chain
-	appendChain(source.head, source.tail, source.count);
-
-	//and null it
-	source.nullMembers();
+		source.nullMembers();
+	}
 }
 
 
 
-
-//
-//append the sent chain to the current chain and update count
-//
 template <typename T>
-void SinglyLinkedList<T>::appendChain(Node<T>* first, Node<T>* last, int count)
+void SinglyLinkedList<T>::appendChainAndUpdateCount(Node<T>* first, Node<T>* last, int count)
 {
 	assert(first && last);
 
-	//if the list is empty, attach the chain to the head pointer
-	if (isEmpty())
+	if ( this->isEmpty() )
 	{
 		this->head = first;
 	}
-	else //attach it to the tail node
+	else
 	{
 		this->tail->next = first;
 	}
 
-	//update tail and count
 	this->tail = last;
 	this->count += count;
 }
 
 
 
-//
-//returns the node before the passed one 
-//
-// \ if no matching node is found, nullptr is returned
-//
-// \ if the list is empty, nullptr is returned
-//
 template <typename T>
 Node<T>* SinglyLinkedList<T>::findNodeBefore(const Node<T>* node)const
 {
 	Node<T>* current = head;
 
-	//while there is an actual node and its successor is not the one 
-	//we are searching for, move forward in the list
-	while (current && current->next != node)
+	while (current != nullptr && current->next != node)
 	{
 		current = current->next;
 	}
@@ -292,9 +224,6 @@ Node<T>* SinglyLinkedList<T>::findNodeBefore(const Node<T>* node)const
 //
 
 
-//
-//the list is empty when default-constructed
-//
 template <typename T>
 SinglyLinkedList<T>::SinglyLinkedList()
 	:
@@ -306,10 +235,7 @@ SinglyLinkedList<T>::SinglyLinkedList()
 }
 
 
-//
-//initialize members as 0
-//and append other's chain of nodes (copied) 
-//
+
 template <typename T>
 SinglyLinkedList<T>::SinglyLinkedList(const SinglyLinkedList<T>& other)
 	:
@@ -323,42 +249,6 @@ SinglyLinkedList<T>::SinglyLinkedList(const SinglyLinkedList<T>& other)
 
 
 
-//
-//copy assignment
-//
-//copy-construct 'swapContentsWith' parameter from 'other'
-//and let it do the work
-//
-template <typename T>
-SinglyLinkedList<T>& SinglyLinkedList<T>::operator=(const SinglyLinkedList<T>& other)
-{
-	if (this != &other)
-	{
-		//parameter is copy-constructed from other
-		swapContentsWith(other);
-	}
-
-	return *this;
-}
-
-
-//
-//free the chain of nodes
-//
-template <typename T>
-SinglyLinkedList<T>::~SinglyLinkedList()
-{
-	clearChain(head);
-}
-
-
-
-//
-//move constructor
-//
-//'steal' source's data and then null source 
-//(source is left in a valid empty state)
-//
 template <typename T>
 SinglyLinkedList<T>::SinglyLinkedList(SinglyLinkedList<T>&& source)
 	:
@@ -371,19 +261,24 @@ SinglyLinkedList<T>::SinglyLinkedList(SinglyLinkedList<T>&& source)
 
 
 
-//
-//move assignment
-//
-//move source in the 'swapContentsWith' parameter (which is a temporary object)
-//and let it do the work
-//
+template <typename T>
+SinglyLinkedList<T>& SinglyLinkedList<T>::operator=(const SinglyLinkedList<T>& other)
+{
+	if (this != &other)
+	{
+		swapContentsWithReconstructedParameter(other);
+	}
+
+	return *this;
+}
+
+
 template <typename T>
 SinglyLinkedList<T>& SinglyLinkedList<T>::operator=(SinglyLinkedList<T>&& source)
 {
 	if (this != &source)
 	{
-		//source is moved into parameter
-		swapContentsWith(std::move(source));
+		swapContentsWithReconstructedParameter(std::move(source));
 	}
 
 	return *this;
@@ -391,23 +286,25 @@ SinglyLinkedList<T>& SinglyLinkedList<T>::operator=(SinglyLinkedList<T>&& source
 
 
 
-
 //
-// construct temp (parameter) with the passed argument,
-// swap contents with this and let temp destroy old data
-//
-// \ if the argument is an rvalue, temp will be move-constructed from it
+// \ if the argument is an rvalue, temp will be move-constructed with it
 // 
 // \ if the argument is an lvalue, temp will be copy-constructed from it
 //
 template <typename T>
-void SinglyLinkedList<T>::swapContentsWith(SinglyLinkedList<T> temp)
+void SinglyLinkedList<T>::swapContentsWithReconstructedParameter(SinglyLinkedList<T> temp)
 {
 	std::swap(this->head, temp.head);
 	std::swap(this->tail, temp.tail);
 	std::swap(this->count, temp.count);
+}
 
-	//temp dies here...
+
+
+template <typename T>
+SinglyLinkedList<T>::~SinglyLinkedList()
+{
+	clearChain(head);
 }
 
 
@@ -422,7 +319,7 @@ void SinglyLinkedList<T>::swapContentsWith(SinglyLinkedList<T> temp)
 //add a node with the passed data as a head node
 //
 template <typename T>
-void SinglyLinkedList<T>::addAsHead(const T& value)
+void SinglyLinkedList<T>::insertAsHead(const T& value)
 {
 	//the new node's successor is the current head node
 	Node<T>* newHead = new Node<T>(value, this->head);
@@ -445,7 +342,7 @@ void SinglyLinkedList<T>::addAsHead(const T& value)
 //add a node with the passed data as the new tail
 //
 template <typename T>
-void SinglyLinkedList<T>::addAsTail(const T& value)
+void SinglyLinkedList<T>::insertAsTail(const T& value)
 {
 	//has no successor as a tail
 	Node<T>* newTail = new Node<T>(value);
@@ -477,7 +374,7 @@ void SinglyLinkedList<T>::addAsTail(const T& value)
 template <typename T>
 void SinglyLinkedList<T>::removeHead()
 {
-	checkIsEmtpy();
+	throwExceptionIfEmpty();
 
 	assert(head);
 
@@ -577,14 +474,14 @@ void SinglyLinkedList<T>::removeTail()
 //
 // \ if the pointer is nullptr
 //   or it points to the tail node
-//   addAsTail is called 
+//   insertAsTail is called 
 //
 template <typename T>
 void SinglyLinkedList<T>::insertAfter(Node<T>* node, const T& data)
 {
 	if (!node || node == tail)
 	{
-		addAsTail(data);
+		insertAsTail(data);
 	}
 	else //insert after it
 	{
@@ -627,14 +524,14 @@ void SinglyLinkedList<T>::insertAfter(SinglyLinkedListIterator<T>& iterator, con
 //exactly before the sent node
 //
 // \ if the pointer is nullptr or points to the head,
-//    addAsHead is called
+//    insertAsHead is called
 //
 template <typename T>
 void SinglyLinkedList<T>::insertBefore(Node<T>* node, const T& data)
 {
 	if (!node || node == head)
 	{
-		addAsHead(data);
+		insertAsHead(data);
 	}
 	else
 	{
