@@ -10,9 +10,7 @@ SinglyLinkedListIterator<Key>::SinglyLinkedListIterator(Node<Key>* startNode, co
 }
 
 
-//
-//returns true if the traversal has not ended
-//
+
 template <typename Key>
 SinglyLinkedListIterator<Key>::operator bool()const
 {
@@ -21,9 +19,6 @@ SinglyLinkedListIterator<Key>::operator bool()const
 
 
 
-//
-//returns true if the traversal has ended
-//
 template <typename Key>
 bool SinglyLinkedListIterator<Key>::operator!()const
 {
@@ -32,13 +27,10 @@ bool SinglyLinkedListIterator<Key>::operator!()const
 
 
 
-//
-//advance to the next node in the list (if not null)
-//
 template <typename Key>
 SinglyLinkedListIterator<Key>& SinglyLinkedListIterator<Key>::operator++()
 {
-	if (current)
+	if (current != nullptr)
 		current = current->next;
 
 	return *this;
@@ -56,9 +48,7 @@ SinglyLinkedListIterator<Key> SinglyLinkedListIterator<Key>::operator++(int)
 }
 
 
-//
-//return the data of the current node
-//
+
 template <typename Key>
 Key& SinglyLinkedListIterator<Key>::operator*()
 {
@@ -67,9 +57,6 @@ Key& SinglyLinkedListIterator<Key>::operator*()
 
 
 
-//
-//owner and current should be the same
-//
 template <typename Key>
 bool operator==(const SinglyLinkedListIterator<Key>& lhs, const SinglyLinkedListIterator<Key>& rhs)
 {
