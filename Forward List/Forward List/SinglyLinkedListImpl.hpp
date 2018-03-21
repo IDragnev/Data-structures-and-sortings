@@ -315,62 +315,42 @@ SinglyLinkedList<T>::~SinglyLinkedList()
 //
 
 
-//
-//add a node with the passed data as a head node
-//
 template <typename T>
-void SinglyLinkedList<T>::insertAsHead(const T& value)
+void SinglyLinkedList<T>::insertAsHead(const T& item)
 {
-	//the new node's successor is the current head node
-	Node<T>* newHead = new Node<T>(value, this->head);
+	Node<T>* newHead = new Node<T>(item, this->head);
 
-	//if the list is emtpy, set tail
-	if (isEmpty())
+	if ( isEmpty() )
 	{
 		this->tail = newHead;
 	}
 
-	//update head and count
 	this->head = newHead;
-
 	++count;
 }
 
 
 
-//
-//add a node with the passed data as the new tail
-//
 template <typename T>
-void SinglyLinkedList<T>::insertAsTail(const T& value)
+void SinglyLinkedList<T>::insertAsTail(const T& item)
 {
-	//has no successor as a tail
-	Node<T>* newTail = new Node<T>(value);
+	Node<T>* newTail = new Node<T>(item);
 
-	//if the list is empty, update head
-	if (isEmpty())
+	if ( isEmpty() )
 	{
 		this->head = newTail;
 	}
-	else //update the successor of current tail
+	else 
 	{	
 		this->tail->next = newTail;
 	}
 
-	//update tail and count
 	this->tail = newTail;
-
 	++count;
 }
 
 
 
-
-//
-//remove the head node
-//
-// \ if the list is empty, an exception is thrown
-//
 template <typename T>
 void SinglyLinkedList<T>::removeHead()
 {
@@ -378,33 +358,21 @@ void SinglyLinkedList<T>::removeHead()
 
 	assert(head);
 
-	//keep the address of the old head node
 	Node<T>* oldHead = head;
-
-	//move head to the next node in the list
+	
 	head = head->next;
 
-	//if this was the only node in the list
-	//update tail to nullptr 
 	if(head == nullptr)
 	{
 		tail = nullptr;
 	}
 
-	//free old head and update count
 	delete oldHead;
-
 	--count;
 }
 
 
 
-
-//
-//remove the specified node from the list
-//
-// \ if the pointer is nullptr, the function does nothing
-//
 template <typename T>
 void SinglyLinkedList<T>::removeAt(Node<T>* node)
 {
@@ -414,38 +382,29 @@ void SinglyLinkedList<T>::removeAt(Node<T>* node)
 		{
 			removeHead();
 		}
-		//if it is not the head node, there are at least
-		//two nodes in the list
+		//if it is not the head node, there are at least two nodes in the list
 		else
 		{
-			//find the node before the one we want to delete
 			Node<T>* nodeBefore = findNodeBefore(node);
 
 			assert(nodeBefore);
 
-			//if the node we are about to delete is the tail, update tail
 			if (node == tail)
 			{
 				tail = nodeBefore;
 			}
 
-			//update the successor of the previous node
+			
 			nodeBefore->next = node->next;
 
-			//free node and update count
 			delete node;
-
 			--count;
 		}
 	}
 }
 
 
-//
-//remove the node the sent iterator is pointing to
-//
-// \ if the iterator is not from this list an exception is thrown
-//
+
 template <typename T>
 void SinglyLinkedList<T>::removeAt(SinglyLinkedListIterator<T>& iterator)
 {
@@ -454,7 +413,6 @@ void SinglyLinkedList<T>::removeAt(SinglyLinkedListIterator<T>& iterator)
 
 	removeAt(iterator.current);
 
-	//invalidate iterator
 	iterator.current = nullptr;
 }
 
@@ -468,30 +426,20 @@ void SinglyLinkedList<T>::removeTail()
 
 
 
-//
-//insert a node with the sent data
-//exactly after the sent node
-//
-// \ if the pointer is nullptr
-//   or it points to the tail node
-//   insertAsTail is called 
-//
 template <typename T>
 void SinglyLinkedList<T>::insertAfter(Node<T>* node, const T& data)
 {
-	if (!node || node == tail)
+	if (node == nullptr || node == tail)
 	{
 		insertAsTail(data);
 	}
-	else //insert after it
+	else 
 	{
-		//if it does not point to the tail (and is not nullptr), it has a successor
+		//if it does not point to the tail and is not null, it has a successor
 		assert(node->next);
 
-		//newNode's successor is node's current successor
 		Node<T>* newNode = new Node<T>(data, node->next);
 
-		//update node's successor as the new node
 		node->next = newNode;
 
 		++count;
@@ -500,14 +448,6 @@ void SinglyLinkedList<T>::insertAfter(Node<T>* node, const T& data)
 
 
 
-
-//
-//add a new node with the sent data
-//exactly after the sent iterator's current
-//
-// \ if the iterator is not from this list
-//   std::invalid_arg is thrown
-//
 template <typename T>
 void SinglyLinkedList<T>::insertAfter(SinglyLinkedListIterator<T>& iterator, const T& data)
 {
@@ -519,41 +459,26 @@ void SinglyLinkedList<T>::insertAfter(SinglyLinkedListIterator<T>& iterator, con
 
 
 
-//
-//insert a node with the sent data 
-//exactly before the sent node
-//
-// \ if the pointer is nullptr or points to the head,
-//    insertAsHead is called
-//
 template <typename T>
 void SinglyLinkedList<T>::insertBefore(Node<T>* node, const T& data)
 {
-	if (!node || node == head)
+	if (node == nullptr || node == head)
 	{
 		insertAsHead(data);
 	}
 	else
 	{
-		//it has a predecessor, because it is not the head node (and is not null)
+		//it has a predecessor, because it is not the head node and is not null
 		Node<T>* previous = findNodeBefore(node);
 		
 		assert(previous);
 
-		//insert after its predecessor
 		insertAfter(previous, data);
 	}
 }
 
 
 
-//
-//insert a new node with the sent data
-//exactly before the sent iterator's current
-//
-// \ if the iterator is not from this list
-//   std::invalid_arg is thrown
-//
 template <typename T>
 void SinglyLinkedList<T>::insertBefore(SinglyLinkedListIterator<T>& iterator, const T& data)
 {
@@ -565,12 +490,6 @@ void SinglyLinkedList<T>::insertBefore(SinglyLinkedListIterator<T>& iterator, co
 
 
 
-//
-//remove the node after the one the iterator points to
-//
-// \ if the iterator is not from this list
-//   std::invalid_arg is thrown
-//
 template <typename T>
 void SinglyLinkedList<T>::removeAfter(SinglyLinkedListIterator<T>& iterator)
 {
@@ -583,18 +502,11 @@ void SinglyLinkedList<T>::removeAfter(SinglyLinkedListIterator<T>& iterator)
 
 
 
-//
-//remove the node before the one the iterator points to
-//
-// \ if the iterator is not from this list
-//   std::invalid_arg is thrown
-//
 template <typename T>
 void SinglyLinkedList<T>::removeBefore(SinglyLinkedListIterator<T>& iterator)
 {
 	if (iterator.owner != this)
 		throw std::invalid_argument("Invalid iterator passed!");
 
-	//find the one before it and remove it
-	remoteAt( findNodeBefore(iterator.current) );
+	removeAt( findNodeBefore(iterator.current) );
 }
