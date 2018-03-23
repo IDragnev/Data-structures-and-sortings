@@ -69,7 +69,7 @@ void DArray<T>::setSize(int newSize)
 
 
 template <typename T>
-inline void DArray<T>::directInit(T* newItems, int newCount, int newSize)
+inline void DArray<T>::directlySetItemsCountAndSize(T* newItems, int newCount, int newSize)
 {
 	items = newItems;
 	count = newCount;
@@ -80,7 +80,7 @@ inline void DArray<T>::directInit(T* newItems, int newCount, int newSize)
 template <typename T>
 inline void DArray<T>::nullMembers()
 {
-	directInit(nullptr, 0, 0);
+	directlySetItemsCountAndSize(nullptr, 0, 0);
 }
 
 
@@ -104,7 +104,7 @@ inline void DArray<T>::destroyAndNullMembers()
 template <typename T>
 void DArray<T>::copyFrom(const DArray<T>& other)
 {
-	if (!other.isEmpty())
+	if ( ! other.isEmpty() )
 	{
 		T* buffer = new T[other.size];
 
@@ -113,7 +113,7 @@ void DArray<T>::copyFrom(const DArray<T>& other)
 
 		destroyItems();
 
-		directInit(buffer, other.count, other.size);
+		directlySetItemsCountAndSize(buffer, other.count, other.size);
 	}
 	else 
 	{
@@ -139,7 +139,7 @@ void DArray<T>::resize(int newSize)
 
 	destroyItems();
 
-	directInit(newItems, newCount, newSize);
+	directlySetItemsCountAndSize(newItems, newCount, newSize);
 }
 
 
@@ -248,15 +248,15 @@ DArray<T>::DArray()
 
 
 template <typename T>
-DArray<T>::DArray(int Size, int Count)
+DArray<T>::DArray(int size, int count)
 	:
 	items(nullptr)
 {
-	setSize(Size);
-	setCount(Count);
+	setSize(size);
+	setCount(count);
 
-	if (size > 0)
-		items = new T[size];
+	if (this->size > 0)
+		items = new T[this->size];
 }
 
 
@@ -282,9 +282,6 @@ DArray<T>::DArray(const DArray<T>& other)
 }
 
 
-//
-// (!) copyFrom() frees old memory (if any)
-//
 template <typename T>
 DArray<T>& DArray<T>::operator=(const DArray<T>& other)
 {
@@ -304,7 +301,7 @@ DArray<T>& DArray<T>::operator=(DArray<T>&& source)
 	if (this != &source)
 	{
 		destroyItems();
-		directInit(source.items, source.count, source.size);
+		directlySetItemsCountAndSize(source.items, source.count, source.size);
 		source.nullMembers();
 	}
 

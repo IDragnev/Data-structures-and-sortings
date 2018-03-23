@@ -67,7 +67,7 @@ private:
 	void destroyAndNullMembers();
 	void destroyItems();
 	void nullMembers();
-	void directInit(T* items, int count, int size);
+	void directlySetItemsCountAndSize(T* items, int count, int size);
 };
 
 #include "DArrayImpl.hpp"
