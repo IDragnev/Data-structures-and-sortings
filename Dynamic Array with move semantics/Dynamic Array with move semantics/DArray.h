@@ -28,17 +28,12 @@ public:
 	void shrink(int size);
 
 public:
-	virtual void add(T&&);
-	virtual void add(const T&);
+	virtual void insert(const T&);
 	virtual void remove(int position);
 	virtual int search(const T&)const;
 
-	void add(DArray<T>&&);
-	void add(const DArray<T>&);
-
-public:
-	void addAt(int, const T&);
-	void addAt(int, T&&);
+	void insert(const DArray<T>&);
+	void insertAt(int, const T&);
 
 public:
 	T& operator[](int position);

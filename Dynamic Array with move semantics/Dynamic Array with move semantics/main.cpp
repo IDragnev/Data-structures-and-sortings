@@ -15,14 +15,14 @@ int main()
 	DArray<int> arr;
 
 	for (int i = 0; i < 10; ++i)
-		arr.add(i);
+		arr.insert(i);
 
 	DArray<int> arr2(10);
 
 	for (int i = 10; i < 15; ++i)
-		arr2.add(i);
+		arr2.insert(i);
 
-	arr.add(std::move(arr2));
+	arr.insert(std::move(arr2));
 
 	DArray<int> arr3;
 

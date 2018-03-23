@@ -327,7 +327,7 @@ DArray<T>::~DArray()
 
 
 template <typename T>
-void DArray<T>::add(const T& newItem)
+void DArray<T>::insert(const T& newItem)
 {
 	resizeIfNeeded();
 
@@ -336,17 +336,7 @@ void DArray<T>::add(const T& newItem)
 
 
 template <typename T>
-void DArray<T>::add(T&& newItem)
-{
-	resizeIfNeeded();
-
-	items[count++] = std::move(newItem);
-} 
-
-
-
-template <typename T>
-void DArray<T>::addAt(int position, const T& newItem)
+void DArray<T>::insertAt(int position, const T& newItem)
 {
 	if (position < 0 || position >= count)
 		throw std::out_of_range("Index out of range");
@@ -357,23 +347,6 @@ void DArray<T>::addAt(int position, const T& newItem)
 	shiftItemsOnePositionRight(position, count - 1);
 
 	items[position] = newItem;
-	++count;
-}
-
-
-
-template <typename T>
-void DArray<T>::addAt(int position, T&& newItem)
-{
-	if (position < 0 || position >= count)
-		throw std::out_of_range("Index out of range");
-
-	resizeIfNeeded();
-
-	//empty the position
-	shiftItemsOnePositionRight(position, count - 1);
-
-	items[position] = std::move(newItem);
 	++count;
 }
 
@@ -429,18 +402,8 @@ const T& DArray<T>::operator[](int index)const
 
 
 template <typename T>
-void DArray<T>::add(const DArray<T>& other)
+void DArray<T>::insert(const DArray<T>& other)
 {
 	for (int i = 0; i < other.count; ++i)
-		add(other[i]);
-}
-
-
-template <typename T>
-void DArray<T>::add(DArray<T>&& other)
-{
-	for (int i = 0; i < other.count; ++i)
-		add(std::move(other[i]));
-
-	other.nullMembers();
+		insert(other[i]);
 }

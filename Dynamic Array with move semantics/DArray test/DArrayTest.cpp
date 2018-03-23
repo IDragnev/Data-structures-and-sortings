@@ -9,7 +9,7 @@ namespace DArraytest
 	void fillArray(DArray<int>& arr, int count, int first = 0, int step = 1)
 	{
 		for (int i = first; i < count; i += step)
-			arr.add(i);
+			arr.insert(i);
 	}
 
 	bool areEqual(DArray<int>& darr1, DArray<int>& darr2)
@@ -53,10 +53,10 @@ namespace DArraytest
 
 			for (int i = 1; i < 11; ++i)
 			{
-				darr.add(i);
+				darr.insert(i);
 				Assert::IsTrue(darr.getSize() == 16, L"Size is changed even though no resizing is needed(done)");
-				Assert::IsTrue(darr.getCount() == i, L"Count is not set correctly after adding");
-				Assert::IsFalse(darr.isEmpty(), L"IsEmpty() returns true after adding elements");
+				Assert::IsTrue(darr.getCount() == i, L"Count is not set correctly after inserting");
+				Assert::IsFalse(darr.isEmpty(), L"IsEmpty() returns true after inserting elements");
 				Assert::IsTrue(darr[i - 1] == i, L"Adding is not working correctly");
 			}
 
@@ -71,17 +71,17 @@ namespace DArraytest
 
 			Assert::IsTrue(darr.isEmpty(), L"isEmpty() returns false even after removing all the elements");
 
-			darr.add(1);
+			darr.insert(1);
 			Assert::IsTrue(darr.getCount() == 1);
 
-			darr.addAt(0, 0);
-			Assert::IsTrue(darr[0] == 0 && darr[1] == 1, L"addAt() is not working correctly");
-			Assert::IsTrue(darr.getCount() == 2, L"Count is not handled correctly when using addAt()");
+			darr.insertAt(0, 0);
+			Assert::IsTrue(darr[0] == 0 && darr[1] == 1, L"insertAt() is not working correctly");
+			Assert::IsTrue(darr.getCount() == 2, L"Count is not handled correctly when using insertAt()");
 
 			for (int i = 0; i < 5; ++i)
 			{
-				darr.addAt(0, i);
-				Assert::IsTrue(darr[0] == i, L"addAt() is not working correctly");
+				darr.insertAt(0, i);
+				Assert::IsTrue(darr[0] == i, L"insertAt() is not working correctly");
 			}
 		}
 
@@ -349,7 +349,7 @@ namespace DArraytest
 
 			fillArray(darr2, 10, 5, 1);
 	
-			darr.add(darr2);
+			darr.insert(darr2);
 
 			//arg is left untouched
 			Assert::IsTrue(darr2.getCount() == 5);
@@ -357,27 +357,6 @@ namespace DArraytest
 			Assert::IsFalse(darr2.isEmpty());
 
 			Assert::IsTrue(darr.getCount() == 5 + darr2.getCount());
-			for (int i = 0; i < 10; ++i)
-				Assert::IsTrue(darr[i] == i);
-		}
-
-		TEST_METHOD(RValueArrayAdd)
-		{
-			DArray<int> darr(8);
-
-			fillArray(darr, 5);
-
-			DArray<int> darr2(10);
-			fillArray(darr2, 10, 5, 1);
-
-			darr.add(std::move(darr2));
-
-			//arg is nulled
-			Assert::IsTrue(darr2.getCount() == 0);
-			Assert::IsTrue(darr2.getSize() == 0);
-			Assert::IsTrue(darr2.isEmpty());
-
-			Assert::IsTrue(darr.getCount() == 10);
 			for (int i = 0; i < 10; ++i)
 				Assert::IsTrue(darr[i] == i);
 		}
