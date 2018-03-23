@@ -63,6 +63,7 @@ private:
 	void destroyItems();
 	void nullMembers();
 	void directlySetItemsCountAndSize(T* items, int count, int size);
+	void throwExceptionIfInvalidIndex(int index)const;
 };
 
 #include "DArrayImpl.hpp"

@@ -338,8 +338,7 @@ void DArray<T>::insert(const T& newItem)
 template <typename T>
 void DArray<T>::insertAt(int position, const T& newItem)
 {
-	if (position < 0 || position >= count)
-		throw std::out_of_range("Index out of range");
+	throwExceptionIfInvalidIndex(position);
 
 	resizeIfNeeded();
 
@@ -355,8 +354,7 @@ void DArray<T>::insertAt(int position, const T& newItem)
 template <typename T>
 void DArray<T>::remove(int position)
 {
-	if (position < 0 || position >= count)
-		throw std::out_of_range("Index out of range");
+	throwExceptionIfInvalidIndex(position);
 
 	//shift items after it one pos. to the left
 	shiftItemsOnePositionLeft(position + 1, count - 1);
@@ -381,24 +379,32 @@ int DArray<T>::search(const T& searchedItem)const
 
 
 template <typename T>
-T& DArray<T>::operator[](int index)
+T& DArray<T>::operator[](int position)
 {
-	if (index < 0 || index >= count)
-		throw std::out_of_range("Index out of range");
+	throwExceptionIfInvalidIndex(position);
 
-	return items[index];
+	return items[position];
 }
 
 
 
 template <typename T>
-const T& DArray<T>::operator[](int index)const
+const T& DArray<T>::operator[](int position)const
+{
+	throwExceptionIfInvalidIndex(position);
+
+	return items[position];
+}
+
+
+
+template <typename T>
+void DArray<T>::throwExceptionIfInvalidIndex(int index)const
 {
 	if (index < 0 || index >= count)
 		throw std::out_of_range("Index out of range");
-
-	return items[index];
 }
+
 
 
 template <typename T>
