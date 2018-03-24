@@ -64,6 +64,7 @@ private:
 	void nullMembers();
 	void directlySetItemsCountAndSize(T* items, int count, int size);
 	void throwExceptionIfInvalidIndex(int index)const;
+	void moveSourceInThis(DArray& source);
 };
 
 #include "DArrayImpl.hpp"

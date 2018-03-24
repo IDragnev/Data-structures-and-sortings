@@ -2,12 +2,24 @@
 
 template <typename T>
 DArray<T>::DArray()
-	:
-	items(nullptr),
-	count(0),
-	size(0)
 {
-	;
+	nullMembers();
+}
+
+
+template <typename T>
+inline void DArray<T>::nullMembers()
+{
+	directlySetItemsCountAndSize(nullptr, 0, 0);
+}
+
+
+template <typename T>
+inline void DArray<T>::directlySetItemsCountAndSize(T* newItems, int newCount, int newSize)
+{
+	items = newItems;
+	count = newCount;
+	size = newSize;
 }
 
 
@@ -40,39 +52,48 @@ template <typename T>
 void DArray<T>::setCount(int newCount)
 {
 	if (newCount < 0 || newCount > size)
-		throw std::invalid_argument("Count must be between 0 and size");
+		throw std::invalid_argument("Count must be at least 0 and at most size");
 
 	count = newCount;
+}
+
+
+
+template <typename T>
+DArray<T>& DArray<T>::operator=(DArray<T>&& source)
+{
+	if (this != &source)
+	{
+		destroyItems();
+		moveSourceInThis(source);
+	}
+
+	return *this;
 }
 
 
 
 template <typename T>
 DArray<T>::DArray(DArray<T>&& source)
-	:
-	items(source.items),
-	count(source.count),
-	size(source.size)
 {
+	moveSourceInThis(source);
+}
+
+
+
+template <typename T>
+inline void DArray<T>::destroyItems()
+{
+	delete[] items;
+}
+
+
+
+template <typename T>
+void DArray<T>::moveSourceInThis(DArray<T>& source)
+{
+	directlySetItemsCountAndSize(source.items, source.count, source.size);
 	source.nullMembers();
-}
-
-
-
-template <typename T>
-inline void DArray<T>::nullMembers()
-{
-	directlySetItemsCountAndSize(nullptr, 0, 0);
-}
-
-
-
-template <typename T>
-inline void DArray<T>::directlySetItemsCountAndSize(T* newItems, int newCount, int newSize)
-{
-	items = newItems;
-	count = newCount;
-	size = newSize;
 }
 
 
@@ -84,6 +105,7 @@ DArray<T>::DArray(const DArray<T>& other)
 {
 	copyFrom(other);
 }
+
 
 
 template <typename T>
@@ -129,34 +151,12 @@ inline bool DArray<T>::isEmpty()const
 
 
 template <typename T>
-inline void DArray<T>::destroyItems()
-{
-	delete[] items;
-}
-
-
-
-template <typename T>
 inline void DArray<T>::destroyAndNullMembers()
 {
 	destroyItems();
 	nullMembers();
 }   
 
-
-
-template <typename T>
-DArray<T>& DArray<T>::operator=(DArray<T>&& source)
-{
-	if (this != &source)
-	{
-		destroyItems();
-		directlySetItemsCountAndSize(source.items, source.count, source.size);
-		source.nullMembers();
-	}
-
-	return *this;
-}
 
 
 template <typename T>
@@ -214,7 +214,6 @@ void DArray<T>::insertAt(int position, const T& newItem)
 
 	resizeIfNeeded();
 
-	//empty the position
 	shiftItemsOnePositionRight(position, count - 1);
 
 	items[position] = newItem;
@@ -304,7 +303,6 @@ void DArray<T>::remove(int position)
 {
 	throwExceptionIfInvalidIndex(position);
 
-	//shift items after it one pos. to the left
 	shiftItemsOnePositionLeft(position + 1, count - 1);
 
 	--count;
