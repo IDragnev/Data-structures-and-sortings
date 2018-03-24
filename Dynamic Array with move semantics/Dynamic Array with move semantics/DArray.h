@@ -2,7 +2,6 @@
 #define __D_ARRAY_M_SEMANT_H_INCLDUED__
 
 #include <assert.h>
-#include <utility>
 #include <stdexcept>
 
 template <typename T>
@@ -48,7 +47,7 @@ protected:
 	void setSize(int);
 	void setCount(int);
 
-	void resizeIfNeeded();
+	void enlargeIfFull();
 
 	void shiftItemsOnePositionLeft(int start, int end);
 	void shiftItemsOnePositionRight(int start, int end);

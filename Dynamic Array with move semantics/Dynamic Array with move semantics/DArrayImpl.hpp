@@ -170,14 +170,14 @@ DArray<T>::~DArray()
 template <typename T>
 void DArray<T>::insert(const T& newItem)
 {
-	resizeIfNeeded();
+	enlargeIfFull();
 
 	items[count++] = newItem;
 }
 
 
 template <typename T>
-inline void DArray<T>::resizeIfNeeded()
+inline void DArray<T>::enlargeIfFull()
 {
 	if (count == size)
 		resize((2 * size) > 0 ? (2 * size) : 8);
@@ -212,7 +212,7 @@ void DArray<T>::insertAt(int position, const T& newItem)
 {
 	throwExceptionIfInvalidIndex(position);
 
-	resizeIfNeeded();
+	enlargeIfFull();
 
 	shiftItemsOnePositionRight(position, count - 1);
 
