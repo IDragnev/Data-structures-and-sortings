@@ -44,9 +44,7 @@ private:
 	T* items;
 
 protected:
-	void setSize(int);
 	void setCount(int);
-
 	void enlargeIfFull();
 
 	void shiftItemsOnePositionLeft(int start, int end);
@@ -56,8 +54,9 @@ protected:
 	const T* getItems()const;
 
 private:
-	void copyFrom(const DArray<T>&);
+	void setSize(int);
 	void resize(int);
+	void copyFrom(const DArray<T>&);
 	void destroyAndNullMembers();
 	void destroyItems();
 	void nullMembers();
