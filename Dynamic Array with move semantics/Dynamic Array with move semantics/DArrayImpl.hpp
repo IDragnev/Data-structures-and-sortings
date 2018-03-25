@@ -309,21 +309,6 @@ void DArray<T>::remove(int position)
 }
 
 
-
-template <typename T>
-int DArray<T>::search(const T& searchedItem)const
-{
-	for (int i = 0; i < count; ++i)
-	{
-		if (items[i] == searchedItem)
-			return i;
-	}
-
-	return -1;
-}
-
-
-
 template <typename T>
 T& DArray<T>::operator[](int position)
 {

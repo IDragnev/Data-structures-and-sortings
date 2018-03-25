@@ -39,9 +39,6 @@ namespace DArraytest
 			Assert::IsTrue(darr.getSize() == 0, L"Default constructor not setting size with 0");
 			Assert::IsTrue(darr.getCount() == 0, L"Default constructor not setting count with 0");
 			Assert::IsTrue(darr.isEmpty(), L"isEmpty() returns false even though count is 0");
-
-			for (int i = 0; i < 10; ++i)
-				Assert::IsFalse(darr.search(i) != -1, L"Find returns a valid index in an empty array");
 		}
 
 		TEST_METHOD(AddingAndRemoval)
@@ -93,10 +90,6 @@ namespace DArraytest
 			fillArray(darr, 17);
 
 			Assert::IsTrue(darr.getSize() == 32, L"Resize is not working correctly");
-
-
-			for (int i = 0; i < 17; ++i)
-				Assert::IsTrue(darr.search(i) == i, L"Find is not working correctly");
 
 			darr.empty();
 			Assert::IsTrue(darr.isEmpty(), L"empty() is not working correctly");

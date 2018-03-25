@@ -29,7 +29,6 @@ public:
 public:
 	virtual void insert(const T&);
 	virtual void remove(int position);
-	virtual int search(const T&)const;
 
 	void insert(const DArray<T>&);
 	void insertAt(int, const T&);
