@@ -14,12 +14,12 @@ namespace Stringtest
 		{
 			//default constructor
 			String str;
-			Assert::IsTrue(str.len() == 0, L"len is not 0 after default construction");
+			Assert::IsTrue(str.getLength() == 0, L"getLength is not 0 after default construction");
 			Assert::IsTrue(strcmp(str, "") == 0, L"operator const char* is not working properly");
 
 			//const char* constructor
 			String str2("1234");
-			Assert::IsTrue(str2.len() == 4, L"const char* constructor is not working properly");
+			Assert::IsTrue(str2.getLength() == 4, L"const char* constructor is not working properly");
 			Assert::IsTrue(strcmp(str2, "1234") == 0, L"const char* constructor is not working properly");
 
 			//char constructor
@@ -41,7 +41,7 @@ namespace Stringtest
 			String str4(str3);
 
 			//assert that copy-constructed string is empty too
-			Assert::IsTrue(str4.len() == 0, L"Copy constructor is not working properly with an empty argument");
+			Assert::IsTrue(str4.getLength() == 0, L"Copy constructor is not working properly with an empty argument");
 			Assert::IsTrue(strcmp(str3, str4) == 0, L"Copy constructor is not working properly");
 		}
 
@@ -57,7 +57,7 @@ namespace Stringtest
 
 				str = str2;
 
-				Assert::IsTrue(str.len() == 0, L"Copy assignment with an empty string is not working properly");
+				Assert::IsTrue(str.getLength() == 0, L"Copy assignment with an empty string is not working properly");
 				Assert::IsTrue(strcmp(str, "") == 0, L"Copy assignment with an empty string is not working properly");
 				Assert::IsTrue(strcmp(str, str2) == 0, L"Copy assignment with an empty string is not working properly");
 			}
@@ -69,7 +69,7 @@ namespace Stringtest
 
 				str3 = str4;
 
-				Assert::IsTrue(str3.len() == 0, L"Copy assignment with an empty string is not working properly");
+				Assert::IsTrue(str3.getLength() == 0, L"Copy assignment with an empty string is not working properly");
 				Assert::IsTrue(strcmp(str3, "") == 0, L"Copy assignment with an empty string is not working properly");
 				Assert::IsTrue(strcmp(str3, str4) == 0, L"Copy assignment with an empty string is not working properly");
 			}
@@ -109,7 +109,7 @@ namespace Stringtest
 				//from an empty prvalue
 				String str2(String(nullptr));
 				Assert::IsTrue(strcmp(str2, "") == 0, L"Move constructor from an empty prvalue is not working properly");
-				Assert::IsTrue(str2.len() == 0, L"Move constructor from an empty prvalue is not working properly");
+				Assert::IsTrue(str2.getLength() == 0, L"Move constructor from an empty prvalue is not working properly");
 			}
 
 			{
@@ -119,7 +119,7 @@ namespace Stringtest
 
 				//argument should be left emtpy
 				Assert::IsTrue(strcmp(str2, "str") == 0, L"Move constructor from a non-empty xvalue is not working properly");
-				Assert::IsTrue(str.len() == 0, L"Move constructor is not managing its argument properly");
+				Assert::IsTrue(str.getLength() == 0, L"Move constructor is not managing its argument properly");
 				Assert::IsTrue(strcmp(str, "") == 0, L"Move constructor is not managing its argument properly");
 			}
 
@@ -129,8 +129,8 @@ namespace Stringtest
 
 			//argument and str2 should be empty
 			Assert::IsTrue(strcmp(str2, "") == 0, L"Move constructor from an empty xvalue is not working properly");
-			Assert::IsTrue(str2.len() == 0, L"Move constructor from an empty xvalue is not working properly");
-			Assert::IsTrue(str.len() == 0, L"Move constructor is not managing its argument properly");
+			Assert::IsTrue(str2.getLength() == 0, L"Move constructor from an empty xvalue is not working properly");
+			Assert::IsTrue(str.getLength() == 0, L"Move constructor is not managing its argument properly");
 			Assert::IsTrue(strcmp(str, "") == 0, L"Move constructor is not managing its argument properly");
 		}
 
@@ -149,7 +149,7 @@ namespace Stringtest
 			str = String(nullptr);
 
 			Assert::IsTrue(strcmp(str, "") == 0, L"Move assignment from an empty prvalue is not working properly");
-			Assert::IsTrue(str.len() == 0, L"Move assignment from an empty prvalue is not working properly");
+			Assert::IsTrue(str.getLength() == 0, L"Move assignment from an empty prvalue is not working properly");
 
 
 			//from a non-empty xvalue
@@ -160,13 +160,13 @@ namespace Stringtest
 			//str2 must be left empty
 			Assert::IsTrue(strcmp(str, "some val") == 0, L"Move assignment from a non-empty xvalue is not working properly");
 			Assert::IsTrue(strcmp(str2, "") == 0, L"Move assignment does not \'null\' its argument");
-			Assert::IsTrue(str2.len() == 0, L"Move assignment does not \'null\' its argument");
+			Assert::IsTrue(str2.getLength() == 0, L"Move assignment does not \'null\' its argument");
 
 			//from an empty xvalue
 			str = std::move(str2);
 
 			Assert::IsTrue(strcmp(str, "") == 0, L"Move assignment from an empty xvalue is not working properly");
-			Assert::IsTrue(str.len() == 0, L"Move assignment from an empty xvalue is not working properly");
+			Assert::IsTrue(str.getLength() == 0, L"Move assignment from an empty xvalue is not working properly");
 		}
 
 		TEST_METHOD(AppendingStringTest)
