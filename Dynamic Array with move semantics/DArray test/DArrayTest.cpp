@@ -41,48 +41,6 @@ namespace DArraytest
 			Assert::IsTrue(darr.isEmpty(), L"isEmpty() returns false even though count is 0");
 		}
 
-		TEST_METHOD(AddingAndRemoval)
-		{
-			DArray<int> darr(16);
-
-			Assert::IsTrue(darr.getSize() == 16, L"Size is not the one which the constructor was passed");
-			Assert::IsTrue(darr.getCount() == 0, L"Count is not 0 even though the array is empty");
-
-			for (int i = 1; i < 11; ++i)
-			{
-				darr.insert(i);
-				Assert::IsTrue(darr.getSize() == 16, L"Size is changed even though no resizing is needed(done)");
-				Assert::IsTrue(darr.getCount() == i, L"Count is not set correctly after inserting");
-				Assert::IsFalse(darr.isEmpty(), L"IsEmpty() returns true after inserting elements");
-				Assert::IsTrue(darr[i - 1] == i, L"Adding is not working correctly");
-			}
-
-
-			int count = darr.getCount();
-			for (int i = 1; i < 11; ++i)
-			{
-				darr.remove(0);
-				Assert::IsTrue(darr.getCount() == count - 1, L"Removing does not handle count correctly");
-				count--;
-			}
-
-			Assert::IsTrue(darr.isEmpty(), L"isEmpty() returns false even after removing all the elements");
-
-			darr.insert(1);
-			Assert::IsTrue(darr.getCount() == 1);
-
-			darr.insertAt(0, 0);
-			Assert::IsTrue(darr[0] == 0 && darr[1] == 1, L"insertAt() is not working correctly");
-			Assert::IsTrue(darr.getCount() == 2, L"Count is not handled correctly when using insertAt()");
-
-			for (int i = 0; i < 5; ++i)
-			{
-				darr.insertAt(0, i);
-				Assert::IsTrue(darr[0] == i, L"insertAt() is not working correctly");
-			}
-		}
-
-
 		TEST_METHOD(Other)
 		{
 			DArray<int> darr(16);
@@ -98,6 +56,7 @@ namespace DArraytest
 			Assert::IsTrue(darr.getSize() == 64, L"ensureSize is not working correctly");
 		}
 
+
 		TEST_METHOD(SimpleConstructorTest)
 		{
 			DArray<int> darr(16);
@@ -112,7 +71,6 @@ namespace DArraytest
 			Assert::IsTrue(darr2.getCount() == 1, L"Constructor not setting count with sent value");
 			Assert::IsFalse(darr2.isEmpty(), L"isEmpty() returns true even though count is 1");
 		}
-
 
 		TEST_METHOD(CopyCtorTest)
 		{
@@ -150,7 +108,7 @@ namespace DArraytest
 				DArray<int> temp;
 
 				DArray<int> darr(std::move(temp));
-				
+
 				//should be null-empty
 				Assert::IsTrue(darr.getCount() == 0);
 				Assert::IsTrue(darr.getSize() == 0);
@@ -181,6 +139,7 @@ namespace DArraytest
 			Assert::IsTrue(temp.getSize() == 0);
 			Assert::IsTrue(temp.isEmpty());
 		}
+
 
 		TEST_METHOD(CopyAssignmentTest)
 		{
@@ -246,6 +205,8 @@ namespace DArraytest
 				Assert::IsTrue(areEqual(darr, darr2), L"Copy-assigned array holds different values");
 			}
 		}
+
+
 
 		TEST_METHOD(MoveAssignmentTest)
 		{
@@ -332,6 +293,7 @@ namespace DArraytest
 			}
 		}
 
+
 		TEST_METHOD(LValueArrayAdd)
 		{
 			DArray<int> darr(8);
@@ -341,7 +303,7 @@ namespace DArraytest
 			DArray<int> darr2(10);
 
 			fillArray(darr2, 10, 5, 1);
-	
+
 			darr.insert(darr2);
 
 			//arg is left untouched
@@ -352,6 +314,50 @@ namespace DArraytest
 			Assert::IsTrue(darr.getCount() == 5 + darr2.getCount());
 			for (int i = 0; i < 10; ++i)
 				Assert::IsTrue(darr[i] == i);
+		}
+
+
+		TEST_METHOD(AddingAndRemoval)
+		{
+			DArray<int> darr(16);
+
+			Assert::IsTrue(darr.getSize() == 16, L"Size is not the one which the constructor was passed");
+			Assert::IsTrue(darr.getCount() == 0, L"Count is not 0 even though the array is empty");
+
+			for (int i = 1; i < 11; ++i)
+			{
+				darr.insert(i);
+				Assert::IsTrue(darr.getSize() == 16, L"Size is changed even though no resizing is needed(done)");
+				Assert::IsTrue(darr.getCount() == i, L"Count is not set correctly after inserting");
+				Assert::IsFalse(darr.isEmpty(), L"IsEmpty() returns true after inserting elements");
+				Assert::IsTrue(darr[i - 1] == i, L"Adding is not working correctly");
+			}
+
+
+			int count = darr.getCount();
+			for (int i = 1; i < 11; ++i)
+			{
+				darr.remove(0);
+				Assert::IsTrue(darr.getCount() == count - 1, L"Removing does not handle count correctly");
+				count--;
+			}
+
+			Assert::IsTrue(darr.isEmpty(), L"isEmpty() returns false even after removing all the elements");
+
+			darr.insert(1);
+			Assert::IsTrue(darr.getCount() == 1);
+
+			darr.insertAt(0, 0);
+
+			Assert::IsTrue(darr[0] == 0 && darr[1] == 1, L"insertAt() is not working correctly");
+			Assert::IsTrue(darr.getCount() == 2, L"Count is not handled correctly when using insertAt()");
+
+			for (int i = 0; i < 5; ++i)
+			{
+				darr.insertAt(0, i);
+				Assert::IsTrue(darr[0] == i, L"insertAt() is not working correctly");
+			}
+
 		}
 	};
 }

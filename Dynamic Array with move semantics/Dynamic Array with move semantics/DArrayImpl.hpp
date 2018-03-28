@@ -206,18 +206,22 @@ void DArray<T>::resize(size_type newSize)
  
 
 
-
 template <typename T>
 void DArray<T>::insertAt(size_type position, const T& newItem)
 {
-	throwExceptionIfInvalidIndex(position);
+	if (position == count)
+		insert(newItem);
+	else
+	{
+		throwExceptionIfInvalidIndex(position);
 
-	enlargeIfFull();
+		enlargeIfFull();
 
-	shiftItemsOnePositionRight(position, count - 1);
+		shiftItemsOnePositionRight(position, count - 1);
 
-	items[position] = newItem;
-	++count;
+		items[position] = newItem;
+		++count;
+	}
 }
 
 
@@ -232,19 +236,16 @@ inline void DArray<T>::throwExceptionIfInvalidIndex(size_type index)const
 
 
 //
-// (!) the function assumes that count < size, so that shifting the last 
-//     item to the right will not write outside the array
+//  the function assumes that count < size, so that shifting the last 
+//  item to the right will not write outside the array
 //
 template <typename T>
 inline void DArray<T>::shiftItemsOnePositionRight(size_type start, size_type end)
 {
 	assert(end < count && count < size);
 
-	while (end >= start)
-	{
-		items[end + 1] = items[end];
-		--end;
-	}
+	for (size_type i = end + 1; i > start; --i)
+		items[i] = items[i - 1];
 }
 
 
@@ -254,11 +255,8 @@ inline void DArray<T>::shiftItemsOnePositionLeft(size_type start, size_type end)
 {
 	assert(start > 0);
 
-	while (start <= end)
-	{
-		items[start - 1] = items[start];
-		++start;
-	}
+	for (size_type i = start - 1; i < end; ++i)
+		items[i] = items[i + 1];
 }
 
 
