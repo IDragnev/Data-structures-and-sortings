@@ -39,7 +39,7 @@ DArray<T>::DArray(sizeType size, sizeType count)
 
 
 template <typename T>
-void DArray<T>::setCount(sizeType newCount)
+inline void DArray<T>::setCount(sizeType newCount)
 {
 	if (newCount <= size)
 	{
@@ -52,7 +52,7 @@ void DArray<T>::setCount(sizeType newCount)
 
 
 template <typename T>
-DArray<T>& DArray<T>::operator=(DArray<T>&& source)
+inline DArray<T>& DArray<T>::operator=(DArray<T>&& source)
 {
 	if (this != &source)
 	{
@@ -92,9 +92,8 @@ inline void DArray<T>::moveParameterInThis(DArray<T>& source)
 
 template <typename T>
 inline DArray<T>::DArray(const DArray<T>& other)
-	:
-	items(nullptr)
 {
+	nullMembers();
 	copyFrom(other);
 }
 
@@ -118,14 +117,12 @@ void DArray<T>::copyFrom(const DArray<T>& other)
 {
 	if ( ! other.isEmpty() )
 	{
-		T* buffer = new T[other.size];
+		DArray<T> temporary(other.size, other.count);
 
 		for (sizeType i = 0; i < other.count; ++i)
-			buffer[i] = other.items[i];
+			temporary.items[i] = other.items[i];
 
-		destroyItems();
-
-		directlySetItemsCountAndSize(buffer, other.count, other.size);
+		std::swap(*this, temporary);
 	}
 	else 
 	{
@@ -177,23 +174,17 @@ inline void DArray<T>::enlargeIfFull()
 
 
 
-//
-// (!) if items == nullptr, then count will be 0 
-//   and the null pointer will not be touched
-//
 template <typename T>
 void DArray<T>::resize(sizeType newSize)
 {
-	T* newItems = new T[newSize];
-
 	sizeType newCount = (count <= newSize) ? count : newSize;
 
+	DArray<T> temporary(newSize, newCount);
+
 	for (sizeType i = 0; i < newCount; ++i)
-		newItems[i] = items[i];
+		temporary.items[i] = items[i];
 
-	destroyItems();
-
-	directlySetItemsCountAndSize(newItems, newCount, newSize);
+	std::swap(*this, temporary);
 }
  
 
