@@ -12,352 +12,298 @@ namespace DArraytest
 			arr.insert(i);
 	}
 
-	bool areEqual(DArray<int>& darr1, DArray<int>& darr2)
+	bool areEqual(DArray<int>& lhs, DArray<int>& rhs)
 	{
-		int count = darr1.getCount();
+		if (lhs.getSize() != rhs.getSize()) 
+			return false;
 
-		if (count != darr2.getCount())
+		int count = lhs.getCount();
+
+		if (count != rhs.getCount())
 			return false;
 
 		for (int i = 0; i < count; ++i)
 		{
-			if (darr1[i] != darr2[i])
+			if (lhs[i] != rhs[i])
 				return false;
 		}
 
 		return true;
 	}
 
+
+	bool areSizeAndCountZero(DArray<int>& dArray)
+	{
+		return dArray.getCount() == 0 && dArray.getSize() == 0;
+	}
+
+
 	TEST_CLASS(DArrayTest)
 	{
 	public:
 		
-		TEST_METHOD(EmptyDArrayTest)
+		TEST_METHOD(ConstructorTest)
 		{
-			DArray<int> darr;
-
-			Assert::IsTrue(darr.getSize() == 0, L"Default constructor not setting size with 0");
-			Assert::IsTrue(darr.getCount() == 0, L"Default constructor not setting count with 0");
-			Assert::IsTrue(darr.isEmpty(), L"isEmpty() returns false even though count is 0");
-		}
-
-		TEST_METHOD(Other)
-		{
-			DArray<int> darr(16);
-
-			fillArray(darr, 17);
-
-			Assert::IsTrue(darr.getSize() == 32, L"Resize is not working correctly");
-
-			darr.empty();
-			Assert::IsTrue(darr.isEmpty(), L"empty() is not working correctly");
-
-			darr.ensureSize(64);
-			Assert::IsTrue(darr.getSize() == 64, L"ensureSize is not working correctly");
-		}
-
-
-		TEST_METHOD(SimpleConstructorTest)
-		{
-			DArray<int> darr(16);
-
-			Assert::IsTrue(darr.getSize() == 16, L"Constructor not setting size with sent value");
-			Assert::IsTrue(darr.getCount() == 0);
-			Assert::IsTrue(darr.isEmpty(), L"isEmpty() returns false even though count is 0");
-
-			DArray<int> darr2(16, 1);
-
-			Assert::IsTrue(darr2.getSize() == 16, L"Constructor not setting size with sent value");
-			Assert::IsTrue(darr2.getCount() == 1, L"Constructor not setting count with sent value");
-			Assert::IsFalse(darr2.isEmpty(), L"isEmpty() returns true even though count is 1");
-		}
-
-		TEST_METHOD(CopyCtorTest)
-		{
+			for (size_t size = 0; size < 50; ++size)
 			{
-				//from a non-empty
-				DArray<int> darr(16);
-
-				fillArray(darr, 10);
-
-				DArray<int> darr2(darr);
-
-				Assert::IsTrue(darr.getSize() == darr2.getSize(), L"Copy constructor is not copying size correctly");
-				Assert::IsTrue(darr.getCount() == darr2.getCount(), L"Copy constructor is not copying count correctly");
-				Assert::IsFalse(darr2.isEmpty(), L"isEmpty() returns true after copying from non-empty array");
-
-				Assert::IsTrue(areEqual(darr, darr2), L"Copy-constructed array holds different values");
+				for (size_t count = 0; count <= size; ++count)
+				{
+					DArray<int> dArray(size, count);
+					Assert::IsTrue(dArray.getCount() == count);
+					Assert::IsTrue(dArray.getSize() == size);
+				}
 			}
+		}
 
-			//from an empty 
-			DArray<int> darr;
-			DArray<int> darr2(darr);
+		TEST_METHOD(GlobalSizeModifyingFunctions)
+		{
+			DArray<int> dArray(16);
+			fillArray(dArray, 17);
 
-			Assert::IsTrue(darr.getSize() == darr2.getSize(), L"Copy constructor is not copying size correctly");
-			Assert::IsTrue(darr.getCount() == darr2.getCount(), L"Copy constructor is not copying count correctly");
-			Assert::IsTrue(darr2.isEmpty(), L"isEmpty() returns false after copying from an empty array");
+			Assert::IsTrue(dArray.getSize() > 16);
+			Assert::IsTrue(dArray.getCount() == 17);
 
-			Assert::IsTrue(areEqual(darr, darr2), L"Copy-constructed array holds different values");
+			dArray.empty();
+			Assert::IsTrue(dArray.isEmpty());
+			Assert::IsTrue(dArray.getSize() == 0);
+
+			dArray.ensureSize(64);
+			Assert::IsTrue(dArray.getSize() == 64);
+
+			dArray.shrink(32);
+			Assert::IsTrue(dArray.getSize() == 32);
 		}
 
 
-		TEST_METHOD(MoveConstructorTest)
+		TEST_METHOD(CopyCtorFromEmptyArgument)
 		{
-			{
-				//from an empty
-				DArray<int> temp;
+			DArray<int> source;
+			DArray<int> destination(source);
 
-				DArray<int> darr(std::move(temp));
-
-				//should be null-empty
-				Assert::IsTrue(darr.getCount() == 0);
-				Assert::IsTrue(darr.getSize() == 0);
-				Assert::IsTrue(darr.isEmpty());
-
-				//should be nulled
-				Assert::IsTrue(temp.getCount() == 0);
-				Assert::IsTrue(temp.getSize() == 0);
-				Assert::IsTrue(temp.isEmpty());
-			}
-
-			//from a non-empty
-			DArray<int> temp(10);
-
-			fillArray(temp, 4);
-
-			DArray<int> darr(std::move(temp));
-
-			Assert::IsTrue(darr.getCount() == 4);
-			Assert::IsTrue(darr.getSize() == 10);
-			Assert::IsFalse(darr.isEmpty());
-
-			for (int i = 0; i < 4; ++i)
-				Assert::IsTrue(darr[i] == i);
-
-			//should be nulled
-			Assert::IsTrue(temp.getCount() == 0);
-			Assert::IsTrue(temp.getSize() == 0);
-			Assert::IsTrue(temp.isEmpty());
-		}
-
-
-		TEST_METHOD(CopyAssignmentTest)
-		{
-			{
-				//empty to empty
-				DArray<int> darr;
-				DArray<int> darr2;
-
-				darr2 = darr;
-
-				Assert::IsTrue(darr2.getCount() == 0);
-				Assert::IsTrue(darr2.getSize() == 0);
-				Assert::IsTrue(darr2.isEmpty());
-			}
-
-			{
-				//empty to non-empty
-				DArray<int> darr;
-				fillArray(darr, 4);
-
-				DArray<int> darr2;
-
-				darr = darr2;
-
-				Assert::IsTrue(darr.getCount() == 0);
-				Assert::IsTrue(darr.getSize() == 0);
-				Assert::IsTrue(darr.isEmpty());
-			}
-
-
-			{
-				//non-empty to empty
-				DArray<int> darr(8);
-
-				fillArray(darr, 4);
-
-				DArray<int> darr2;
-				darr2 = darr;
-
-				Assert::IsTrue(darr2.getCount() == darr.getCount());
-				Assert::IsTrue(darr2.getSize() == darr.getSize());
-				Assert::IsFalse(darr2.isEmpty());
-
-				Assert::IsTrue(areEqual(darr, darr2), L"Copy-assigned array holds different values");
-			}
-
-
-			{
-				//non-empty to non-empty
-				DArray<int> darr(8);
-
-				fillArray(darr, 4);
-
-				DArray<int> darr2;
-				fillArray(darr2, 7, 0, 5);
-
-				darr2 = darr;
-
-				Assert::IsTrue(darr2.getCount() == darr.getCount());
-				Assert::IsTrue(darr2.getSize() == darr.getSize());
-				Assert::IsFalse(darr2.isEmpty());
-
-				Assert::IsTrue(areEqual(darr, darr2), L"Copy-assigned array holds different values");
-			}
+			Assert::IsTrue(areEqual(source, destination));
 		}
 
 
 
-		TEST_METHOD(MoveAssignmentTest)
+		TEST_METHOD(CopyCtorFromNonEmptyArgument)
 		{
-			{
-				//empty to empty
-				DArray<int> darr;
-				DArray<int> darr2;
+			DArray<int> source(16);
+			fillArray(source, 10);
 
-				darr2 = std::move(darr);
+			DArray<int> destination(source);
 
-				Assert::IsTrue(darr.getCount() == 0);
-				Assert::IsTrue(darr.getSize() == 0);
-				Assert::IsTrue(darr.isEmpty());
-
-				Assert::IsTrue(darr2.getCount() == 0);
-				Assert::IsTrue(darr2.getSize() == 0);
-				Assert::IsTrue(darr2.isEmpty());
-			}
-
-			{
-				//empty to non-empty
-				DArray<int> darr;
-				fillArray(darr, 4);
-
-				DArray<int> darr2;
-
-				darr = std::move(darr2);
-
-				Assert::IsTrue(darr.getCount() == 0);
-				Assert::IsTrue(darr.getSize() == 0);
-				Assert::IsTrue(darr.isEmpty());
-
-				Assert::IsTrue(darr2.getCount() == 0);
-				Assert::IsTrue(darr2.getSize() == 0);
-				Assert::IsTrue(darr2.isEmpty());
-			}
-
-
-			{
-				//non-empty to empty
-				DArray<int> darr(8);
-
-				fillArray(darr, 4);
-
-				DArray<int> darr2;
-				darr2 = std::move(darr);
-
-				//argument is nulled
-				Assert::IsTrue(darr.getCount() == 0);
-				Assert::IsTrue(darr.getSize() == 0);
-				Assert::IsTrue(darr.isEmpty());
-
-				Assert::IsTrue(darr2.getCount() == 4);
-				Assert::IsTrue(darr2.getSize() == 8);
-				Assert::IsFalse(darr2.isEmpty());
-
-				for (int i = 0; i < 4; ++i)
-					Assert::IsTrue(darr2[i] == i);
-			}
-
-
-			{
-				//non-empty to non-empty
-				DArray<int> darr(8);
-
-				fillArray(darr, 4);
-
-				DArray<int> darr2;
-				fillArray(darr2, 7, 0, 5);
-
-				darr2 = std::move(darr);
-
-				//argument is nulled
-				Assert::IsTrue(darr.getCount() == 0);
-				Assert::IsTrue(darr.getSize() == 0);
-				Assert::IsTrue(darr.isEmpty());
-
-				Assert::IsTrue(darr2.getCount() == 4);
-				Assert::IsTrue(darr2.getSize() == 8);
-				Assert::IsFalse(darr2.isEmpty());
-
-				for (int i = 0; i < 4; ++i)
-					Assert::IsTrue(darr2[i] == i);
-			}
+			Assert::IsTrue(areEqual(source, destination));
 		}
 
 
-		TEST_METHOD(LValueArrayAdd)
+		TEST_METHOD(MoveConstructorFromEmpty)
 		{
-			DArray<int> darr(8);
+			DArray<int> source;
+			DArray<int> destination(std::move(source));
 
-			fillArray(darr, 5);
+			Assert::IsTrue(areSizeAndCountZero(source));
+			Assert::IsTrue(areSizeAndCountZero(destination));
 
-			DArray<int> darr2(10);
+		}
 
-			fillArray(darr2, 10, 5, 1);
 
-			darr.insert(darr2);
+		TEST_METHOD(MoveConstructorFromNonEmpty)
+		{
+			DArray<int> source(35);
+			fillArray(source, 30);
 
-			//arg is left untouched
-			Assert::IsTrue(darr2.getCount() == 5);
-			Assert::IsTrue(darr2.getSize() == 10);
-			Assert::IsFalse(darr2.isEmpty());
+			DArray<int> destination(std::move(source));
 
-			Assert::IsTrue(darr.getCount() == 5 + darr2.getCount());
+			Assert::IsTrue(areSizeAndCountZero(source));
+
+			Assert::IsTrue(destination.getCount() == 30);
+			Assert::IsTrue(destination.getSize() == 35);
+			Assert::IsFalse(destination.isEmpty());
+
+			for (int i = 0; i < 30; ++i)
+				Assert::IsTrue(destination[i] == i);
+
+		}
+
+
+		TEST_METHOD(CopyAssignmentEmptyToEmpty)
+		{
+			DArray<int> source;
+			DArray<int> dest;
+
+			dest = source;
+
+			Assert::IsTrue(areSizeAndCountZero(dest));
+		}
+
+
+		TEST_METHOD(CopyAssignmentEmptyToNonEmpty)
+		{
+			DArray<int> destination;
+			fillArray(destination, 20);
+
+			DArray<int> source;
+
+			destination = source;
+
+			Assert::IsTrue(areSizeAndCountZero(destination));
+		}
+
+
+		TEST_METHOD(CopyAssignmentNonEmptyToEmpty)
+		{
+			DArray<int> source(30);
+			fillArray(source, 27);
+
+			DArray<int> destination;
+			destination = source;
+
+			Assert::IsTrue(areEqual(source, destination));
+		}
+
+		TEST_METHOD(CopyAssignmentNonEmptyToNonEmpty)
+		{
+			DArray<int> source(30);
+			fillArray(source, 27);
+
+			DArray<int> destination;
+			fillArray(destination, 20, 0, 5);
+
+			destination = source;
+
+			Assert::IsTrue(areEqual(source, destination));
+		}
+
+
+		TEST_METHOD(MoveAssignmentEmptyToEmpty)
+		{
+			DArray<int> source;
+			DArray<int> destination;
+
+			destination = std::move(source);
+
+			Assert::IsTrue(areSizeAndCountZero(source));
+			Assert::IsTrue(areSizeAndCountZero(destination));
+		}
+
+
+		TEST_METHOD(MoveAssignmentEmptyToNonEmpty)
+		{
+			DArray<int> destination;
+			fillArray(destination, 40);
+
+			DArray<int> source;
+
+			destination = std::move(source);
+
+			Assert::IsTrue(areSizeAndCountZero(source));
+			Assert::IsTrue(areSizeAndCountZero(destination));
+		}
+
+		TEST_METHOD(MoveAssignmentNonEmptyToEmpty)
+		{
+			DArray<int> source(30);
+			fillArray(source, 27);
+
+			DArray<int> destination;
+			destination = std::move(source);
+
+			Assert::IsTrue(areSizeAndCountZero(source));
+
+			Assert::IsTrue(destination.getCount() == 27);
+			Assert::IsTrue(destination.getSize() == 30);
+			Assert::IsFalse(destination.isEmpty());
+
+			for (int i = 0; i < 27; ++i)
+				Assert::IsTrue(destination[i] == i);
+		}
+
+		TEST_METHOD(MoveAssignmentNonEmptyToNonEmpty)
+		{
+			DArray<int> source(30);
+			fillArray(source, 27);
+
+			DArray<int> destination;
+			fillArray(destination, 7, 0, 5);
+
+			destination = std::move(source);
+
+			Assert::IsTrue(areSizeAndCountZero(source));
+
+			Assert::IsTrue(destination.getCount() == 27);
+			Assert::IsTrue(destination.getSize() == 30);
+			Assert::IsFalse(destination.isEmpty());
+
+			for (int i = 0; i < 27; ++i)
+				Assert::IsTrue(destination[i] == i);
+		}
+
+
+		TEST_METHOD(ArrayInsertionTest)
+		{
+			DArray<int> destination(8);
+			fillArray(destination, 5);
+
+			DArray<int> source(10);
+			fillArray(source, 10, 5, 1);
+
+			destination.insert(source);
+
+			Assert::IsTrue(destination.getCount() == 5 + source.getCount());
+		
 			for (int i = 0; i < 10; ++i)
-				Assert::IsTrue(darr[i] == i);
+				Assert::IsTrue(destination[i] == i);
 		}
 
 
 		TEST_METHOD(AddingAndRemoval)
 		{
-			DArray<int> darr(16);
-
-			Assert::IsTrue(darr.getSize() == 16, L"Size is not the one which the constructor was passed");
-			Assert::IsTrue(darr.getCount() == 0, L"Count is not 0 even though the array is empty");
+			DArray<int> dArray(16);
 
 			for (int i = 1; i < 11; ++i)
 			{
-				darr.insert(i);
-				Assert::IsTrue(darr.getSize() == 16, L"Size is changed even though no resizing is needed(done)");
-				Assert::IsTrue(darr.getCount() == i, L"Count is not set correctly after inserting");
-				Assert::IsFalse(darr.isEmpty(), L"IsEmpty() returns true after inserting elements");
-				Assert::IsTrue(darr[i - 1] == i, L"Adding is not working correctly");
+				dArray.insert(i);
+				Assert::IsTrue(dArray.getSize() == 16);
+				Assert::IsTrue(dArray.getCount() == i);
+				Assert::IsFalse(dArray.isEmpty());
+				Assert::IsTrue(dArray[i - 1] == i);
 			}
 
+			int count = dArray.getCount();
 
-			int count = darr.getCount();
 			for (int i = 1; i < 11; ++i)
 			{
-				darr.remove(0);
-				Assert::IsTrue(darr.getCount() == count - 1, L"Removing does not handle count correctly");
-				count--;
+				dArray.remove(0);
+				Assert::IsTrue(dArray.getCount() == --count);
 			}
 
-			Assert::IsTrue(darr.isEmpty(), L"isEmpty() returns false even after removing all the elements");
+			Assert::IsTrue(dArray.isEmpty());
+		}
 
-			darr.insert(1);
-			Assert::IsTrue(darr.getCount() == 1);
 
-			darr.insertAt(0, 0);
+		TEST_METHOD(InsertAtTest)
+		{
+			DArray<int> dArray(16);
 
-			Assert::IsTrue(darr[0] == 0 && darr[1] == 1, L"insertAt() is not working correctly");
-			Assert::IsTrue(darr.getCount() == 2, L"Count is not handled correctly when using insertAt()");
-
-			for (int i = 0; i < 5; ++i)
+			//inserting back
+			for (int i = 0; i < 16; ++i)
 			{
-				darr.insertAt(0, i);
-				Assert::IsTrue(darr[0] == i, L"insertAt() is not working correctly");
+				dArray.insertAt(i, i);
+				Assert::IsTrue(dArray.getCount() == i + 1);
+				Assert::IsTrue(dArray[i] == i);
 			}
 
+			int count = dArray.getCount();
+
+			//inserting between the elements
+			for (int i = 0; i < 10; ++i)
+			{
+				for (int j = count; j >= 0; --j)
+				{
+					dArray.insertAt(j, i);
+					Assert::IsTrue(dArray[j] == i);
+				}
+			}
 		}
 	};
 }
