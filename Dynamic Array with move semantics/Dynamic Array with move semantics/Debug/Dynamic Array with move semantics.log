@@ -1,3 +1,4 @@
-﻿  main.cpp
+﻿cl : Command line warning D9028: minimal rebuild failure, reverting to normal build
+  main.cpp
   Dynamic Array with move semantics.vcxproj -> D:\Sortings and data structures\Data-structures-and-sortings\Dynamic Array with move semantics\Debug\Dynamic Array with move semantics.exe
   Dynamic Array with move semantics.vcxproj -> D:\Sortings and data structures\Data-structures-and-sortings\Dynamic Array with move semantics\Debug\Dynamic Array with move semantics.pdb (Full PDB)
