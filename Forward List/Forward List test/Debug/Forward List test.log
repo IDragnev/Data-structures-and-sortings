@@ -1,8 +1,6 @@
 ﻿C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets(392,5): warning MSB8028: The intermediate directory (Debug\) contains files shared from another project (Forward List test.vcxproj).  This can lead to incorrect clean and rebuild behavior.
-  IteratorTest.cpp
-  Generating Code...
-  Compiling...
   SinglyLinkedListTest.cpp
+  IteratorTest.cpp
   Generating Code...
   Forward List test.vcxproj -> D:\Sortings and data structures\Data-structures-and-sortings\Forward List\Debug\Singly-Linked List Test.dll
   Forward List test.vcxproj -> D:\Sortings and data structures\Data-structures-and-sortings\Forward List\Debug\Singly-Linked List Test.pdb (Partial PDB)

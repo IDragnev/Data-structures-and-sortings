@@ -10,61 +10,66 @@
 template <typename T>
 class SinglyLinkedList
 {
+private:
+	typedef unsigned countType;
+
 public:
 	SinglyLinkedList();
-	SinglyLinkedList(SinglyLinkedList<T>&&);
-	SinglyLinkedList(const SinglyLinkedList<T>&);
+	SinglyLinkedList(SinglyLinkedList<T>&& source);
+	SinglyLinkedList(const SinglyLinkedList<T>& source);
 	~SinglyLinkedList();
 
-	SinglyLinkedList<T>& operator=(SinglyLinkedList<T>&&);
-	SinglyLinkedList<T>& operator=(const SinglyLinkedList<T>&);
+	SinglyLinkedList<T>& operator=(SinglyLinkedList<T>&& rhs);
+	SinglyLinkedList<T>& operator=(const SinglyLinkedList<T>& rhs);
 
-	int getCount()const;                             
-	bool isEmpty()const;                              
+	countType getCount() const;                             
+	bool isEmpty() const;                              
 
 	SinglyLinkedListIterator<T> getHead();                         
 	SinglyLinkedListIterator<T> getTail();
 
-	void appendList(SinglyLinkedList<T>&&);
-	void appendList(const SinglyLinkedList<T>&);          
+	void appendList(SinglyLinkedList<T>&& other);
+	void appendList(const SinglyLinkedList<T>& other);          
 
 	void empty();
 
 public:
-	void setHead(const T&);                           
-	void setTail(const T&);                          
+	void setHead(const T& item);                           
+	void setTail(const T& item);                          
 
-	void insertAsHead(const T&);                         
-	void insertAsTail(const T&);                         
+	void insertAsHead(const T& item);                         
+	void insertAsTail(const T& item);                         
 
 	void removeHead();                                
 	void removeTail();                          
 
-	void removeAt(SinglyLinkedListIterator<T>& it); 
-	void removeBefore(SinglyLinkedListIterator<T>& it);
-	void removeAfter(SinglyLinkedListIterator<T>& it);
+	void removeAt(SinglyLinkedListIterator<T>& iterator); 
+	void removeBefore(SinglyLinkedListIterator<T>& iterator);
+	void removeAfter(SinglyLinkedListIterator<T>& iterator);
 
-	void insertAfter(SinglyLinkedListIterator<T>& it, const T&);          
-	void insertBefore(SinglyLinkedListIterator<T>& it, const T&);      
+	void insertAfter(SinglyLinkedListIterator<T>& iterator, const T& item);
+	void insertBefore(SinglyLinkedListIterator<T>& iterator, const T& item);
 
 private:
-	int count;                                         
+	countType count;                                         
 	Node<T>* head;                                  
 	Node<T>* tail;                                    
 
 private:
-	void throwExceptionIfEmpty()const;    
+	void throwExceptionIfEmpty()const; 
+	void throwExceptionIfInvalid(const SinglyLinkedListIterator<T>& iterator) const;
+
 	void nullMembers();
 
 	Node<T>* findNodeBefore(const Node<T>* node)const; 
 
 	void removeAt(Node<T>* node);
-	void insertAfter(Node<T>* node, const T&);
-	void insertBefore(Node<T>* node, const T&);
+	void insertAfter(Node<T>* node, const T& item);
+	void insertBefore(Node<T>* node, const T& item);
 
-	void appendChainAndUpdateCount(Node<T>* first, Node<T>* last, int count);
+	void appendChainAndUpdateCount(Node<T>* first, Node<T>* last, countType count);
 
-	void swapContentsWithReconstructedParameter(SinglyLinkedList<T>);
+	void swapContentsWithReconstructedParameter(SinglyLinkedList<T> other);
 
 private:
 	static Node<T>* cloneChain(const Node<T>* firstNode, Node<T>** lastNode = nullptr);
