@@ -5,44 +5,44 @@ class String
 {
 public:
 	String();                                 
-	String(char);                            
-	String(const char*);
-	String(const String&);
-	String(String&&);
+	String(char symbol);                            
+	String(const char* string);
+	String(const String& source);
+	String(String&& source);
 	~String();
 
-	String& operator=(String&&);
-	String& operator=(const String&);
+	String& operator=(String&& rhs);
+	String& operator=(const String& rhs);
 
-	operator const char*()const;
+	operator const char*() const;
 
-	size_t getLength()const;                          
+	size_t getLength() const;                          
 
-	void append(const char*);
-	void append(char);
+	void append(const char* string);
+	void append(char symbol);
 
-	String& operator+=(const char*);
-	String& operator+=(char);
+	String& operator+=(const char* rhs);
+	String& operator+=(char rhs);
 
 private:
 	char* value;
 
 private:
-	const char* getValue()const;           
-	void setValue(const char*);  
-	void setValue(char);
+	const char* getValue() const;           
+	void setValue(const char* cString);  
+	void setValue(char symbol);
 	void nullValue();
 	void destroyValue();
 
-	void moveParameterInThis(String&);
+	void moveParameterInThis(String& source);
 
-	static char* cloneCString(const char*);
+	static char* cloneCString(const char* cString);
 };
 
 
-String operator+(char, const String&);
-String operator+(const char*, const String&);
-String operator+(const String&, const String&);
+String operator+(char lhs, const String& rhs);
+String operator+(const char* lhs, const String& rhs);
+String operator+(const String& lhs, const String& rhs);
 
 bool operator==(const String& lhs, const String& rhs); 
 bool operator!=(const String& lhs, const String& rhs);
