@@ -213,27 +213,28 @@ bool operator!=(const String& lhs, const String& rhs)
 	return !(lhs == rhs);
 }
 
-bool operator>(const String& lhs, const String& rhs)
-{
-	return strcmp(lhs, rhs) > 0;
-}
-
-
-bool operator>=(const String& lhs, const String& rhs)
-{
-	return (lhs > rhs) || (lhs == rhs);
-}
-
 
 bool operator<(const String& lhs, const String& rhs)
 {
-	return !(lhs >= rhs);
+	return strcmp(lhs, rhs) < 0;
 }
 
 
 bool operator<=(const String& lhs, const String& rhs)
 {
-	return !(lhs > rhs);
+	return (lhs < rhs) || (lhs == rhs);
+}
+
+
+bool operator>(const String& lhs, const String& rhs)
+{
+	return !(lhs <= rhs);
+}
+
+
+bool operator>=(const String& lhs, const String& rhs)
+{
+	return !(lhs < rhs);
 }
 
 
@@ -248,7 +249,6 @@ String operator+(const String& lhs, const String& rhs)
 }
 
 
-
 String operator+(char lhs, const String& rhs)
 {
 	String result(lhs);
@@ -257,7 +257,6 @@ String operator+(char lhs, const String& rhs)
 
 	return result;
 }
-
 
 
 String operator+(const char* lhs, const String& rhs)
