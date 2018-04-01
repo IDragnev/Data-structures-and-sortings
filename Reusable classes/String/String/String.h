@@ -25,14 +25,14 @@ public:
 	String& operator+=(char rhs);
 
 private:
-	char* value;
+	char* actualString;
 
 private:
-	const char* getValue() const;           
-	void setValue(const char* cString);  
-	void setValue(char symbol);
-	void nullValue();
-	void destroyValue();
+	const char* getActualString() const;           
+	void setActualString(const char* cString);  
+	void setActualString(char symbol);
+	void nullActualString();
+	void destroyActualString();
 
 	void moveParameterInThis(String& source);
 
