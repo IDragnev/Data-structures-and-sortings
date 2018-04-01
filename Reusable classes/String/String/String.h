@@ -39,16 +39,15 @@ private:
 	static char* cloneCString(const char* cString);
 };
 
-
+String operator+(const String& lhs, char rhs);
 String operator+(char lhs, const String& rhs);
-String operator+(const char* lhs, const String& rhs);
 String operator+(const String& lhs, const String& rhs);
 
 bool operator==(const String& lhs, const String& rhs); 
 bool operator!=(const String& lhs, const String& rhs);
-bool operator>(const String& lhs, const String& rhs);
-bool operator>=(const String& lhs, const String& rhs);
 bool operator<(const String& lhs, const String& rhs);
 bool operator<=(const String& lhs, const String& rhs);
+bool operator>(const String& lhs, const String& rhs);
+bool operator>=(const String& lhs, const String& rhs);
 
 #endif // __STRING_H_INCLUDED__

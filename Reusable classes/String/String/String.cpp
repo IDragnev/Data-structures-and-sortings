@@ -25,11 +25,11 @@ String::String(const String& other) :
 
 
 
-String& String::operator=(const String& other)
+String& String::operator=(const String& rhs)
 {
-	if (this != &other)
+	if (this != &rhs)
 	{
-		setActualString(other.actualString);
+		setActualString(rhs.actualString);
 	}
 
 	return *this;
@@ -255,7 +255,7 @@ String operator+(char lhs, const String& rhs)
 }
 
 
-String operator+(const char* lhs, const String& rhs)
+String operator+(const String& lhs, char rhs)
 {
 	String result(lhs);
 
@@ -263,5 +263,4 @@ String operator+(const char* lhs, const String& rhs)
 
 	return result;
 }
-
 
