@@ -77,7 +77,8 @@ int main()
 		SinglyLinkedList<String> list2;
 		list2.insertAsHead("some value");
 
-		list2 = list;		
+		list2 = list;
+		SinglyLinkedList<String> list3(list2);
 		
 	}
 	catch (std::exception& ex)

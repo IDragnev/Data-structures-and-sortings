@@ -67,7 +67,7 @@ inline void SinglyLinkedList<T>::setTail(const T& data)
 
 
 template <typename T>
-void SinglyLinkedList<T>::clearChain(const Node<T>* firstNode)
+void SinglyLinkedList<T>::clearChainStartingAt(const Node<T>* firstNode)
 {
 	if (firstNode != nullptr)
 	{
@@ -90,7 +90,7 @@ void SinglyLinkedList<T>::clearChain(const Node<T>* firstNode)
 template <typename T>
 inline void SinglyLinkedList<T>::empty()
 {
-	clearChain(head);
+	clearChainStartingAt(head);
 
 	nullMembers();
 }
@@ -98,7 +98,7 @@ inline void SinglyLinkedList<T>::empty()
 
 
 template <typename T>
-Node<T>* SinglyLinkedList<T>::cloneChain(const Node<T>* firstNode, Node<T>** endOfChain)
+Node<T>* SinglyLinkedList<T>::cloneChainStartingAt(const Node<T>* firstNode, Node<T>** endOfChain)
 {
 	assert(firstNode);
 	Node<T>* newChainHead = nullptr;
@@ -127,7 +127,7 @@ Node<T>* SinglyLinkedList<T>::cloneChain(const Node<T>* firstNode, Node<T>** end
 	} 
 	catch (std::bad_alloc&)
 	{		
-		clearChain(newChainHead);
+		clearChainStartingAt(newChainHead);
 
 		throw;
 	}
@@ -141,7 +141,7 @@ void SinglyLinkedList<T>::appendList(const SinglyLinkedList<T>& other)
 	if ( ! other.isEmpty() )
 	{
 		Node<T>* newChainTail = nullptr;
-		Node<T>* newChainHead = cloneChain(other.head, &newChainTail);
+		Node<T>* newChainHead = cloneChainStartingAt(other.head, &newChainTail);
 
 		appendChainAndUpdateCount(newChainHead, newChainTail, other.count);
 	}
@@ -208,9 +208,7 @@ SinglyLinkedList<T>::SinglyLinkedList() :
 
 template <typename T>
 SinglyLinkedList<T>::SinglyLinkedList(const SinglyLinkedList<T>& other)	:
-	count(0),
-	head(nullptr),
-	tail(nullptr)
+	SinglyLinkedList<T>()
 {
 	appendList(other);
 	assert(count == other.count);
@@ -265,7 +263,7 @@ inline void SinglyLinkedList<T>::swapContentsWithReconstructedParameter(SinglyLi
 template <typename T>
 inline SinglyLinkedList<T>::~SinglyLinkedList()
 {
-	clearChain(head);
+	clearChainStartingAt(head);
 }
 
 

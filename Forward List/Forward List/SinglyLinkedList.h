@@ -72,8 +72,8 @@ private:
 	void swapContentsWithReconstructedParameter(SinglyLinkedList<T> other);
 
 private:
-	static Node<T>* cloneChain(const Node<T>* firstNode, Node<T>** lastNode = nullptr);
-	static void clearChain(const Node<T>* firstNode);  
+	static Node<T>* cloneChainStartingAt(const Node<T>* firstNode, Node<T>** lastNode = nullptr);
+	static void clearChainStartingAt(const Node<T>* firstNode);  
 };
 
 #include "SinglyLinkedListImpl.hpp"
