@@ -6,6 +6,8 @@ int main()
 	String str;
 	String another("ale");
 
+	String str2(str);
+
 	str = String("some temp");
 
 	str = "do sth";
