@@ -35,7 +35,6 @@ inline SinglyLinkedListIterator<T> SinglyLinkedList<T>::getTail()
 }
 
 
-
 template <typename T>
 inline void SinglyLinkedList<T>::nullifyMembers()
 {
@@ -43,7 +42,6 @@ inline void SinglyLinkedList<T>::nullifyMembers()
 	head = nullptr;
 	tail = nullptr;
 }
-
 
 
 template <typename T>
@@ -55,7 +53,6 @@ inline void SinglyLinkedList<T>::setHead(const T& data)
 }
 
 
-
 template <typename T>
 inline void SinglyLinkedList<T>::setTail(const T& data)
 {
@@ -65,26 +62,24 @@ inline void SinglyLinkedList<T>::setTail(const T& data)
 }
 
 
-
 template <typename T>
 void SinglyLinkedList<T>::clearChainStartingAt(const Node<T>* firstNode)
 {
 	if (firstNode != nullptr)
 	{
 		const Node<T>* currentNode = firstNode;
-		const Node<T>* oldNode = firstNode;
+		const Node<T>* toDelete = firstNode;
 
 		while (currentNode != nullptr)
 		{
-			oldNode = currentNode;
+			toDelete = currentNode;
 
 			currentNode = currentNode->next;
 
-			delete oldNode;
+			delete toDelete;
 		}
 	}
 }
-
 
 
 template <typename T>
@@ -96,19 +91,16 @@ inline void SinglyLinkedList<T>::empty()
 }
 
 
-
 template <typename T>
 Node<T>* SinglyLinkedList<T>::cloneChainStartingAt(const Node<T>* firstNode, Node<T>** endOfChain)
 {
-	assert(firstNode);
+	assert(firstNode != nullptr);
 	Node<T>* newChainHead = nullptr;
 
 	try
 	{
 		newChainHead = new Node<T>(firstNode->data);
-
 		const Node<T>* nodeToCopy = firstNode->next;
-
 		Node<T>* newChainTail = newChainHead;
 
 		while (nodeToCopy != nullptr)
@@ -116,7 +108,6 @@ Node<T>* SinglyLinkedList<T>::cloneChainStartingAt(const Node<T>* firstNode, Nod
 			newChainTail->next = new Node<T>(nodeToCopy->data);
 
 			newChainTail = newChainTail->next;
-
 			nodeToCopy = nodeToCopy->next;
 		}
 
@@ -134,7 +125,6 @@ Node<T>* SinglyLinkedList<T>::cloneChainStartingAt(const Node<T>* firstNode, Nod
 }
 
 
-
 template <typename T>
 void SinglyLinkedList<T>::appendList(const SinglyLinkedList<T>& other)
 {
@@ -146,7 +136,6 @@ void SinglyLinkedList<T>::appendList(const SinglyLinkedList<T>& other)
 		appendChainAndUpdateCount(newChainHead, newChainTail, other.count);
 	}
 }
-
 
 
 template <typename T>
@@ -161,11 +150,10 @@ void SinglyLinkedList<T>::appendList(SinglyLinkedList<T>&& source)
 }
 
 
-
 template <typename T>
 void SinglyLinkedList<T>::appendChainAndUpdateCount(Node<T>* first, Node<T>* last, countType count)
 {
-	assert(first && last);
+	assert(first != nullptr && last != nullptr);
 
 	if ( this->isEmpty() )
 	{
@@ -181,16 +169,13 @@ void SinglyLinkedList<T>::appendChainAndUpdateCount(Node<T>* first, Node<T>* las
 }
 
 
-
 template <typename T>
-Node<T>* SinglyLinkedList<T>::findNodeBefore(const Node<T>* node)const
+Node<T>* SinglyLinkedList<T>::findNodeBefore(const Node<T>* node) const
 {
 	Node<T>* current = head;
 
 	while (current != nullptr && current->next != node)
-	{
 		current = current->next;
-	}
 
 	return current;
 }
@@ -202,18 +187,15 @@ SinglyLinkedList<T>::SinglyLinkedList() :
 	head(nullptr),
 	tail(nullptr)
 {
-	;
 }
 
 
 template <typename T>
-SinglyLinkedList<T>::SinglyLinkedList(const SinglyLinkedList<T>& other)	:
+SinglyLinkedList<T>::SinglyLinkedList(const SinglyLinkedList<T>& source)	:
 	SinglyLinkedList<T>()
 {
-	appendList(other);
-	assert(count == other.count);
+	appendList(source);
 }
-
 
 
 template <typename T>
@@ -226,13 +208,12 @@ SinglyLinkedList<T>::SinglyLinkedList(SinglyLinkedList<T>&& source) :
 }
 
 
-
 template <typename T>
-SinglyLinkedList<T>& SinglyLinkedList<T>::operator=(const SinglyLinkedList<T>& other)
+SinglyLinkedList<T>& SinglyLinkedList<T>::operator=(const SinglyLinkedList<T>& rhs)
 {
-	if (this != &other)
+	if (this != &rhs)
 	{
-		swapContentsWithReconstructedParameter(other);
+		swapContentsWithReconstructedParameter(rhs);
 	}
 
 	return *this;
@@ -240,11 +221,11 @@ SinglyLinkedList<T>& SinglyLinkedList<T>::operator=(const SinglyLinkedList<T>& o
 
 
 template <typename T>
-SinglyLinkedList<T>& SinglyLinkedList<T>::operator=(SinglyLinkedList<T>&& source)
+SinglyLinkedList<T>& SinglyLinkedList<T>::operator=(SinglyLinkedList<T>&& rhs)
 {
-	if (this != &source)
+	if (this != &rhs)
 	{
-		swapContentsWithReconstructedParameter(std::move(source));
+		swapContentsWithReconstructedParameter(std::move(rhs));
 	}
 
 	return *this;
@@ -267,7 +248,6 @@ inline SinglyLinkedList<T>::~SinglyLinkedList()
 }
 
 
-
 template <typename T>
 void SinglyLinkedList<T>::insertAsHead(const T& item)
 {
@@ -279,7 +259,6 @@ void SinglyLinkedList<T>::insertAsHead(const T& item)
 	this->head = newHead;
 	++count;
 }
-
 
 
 template <typename T>
@@ -301,13 +280,11 @@ void SinglyLinkedList<T>::insertAsTail(const T& item)
 }
 
 
-
 template <typename T>
 void SinglyLinkedList<T>::removeHead()
 {
 	throwExceptionIfEmpty();
-
-	assert(head);
+	assert(head != nullptr);
 
 	Node<T>* oldHead = head;
 	
@@ -321,33 +298,31 @@ void SinglyLinkedList<T>::removeHead()
 }
 
 
-
 template <typename T>
-void SinglyLinkedList<T>::removeAt(Node<T>* node)
+void SinglyLinkedList<T>::removeAt(Node<T>* nodeToRemove)
 {
-	if (node != nullptr)
+	if (nodeToRemove != nullptr)
 	{
-		if (node == head)
+		if (nodeToRemove == head)
 		{
 			removeHead();
 		}
 		//if it is not the head node, there are at least two nodes in the list
 		else 
 		{
-			Node<T>* nodeBefore = findNodeBefore(node);
-			assert(nodeBefore);
+			Node<T>* nodeBefore = findNodeBefore(nodeToRemove);
+			assert(nodeBefore != nullptr);
 
-			if (node == tail)
+			if (nodeToRemove == tail)
 				tail = nodeBefore;
 			
-			nodeBefore->next = node->next;
+			nodeBefore->next = nodeToRemove->next;
 
-			delete node;
+			delete nodeToRemove;
 			--count;
 		}
 	}
 }
-
 
 
 template <typename T>
@@ -356,10 +331,8 @@ inline void SinglyLinkedList<T>::removeAt(SinglyLinkedListIterator<T>& iterator)
 	throwExceptionIfInvalid(iterator);
 
 	removeAt(iterator.current);
-
 	iterator.current = nullptr;
 }
-
 
 
 template <typename T>
@@ -369,70 +342,64 @@ inline void SinglyLinkedList<T>::removeTail()
 }
 
 
-
 template <typename T>
-void SinglyLinkedList<T>::insertAfter(Node<T>* node, const T& data)
+void SinglyLinkedList<T>::insertAfter(Node<T>* nodeToInsertAfter, const T& item)
 {
-	if (node == nullptr || node == tail)
+	if (nodeToInsertAfter == nullptr || nodeToInsertAfter == tail)
 	{
-		insertAsTail(data);
+		insertAsTail(item);
 	}
 	else 
 	{
 		//if it is not the tail and is not null, it has a successor
-		assert(node->next);
+		assert(nodeToInsertAfter->next != nullptr);
 
-		Node<T>* newNode = new Node<T>(data, node->next);
-
-		node->next = newNode;
+		Node<T>* newNode = new Node<T>(item, nodeToInsertAfter->next);
+		nodeToInsertAfter->next = newNode;
 
 		++count;
 	}
 }
 
 
-
 template <typename T>
-void SinglyLinkedList<T>::insertAfter(SinglyLinkedListIterator<T>& iterator, const T& data)
+void SinglyLinkedList<T>::insertAfter(SinglyLinkedListIterator<T>& iterator, const T& item)
 {
 	throwExceptionIfInvalid(iterator);
 
-	insertAfter(iterator.current, data);
+	insertAfter(iterator.current, item);
 }
 
 
-
 template <typename T>
-void SinglyLinkedList<T>::insertBefore(Node<T>* node, const T& data)
+void SinglyLinkedList<T>::insertBefore(Node<T>* nodeToInsertBefore, const T& item)
 {
-	if (node == nullptr || node == head)
+	if (nodeToInsertBefore == nullptr || nodeToInsertBefore == head)
 	{
-		insertAsHead(data);
+		insertAsHead(item);
 	}
 	else
 	{
 		//it has a predecessor, because it is not the head node and is not null
-		Node<T>* previous = findNodeBefore(node);	
-		assert(previous);
+		Node<T>* previous = findNodeBefore(nodeToInsertBefore);
+		assert(previous != nullptr);
 
-		insertAfter(previous, data);
+		insertAfter(previous, item);
 	}
 }
 
 
-
 template <typename T>
-void SinglyLinkedList<T>::insertBefore(SinglyLinkedListIterator<T>& iterator, const T& data)
+inline void SinglyLinkedList<T>::insertBefore(SinglyLinkedListIterator<T>& iterator, const T& item)
 {
 	throwExceptionIfInvalid(iterator);
 
-	insertBefore(iterator.current, data);
+	insertBefore(iterator.current, item);
 }
 
 
-
 template <typename T>
-void SinglyLinkedList<T>::removeAfter(SinglyLinkedListIterator<T>& iterator)
+inline void SinglyLinkedList<T>::removeAfter(SinglyLinkedListIterator<T>& iterator)
 {
 	throwExceptionIfInvalid(iterator);
 
