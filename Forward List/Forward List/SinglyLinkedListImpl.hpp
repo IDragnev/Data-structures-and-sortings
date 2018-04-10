@@ -37,7 +37,7 @@ inline SinglyLinkedListIterator<T> SinglyLinkedList<T>::getTail()
 
 
 template <typename T>
-inline void SinglyLinkedList<T>::nullMembers()
+inline void SinglyLinkedList<T>::nullifyMembers()
 {
 	count = 0;
 	head = nullptr;
@@ -92,7 +92,7 @@ inline void SinglyLinkedList<T>::empty()
 {
 	clearChainStartingAt(head);
 
-	nullMembers();
+	nullifyMembers();
 }
 
 
@@ -156,7 +156,7 @@ void SinglyLinkedList<T>::appendList(SinglyLinkedList<T>&& source)
 	{
 		appendChainAndUpdateCount(source.head, source.tail, source.count);
 
-		source.nullMembers();
+		source.nullifyMembers();
 	}
 }
 
@@ -222,7 +222,7 @@ SinglyLinkedList<T>::SinglyLinkedList(SinglyLinkedList<T>&& source) :
 	tail(source.tail),
 	count(source.count)
 {
-	source.nullMembers();
+	source.nullifyMembers();
 }
 
 

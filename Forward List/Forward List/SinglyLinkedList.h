@@ -24,14 +24,13 @@ public:
 
 	countType getCount() const;                             
 	bool isEmpty() const;                              
+	void empty();
 
 	SinglyLinkedListIterator<T> getHead();                         
 	SinglyLinkedListIterator<T> getTail();
 
 	void appendList(SinglyLinkedList<T>&& other);
 	void appendList(const SinglyLinkedList<T>& other);          
-
-	void empty();
 
 public:
 	void setHead(const T& item);                           
@@ -59,7 +58,7 @@ private:
 	void throwExceptionIfEmpty()const; 
 	void throwExceptionIfInvalid(const SinglyLinkedListIterator<T>& iterator) const;
 
-	void nullMembers();
+	void nullifyMembers();
 
 	Node<T>* findNodeBefore(const Node<T>* node)const; 
 
