@@ -1,187 +1,5 @@
 
 template <typename T>
-inline bool SinglyLinkedList<T>::isEmpty()const
-{
-	return count == 0;
-}
-
-
-template <typename T>
-inline void SinglyLinkedList<T>::throwExceptionIfEmpty()const
-{
-	if ( isEmpty() )
-		throw std::logic_error("List is empty!");
-}
-
-
-template <typename T>
-inline typename SinglyLinkedList<T>::countType SinglyLinkedList<T>::getCount()const
-{
-	return count;
-}
-
-
-template <typename T>
-inline SinglyLinkedListIterator<T> SinglyLinkedList<T>::getHead()
-{
-	return SinglyLinkedListIterator<T>(head, this);
-}
-
-
-template <typename T>
-inline SinglyLinkedListIterator<T> SinglyLinkedList<T>::getTail()
-{
-	return SinglyLinkedListIterator<T>(tail, this);
-}
-
-
-template <typename T>
-inline void SinglyLinkedList<T>::nullifyMembers()
-{
-	count = 0;
-	head = nullptr;
-	tail = nullptr;
-}
-
-
-template <typename T>
-inline void SinglyLinkedList<T>::setHead(const T& data)
-{
-	throwExceptionIfEmpty();
-
-	head->data = data;
-}
-
-
-template <typename T>
-inline void SinglyLinkedList<T>::setTail(const T& data)
-{
-	throwExceptionIfEmpty();
-
-	tail->data = data;
-}
-
-
-template <typename T>
-void SinglyLinkedList<T>::clearChainStartingAt(const Node<T>* firstNode)
-{
-	if (firstNode != nullptr)
-	{
-		const Node<T>* currentNode = firstNode;
-		const Node<T>* toDelete = firstNode;
-
-		while (currentNode != nullptr)
-		{
-			toDelete = currentNode;
-
-			currentNode = currentNode->next;
-
-			delete toDelete;
-		}
-	}
-}
-
-
-template <typename T>
-inline void SinglyLinkedList<T>::empty()
-{
-	clearChainStartingAt(head);
-
-	nullifyMembers();
-}
-
-
-template <typename T>
-Node<T>* SinglyLinkedList<T>::cloneChainStartingAt(const Node<T>* firstNode, Node<T>** endOfChain)
-{
-	assert(firstNode != nullptr);
-	Node<T>* newChainHead = nullptr;
-
-	try
-	{
-		newChainHead = new Node<T>(firstNode->data);
-		const Node<T>* nodeToCopy = firstNode->next;
-		Node<T>* newChainTail = newChainHead;
-
-		while (nodeToCopy != nullptr)
-		{
-			newChainTail->next = new Node<T>(nodeToCopy->data);
-
-			newChainTail = newChainTail->next;
-			nodeToCopy = nodeToCopy->next;
-		}
-
-		if (endOfChain != nullptr)
-			*endOfChain = newChainTail;
-
-		return newChainHead;
-	} 
-	catch (std::bad_alloc&)
-	{		
-		clearChainStartingAt(newChainHead);
-
-		throw;
-	}
-}
-
-
-template <typename T>
-void SinglyLinkedList<T>::appendList(const SinglyLinkedList<T>& other)
-{
-	if ( ! other.isEmpty() )
-	{
-		Node<T>* newChainTail = nullptr;
-		Node<T>* newChainHead = cloneChainStartingAt(other.head, &newChainTail);
-
-		appendChainAndUpdateCount(newChainHead, newChainTail, other.count);
-	}
-}
-
-
-template <typename T>
-void SinglyLinkedList<T>::appendList(SinglyLinkedList<T>&& source)
-{
-	if ( ! source.isEmpty() )
-	{
-		appendChainAndUpdateCount(source.head, source.tail, source.count);
-
-		source.nullifyMembers();
-	}
-}
-
-
-template <typename T>
-void SinglyLinkedList<T>::appendChainAndUpdateCount(Node<T>* first, Node<T>* last, countType count)
-{
-	assert(first != nullptr && last != nullptr);
-
-	if ( this->isEmpty() )
-	{
-		this->head = first;
-	}
-	else
-	{
-		this->tail->next = first;
-	}
-
-	this->tail = last;
-	this->count += count;
-}
-
-
-template <typename T>
-Node<T>* SinglyLinkedList<T>::findNodeBefore(const Node<T>* node) const
-{
-	Node<T>* current = head;
-
-	while (current != nullptr && current->next != node)
-		current = current->next;
-
-	return current;
-}
-
-
-template <typename T>
 SinglyLinkedList<T>::SinglyLinkedList() :
 	count(0),
 	head(nullptr),
@@ -191,7 +9,7 @@ SinglyLinkedList<T>::SinglyLinkedList() :
 
 
 template <typename T>
-SinglyLinkedList<T>::SinglyLinkedList(const SinglyLinkedList<T>& source)	:
+SinglyLinkedList<T>::SinglyLinkedList(const SinglyLinkedList<T>& source) :
 	SinglyLinkedList<T>()
 {
 	appendList(source);
@@ -245,6 +63,143 @@ template <typename T>
 inline SinglyLinkedList<T>::~SinglyLinkedList()
 {
 	clearChainStartingAt(head);
+}
+
+
+template <typename T>
+void SinglyLinkedList<T>::appendList(const SinglyLinkedList<T>& other)
+{
+	if ( ! other.isEmpty() )
+	{
+		Node<T>* newChainTail = nullptr;
+		Node<T>* newChainHead = cloneChainStartingAt(other.head, &newChainTail);
+
+		appendChainAndUpdateCount(newChainHead, newChainTail, other.count);
+	}
+}
+
+
+template <typename T>
+void SinglyLinkedList<T>::appendList(SinglyLinkedList<T>&& source)
+{
+	if ( ! source.isEmpty() )
+	{
+		appendChainAndUpdateCount(source.head, source.tail, source.count);
+
+		source.nullifyMembers();
+	}
+}
+
+
+template <typename T>
+void SinglyLinkedList<T>::appendChainAndUpdateCount(Node<T>* first, Node<T>* last, countType count)
+{
+	assert(first != nullptr && last != nullptr);
+
+	if ( this->isEmpty() )
+	{
+		this->head = first;
+	}
+	else
+	{
+		this->tail->next = first;
+	}
+
+	this->tail = last;
+	this->count += count;
+}
+
+
+template <typename T>
+inline void SinglyLinkedList<T>::empty()
+{
+	clearChainStartingAt(head);
+
+	nullifyMembers();
+} 
+
+
+template <typename T>
+inline void SinglyLinkedList<T>::setHead(const T& data)
+{
+	throwExceptionIfEmpty();
+
+	head->data = data;
+}
+
+
+template <typename T>
+inline void SinglyLinkedList<T>::setTail(const T& data)
+{
+	throwExceptionIfEmpty();
+
+	tail->data = data;
+}
+
+
+template <typename T>
+void SinglyLinkedList<T>::clearChainStartingAt(const Node<T>* firstNode)
+{
+	if (firstNode != nullptr)
+	{
+		const Node<T>* currentNode = firstNode;
+		const Node<T>* toDelete = firstNode;
+
+		while (currentNode != nullptr)
+		{
+			toDelete = currentNode;
+
+			currentNode = currentNode->next;
+
+			delete toDelete;
+		}
+	}
+}
+
+
+template <typename T>
+Node<T>* SinglyLinkedList<T>::cloneChainStartingAt(const Node<T>* firstNode, Node<T>** endOfChain)
+{
+	assert(firstNode != nullptr);
+	Node<T>* newChainHead = nullptr;
+
+	try
+	{
+		newChainHead = new Node<T>(firstNode->data);
+		const Node<T>* nodeToCopy = firstNode->next;
+		Node<T>* newChainTail = newChainHead;
+
+		while (nodeToCopy != nullptr)
+		{
+			newChainTail->next = new Node<T>(nodeToCopy->data);
+
+			newChainTail = newChainTail->next;
+			nodeToCopy = nodeToCopy->next;
+		}
+
+		if (endOfChain != nullptr)
+			*endOfChain = newChainTail;
+
+		return newChainHead;
+	} 
+	catch (std::bad_alloc&)
+	{		
+		clearChainStartingAt(newChainHead);
+
+		throw;
+	}
+}
+
+
+template <typename T>
+Node<T>* SinglyLinkedList<T>::findNodeBefore(const Node<T>* node) const
+{
+	Node<T>* current = head;
+
+	while (current != nullptr && current->next != node)
+		current = current->next;
+
+	return current;
 }
 
 
@@ -421,4 +376,49 @@ inline void SinglyLinkedList<T>::throwExceptionIfInvalid(const SinglyLinkedListI
 {
 	if (iterator.owner != this)
 		throw std::invalid_argument("Invalid iterator passed!");
+}
+
+
+template <typename T>
+inline bool SinglyLinkedList<T>::isEmpty()const
+{
+	return count == 0;
+}
+
+
+template <typename T>
+inline void SinglyLinkedList<T>::throwExceptionIfEmpty()const
+{
+	if ( isEmpty() )
+		throw std::logic_error("List is empty!");
+}
+
+
+template <typename T>
+inline typename SinglyLinkedList<T>::countType SinglyLinkedList<T>::getCount()const
+{
+	return count;
+}
+
+
+template <typename T>
+inline SinglyLinkedListIterator<T> SinglyLinkedList<T>::getHead()
+{
+	return SinglyLinkedListIterator<T>(head, this);
+}
+
+
+template <typename T>
+inline SinglyLinkedListIterator<T> SinglyLinkedList<T>::getTail()
+{
+	return SinglyLinkedListIterator<T>(tail, this);
+}
+
+
+template <typename T>
+inline void SinglyLinkedList<T>::nullifyMembers()
+{
+	count = 0;
+	head = nullptr;
+	tail = nullptr;
 }
