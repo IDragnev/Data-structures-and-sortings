@@ -4,27 +4,30 @@ using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
 #include "../Forward List/SinglyLinkedList.h"
 
+typedef SinglyLinkedListIterator<int> ListIterator;
+typedef SinglyLinkedList<int> List;
+
 namespace ForwardListTest
 {
-	void fillListAddingTail(SinglyLinkedList<int>& list, int count)
+	void fillListAddingTail(List& list, int count)
 	{
 		for (int i = 0; i < count; ++i)
 			list.insertAsTail(i);
 	}
 
-	void fillListAddingHead(SinglyLinkedList<int>& list, int count)
+	void fillListAddingHead(List& list, int count)
 	{
 		for (int i = 0; i < count; ++i)
 			list.insertAsHead(i);
 	}
 
-	bool areEqual(SinglyLinkedList<int>& list1, SinglyLinkedList<int>& list2)
+	bool areEqual(List& list1, List& list2)
 	{
 		if (list1.getCount() != list2.getCount()) 
 			return false;
 		
-		SinglyLinkedListIterator<int> iterator1 = list1.getHead();
-		SinglyLinkedListIterator<int> iterator2 = list2.getHead();
+		ListIterator iterator1 = list1.getHead();
+		ListIterator iterator2 = list2.getHead();
 
 		for (; iterator1; ++iterator1, ++iterator2)
 		{
@@ -42,13 +45,13 @@ namespace ForwardListTest
 	public:
 		TEST_METHOD(EmptyListTest)
 		{
-			SinglyLinkedList<int> list;
+			List list;
 
 			Assert::IsTrue(list.getCount() == 0, L"List is not empty when constructed");
 			Assert::IsTrue(list.isEmpty(), L"IsEmpty returns false after construction");
 
 			//iterators should be null
-			SinglyLinkedListIterator<int> iterator = list.getHead();
+			ListIterator iterator = list.getHead();
 			Assert::IsFalse(iterator);
 
 			iterator = list.getTail();
@@ -61,7 +64,7 @@ namespace ForwardListTest
 		
 		TEST_METHOD(AddingTailTest)
 		{
-			SinglyLinkedList<int> list;
+			List list;
 
 			list.insertAsTail(1);
 
@@ -70,7 +73,7 @@ namespace ForwardListTest
 			Assert::IsTrue(list.getCount() == 1, L"Count is not 1 after inserting tail");
 
 			//tail and head should be 1
-			SinglyLinkedListIterator<int> iterator = list.getTail();
+			ListIterator iterator = list.getTail();
 			Assert::AreEqual(*iterator, 1, L"Tail is not set properly");
 
 			iterator = list.getHead();
@@ -94,7 +97,7 @@ namespace ForwardListTest
 
 		TEST_METHOD(AddingHeadTest)
 		{
-			SinglyLinkedList<int> list;
+			List list;
 
 			list.insertAsHead(1);
 
@@ -103,7 +106,7 @@ namespace ForwardListTest
 			Assert::IsTrue(list.getCount() == 1, L"Count is not 1 after inserting head");
 
 			//tail and head should be 1
-			SinglyLinkedListIterator<int> iterator = list.getTail();
+			ListIterator iterator = list.getTail();
 			Assert::AreEqual(*iterator, 1, L"Head is not set properly");
 
 			iterator = list.getHead();
@@ -127,7 +130,7 @@ namespace ForwardListTest
 
 		TEST_METHOD(SettingTailTest)
 		{
-			SinglyLinkedList<int> list;
+			List list;
 
 			list.insertAsTail(1);
 
@@ -137,7 +140,7 @@ namespace ForwardListTest
 			Assert::IsTrue(list.getCount() == 1, L"Setting tail changes count");
 
 			//tail and head should be 2
-			SinglyLinkedListIterator<int> iterator = list.getTail();
+			ListIterator iterator = list.getTail();
 			Assert::AreEqual(*iterator, 2, L"Tail is not set properly");
 
 			iterator = list.getHead();
@@ -146,7 +149,7 @@ namespace ForwardListTest
 
 		TEST_METHOD(SettingHeadTest)
 		{
-			SinglyLinkedList<int> list;
+			List list;
 
 			list.insertAsHead(1);
 
@@ -156,7 +159,7 @@ namespace ForwardListTest
 			Assert::IsTrue(list.getCount() == 1, L"Setting head changes count");
 
 			//tail and head should be 2
-			SinglyLinkedListIterator<int> iterator = list.getTail();
+			ListIterator iterator = list.getTail();
 			Assert::AreEqual(*iterator, 2, L"Head is not set properly");
 
 			iterator = list.getHead();
@@ -166,13 +169,13 @@ namespace ForwardListTest
 
 		TEST_METHOD(AppendingToListCountTest)
 		{
-			SinglyLinkedList<int> list;
+			List list;
 
 			fillListAddingTail(list,10);
 
 			int count = list.getCount();
 
-			SinglyLinkedList<int> list2;
+			List list2;
 
 			//append an empty list
 			list.appendList(list2);
@@ -192,16 +195,16 @@ namespace ForwardListTest
 		
 		TEST_METHOD(AppendingToListReconstruction)
 		{
-			SinglyLinkedList<int> list;
+			List list;
 
-			SinglyLinkedList<int> list2;
+			List list2;
 			fillListAddingTail(list2, 10);
 
 			//append list2 to the empty list
 			list.appendList(list2);
 
-			SinglyLinkedListIterator<int> iterator = list.getHead();
-			SinglyLinkedListIterator<int> sourceIterator = list2.getHead();
+			ListIterator iterator = list.getHead();
+			ListIterator sourceIterator = list2.getHead();
 
 			//should have reconstructed them all
 			for (; iterator && sourceIterator; ++iterator, ++sourceIterator)
@@ -234,12 +237,12 @@ namespace ForwardListTest
 
 		TEST_METHOD(RemovingHeadAndTailTest)
 		{
-			SinglyLinkedList<int> list;
+			List list;
 
 			// list = { 9,8,7,6,5,4,3,2,1,0 }
 			fillListAddingHead(list, 10);
 
-			SinglyLinkedListIterator<int> iterator = list.getHead();
+			ListIterator iterator = list.getHead();
 
 			for (int i = 10; i > 0; --i)
 			{
@@ -271,10 +274,10 @@ namespace ForwardListTest
 		TEST_METHOD(InsertionAfterIteratorTest)
 		{
 
-			SinglyLinkedList<int> list;
+			List list;
 
 			//null iterator
-			SinglyLinkedListIterator<int> head = list.getHead();
+			ListIterator head = list.getHead();
 
 			//should insert it as tail
 			list.insertAfter(head, 2);
@@ -330,10 +333,10 @@ namespace ForwardListTest
 		TEST_METHOD(InsertionBeforeIteratorTest)
 		{
 
-			SinglyLinkedList<int> list;
+			List list;
 
 			//null iterator
-			SinglyLinkedListIterator<int> head = list.getHead();
+			ListIterator head = list.getHead();
 
 			//should insert it as head
 			list.insertBefore(head, 2);
@@ -361,7 +364,7 @@ namespace ForwardListTest
 			list.insertAsTail(3);
 
 			//insert between 1 and 3
-			SinglyLinkedListIterator<int> tail = list.getTail();
+			ListIterator tail = list.getTail();
 
 			list.insertBefore(tail, 2);
 
@@ -386,10 +389,10 @@ namespace ForwardListTest
 
 		TEST_METHOD(RemovingAtHeadIteratorTest)
 		{
-			SinglyLinkedList<int> list;
+			List list;
 
 			//null iterator
-			SinglyLinkedListIterator<int> iterator = list.getHead();
+			ListIterator iterator = list.getHead();
 
 			//removing at null iterator should do nothing
 			list.removeAt(iterator);
@@ -424,10 +427,10 @@ namespace ForwardListTest
 
 		TEST_METHOD(RemovingAtTailIteratorTest)
 		{
-			SinglyLinkedList<int> list;
+			List list;
 
 			//null iterator
-			SinglyLinkedListIterator<int> iterator = list.getTail();
+			ListIterator iterator = list.getTail();
 
 			//removing at null iterator should do nothing
 			list.removeAt(iterator);
@@ -463,10 +466,10 @@ namespace ForwardListTest
 
 		TEST_METHOD(RemovingAtMiddleIteratorTest)
 		{
-			SinglyLinkedList<int> list;
+			List list;
 
 			//null iterator
-			SinglyLinkedListIterator<int> iterator = list.getTail();
+			ListIterator iterator = list.getTail();
 
 			//removing at null iterator should do nothing
 			list.removeAt(iterator);
@@ -482,7 +485,7 @@ namespace ForwardListTest
 			//go to the second node
 			++iterator;
 
-			SinglyLinkedListIterator<int> head = list.getHead();
+			ListIterator head = list.getHead();
 
 			//removing at middle
 			for (int i = 0; i < 10; ++i)
@@ -514,11 +517,11 @@ namespace ForwardListTest
 
 		TEST_METHOD(CopyCtorTest)
 		{
-			SinglyLinkedList<int> list;
+			List list;
 			
 			{
 				//from an empty list
-				SinglyLinkedList<int> list2(list);
+				List list2(list);
 				Assert::IsTrue(list2.getCount() == 0, L"Copy-construction from an empty list is does not construct an empty list");
 				Assert::IsTrue(list2.isEmpty(), L"Copy-construction from an empty list does not construct an empty list");
 			}
@@ -526,18 +529,18 @@ namespace ForwardListTest
 			//from non empty
 			fillListAddingHead(list, 10);
 
-			SinglyLinkedList<int> list2(list);
+			List list2(list);
 
 			Assert::IsTrue(areEqual(list, list2), L"Copy-construction is not working properly");
 		}
 
 		TEST_METHOD(MoveCtorTest)
 		{
-			SinglyLinkedList<int> list;
+			List list;
 
 			{
 				//from an empty list
-				SinglyLinkedList<int> list2(std::move(list));
+				List list2(std::move(list));
 
 				Assert::IsTrue(list2.getCount() == 0, L"Move-construction from an empty list does not construct an empty list");
 				Assert::IsTrue(list2.isEmpty(), L"Move-construction from an empty list does not construct an empty list");
@@ -551,7 +554,7 @@ namespace ForwardListTest
 			fillListAddingTail(list, 10);
 
 			//from a non-empty
-			SinglyLinkedList<int> list2(std::move(list));
+			List list2(std::move(list));
 
 			Assert::IsTrue(list2.getCount() == 10, L"Move-construction from a non-empty list is not managing count properly");
 			Assert::IsFalse(list2.isEmpty(), L"Move-construction from a non-empty list constructs an empty list");
@@ -560,7 +563,7 @@ namespace ForwardListTest
 			Assert::IsTrue(list.getCount() == 0, L"Argument is not empty after move-construction");
 			Assert::IsTrue(list.isEmpty(), L"Argument is not empty after move-construction");
 
-			SinglyLinkedListIterator<int> head = list2.getHead();
+			ListIterator head = list2.getHead();
 			
 			for (int i = 0; i < 10; ++i, ++head)
 				Assert::IsTrue(*head == i, L"Move-construction is not working properly");
@@ -568,8 +571,8 @@ namespace ForwardListTest
 
 		TEST_METHOD(CopyAssignmentTest)
 		{
-			SinglyLinkedList<int> list;
-			SinglyLinkedList<int> list2;
+			List list;
+			List list2;
 
 			//from empty to empty
 			list = list2;
@@ -606,8 +609,8 @@ namespace ForwardListTest
 
 		TEST_METHOD(MoveAssignmentTest)
 		{
-			SinglyLinkedList<int> list;
-			SinglyLinkedList<int> list2;
+			List list;
+			List list2;
 
 			//from empty to empty
 			list = std::move(list2);
@@ -626,7 +629,7 @@ namespace ForwardListTest
 
 			Assert::IsTrue(list.getCount() == 10, L"Move assignment is not working properly");
 			
-			SinglyLinkedListIterator<int> iterator = list.getHead();
+			ListIterator iterator = list.getHead();
 
 			for (int i = 0; i < 10; ++i, ++iterator)
 				Assert::IsTrue(*iterator == i, L"Move assignment is not working properly");
