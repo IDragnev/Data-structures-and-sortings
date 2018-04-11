@@ -55,7 +55,7 @@ private:
 	Node<T>* tail;                                    
 
 private:
-	void throwExceptionIfEmpty()const; 
+	void throwExceptionIfEmpty() const; 
 	void throwExceptionIfInvalid(const SinglyLinkedListIterator<T>& iterator) const;
 
 	void nullifyMembers();
