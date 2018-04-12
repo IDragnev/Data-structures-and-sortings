@@ -143,7 +143,9 @@ void SinglyLinkedList<T>::insertAsHead(const T& item)
 	Node<T>* newHead = new Node<T>(item, this->head);
 
 	if ( isEmpty() )
+	{
 		this->tail = newHead;
+	}
 
 	this->head = newHead;
 	++count;
@@ -179,8 +181,10 @@ void SinglyLinkedList<T>::removeHead()
 	
 	head = head->next;
 
-	if(head == nullptr)
+	if (head == nullptr)
+	{
 		tail = nullptr;
+	}
 
 	delete oldHead;
 	--count;
@@ -190,7 +194,7 @@ void SinglyLinkedList<T>::removeHead()
 template <typename T>
 inline void SinglyLinkedList<T>::removeTail()
 {
-	return removeAt(tail);
+	removeAt(tail);
 }
 
 
@@ -243,26 +247,27 @@ inline void SinglyLinkedList<T>::insertBefore(SinglyLinkedListIterator<T>& itera
 template <typename T>
 void SinglyLinkedList<T>::removeAt(Node<T>* nodeToRemove)
 {
-	if (nodeToRemove != nullptr)
+	if (nodeToRemove == nullptr)
 	{
-		if (nodeToRemove == head)
-		{
-			removeHead();
-		}
-		//if it is not the head node, there are at least two nodes in the list
-		else 
-		{
-			Node<T>* nodeBefore = findNodeBefore(nodeToRemove);
-			assert(nodeBefore != nullptr);
+		return;
+	}
+	else if (nodeToRemove == head)
+	{
+		removeHead();
+	}
+	//if it is not the head node, there are at least two nodes in the list
+	else
+	{
+		Node<T>* nodeBefore = findNodeBefore(nodeToRemove);
+		assert(nodeBefore != nullptr);
 
-			if (nodeToRemove == tail)
-				tail = nodeBefore;
-			
-			nodeBefore->next = nodeToRemove->next;
+		if (nodeToRemove == tail)
+			tail = nodeBefore;
 
-			delete nodeToRemove;
-			--count;
-		}
+		nodeBefore->next = nodeToRemove->next;
+
+		delete nodeToRemove;
+		--count;
 	}
 }
 
@@ -403,7 +408,7 @@ Node<T>* SinglyLinkedList<T>::cloneChainStartingAt(const Node<T>* firstNode, Nod
 
 		return newChainHead;
 	} 
-	catch (std::bad_alloc&) //TODO: catch(...) ? 
+	catch (...) 
 	{		
 		clearChainStartingAt(newChainHead);
 
