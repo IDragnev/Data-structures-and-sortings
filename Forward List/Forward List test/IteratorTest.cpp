@@ -25,8 +25,8 @@ namespace ForwardListTest
 			ListIterator iterator = list.getHead();
 			int count = 0;
 
-			for (; iterator; ++iterator, ++count)
-				;
+			for (; iterator; ++iterator)
+				++count;
 
 			Assert::IsTrue(count == 5);
 		}
@@ -52,21 +52,21 @@ namespace ForwardListTest
 				ListIterator head = list.getHead();
 				ListIterator tail = list.getTail();
 
-				Assert::IsFalse(head == tail, L"Operator== is not working properly");
-				Assert::IsTrue(head != tail, L"Operator!= is not working properly");
+				Assert::IsFalse(head == tail);
+				Assert::IsTrue(head != tail);
 
 				tail = list.getHead();
 
-				Assert::IsTrue(head == tail, L"Operator== is not working properly");
-				Assert::IsFalse(head != tail, L"Operator!= is not working properly");
+				Assert::IsTrue(head == tail);
+				Assert::IsFalse(head != tail);
 
 				list.empty();
 
 				head = list.getHead();
 				tail = list.getTail();
 
-				Assert::IsTrue(head == tail, L"Operator== is not working properly");
-				Assert::IsFalse(head != tail, L"Operator!= is not working properly");
+				Assert::IsTrue(head == tail);
+				Assert::IsFalse(head != tail);
 
 		}
 	};
