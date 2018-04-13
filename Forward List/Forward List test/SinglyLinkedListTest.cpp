@@ -510,62 +510,66 @@ namespace ForwardListTest
 			Assert::IsTrue(areEqual(lhs, rhs));
 		}
 		
-
-		TEST_METHOD(MoveAssignmentTest)
+		TEST_METHOD(MoveAssignmentEmptyToEmpty)
 		{
-			List list;
-			List list2;
+			List lhs;
+			List rhs;
 
-			//from empty to empty
-			list = std::move(list2);
+			lhs = std::move(rhs);
 
-			//both should be empty
-			Assert::IsTrue(list.getCount() == 0, L"Move assignment from an empty list is not leaving lhs empty");
-			Assert::IsTrue(list.isEmpty(), L"Move assignment from an empty list is not leaving lhs empty");
-			Assert::IsTrue(list2.getCount() == 0, L"Move assignment from an empty list is not leaving rhs empty");
-			Assert::IsTrue(list2.isEmpty(), L"Move assignment from an empty list is not leaving rhs empty");
+			Assert::IsTrue(lhs.getCount() == 0);
+			Assert::IsTrue(lhs.isEmpty());
+			Assert::IsTrue(rhs.getCount() == 0);
+			Assert::IsTrue(rhs.isEmpty());
+		}
 
-			//0,1,2,3,4,5,6,7,8,9
-			fillListAddingTail(list2, 10);
+		TEST_METHOD(MoveAssignmentNonEmptyToEmpty)
+		{
+			List lhs;
+			List rhs;
 
-			//non-empty to empty
-			list = std::move(list2);
+			fillListAddingHead(rhs, 20);
 
-			Assert::IsTrue(list.getCount() == 10, L"Move assignment is not working properly");
-			
-			ListIterator iterator = list.getHead();
+			List initialRhsCopy(rhs);
 
-			for (int i = 0; i < 10; ++i, ++iterator)
-				Assert::IsTrue(*iterator == i, L"Move assignment is not working properly");
+			lhs = std::move(rhs);
 
-			//argument should be left empty
-			Assert::IsTrue(list2.getCount() == 0, L"Move assignment from a non-empty list is not leaving rhs empty");
-			Assert::IsTrue(list2.isEmpty(), L"Move assignment from a non-empty list is not leaving rhs empty");
+			Assert::IsTrue(areEqual(lhs, initialRhsCopy));
+			Assert::IsTrue(rhs.getCount() == 0);
+			Assert::IsTrue(rhs.isEmpty());
+		}
+		
+		TEST_METHOD(MoveAssignmentEmptyToNonEmpty)
+		{
+			List lhs;
+			List rhs;
 
-			// 0,1,2,3,4, ... ,19,20
-			fillListAddingTail(list2, 20);
+			fillListAddingHead(lhs, 30);
 
-			//non-empty to non-empty
-			list = std::move(list2);
+			lhs = std::move(rhs);
 
-			iterator = list.getHead();
-
-			for (int i = 0; i < 20; ++i, ++iterator)
-				Assert::IsTrue(*iterator == i, L"Move assignment is not working properly");
-			
-			//argument should be left empty
-			Assert::IsTrue(list2.getCount() == 0, L"Move assignment from a non-empty list is not leaving rhs empty");
-			Assert::IsTrue(list2.isEmpty(), L"Move assignment from a non-empty list is not leaving rhs empty");
+			Assert::IsTrue(lhs.getCount() == 0);
+			Assert::IsTrue(lhs.isEmpty());
+			Assert::IsTrue(rhs.getCount() == 0);
+			Assert::IsTrue(rhs.isEmpty());
+		}
 
 
-			//empty to non-empty
-			list = std::move(list2);
+		TEST_METHOD(MoveAssignmentNonEmptyToNonEmpty)
+		{
+			List lhs;
+			List rhs;
 
-			//both should be empty
-			Assert::IsTrue(list.getCount() == 0, L"Move assignment from an empty list is not leaving lhs empty");
-			Assert::IsTrue(list.isEmpty(), L"Move assignment from an empty list is not leaving lhs empty");
-			Assert::IsTrue(list2.getCount() == 0, L"Move assignment from an empty list is not leaving rhs empty");
-			Assert::IsTrue(list2.isEmpty(), L"Move assignment from an empty list is not leaving rhs empty");
+			fillListAddingHead(lhs, 30);
+			fillListAddingTail(rhs, 15);
+
+			List initialRhsCopy(rhs);
+
+			lhs = std::move(rhs);
+
+			Assert::IsTrue(areEqual(lhs, initialRhsCopy));
+			Assert::IsTrue(rhs.getCount() == 0);
+			Assert::IsTrue(rhs.isEmpty());
 		}
 	};
 }
