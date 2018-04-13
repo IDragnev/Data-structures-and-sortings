@@ -178,65 +178,76 @@ namespace ForwardListTest
 			}
 		}
 
-
-		TEST_METHOD(InsertionAfterIteratorTest)
+		TEST_METHOD(InsertionAfterNullIterator)
 		{
-
 			List list;
 
-			//null iterator
-			ListIterator head = list.getHead();
+			for (int i = 0; i < 100; ++i)
+			{
+				ListIterator iterator = list.getTail();
+				//forse null
+				++iterator;
 
-			//should insert it as tail
-			list.insertAfter(head, 2);
+				//should insert it as tail
+				list.insertAfter(iterator, i);
 
-			head = list.getHead();
-			Assert::IsTrue(*head == 2, L"Insertion after null iterator is not adding as tail");
+				ListIterator tail = list.getTail();
+				Assert::IsTrue(*tail == i);
+			}
+		}
 
-			//empty list
-			list.empty();
-
-			//add as head
+		TEST_METHOD(InsertingAfterHeadIterator)
+		{
+			List list;
 			list.insertAsHead(1);
 
-			head = list.getHead();
+			for (int i = 0; i < 100; ++i)
+			{
+				ListIterator headIterator = list.getHead();
+				list.insertAfter(headIterator, i);
 
-			//insert after the head
-			list.insertAfter(head, 3);
+				++headIterator;
 
-			//move to the new node
-			++head;
-			Assert::IsTrue(head, L"Insertion after iterator does not update its successor");
-			Assert::IsTrue(*head == 3, L"Insertion after iterator does not construct with the value passed");
+				Assert::IsTrue(headIterator, L"Insertion after iterator does not update its successor");
+				Assert::IsTrue(*headIterator == i, L"Insertion after iterator does not construct with the value passed");
+			}
+		}
 
-			//empty again
-			list.empty();
+		TEST_METHOD(InsertingBetweenNodesWithIterator)
+		{
+			List list;
 
 			list.insertAsHead(1);
 			list.insertAsTail(3);
 
-			//insert between 1 and 3
-			head = list.getHead();
+			ListIterator headIterator = list.getHead();
+			list.insertAfter(headIterator, 2);
 
-			list.insertAfter(head, 2);
-
-			//should have added between them 
 			for (int i = 1; i < 4; ++i)
 			{
-				Assert::IsTrue(*head == i, L"Inserting between two nodes is not working properly");
-				++head;
+				Assert::IsTrue(*headIterator == i, L"Inserting between two nodes with iterator is not working properly");
+				++headIterator;
 			}
 
-			//now the traversal has finished
-			Assert::IsFalse(head);
-			
-			//should add as tail when adding after NULL iterator
-			list.insertAfter(head, 100);
-
-			head = list.getTail();
-			Assert::AreEqual(*head, 100, L"Inserting after null iterator is not adding as tail");
+			Assert::IsFalse(headIterator);
 		}
 
+		TEST_METHOD(InsertingAfterTailIterator)
+		{
+			List list;
+			list.insertAsTail(1);
+
+			for (int i = 0; i < 100; ++i)
+			{
+				ListIterator tailIterator = list.getTail();
+				list.insertAfter(tailIterator, i);
+
+				++tailIterator;
+
+				Assert::IsTrue(tailIterator);
+				Assert::IsTrue(*tailIterator == i, L"Insertion after tail iterator does not construct with the value passed");
+			}
+		}
 
 		TEST_METHOD(InsertionBeforeIteratorTest)
 		{
