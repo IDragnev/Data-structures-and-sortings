@@ -15,12 +15,14 @@ namespace ForwardListTest
 
 	TEST_CLASS(IteratorTest)
 	{
+	private:
+		static const int NUMBER_OF_ITEMS_TO_INSERT = 50;
+
 	public:
 		TEST_METHOD(IteratorBoundariesTest)
 		{
 			List list;
-
-			fillListAddingTail(list, 5);
+			fillListAddingTail(list, NUMBER_OF_ITEMS_TO_INSERT);
 			
 			ListIterator iterator = list.getHead();
 			int count = 0;
@@ -28,14 +30,13 @@ namespace ForwardListTest
 			for (; iterator; ++iterator)
 				++count;
 
-			Assert::IsTrue(count == 5);
+			Assert::IsTrue(count == NUMBER_OF_ITEMS_TO_INSERT);
 		}
 
 		TEST_METHOD(IteratorDerrefTest)
 		{
 			List list;
-
-			fillListAddingTail(list, 10);
+			fillListAddingTail(list, NUMBER_OF_ITEMS_TO_INSERT);
 
 			ListIterator iterator = list.getHead();
 
@@ -46,8 +47,7 @@ namespace ForwardListTest
 		TEST_METHOD(IteratorEqualtyOperatorsTest)
 		{
 				List list;
-				
-				fillListAddingTail(list, 10);
+				fillListAddingTail(list, NUMBER_OF_ITEMS_TO_INSERT);
 
 				ListIterator head = list.getHead();
 				ListIterator tail = list.getTail();
@@ -67,7 +67,6 @@ namespace ForwardListTest
 
 				Assert::IsTrue(head == tail);
 				Assert::IsFalse(head != tail);
-
 		}
 	};
 }
