@@ -22,22 +22,23 @@ namespace ForwardListTest
 			list.insertAsHead(i);
 	}
 
-	bool areEqual(List& lhs, List& rhs)
+	bool doIteratorsPointToEqualLists(ListIterator& lhsHead, ListIterator& rhsHead)
 	{
-		if (lhs.getCount() != rhs.getCount())
-			return false;
-		
-		ListIterator lhsIterator = lhs.getHead();
-		ListIterator rhsIterator = rhs.getHead();
-
-		for (; lhsIterator; ++lhsIterator, ++rhsIterator)
+		while (lhsHead)
 		{
-			if (*lhsIterator != *rhsIterator)
+			if (*lhsHead != *rhsHead)
 				return false;
+
+			++lhsHead;
+			++rhsHead;
 		}
 
-		//both should have reached the end
-		return !lhsIterator && !rhsIterator;
+		return !lhsHead && !rhsHead;
+	}
+
+	bool areEqual(List& lhs, List& rhs)
+	{
+		return (lhs.getCount() == rhs.getCount()) && doIteratorsPointToEqualLists(lhs.getHead(), rhs.getHead());
 	}
 
 
@@ -127,7 +128,7 @@ namespace ForwardListTest
 			fillListAddingTail(source, 10);
 			destination.appendList(source);
 
-			Assert::IsTrue(areEqual(destination, source));
+			Assert::IsTrue( areEqual(destination, source) );
 
 			ListIterator destinationTail = destination.getTail();
 			destination.appendList(source);
@@ -135,11 +136,10 @@ namespace ForwardListTest
 			++destinationTail;
 			Assert::IsFalse(!destinationTail, L"The node after tail is null after appending non-empty list");
 
-			ListIterator sourceIterator = source.getHead();
+			ListIterator sourceHead = source.getHead();
 
-			//TO DO : check equality between destTail and sourceIterator
+			Assert::IsTrue(doIteratorsPointToEqualLists(destinationTail, sourceHead));
 		}
-
 
 		TEST_METHOD(RemovingHeadTest)
 		{
@@ -425,95 +425,91 @@ namespace ForwardListTest
 
 		TEST_METHOD(CopyCtorTest)
 		{
-			List list;
-			
-			{
-				//from an empty list
-				List list2(list);
-				Assert::IsTrue(list2.getCount() == 0, L"Copy-construction from an empty list is does not construct an empty list");
-				Assert::IsTrue(list2.isEmpty(), L"Copy-construction from an empty list does not construct an empty list");
-			}
+			List source;
 
-			//from non empty
-			fillListAddingHead(list, 10);
+			List destinationOne(source);
+			Assert::IsTrue(areEqual(source, destinationOne));
 
-			List list2(list);
+			fillListAddingHead(source, 10);
 
-			Assert::IsTrue(areEqual(list, list2), L"Copy-construction is not working properly");
+			List destinationTwo(source);
+			Assert::IsTrue(areEqual(source, destinationTwo));
 		}
 
-		TEST_METHOD(MoveCtorTest)
+		TEST_METHOD(MoveCtorFromEmpty)
 		{
-			List list;
+			List source;
+			List destination(std::move(source));
 
-			{
-				//from an empty list
-				List list2(std::move(list));
+			Assert::IsTrue(destination.getCount() == 0);
+			Assert::IsTrue(destination.isEmpty());
 
-				Assert::IsTrue(list2.getCount() == 0, L"Move-construction from an empty list does not construct an empty list");
-				Assert::IsTrue(list2.isEmpty(), L"Move-construction from an empty list does not construct an empty list");
-
-				//argument should be left empty
-				Assert::IsTrue(list.getCount() == 0, L"Argument is not empty after move-construction");
-				Assert::IsTrue(list.isEmpty(), L"Argument is not empty after move-construction");
-			}
-
-			//0,1,2,3,4,5,6,7,8,9
-			fillListAddingTail(list, 10);
-
-			//from a non-empty
-			List list2(std::move(list));
-
-			Assert::IsTrue(list2.getCount() == 10, L"Move-construction from a non-empty list is not managing count properly");
-			Assert::IsFalse(list2.isEmpty(), L"Move-construction from a non-empty list constructs an empty list");
-
-			//argument should be left empty
-			Assert::IsTrue(list.getCount() == 0, L"Argument is not empty after move-construction");
-			Assert::IsTrue(list.isEmpty(), L"Argument is not empty after move-construction");
-
-			ListIterator head = list2.getHead();
-			
-			for (int i = 0; i < 10; ++i, ++head)
-				Assert::IsTrue(*head == i, L"Move-construction is not working properly");
+			Assert::IsTrue(source.getCount() == 0);
+			Assert::IsTrue(source.isEmpty());
 		}
 
-		TEST_METHOD(CopyAssignmentTest)
+		TEST_METHOD(MoveCtorFromNonEmpty)
 		{
-			List list;
-			List list2;
+			List source;
+			fillListAddingTail(source, 10);
 
-			//from empty to empty
-			list = list2;
+			List initialSourceCopy(source);
 
-			//should be empty
-			Assert::IsTrue(list.getCount() == 0, L"Copy assignment from an empty list is not leaving lhs empty");
-			Assert::IsTrue(list.isEmpty(), L"Copy assignment from an empty list is not leaving lhs empty");
+			List destination(std::move(source));
 
-			fillListAddingTail(list2, 10);
+			Assert::IsTrue( areEqual(destination, initialSourceCopy) );
 
-			//non-empty to empty
-			list = list2;
-
-			Assert::IsTrue(areEqual(list, list2), L"Copy assignment from non-empty to empty is not working properly");
-
-			//append one more to list2
-			list2.insertAsTail(11);
-
-			//non-empty to non-empty
-			list = list2;
-
-			Assert::IsTrue(areEqual(list, list2), L"Copy assignment from non-empty to non-empty is not working properly");
-
-			//empty list2
-			list2.empty();
-
-			//empty to non-empty
-			list = list2;
-
-			//should be empty
-			Assert::IsTrue(list.getCount() == 0, L"Copy assignment from an empty list is not leaving lhs empty");
-			Assert::IsTrue(list.isEmpty(), L"Copy assignment from an empty list is not leaving lhs empty");
+			Assert::IsTrue(source.getCount() == 0);
+			Assert::IsTrue(source.isEmpty());
 		}
+
+		TEST_METHOD(CopyAssignmentEmptyToEmpty)
+		{
+			List lhs;
+			List rhs;
+
+			lhs = rhs;
+
+			Assert::IsTrue(areEqual(lhs, rhs));
+		}
+
+		TEST_METHOD(CopyAssignmentNonEmptyToEmpty)
+		{
+			List lhs;
+			List rhs;
+
+			fillListAddingTail(rhs, 10);
+
+			lhs = rhs;
+
+			Assert::IsTrue(areEqual(lhs, rhs));
+		}
+
+		TEST_METHOD(CopyAssignmentNonEmptyToNonEmpty)
+		{
+			List lhs;
+			List rhs;
+
+			fillListAddingHead(lhs, 20);
+			fillListAddingTail(rhs, 30);
+
+			lhs = rhs;
+
+			Assert::IsTrue(areEqual(lhs, rhs));
+		}
+
+		TEST_METHOD(CopyAssignmentEmptyToNonEmpty)
+		{
+			List lhs;
+			List rhs;
+
+			fillListAddingHead(lhs, 20);
+
+			lhs = rhs;
+
+			Assert::IsTrue(areEqual(lhs, rhs));
+		}
+		
 
 		TEST_METHOD(MoveAssignmentTest)
 		{
