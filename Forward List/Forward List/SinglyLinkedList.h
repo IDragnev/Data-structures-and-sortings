@@ -36,6 +36,7 @@ public:
 	void setHead(const T& item);                           
 	void setTail(const T& item);                          
 
+	void insert(const T& item);
 	void insertAsHead(const T& item);                         
 	void insertAsTail(const T& item);                         
 
@@ -60,7 +61,7 @@ private:
 
 	void nullifyMembers();
 
-	Node<T>* findNodeBefore(const Node<T>* node)const; 
+	Node<T>* findNodeBefore(const Node<T>* node) const; 
 
 	void removeAt(Node<T>* node);
 	void insertAfter(Node<T>* node, const T& item);

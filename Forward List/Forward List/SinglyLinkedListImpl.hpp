@@ -138,6 +138,13 @@ inline void SinglyLinkedList<T>::setTail(const T& data)
 
 
 template <typename T>
+inline void SinglyLinkedList<T>::insert(const T& item)
+{
+	insertAsTail(item);
+}
+
+
+template <typename T>
 void SinglyLinkedList<T>::insertAsHead(const T& item)
 {
 	Node<T>* newHead = new Node<T>(item, this->head);
