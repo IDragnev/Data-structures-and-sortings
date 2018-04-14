@@ -8,6 +8,9 @@ template <typename T>
 class DArray
 {
 private:
+	static_assert(std::is_default_constructible<T>::value, "DArray<T> requires T to be default constructible.");
+	static_assert(std::is_copy_assignable<T>::value, "DArray<T> requires T to be copy assignable.");
+
 	typedef size_t sizeType;
 
 public:
@@ -29,14 +32,12 @@ public:
 	void ensureSize(sizeType size);
 	void shrink(sizeType size);
 
-public:
 	virtual void insert(const T& item);
 	virtual void remove(sizeType position);
 
 	void insert(const DArray<T>& other);
 	void insertAt(sizeType position, const T& item);
 
-public:
 	T& operator[](sizeType position);
 	const T& operator[](sizeType position)const;
 
@@ -46,24 +47,21 @@ private:
 	T* items;
 
 protected:
-	void setCount(sizeType count);
+	void throwExceptionIfInvalidIndex(sizeType index)const;
 	void enlargeIfFull();
+	
+	void setCount(sizeType count);
 
 	void shiftItemsOnePositionLeft(sizeType start, sizeType end);
 	void shiftItemsOnePositionRight(sizeType start, sizeType end);
-
 	T* getItems();
-	const T* getItems()const;
 
 private:
 	void resize(sizeType newSize);
 	void copyFrom(const DArray<T>& other);
-	void destroyAndNullMembers();
+	void swapContentsWithReconstructedParameter(DArray<T> temp);
 	void destroyItems();
-	void nullMembers();
-	void directlySetItemsCountAndSize(T* items, sizeType count, sizeType size);
-	void throwExceptionIfInvalidIndex(sizeType index)const;
-	void moveParameterInThis(DArray& source);
+	void nullifyMembers();
 };
 
 #include "DArrayImpl.hpp"
