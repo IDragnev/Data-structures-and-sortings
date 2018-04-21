@@ -19,6 +19,5 @@ Node<Key>::Node(const Key& data, Node<Key>* next)
 	next(next),
 	data(data)
 {
-	;
 }
 #endif // __NODE_H_INCLUDED__

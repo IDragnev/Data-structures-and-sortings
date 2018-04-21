@@ -69,7 +69,7 @@ inline void SinglyLinkedList<T>::swapContentsWithReconstructedParameter(SinglyLi
 template <typename T>
 void SinglyLinkedList<T>::appendList(const SinglyLinkedList<T>& source)
 {
-	if ( ! source.isEmpty() )
+	if (!source.isEmpty())
 	{
 		Node<T>* newChainTail = nullptr;
 		Node<T>* newChainHead = cloneChainStartingAt(source.head, &newChainTail);
@@ -82,7 +82,7 @@ void SinglyLinkedList<T>::appendList(const SinglyLinkedList<T>& source)
 template <typename T>
 void SinglyLinkedList<T>::appendList(SinglyLinkedList<T>&& source)
 {
-	if ( ! source.isEmpty() )
+	if (!source.isEmpty())
 	{
 		appendChainAndUpdateCount(source.head, source.tail, source.count);
 
@@ -96,7 +96,7 @@ void SinglyLinkedList<T>::appendChainAndUpdateCount(Node<T>* first, Node<T>* las
 {
 	assert(first != nullptr && last != nullptr);
 
-	if ( this->isEmpty() )
+	if (this->isEmpty())
 	{
 		this->head = first;
 	}
@@ -149,7 +149,7 @@ void SinglyLinkedList<T>::insertAsHead(const T& item)
 {
 	Node<T>* newHead = new Node<T>(item, this->head);
 
-	if ( isEmpty() )
+	if (isEmpty())
 	{
 		this->tail = newHead;
 	}
@@ -164,7 +164,7 @@ void SinglyLinkedList<T>::insertAsTail(const T& item)
 {
 	Node<T>* newTail = new Node<T>(item);
 
-	if ( isEmpty() )
+	if (isEmpty())
 	{
 		this->head = newTail;
 	}
@@ -328,7 +328,7 @@ inline void SinglyLinkedList<T>::throwExceptionIfInvalid(const SinglyLinkedListI
 template <typename T>
 inline void SinglyLinkedList<T>::throwExceptionIfEmpty()const
 {
-	if ( isEmpty() )
+	if (isEmpty())
 		throw std::logic_error("List is empty!");
 }
 
