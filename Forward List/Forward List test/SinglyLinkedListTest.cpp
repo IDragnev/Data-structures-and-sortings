@@ -38,7 +38,7 @@ namespace ForwardListTest
 
 	bool areEqual(List& lhs, List& rhs)
 	{
-		return (lhs.getCount() == rhs.getCount()) && doIteratorsPointToEqualLists(lhs.getHead(), rhs.getHead());
+		return (lhs.getCount() == rhs.getCount()) && doIteratorsPointToEqualLists(lhs.getHeadIterator(), rhs.getHeadIterator());
 	}
 
 
@@ -55,10 +55,10 @@ namespace ForwardListTest
 			Assert::IsTrue(list.getCount() == 0, L"List is not empty when constructed");
 			Assert::IsTrue(list.isEmpty(), L"IsEmpty returns false after construction");
 
-			ListIterator iterator = list.getHead();
+			ListIterator iterator = list.getHeadIterator();
 			Assert::IsFalse(iterator);
 
-			iterator = list.getTail();
+			iterator = list.getTailIterator();
 			Assert::IsFalse(iterator);
 		}
 		
@@ -67,7 +67,7 @@ namespace ForwardListTest
 			List list;
 
 			list.insertAsTail(1);
-			Assert::AreEqual( *(list.getTail()), *(list.getHead()) );
+			Assert::AreEqual( *(list.getTailIterator()), *(list.getHeadIterator()) );
 
 			list.removeHead();
 
@@ -77,7 +77,7 @@ namespace ForwardListTest
 				Assert::IsTrue(list.getCount() == i + 1, L"Count is not set properly when inserting as tail");
 			}
 
-			ListIterator iterator = list.getHead();
+			ListIterator iterator = list.getHeadIterator();
 
 			for (int i = 0; iterator; ++iterator, ++i)
 				Assert::IsTrue(*iterator == i, L"Inserting as tail is not working properly");
@@ -88,7 +88,7 @@ namespace ForwardListTest
 			List list;
 
 			list.insertAsHead(1);
-			Assert::AreEqual( *(list.getTail()), *(list.getHead()) );
+			Assert::AreEqual( *(list.getTailIterator()), *(list.getHeadIterator()) );
 
 			list.removeHead();
 
@@ -98,7 +98,7 @@ namespace ForwardListTest
 				Assert::IsTrue(list.getCount() == i + 1, L"Count is not set properly when inserting as head");
 			}
 
-			ListIterator iterator = list.getHead();
+			ListIterator iterator = list.getHeadIterator();
 
 			for (int i = NUMBER_OF_ITEMS_TO_INSERT - 1 ; iterator; ++iterator, --i)
 				Assert::AreEqual(*iterator, i, L"Adding as head is not working properly");
@@ -132,13 +132,13 @@ namespace ForwardListTest
 
 			Assert::IsTrue( areEqual(destination, source) );
 
-			ListIterator destinationTail = destination.getTail();
+			ListIterator destinationTail = destination.getTailIterator();
 			destination.appendList(source);
 
 			++destinationTail;
 			Assert::IsFalse(!destinationTail, L"The node after tail is null after appending non-empty list");
 
-			ListIterator sourceHead = source.getHead();
+			ListIterator sourceHead = source.getHeadIterator();
 
 			Assert::IsTrue(doIteratorsPointToEqualLists(destinationTail, sourceHead));
 		}
@@ -148,7 +148,7 @@ namespace ForwardListTest
 			List list;
 			fillListAddingHead(list, NUMBER_OF_ITEMS_TO_INSERT);
 
-			ListIterator iterator = list.getHead();
+			ListIterator iterator = list.getHeadIterator();
 			for (int i = NUMBER_OF_ITEMS_TO_INSERT; i > 0; --i)
 			{
 				Assert::IsTrue(*iterator == i - 1, L"Removing head does not manage head properly");
@@ -164,14 +164,14 @@ namespace ForwardListTest
 			List list;
 			fillListAddingTail(list, NUMBER_OF_ITEMS_TO_INSERT);
 
-			ListIterator iterator = list.getTail();
+			ListIterator iterator = list.getTailIterator();
 			for (int i = NUMBER_OF_ITEMS_TO_INSERT; i > 0; --i)
 			{
 				Assert::IsTrue(*iterator == i - 1, L"Removing tail does not manage tail properly");
 				Assert::IsTrue(list.getCount() == i, L"Removing tail does not manage count properly");
 
 				list.removeTail();
-				iterator = list.getTail();
+				iterator = list.getTailIterator();
 			}
 		}
 
@@ -182,14 +182,14 @@ namespace ForwardListTest
 
 			for (int i = 0; i < NUMBER_OF_ITEMS_TO_INSERT; ++i)
 			{
-				ListIterator iterator = list.getTail();
+				ListIterator iterator = list.getTailIterator();
 				//forse null
 				++iterator;
 
 				//should insert it as tail
 				list.insertAfter(iterator, i);
 
-				ListIterator tail = list.getTail();
+				ListIterator tail = list.getTailIterator();
 				Assert::IsTrue(*tail == i);
 			}
 		}
@@ -201,7 +201,7 @@ namespace ForwardListTest
 
 			for (int i = 0; i < NUMBER_OF_ITEMS_TO_INSERT; ++i)
 			{
-				ListIterator headIterator = list.getHead();
+				ListIterator headIterator = list.getHeadIterator();
 				list.insertAfter(headIterator, i);
 
 				++headIterator;
@@ -218,7 +218,7 @@ namespace ForwardListTest
 			list.insertAsHead(1);
 			list.insertAsTail(3);
 
-			ListIterator headIterator = list.getHead();
+			ListIterator headIterator = list.getHeadIterator();
 			list.insertAfter(headIterator, 2);
 
 			for (int i = 1; i < 4; ++i)
@@ -237,7 +237,7 @@ namespace ForwardListTest
 
 			for (int i = 0; i < NUMBER_OF_ITEMS_TO_INSERT; ++i)
 			{
-				ListIterator tailIterator = list.getTail();
+				ListIterator tailIterator = list.getTailIterator();
 				list.insertAfter(tailIterator, i);
 
 				++tailIterator;
@@ -253,14 +253,14 @@ namespace ForwardListTest
 
 			for (int i = 0; i < NUMBER_OF_ITEMS_TO_INSERT; ++i)
 			{
-				ListIterator iterator = list.getTail();
+				ListIterator iterator = list.getTailIterator();
 				//forse null
 				++iterator;
 
 				//should insert it as head
 				list.insertBefore(iterator, i);
 
-				ListIterator headIterator = list.getHead();
+				ListIterator headIterator = list.getHeadIterator();
 				Assert::IsTrue(*headIterator == i);
 			}
 		}
@@ -272,10 +272,10 @@ namespace ForwardListTest
 
 			for (int i = 0; i < NUMBER_OF_ITEMS_TO_INSERT; ++i)
 			{
-				ListIterator headIterator = list.getHead();
+				ListIterator headIterator = list.getHeadIterator();
 				list.insertBefore(headIterator, i);
 
-				ListIterator newHead = list.getHead();
+				ListIterator newHead = list.getHeadIterator();
 				Assert::IsTrue(*newHead == i);
 			}
 		}
@@ -287,10 +287,10 @@ namespace ForwardListTest
 			list.insertAsHead(1);
 			list.insertAsTail(3);
 
-			ListIterator tailIterator = list.getTail();
+			ListIterator tailIterator = list.getTailIterator();
 			list.insertBefore(tailIterator, 2);
 
-			ListIterator iterator = list.getHead();
+			ListIterator iterator = list.getHeadIterator();
 			for (int i = 1; i < 4; ++i)
 			{
 				Assert::IsTrue(*iterator == i);
@@ -304,7 +304,7 @@ namespace ForwardListTest
 		{
 			List emptyList;
 
-			ListIterator nullIterator = emptyList.getHead();
+			ListIterator nullIterator = emptyList.getHeadIterator();
 			emptyList.removeAt(nullIterator);
 
 			Assert::IsTrue(emptyList.getCount() == 0);
@@ -318,7 +318,7 @@ namespace ForwardListTest
 
 			for (int i = 0; i < NUMBER_OF_ITEMS_TO_INSERT; ++i)
 			{
-				ListIterator headIterator = list.getHead();
+				ListIterator headIterator = list.getHeadIterator();
 
 				Assert::IsTrue(*headIterator == i, L"Removing at head iterator does not manage head properly");
 				Assert::IsTrue(list.getCount() == NUMBER_OF_ITEMS_TO_INSERT - i, L"Removing at head iterator does not manage count properly");
@@ -339,7 +339,7 @@ namespace ForwardListTest
 
 			for (int i = NUMBER_OF_ITEMS_TO_INSERT - 1; i >= 0; --i)
 			{
-				ListIterator tailIterator = list.getTail();
+				ListIterator tailIterator = list.getTailIterator();
 
 				Assert::IsTrue(*tailIterator == i, L"Removing at tail iterator does not manage tail properly");
 				Assert::IsTrue(list.getCount() == i + 1, L"Removing at tail iterator does not manage count properly");
@@ -359,11 +359,11 @@ namespace ForwardListTest
 
 			for (int i = 0; i < NUMBER_OF_ITEMS_TO_INSERT; ++i)
 			{
-				ListIterator secondNodeIterator = list.getHead();
+				ListIterator secondNodeIterator = list.getHeadIterator();
 				++secondNodeIterator;
 
 				//head stays 0 after removing its successor
-				Assert::IsTrue( *( list.getHead() ) == 0, L"Removing between nodes with iterator does not manage predecessor properly");
+				Assert::IsTrue( *( list.getHeadIterator() ) == 0, L"Removing between nodes with iterator does not manage predecessor properly");
 			
 				//if at least two nodes in the list
 				if (i < NUMBER_OF_ITEMS_TO_INSERT - 1)
@@ -378,7 +378,7 @@ namespace ForwardListTest
 			}
 
 			Assert::IsTrue(list.getCount() == 1);
-			Assert::IsTrue( *( list.getHead() ) == 0 );
+			Assert::IsTrue( *( list.getHeadIterator() ) == 0 );
 		}
 
 

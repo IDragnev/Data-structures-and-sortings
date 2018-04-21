@@ -348,14 +348,14 @@ inline typename SinglyLinkedList<T>::countType SinglyLinkedList<T>::getCount()co
 
 
 template <typename T>
-inline SinglyLinkedListIterator<T> SinglyLinkedList<T>::getHead()
+inline SinglyLinkedListIterator<T> SinglyLinkedList<T>::getHeadIterator()
 {
 	return SinglyLinkedListIterator<T>(head, this);
 }
 
 
 template <typename T>
-inline SinglyLinkedListIterator<T> SinglyLinkedList<T>::getTail()
+inline SinglyLinkedListIterator<T> SinglyLinkedList<T>::getTailIterator()
 {
 	return SinglyLinkedListIterator<T>(tail, this);
 }

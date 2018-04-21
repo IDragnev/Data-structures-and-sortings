@@ -24,7 +24,7 @@ namespace ForwardListTest
 			List list;
 			fillListAddingTail(list, NUMBER_OF_ITEMS_TO_INSERT);
 			
-			ListIterator iterator = list.getHead();
+			ListIterator iterator = list.getHeadIterator();
 			int count = 0;
 
 			for (; iterator; ++iterator)
@@ -38,7 +38,7 @@ namespace ForwardListTest
 			List list;
 			fillListAddingTail(list, NUMBER_OF_ITEMS_TO_INSERT);
 
-			ListIterator iterator = list.getHead();
+			ListIterator iterator = list.getHeadIterator();
 
 			for (int i = 0; iterator; ++iterator, ++i)
 				Assert::AreEqual(*iterator, i);
@@ -49,21 +49,21 @@ namespace ForwardListTest
 				List list;
 				fillListAddingTail(list, NUMBER_OF_ITEMS_TO_INSERT);
 
-				ListIterator head = list.getHead();
-				ListIterator tail = list.getTail();
+				ListIterator head = list.getHeadIterator();
+				ListIterator tail = list.getTailIterator();
 
 				Assert::IsFalse(head == tail);
 				Assert::IsTrue(head != tail);
 
-				tail = list.getHead();
+				tail = list.getHeadIterator();
 
 				Assert::IsTrue(head == tail);
 				Assert::IsFalse(head != tail);
 
 				list.empty();
 
-				head = list.getHead();
-				tail = list.getTail();
+				head = list.getHeadIterator();
+				tail = list.getTailIterator();
 
 				Assert::IsTrue(head == tail);
 				Assert::IsFalse(head != tail);
