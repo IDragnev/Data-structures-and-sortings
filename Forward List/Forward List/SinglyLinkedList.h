@@ -51,11 +51,6 @@ public:
 	void insertBefore(SinglyLinkedListIterator<T>& iterator, const T& item);
 
 private:
-	countType count;                                         
-	Node<T>* head;                                  
-	Node<T>* tail;                                    
-
-private:
 	void throwExceptionIfEmpty() const; 
 	void throwExceptionIfInvalid(const SinglyLinkedListIterator<T>& iterator) const;
 
@@ -74,6 +69,11 @@ private:
 private:
 	static Node<T>* cloneChainStartingAt(const Node<T>* firstNode, Node<T>** lastNode = nullptr);
 	static void clearChainStartingAt(const Node<T>* firstNode);  
+
+private:
+	countType count;                                         
+	Node<T>* head;                                  
+	Node<T>* tail;                                    
 };
 
 #include "SinglyLinkedListImpl.hpp"
