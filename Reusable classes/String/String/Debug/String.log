@@ -1,3 +1,6 @@
-﻿  String.cpp
+﻿  main.cpp
+  String.cpp
+  Generating Code...
+  LINK : D:\Sortings and data structures\Data-structures-and-sortings\Reusable classes\String\Debug\String.exe not found or not built by the last incremental link; performing full link
   String.vcxproj -> D:\Sortings and data structures\Data-structures-and-sortings\Reusable classes\String\Debug\String.exe
   String.vcxproj -> D:\Sortings and data structures\Data-structures-and-sortings\Reusable classes\String\Debug\String.pdb (Full PDB)
